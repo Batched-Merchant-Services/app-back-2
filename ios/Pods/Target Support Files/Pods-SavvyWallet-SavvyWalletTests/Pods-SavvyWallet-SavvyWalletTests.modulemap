@@ -1,0 +1,6 @@
+module Pods_SavvyWallet_SavvyWalletTests {
+  umbrella header "Pods-SavvyWallet-SavvyWalletTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
