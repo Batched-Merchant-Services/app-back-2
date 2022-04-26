@@ -35,8 +35,37 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Play using while you are hiking </string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>App uses Bluetooth to find, connect and communicate with nearby devices</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This application requires access to your Bluetooth</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app need to access your calendar events</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This application requires access to your camera to scan QR codes</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This application requires access to contacts to send and receive payments.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your current location will be displayed on the map, it will be used to find your location and to enter cash refills.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your current location will be displayed on the map, it will be used to find your location and to enter cash refills.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Your current location will be displayed on the map, it will be used to find your location and to enter cash refills.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs to be able to access your motion use</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This application requires access to your gallery to update your profile image</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app requires speech recognition use.</string>
+  <key>UIAppFonts</key>
+    <array>
+      <string>Montserrat-Bold.otf</string>
+      <string>Montserrat-Medium.otf</string>
+      <string>Montserrat-Regular.otf</string>
+      <string>Montserrat-SemiBold.otf</string>
+    </array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

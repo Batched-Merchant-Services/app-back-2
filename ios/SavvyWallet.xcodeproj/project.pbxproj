@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SavvyWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SavvyWalletTests.m */; };
+		02D883CA28175DD10060F9DA /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C628175DD10060F9DA /* Montserrat-Regular.otf */; };
+		02D883CB28175DD10060F9DA /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C728175DD10060F9DA /* Montserrat-Bold.otf */; };
+		02D883CC28175DD10060F9DA /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C828175DD10060F9DA /* Montserrat-Medium.otf */; };
+		02D883CD28175DD10060F9DA /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C928175DD10060F9DA /* Montserrat-SemiBold.otf */; };
 		0735FE24D56A99627C670638 /* libPods-SavvyWallet-SavvyWalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4C315C8052D0487F4886EE /* libPods-SavvyWallet-SavvyWalletTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -30,6 +34,10 @@
 		00E356EE1AD99517003FC87E /* SavvyWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SavvyWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SavvyWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavvyWalletTests.m; sourceTree = "<group>"; };
+		02D883C628175DD10060F9DA /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.otf"; path = "../src/assets/fonts/Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		02D883C728175DD10060F9DA /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "../src/assets/fonts/Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		02D883C828175DD10060F9DA /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.otf"; path = "../src/assets/fonts/Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		02D883C928175DD10060F9DA /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.otf"; path = "../src/assets/fonts/Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		0301DD223BDDEB32231BD6B7 /* Pods-SavvyWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet.release.xcconfig"; path = "Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SavvyWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SavvyWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SavvyWallet/AppDelegate.h; sourceTree = "<group>"; };
@@ -91,7 +99,6 @@
 				D7DCC28FADD50B170C494897 /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */,
 				A4E1325572DB459599CAA36E /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +135,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				02D883C728175DD10060F9DA /* Montserrat-Bold.otf */,
+				02D883C828175DD10060F9DA /* Montserrat-Medium.otf */,
+				02D883C628175DD10060F9DA /* Montserrat-Regular.otf */,
+				02D883C928175DD10060F9DA /* Montserrat-SemiBold.otf */,
 				13B07FAE1A68108700A75B9A /* SavvyWallet */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SavvyWalletTests */,
@@ -243,6 +254,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D883CA28175DD10060F9DA /* Montserrat-Regular.otf in Resources */,
+				02D883CB28175DD10060F9DA /* Montserrat-Bold.otf in Resources */,
+				02D883CC28175DD10060F9DA /* Montserrat-Medium.otf in Resources */,
+				02D883CD28175DD10060F9DA /* Montserrat-SemiBold.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -484,7 +499,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J7NJWF67GA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SavvyWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,8 +514,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savvy.savvywallet;
 				PRODUCT_NAME = SavvyWallet;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -510,7 +529,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J7NJWF67GA;
 				INFOPLIST_FILE = SavvyWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,8 +543,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savvy.savvywallet;
 				PRODUCT_NAME = SavvyWallet;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

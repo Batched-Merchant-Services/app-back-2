@@ -1,0 +1,69 @@
+import React from 'react';
+
+import { scale, verticalScale } from 'react-native-size-matters';
+import i18n from '@utils/i18n';
+import {
+  View,
+  Text,
+  ImageComponent,
+  DivSpace,
+  ButtonRounded,
+  Link
+} from '@components';
+import Styles from '@screens/nationalPayments/styles';
+
+import stepThreeCards from '@assets/cards/virtualStepThree.png';
+import Colors from '@styles/Colors';
+
+const InfoVirtualStepThree = ({ navigation }) => {
+
+  const handleNext = () =>{
+    navigation.navigate('ConfirmationPinUser', {
+      data: { page: 'createVirtualCard' },
+      next: 'ConfirmationUpdateCard'
+    });
+  }
+
+  return (
+    <View textBlueDark style={Styles.carouselItem} paddingV-20>
+     <DivSpace height-4 />
+     <View marginH-15>
+        <Text semibold h16 white center>
+          {i18n.t('myCards.component.newVirtualCards.stepThree.title')}
+        </Text>
+     </View>
+      <DivSpace height-25 />
+      <View  centerV paddingH-15 height-60 style={{ backgroundColor:Colors?.orange }}>
+        <Text h12 semibold>
+          {i18n.t('myCards.component.newVirtualCards.stepThree.textSupportTheCardNumbers')}
+        </Text>
+      </View>
+      <DivSpace height-15 />
+      <View flex-1 centerH marginH-15>
+        <ImageComponent source={stepThreeCards} width={'100%'} height={verticalScale(150)} />
+        <DivSpace height-35 />
+        <Text h11 white>
+          3.{i18n.t('myCards.component.newVirtualCards.stepThree.textPressActivateCard')}
+        </Text>
+        <Text h11 white>
+        {i18n.t('myCards.component.newVirtualCards.stepThree.textYouCanCloseTheVirtual')}
+        </Text>
+      </View>
+      <View flex-1 bottom centerH>
+        <ButtonRounded onPress={handleNext} >
+          <Text h12 semibold>
+          {i18n.t('myCards.component.newVirtualCards.stepThree.buttonActivateCard')}
+          </Text>
+        </ButtonRounded>
+        <DivSpace height-10 />
+        <Link >
+          <Text h11 medium white>
+            {i18n.t('myCards.component.newVirtualCards.stepThree.linkExit')}
+          </Text>
+        </Link>
+      </View>
+    </View>
+  );
+};
+
+export default InfoVirtualStepThree;

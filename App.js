@@ -1,112 +1,103 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { YellowBox, StatusBar,AppState} from 'react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import UserInactivity from 'react-native-user-inactivity';
+import AppContainer from '@navigation';
+import NavigationService from './NavigationService';
+import store from '@store';
+import {ModalInactive} from '@components';
+const timer = require('react-native-timer');
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+YellowBox.ignoreWarnings(['Remote debugger', 'Module RNSecureKeyStore']); // We know, use remote debugger might slow down app performance...
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+class App extends React.Component {
+  
+  state = { 
+    ready                    : false,
+    store                    : null,
+    active                   : true,
+    isRechargeUserModalOpened: false,
+    appState                 : AppState.currentState,
+    timePassed               : false
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+  
+  async componentDidMount() {
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+    this.setState({ ready: true, store: await store,isRechargeUserModalOpened: false });
+    AppState.addEventListener('change',this._handleAppStateChange);
+    timer.clearTimeout(this,'timePassed');
+
+  }
+
+  
+  _handleAppStateChange = async(nextAppState) =>{
+
+    const ModalOpen = global.store.getState().app.modalState === 'closing'? false:  true;
+    if (nextAppState.match(/inactive|background/)) {
+
+      timer.setTimeout(
+        this, 'timePassed', () =>  this.setState({
+          isRechargeUserModalOpened: ModalOpen,
+        }), 300000
+      );
+    }else if(nextAppState === 'active' || this.state.appState === 'active' ){
+      timer.clearTimeout(this,'timePassed');
+    }
+    
+    this.setState({appState: nextAppState});
+
+  };
+
+  onAction = (active) => {
+    const ModalOpen =global.store.getState().app.modalState === 'closing'? false:  true;
+    if (!active ) {
+      this.setState({
+        isRechargeUserModalOpened: ModalOpen,
+      });
+    }else{
+      this.setState({
+        isRechargeUserModalOpened: ModalOpen,
+      });
+    }
+  }  
+
+  render() {
+    const {isRechargeUserModalOpened}= this.state;
+    if (this.state.ready) {
+      global.store = this.state.store; 
+      const theme = this.state.store.getState().user?.Theme;
+      return (
+        <ReduxProvider store={this.state.store}>
+          <UserInactivity
+            timeForInactivity={300000}
+            onAction={this.onAction}
+          >
+            <StatusBar
+              translucent={true} backgroundColor={'red'}
+            />
+            <AppContainer  screenProps={ theme } ref={navigatorRef => { NavigationService.setTopLevelNavigator(navigatorRef);}} />
+            <ModalInactive
+              isOpen={isRechargeUserModalOpened}
+              onEnter={() => {
+                this.setState({isRechargeUserModalOpened: false});
+              }}
+              onClose={() => {
+                this.setState({isRechargeUserModalOpened: false});
+                NavigationService.navigate('Login',{page: 'modalUser'});
+                
+              }}
+            />
+          </UserInactivity>
+        </ReduxProvider>
+          
+
+      );
+    }
+    return null;
+  }
+}
 
 export default App;
