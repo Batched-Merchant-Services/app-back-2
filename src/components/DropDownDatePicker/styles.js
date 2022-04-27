@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
 const { width } = Dimensions.get('window');
 
-const modalWidth = width - 40;
+const modalWidth = width - 80;
 
 export default StyleSheet.create({
   containerModal: {
@@ -18,7 +18,6 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     width          : scale(modalWidth),
     borderRadius   : verticalScale(8),
-    alignItems     : 'center'
   },
   buttonList: {
     width         : '100%',

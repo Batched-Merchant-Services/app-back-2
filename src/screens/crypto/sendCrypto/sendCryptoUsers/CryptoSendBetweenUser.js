@@ -198,8 +198,8 @@ const CryptoSendBetweenUser = ({ navigation }) => {
                 )}
                 <Text h9 white center>{i18n.t('CryptoBalance.component.CryptoSendBetweenUser.textYourContactWillFindTheir')}</Text>
                 <DivSpace height-15 />
-                <View width-70 height-68 style={{borderColor: brandTheme?.orange??Colors.orange,borderWidth:2}}>
-                  <ButtonWallet  navigation={navigation} delay={100} IconButton={IconReceiveCrypto} titleText={i18n.t('CryptoBalance.component.ButtonReceive')}/> 
+                <View flex-1 padding-5 style={{borderColor: brandTheme?.orange??Colors.orange,borderWidth:2}}>
+                  <ButtonWallet   buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} navigation={navigation} delay={100} IconButton={IconReceiveCrypto} titleText={i18n.t('CryptoBalance.component.ButtonReceive')}/> 
                 </View>
               </View>
             </View>

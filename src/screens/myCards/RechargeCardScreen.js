@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { scale } from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import {
   DivSpace,
   NavigationBar,
@@ -52,12 +52,12 @@ const RechargeCardScreen = ({ navigation }) => {
         style={{ borderRadius: 10 }}
       >
         <DivSpace height-16 />
-        <View style={[ data?.type === 'VIRTUAL'? Styles.cardBatched:[]]}>
           <Cards
             {...data}
             available={true}
+            width={scale(280)} 
+            height={verticalScale(163)}
           />
-        </View>
         <DivSpace height-40 />
         <View>
           <Text h10 center textGray>

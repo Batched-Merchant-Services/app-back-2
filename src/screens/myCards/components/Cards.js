@@ -9,16 +9,16 @@ import cardFisica from '@assets/brand/cardFisica.png';
 import { useSelector } from 'react-redux';
 import Colors from '@styles/Colors';
 
-const Cards = ({ input, available, ...item }) => {
+const Cards = ({ input, available,height,width, ...item }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
   const brandThemeImages = userData?.Theme?.images;
   const typeCard = item.type;
-
+  console.log('typeCard',item?.img_card !== "",item)
   return (
-    <View>
-      <ImageBackground source={typeCard === 'PHYSICAL' || typeCard === 'EMPTY' ? item?.img_card !== "" ? { uri: item?.img_card } : cardFisica : item?.img_card !== "" ? { uri: item?.img_card } : cardVirtual} style={[typeCard === 'VIRTUAL' ? Styles.containerImageSlide : Styles.containerImage]} imageStyle={{ borderRadius: typeCard === 'PHYSICAL' ? 12 : 0 }}>
+    <View style={{ height, width }}>
+      <ImageBackground source={typeCard === 'PHYSICAL' || typeCard === 'EMPTY' ? item?.img_card? item?.img_card !== "" ? { uri: item?.img_card }:cardFisica : cardFisica : item?.img_card !== "" ? { uri: item?.img_card } : cardVirtual} style={[typeCard === 'VIRTUAL' ? Styles.imageContainer : Styles.imageContainer]} imageStyle={{ borderRadius: typeCard === 'PHYSICAL' ? 12 : 0 }}>
         <View right marginT-40 marginR-8>
           <Text style={Styles.textWhite} h10 bold>
             {' '}
@@ -28,7 +28,7 @@ const Cards = ({ input, available, ...item }) => {
           </Text>
         </View>
         <View flex-1 marginT-10 marginH-15>
-          {typeCard === 'PHYSICAL' && (
+          {typeCard === 'PHYSICAL' || typeCard === 'EMPTY'  && (
             <Fragment>
               {input ? (
                 <View

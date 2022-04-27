@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DropDownDatePickerIOS, Modal, Platform, TouchableOpacity, DropDownDatePickerAndroid, Image } from 'react-native';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import PropTypes from 'prop-types';
 import { formatDate, addZeros } from '@utils/formatters';
@@ -46,17 +46,14 @@ const DropDownDatePicker = ({ buttonStyle = {}, onSelected,  textStyle = {}, pla
     }
   };
  
-  const setDate = (newdate) => {
+  const setDate = (event, date) => {
+    console.log('newdate',date)
     let current_date = moment();
-    let date_picker = moment(newdate);
+    let date_picker = moment(date);
     let edad = current_date.diff(date_picker._d, 'years');
-    if (edad < 18) {
-      alert('Aun no cumples la mayoria de edad ');
-    } else {
-      setChosenDate(newdate);
-      setNewDate(formatDate(newdate));
-      onSelected(formatDate(newdate));
-    }
+      setChosenDate(date);
+      setNewDate(formatDate(date));
+      onSelected(formatDate(date));
   };
 
   const renderPikerModal = () => {
@@ -68,7 +65,7 @@ const DropDownDatePicker = ({ buttonStyle = {}, onSelected,  textStyle = {}, pla
     setShowModal(!showModal);
   };
 
-
+  console.log('chosenDate',chosenDate)
   return (
     <View style={styles.heightContainer}>
       <Text h12 regular bgGray> {label} </Text>
@@ -97,23 +94,23 @@ const DropDownDatePicker = ({ buttonStyle = {}, onSelected,  textStyle = {}, pla
         onRequestClose={() => {
           alert('Modal has been closed.');
         }}>
-        <View style={styles.containerModal}>
-          <View style={styles.modal}>
-            <DropDownDatePickerIOS
-              date={chosenDate}
-              onDateChange={date => {
-                setDate(date);
-              }}
-              style={{ width: '90%' }}
+         <View  style={styles.containerModal}>
+          <View  style={styles.modal} >
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={chosenDate}
+              textColor={brandTheme?.white ?? Colors.white}
               mode='date'
+              display="spinner"
+              onChange={setDate}
             />
-            <DivSpace height-10 />
-            <View centerH>
-              <ButtonNext onPress={selectDate}>Select</ButtonNext>
-            </View>
-            <DivSpace height-20 />
+                <DivSpace height-15 />
+                <View centerH>
+                  <ButtonNext onPress={selectDate}>Select</ButtonNext>
+                </View>
+                <DivSpace height-15 />
           </View>
-        </View>
+      </View>
       </Modal>
     </View>
   );

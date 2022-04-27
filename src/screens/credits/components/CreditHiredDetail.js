@@ -102,9 +102,9 @@ const CreditHiredDetail = ({
       <View centerH >
         <MenuContainer boxStyles={{ width: scale(310) }}>
           <View flex-1 row marginV-15 centerH centerV >
-            <ButtonWallet IconButton={IconRequestCash} titleText={i18n.t('contractedCredits.component.textContract')}/>
-            <ButtonWallet IconButton={IconHistory} titleText={i18n.t('contractedCredits.component.textAmortizationTable')}/>
-            <ButtonWallet IconButton={IconCancelCard}  titleText={i18n.t('contractedCredits.component.textCapitalPayment')}/>
+            <ButtonWallet  buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} IconButton={IconRequestCash} titleText={i18n.t('contractedCredits.component.textContract')}/>
+            <ButtonWallet  buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} IconButton={IconHistory} titleText={i18n.t('contractedCredits.component.textAmortizationTable')}/>
+            <ButtonWallet  buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} IconButton={IconCancelCard}  titleText={i18n.t('contractedCredits.component.textCapitalPayment')}/>
           </View>
         </MenuContainer>
       </View>

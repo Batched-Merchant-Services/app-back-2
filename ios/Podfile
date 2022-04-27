@@ -10,7 +10,11 @@ target 'SavvyWallet' do
   pod 'Permission-AppTrackingTransparency', :path => "#{permissions_path}/AppTrackingTransparency/Permission-AppTrackingTransparency.podspec"
   pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars/Permission-Calendars.podspec"
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts/Permission-Contacts.podspec"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera/Permission-Camera.podspec"
   pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
+  pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
+  pod 'RNCharts', :path => '../node_modules/react-native-charts-wrapper'
   
   use_react_native!(
     :path => config[:reactNativePath],

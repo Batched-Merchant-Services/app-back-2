@@ -192,8 +192,8 @@ const Levels = ({ navigation }) => {
             <View centerH>
               <MenuContainer boxStyles={{ marginHorizontal: 10 }}>
                 <View flex-1 row marginV-15 centerH centerV >
-                  <ButtonWallet srcImage={logoUulalaSm} onPress={() => navigation.navigate('LevelsInfo')}  buttonStyle={{ left: 12 }} titleText={i18n.t('levels.component.textInformation') +'\n'+ i18n.t('levels.component.textTheInformation')}/>
-                  <ButtonWallet srcImage={levelUp}  onPress={handlePressNextLevel} buttonStyle={{ right: 12 }} titleText={i18n.t('levels.component.textLevel') +'\n'+ i18n.t('levels.component.textUp')}/>
+                  <ButtonWallet  buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} srcImage={logoUulalaSm} onPress={() => navigation.navigate('LevelsInfo')}  buttonStyle={{ left: 12 }} titleText={i18n.t('levels.component.textInformation') +'\n'+ i18n.t('levels.component.textTheInformation')}/>
+                  <ButtonWallet  buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} srcImage={levelUp}  onPress={handlePressNextLevel} buttonStyle={{ right: 12 }} titleText={i18n.t('levels.component.textLevel') +'\n'+ i18n.t('levels.component.textUp')}/>
                 </View>
               </MenuContainer>
             </View>

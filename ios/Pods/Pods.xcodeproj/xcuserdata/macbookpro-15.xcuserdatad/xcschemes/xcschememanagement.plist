@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Charts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CocoaAsyncSocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -99,7 +104,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Permission-Camera.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Permission-Contacts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Permission-MediaLibrary.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Permission-PhotoLibrary.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -130,6 +150,16 @@
 			<false/>
 		</dict>
 		<key>RNCAsyncStorage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RNCharts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RNDateTimePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -275,6 +305,11 @@
 			<false/>
 		</dict>
 		<key>ReactNativeART.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

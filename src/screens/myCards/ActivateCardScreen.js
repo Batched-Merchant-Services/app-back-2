@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { scale } from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import {
   DivSpace,
   NavigationBar,
@@ -104,6 +104,8 @@ const ActivateCardScreen = ({ navigation }) => {
           dueDate={ formatCardExpiration(cardExpiration.value)}
           cvv={formatCardCVV(cardCVV.value)}
           input
+          width={scale(280)} 
+          height={verticalScale(163)}
         />
         <DivSpace height-20 />
         <View>

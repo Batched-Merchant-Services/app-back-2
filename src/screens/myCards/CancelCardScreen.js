@@ -45,6 +45,8 @@ const CancelCardScreen = ({ navigation }) => {
         <Cards
           {...data}
           available={true}
+          width={scale(280)} 
+          height={verticalScale(163)}
         />
         <DivSpace height-21 />
         <Text h12 center regular white>

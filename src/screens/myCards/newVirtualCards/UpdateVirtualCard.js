@@ -75,15 +75,16 @@ const UpdateVirtualCard = ({ navigation }) => {
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationBar onBack={handleBackPress} body={i18n.t('myCards.component.UpdateVirtualCard.textUpdateCard')} />
         <DivSpace height-40 />
-        <View flex-1 centerH>
-          <View width-290 height-200>
+          <View centerH>
             <Cards
               {...data}
               available={true}
+              width={scale(280)} 
+              height={verticalScale(163)}
             />
           </View>
-        </View>
-        <DivSpace height-10 />
+          
+        <DivSpace height-20 />
         <View paddingH-80>
           <Text white h12 medium>
             {i18n.t('myCards.component.UpdateVirtualCard.title')}

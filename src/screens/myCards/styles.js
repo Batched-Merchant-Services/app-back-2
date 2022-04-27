@@ -105,6 +105,12 @@ export default StyleSheet.create({
   },
   textWhite: {
     color: 'white'
+  },
+  imageContainer: {
+    flex      : 1,
+    width     : null,
+    height    : null,
+    resizeMode: 'contain'
   }
 
 });
