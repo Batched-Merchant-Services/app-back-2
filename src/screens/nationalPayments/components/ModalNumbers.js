@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import { View, Text,DivSpace,ImageComponent,ModalContainer,ImageAvatar,ButtonRounded } from '@components';
+import { View, Text,DivSpace,ImageComponent,ModalContainer,ResizeImageAvatar,ButtonRounded } from '@components';
 import { TouchableOpacity } from 'react-native';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import CircleAvatar from '@screens/nationalPayments/components/CircleAvatar';
@@ -36,7 +36,7 @@ const ModalNumbers = ({ isOpen, onClose = () => null, navigation,data,onDataSele
                     <Text h20 bold white>{itemName}{itemLastName}</Text>
                   </CircleAvatar>
                 ) : (
-                  <ImageAvatar
+                  <ResizeImageAvatar
                     source={{ uri: infoData.thumbnailPath }}
                     width={scale(75)} 
                     height={moderateScale(75)}
@@ -72,7 +72,7 @@ const ModalNumbers = ({ isOpen, onClose = () => null, navigation,data,onDataSele
                       <Text h20 bold white>{itemName}{itemLastName}</Text>
                     </CircleAvatar>
                   ) : (
-                    <ImageAvatar
+                    <ResizeImageAvatar
                       source={{ uri: infoData.thumbnailPath }}
                       width={scale(75)} 
                       height={moderateScale(75)}

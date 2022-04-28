@@ -8,7 +8,7 @@ import { View,
   NavigationBar,
   BoxBlue,
   ImageComponent,
-  ImageAvatar,
+  ResizeImageAvatar,
   Text,
   ButtonRounded,
   SnackBar,
@@ -120,7 +120,7 @@ const ContactInformation = ({ navigation }) => {
                 </CircleAvatar>
               ):(
 
-                <ImageAvatar
+                <ResizeImageAvatar
                   source={{ uri: userData.imageProfileContact }}
                   width={scale(75)} 
                   height={moderateScale(75)}
@@ -133,7 +133,7 @@ const ContactInformation = ({ navigation }) => {
                   <Text h20 bold>{itemNameSearch}{itemLastNameSearch}</Text>
                 </CircleAvatar>
               ):(
-                <ImageAvatar
+                <ResizeImageAvatar
                   source={{ uri: image }}
                   width={scale(75)} 
                   height={moderateScale(75)}

@@ -28,7 +28,7 @@ const Cards = ({ input, available,height,width, ...item }) => {
           </Text>
         </View>
         <View flex-1 marginT-10 marginH-15>
-          {typeCard === 'PHYSICAL' || typeCard === 'EMPTY'  && (
+          {typeCard === 'PHYSICAL'   && (
             <Fragment>
               {input ? (
                 <View
@@ -128,6 +128,72 @@ const Cards = ({ input, available,height,width, ...item }) => {
               </View>
               <DivSpace height-10 />
             </View>
+          )}
+          {typeCard === 'EMPTY'   && (
+            <Fragment>
+              {input ? (
+                <View
+                  paddingT-5
+                  paddingV-1
+                  paddingH-5
+                  style={{
+                    borderColor: brandTheme?.bgBlue06 ?? Colors?.bgBlue06,
+                    width: '100%',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    backgroundColor: brandTheme?.bgBlue01 ?? Colors?.bgBlue01
+                  }}
+                >
+                  <Text style={Styles.textWhite} h7>
+                    {' '}
+                    {i18n.t('myCards.component.textCardNumber')}
+                  </Text>
+                  <Text style={Styles.textWhite} h16 semibold>
+                    {' '}
+                    {item.cardNumber}
+                  </Text>
+                </View>
+              ) : (
+                <React.Fragment>
+                  <Text style={Styles.textWhite} h10>
+                    {' '}
+                  </Text>
+                  <Text style={Styles.textWhite} h16 semibold>
+                    {' '}
+                    {item.cardNumber}
+                  </Text>
+                </React.Fragment>
+              )}
+              <DivSpace height-5 />
+              <View row>
+                <View column>
+                  <Text style={Styles.textWhite} h8>
+                    {' '}
+                    {i18n.t('myCards.component.textValidUntil')}
+                  </Text>
+                  <Text style={Styles.textWhite} h12 semibold>
+                    {' '}
+                    {item.dueDate}
+                  </Text>
+                </View>
+                <DivSpace width-5 />
+                <View column>
+                  <Text style={Styles.textWhite} h8>
+                    {' '}
+                    {i18n.t('myCards.component.textCVV')}
+                  </Text>
+                  <Text style={Styles.textWhite} h12 semibold>
+                    {' '}
+                    {item.cvv}
+                  </Text>
+                </View>
+              </View>
+              <DivSpace height-5 />
+              <Text style={Styles.textWhite} h12 numberOfLines={1} ellipsizeMode='tail' semibold>
+                {' '}
+                {item.name}
+              </Text>
+            </Fragment>
           )}
         </View>
       </ImageBackground>

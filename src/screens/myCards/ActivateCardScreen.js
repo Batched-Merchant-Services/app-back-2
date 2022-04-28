@@ -67,7 +67,10 @@ const ActivateCardScreen = ({ navigation }) => {
   }
 
   function formatCardExpiration(cardExpiration) {
-    return cardExpiration.padEnd(4, '0').match(/.{1,2}/g).join('/');
+    const result= cardExpiration?.padEnd(6, '0')?.match(/.{1,2}/g)?.join('/');
+    const sliceOne= result?.slice(0,3)
+    const sliceTwo= result?.slice(3,8)?.replace('/','')
+    return sliceOne+sliceTwo
   }
 
   function formatCardCVV(cardCVV) {
@@ -104,8 +107,8 @@ const ActivateCardScreen = ({ navigation }) => {
           dueDate={ formatCardExpiration(cardExpiration.value)}
           cvv={formatCardCVV(cardCVV.value)}
           input
-          width={scale(280)} 
-          height={verticalScale(163)}
+          width={verticalScale(260)} 
+          height={verticalScale(170)}
         />
         <DivSpace height-20 />
         <View>

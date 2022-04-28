@@ -8,7 +8,7 @@ import {
   NavigationBar,
   BoxBlue,
   ImageComponent,
-  ImageAvatar,
+  ResizeImageAvatar,
   Text,
   ButtonRounded
 } from '@components';
@@ -43,7 +43,7 @@ const ReceivedInternationalPayment = ({ navigation }) => {
             />
           </View>
           <View centerH>
-            <ImageAvatar source={''} width={80} height={80} />
+            <ResizeImageAvatar source={''} width={80} height={80} />
             <DivSpace height-15 />
             <Text H16 white semibold>
               FERNANDO MORALES

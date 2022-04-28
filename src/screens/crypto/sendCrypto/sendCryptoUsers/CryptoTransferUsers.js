@@ -17,7 +17,7 @@ import {
   DivSpace,
   ContainerCrypto,
   SnackBar,
-  ImageAvatar,
+  ResizeImageAvatar,
   NavigationBar,
   ButtonRounded,
   AnimateLabelInput
@@ -180,7 +180,7 @@ const CryptoTransferUsers = ({ navigation }) => {
                   <Text h20 bold white>{infoUser.alias}</Text>
                 </CircleAvatar>
               ):(
-                <ImageAvatar
+                <ResizeImageAvatar
                   source={{ uri: infoUser.avatarImage }}
                   width={scale(75)} 
                   height={scale(75)}

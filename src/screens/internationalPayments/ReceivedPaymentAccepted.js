@@ -10,7 +10,7 @@ import {
   BoxBlue,
   ImageComponent,
   Text,
-  ImageAvatar,
+  ResizeImageAvatar,
   ButtonBackHome,
   BoxGradient
 } from '@components';
@@ -98,7 +98,7 @@ const ReceivedPaymentAccepted = ({ navigation }) => {
               </View>
             </View>
             <DivSpace height-15 />
-            <ImageAvatar
+            <ResizeImageAvatar
               source={''}
               width={60} 
               height={60}

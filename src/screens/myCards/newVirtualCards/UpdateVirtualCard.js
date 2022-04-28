@@ -79,8 +79,8 @@ const UpdateVirtualCard = ({ navigation }) => {
             <Cards
               {...data}
               available={true}
-              width={scale(280)} 
-              height={verticalScale(163)}
+              width={verticalScale(260)} 
+              height={verticalScale(170)}
             />
           </View>
           

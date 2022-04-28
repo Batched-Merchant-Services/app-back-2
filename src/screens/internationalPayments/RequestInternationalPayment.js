@@ -4,7 +4,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import {
   View,
   ImageComponent,
-  ImageAvatar,
+  ResizeImageAvatar,
   Text,
   BoxBlue,
   DivSpace,
@@ -51,7 +51,7 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
               <ImageComponent bgBlue01 source={startDisable} width={scale(32)} height={verticalScale(30)}  />
             </View>
             <View centerH>
-              <ImageAvatar
+              <ResizeImageAvatar
                 source={''}
                 width={78} 
                 height={78}

@@ -6,7 +6,7 @@ import { useSelector} from 'react-redux';
 import Colors from '@styles/Colors';
 import styles from './styles';
 
-const ImageAvatar = ({ source, height, width }) => {
+const ResizeImageAvatar = ({ source, height, width }) => {
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandTheme = appData?.Theme?.colors;
@@ -15,9 +15,9 @@ const ImageAvatar = ({ source, height, width }) => {
   );
 };
 
-ImageAvatar.propTypes = {
+ResizeImageAvatar.propTypes = {
   height: PropTypes.number.isRequired,
   width : PropTypes.number.isRequired,
 };
 
-export default ImageAvatar;
+export default ResizeImageAvatar;

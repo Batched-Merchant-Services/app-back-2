@@ -41,7 +41,7 @@ apiSavvyWallet.interceptors.request.use(
 );
 
 const errorHandler = (error) => {
-  console.log('errorHandler',error.config);
+  console.log('errorHandler', error.response);
   if(error.config) {
     
   }
