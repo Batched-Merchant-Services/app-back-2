@@ -103,13 +103,6 @@ const UpdateVirtualCard = ({ navigation }) => {
               <ContainerCardsInput {...cardNumber} />
             </View>
           </View>
-
-          {/* <FloatingLabelInput
-            {...cardNumber}
-            label={i18n.t('myCards.component.UpdateVirtualCard.inputCardNumbers')}
-            keyboardType={'default'}
-            autoCapitalize={'none'}
-          /> */}
           <DivSpace height-20 />
           <View flex-1 row>
             <View flex-1 centerH >
