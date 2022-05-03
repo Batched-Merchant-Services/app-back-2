@@ -76,7 +76,7 @@ class App extends React.Component {
             onAction={this.onAction}
           >
             <StatusBar
-              translucent={true} backgroundColor={'red'}
+                translucent={true} backgroundColor={'transparent'}
             />
             <AppContainer  screenProps={ theme } ref={navigatorRef => { NavigationService.setTopLevelNavigator(navigatorRef);}} />
             <ModalInactive
