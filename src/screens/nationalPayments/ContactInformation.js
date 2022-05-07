@@ -122,7 +122,7 @@ const ContactInformation = ({ navigation }) => {
 
                 <ResizeImageAvatar
                   source={{ uri: userData.imageProfileContact }}
-                  width={scale(75)} 
+                  width={moderateScale(75)} 
                   height={moderateScale(75)}
                 />
               )
@@ -135,7 +135,7 @@ const ContactInformation = ({ navigation }) => {
               ):(
                 <ResizeImageAvatar
                   source={{ uri: image }}
-                  width={scale(75)} 
+                  width={moderateScale(75)} 
                   height={moderateScale(75)}
                 />
               )

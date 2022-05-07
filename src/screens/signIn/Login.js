@@ -50,7 +50,6 @@ const optionalConfigObject = {
 async function handleSignIn(
   Phone,
   Password,
-  Company,
   setIsLoadingModal,
   setStatusUser,
   setShowDeviceModal,
@@ -61,7 +60,7 @@ async function handleSignIn(
   dispatch) {
   setIsLoadingModal(true);
 
-  const response = await login(Phone, Password,Company);
+  const response = await login(Phone, Password);
   if (response.code < 400) {
     await LocalStorage.set('auth_token', response.data.token);
     await LocalStorage.set('user', Phone);
@@ -136,7 +135,7 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     changeHandlerSelect: 'onSelect'
   });
   
-  const isValid = isFormValid(phone, password,company);
+  const isValid = isFormValid(phone, password);
   const dispatch = useDispatch();
   const redux = useSelector(state => state);
   const userData = redux.user;
@@ -150,11 +149,9 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     const text = value === 'login' ? true : false;
     const Phone = !text ? user : phone?.value;
     const Password = !text ? pass : password?.value;
-    const Company =  company?.value?company?.value?.value.toString():'';
     
     await handleSignIn(Phone,
       Password,
-      Company,
       setIsLoadingModal,
       setStatusUser,
       setShowDeviceModal,
@@ -170,18 +167,18 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
   }, []);
 
 
-  useEffect(() => {
-    getCompanies();
-  }, []);
+  // useEffect(() => {
+  //   getCompanies();
+  // }, []);
 
-  async function  getCompanies (){
-    const response = await getCompaniesQuery();
-    if (response.code < 400) {
-      setCompanyOption(response.data);
-    }else{
-      setCompanyOption([]);
-    }
-  }
+  // async function  getCompanies (){
+  //   const response = await getCompaniesQuery();
+  //   if (response.code < 400) {
+  //     setCompanyOption(response.data);
+  //   }else{
+  //     setCompanyOption([]);
+  //   }
+  // }
 
 
 
@@ -269,14 +266,14 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
                   style={{ color: brandTheme?.white??Colors.white }}
                   containerStyle={{ backgroundColor: 'white' }}
                 />
-                <Select
+                {/* <Select
                   {...company}
                   label= {i18n.t('signUp.component.selectEntryCode')}
                   options={companyOption}
                   size="sm"
                   dropLabelStyle={{color: brandTheme?.textBlue01??Colors.textBlue01}}
                   dropStyle={{backgroundColor:brandTheme?.textBlue01??Colors.textBlue01,borderColor: brandTheme?.bgOrange02??Colors.bgOrange02 }}
-                />
+                /> */}
               </View>
               <DivSpace height-10 />
               <ButtonRounded

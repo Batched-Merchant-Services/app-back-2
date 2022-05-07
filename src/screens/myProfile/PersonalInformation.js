@@ -171,12 +171,12 @@ const PersonalInformation = ({ navigation }) => {
                 autoCapitalize={'characters'}
               />
               <DivSpace height-10/>
-              <AnimateLabelInput
+              {/* <AnimateLabelInput
                 {...rfc}
                 label={i18n.t('myProfile.component.labelRFC')}
                 keyboardType={'default'}
                 autoCapitalize={'none'}
-              />
+              /> */}
               <DivSpace height-15/>
               <Text h10 textGray>{i18n.t('myProfile.component.textTheInformationRequested')}<Text bold white>{' '}{i18n.t('myProfile.component.textItisProtectedWithUs')}</Text></Text>
               <DivSpace height-15/> 

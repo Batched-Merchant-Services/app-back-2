@@ -115,8 +115,8 @@ const PayConfirmation = ({ navigation }) => {
               ):(
                 <ResizeImageAvatar
                   source={{uri: userData.imageUserQRScan }}
-                  width={60} 
-                  height={60}
+                  width={moderateScale(60)} 
+                  height={moderateScale(60)}
                 />
               )
             )}

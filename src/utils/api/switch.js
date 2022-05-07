@@ -91,8 +91,7 @@ const pinCrypto = async(data) => {
   return infoPin;
 };
 
-export const login = async ( phoneNumber,password,company ) => {
-  console.log('company',company)
+export const login = async ( phoneNumber,password ) => {
   const body = await bodyCrypto({
     phoneNumber,
     password,
@@ -100,7 +99,7 @@ export const login = async ( phoneNumber,password,company ) => {
     version     : versionNumber,
     system      : OS,
     build_number: buildNumber,
-    group_id    : company
+    group_id    : '0'
   });
   return await apiSavvyWallet.post(`/sessions/login`,body);
 };

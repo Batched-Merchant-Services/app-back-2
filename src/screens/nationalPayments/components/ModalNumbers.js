@@ -38,7 +38,7 @@ const ModalNumbers = ({ isOpen, onClose = () => null, navigation,data,onDataSele
                 ) : (
                   <ResizeImageAvatar
                     source={{ uri: infoData.thumbnailPath }}
-                    width={scale(75)} 
+                    width={moderateScale(75)} 
                     height={moderateScale(75)}
                   />
                 )}

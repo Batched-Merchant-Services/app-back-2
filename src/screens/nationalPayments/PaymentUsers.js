@@ -62,6 +62,7 @@ const PaymentUsers = ({navigation}) => {
               itemWidth={scale(285)}
               inactiveSlideOpacity={1}
               onSnapToItem={index => setActiveSlide(index)}
+              removeClippedSubviews={false} 
             />
             <Pagination
               containerStyle={{
