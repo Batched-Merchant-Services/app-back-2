@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import i18n from '@utils/i18n';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
+import { SafeAreaView, } from 'react-native';
 import {
   Text,
   View,

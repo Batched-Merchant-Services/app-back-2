@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView,KeyboardAvoidingView,Platform } from 'react-native';
 import { catalogTiket, createTiket } from '@utils/api/switch';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
@@ -129,6 +129,10 @@ const ContactScreen = ({ navigation }) => {
   return (
     <SignUpWrapper >
       <SafeAreaView style={{flex:1}} forceInset={{top: 'always'}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "height" : ""}
+        style={{ flex: 1 }}
+      >
         <NavigationBar
           onBack={() => navigation.goBack()}
           body={i18n.t('contact.component.title')}
@@ -173,6 +177,7 @@ const ContactScreen = ({ navigation }) => {
             </Text>
           </ButtonRounded>
         </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
       <SnackBar
         message={title}
@@ -181,6 +186,7 @@ const ContactScreen = ({ navigation }) => {
         animationAction={actionAnimated}
       />
       {isLoadingModal && <Loader isOpen={true} navigation={navigation} />}
+      
     </SignUpWrapper>
   );
 };

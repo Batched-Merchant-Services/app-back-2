@@ -110,7 +110,6 @@ const MyCryptoBalance = ({ navigation }) => {
         </View>
         <DivSpace height-10 />
         <View marginH-20>
-          <Text h10 bgGray>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mauris massa, convallis ut volutpat non, efficitur a mi. Duis pretium massa id risus pretium facilisis.</Text>
           <DivSpace height-10 />
           <BoxOptions navigation={navigation} buy={page}/>
         </View>

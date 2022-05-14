@@ -10,6 +10,14 @@ const Styles = StyleSheet.create({
     resizeMode: 'stretch'
   },
   image: { paddingTop: verticalScale(Platform.OS === 'android' ? 50 : 70) },
+  container: {
+    flex: 1,borderColor:'red',borderWidth:1
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: "space-around"
+  },
 });
 
 export default Styles;

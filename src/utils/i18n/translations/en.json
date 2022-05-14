@@ -885,7 +885,7 @@
         "movementsAction": "Transaction\nHistory",
         "updateCardAction": "Update\nCard",
         "titleInfoReceived":"My card \n Prepaid Physics",
-        "textIfYouReceived":"If you received a Uulala physical card",
+        "textIfYouReceived":"If you received a SAVVY physical card",
         "textAtWorkOrWe":"at work or we send it to you, check that it is in an envelope",
         "textNewSealed":"new and sealed.",
         "buttonNext": "Next",
@@ -1015,7 +1015,7 @@
           "textReference":"Reference",
           "textConsult":"Consult",
           "textToConsultTheInformation":"To consult the information of your cards you must",
-          "textEnterTheUulala":"enter the panel of virtual cards Uulala.",
+          "textEnterTheUulala":"enter the panel of virtual cards SAVVY.",
           "textYouWillHaveTo":"You will have to register and enter to make the query."
         },
         "pinUpdate":{

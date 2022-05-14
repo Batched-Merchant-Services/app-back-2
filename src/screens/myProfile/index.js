@@ -156,7 +156,6 @@ const myProfile = ({ navigation }) => {
 
     await getInfoUser(
       setShowPhoto, 
-      showPhoto, 
       setShowImage, 
       setName, 
       setLastName, 
@@ -391,7 +390,7 @@ const myProfile = ({ navigation }) => {
             <NavigationBar
               white
               onBack={() => navigation.goBack()}
-              body={<Text semibold h4 center white>{i18n.t('myProfile.component.title')}</Text>}
+              body={<Text semibold h14 center white>{i18n.t('myProfile.component.title')}</Text>}
               onClose={null}
             />
             <View>

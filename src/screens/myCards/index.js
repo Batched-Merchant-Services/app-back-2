@@ -285,13 +285,13 @@ const MyCards = ({ navigation }) => {
                       {CAROUSEL_ITEMS[activeSlide].statusRequestCard && (
                         <View>
                           <DivSpace height-20 />
-                          <Text medium h12 bgGray center>
+                          <Text medium h12 white center>
                             {i18n.t('myCards.component.textBalance')}
                           </Text>
-                          <Text medium h32 bgGray center>
+                          <Text medium h32 white center>
                             {moneyFormatter(CAROUSEL_ITEMS[activeSlide].balance)}
                           </Text>
-                          <Text medium h14 intenseOrange center>
+                          <Text medium h14 orange center>
                             {currencyUser}
                           </Text>
                           <CardVirtualActions navigation={navigation} dataVirtual={CAROUSEL_ITEMS[activeSlide]} />

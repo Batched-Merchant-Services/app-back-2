@@ -99,8 +99,6 @@ const CryptoSale = ({ navigation }) => {
                 </ButtonRounded>
               </View>
               <DivSpace height-15 />
-              <Text h10 bgGray center>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non magna egestas, pellentesque neque placerat purus. Donec sagittis nulla elit, a porttitor arcu mollis id.</Text>
-              <DivSpace height-15 />
             </View>
             <DivSpace height-15 />
           </View>

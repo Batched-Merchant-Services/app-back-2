@@ -120,7 +120,7 @@ const AboutSavvy = ({ navigation }) => {
               </View>
               <DivSpace height-25 />
               <Text center h10 textGray>
-                {i18n.t('AboutSavvy.component.textVersionApp')}{' '}V3.0.0.1
+                {i18n.t('AboutSavvy.component.textVersionApp')}{' '}
               </Text>
             </View>
           </View>

@@ -4,6 +4,7 @@ import LocalStorage from '@utils/localStorage';
 import RNLanguages from 'react-native-languages';
 import {Platform} from 'react-native';
 import jwt from 'react-native-pure-jwt';
+import i18n from '@utils/i18n';
 import {PRODUCTION_API_URL,STAGING_API_URL,SECRET_API_KEY,USER_AGENT} from '@env';
 
 /* TODO: change this url in production. */
@@ -12,25 +13,24 @@ const device = DeviceInfo.getUniqueId();
 const buildNumber = DeviceInfo.getBuildNumber();
 const versionNumber = DeviceInfo.getVersion();
 const OS = Platform.OS;
-const languages = RNLanguages.language;;
-const language = languages.substring(0,2);
 
+console.log('i18n?.language',i18n?.language);
 var apiSavvyWallet = axios.create({
   baseURL: BASEURLSWITCH,
   headers: {
     device        : device,
     'User-Agent'  : USER_AGENT,
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   }
 });
 
 apiSavvyWallet.interceptors.request.use(
   async config => {
-    console.log('config',config);
+    config.headers = {...config.headers,'Accept-Language': i18n?.language };
     const authUrls = [];
     if (authUrls.includes(config.url)) {
       const token = await LocalStorage.get('session_token');
-      config.headers = { ...config.headers, 'Authorization': token };
+      config.headers = { ...config.headers, 'Authorization': token,'Accept-Language': i18n?.language };
       return config;
     }
     return config;
@@ -41,7 +41,7 @@ apiSavvyWallet.interceptors.request.use(
 );
 
 const errorHandler = (error) => {
-  console.log('errorHandler', error.response);
+  console.log('errorHandler',error.config);
   if(error.config) {
     
   }
@@ -504,7 +504,7 @@ export const getStateCatalog= async () => {
 
 export const getIdentificationsCatalog= async () => {
 
-  return await apiSavvyWallet.get(`/catalogs/identifications/?language=${language}`);
+  return await apiSavvyWallet.get(`/catalogs/identifications/?language=${i18n?.language}`);
 };
 
 
@@ -979,7 +979,7 @@ export const getAddress = async (token,currency) => {
 
 export const catalogSecurityQuestion= async () => {
  
-  return await apiSavvyWallet.get(`/catalogs/security/questions?language=${language}`);
+  return await apiSavvyWallet.get(`/catalogs/security/questions?language=${i18n?.language}`);
 };
 
 export const sendCrypto = async (token,currency,amount,id,note,pin) => {

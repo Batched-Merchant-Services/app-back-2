@@ -1,5 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
+import {KeyboardAvoidingView, Platform  } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
 import {
   View,
@@ -38,6 +39,10 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
   };
   return (
     <SignUpWrapper>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "height" : ""}
+        style={{ flex: 1 }}
+      >
       <SafeAreaView forceInset={{top: 'always'}}>
         <NavigationBar
           onBack={() => navigation.goBack()}
@@ -99,6 +104,7 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
           <DivSpace height-52 />
         </View>
       </SafeAreaView>
+      </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };

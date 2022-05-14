@@ -1,4 +1,5 @@
 import React from 'react';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -32,59 +33,64 @@ const StoreCaptureQR = ({ navigation }) => {
 
   return (
     <SignUpWrapper forceInset={{ top: 0 }}>
-      <SafeAreaView forceInset={{top: 'always'}}>
-        <NavigationBar
-          onBack={() => navigation.goBack()}
-          body={i18n.t('sendQRPayments.component.title')}
-        />
-        <DivSpace height-15 />
-        <View centerH>
-          <BoxBlue
-            containerStyle={{
-              justifyContent: 'flex-start',
-              height        : verticalScale(230)
-            }}
-          >
-            <View flex-1 centerH centerV>
-              <IconUserSearchQR width={scale(52)} height={verticalScale(52)}  fill={brandTheme?.orange??Colors?.orange} fillSecondary={brandTheme?.white??Colors?.white}/>
-            </View>
-            <View flex-1 centerH marginH-70>
-              <Text h16 white light center>
-                {i18n.t('sendQRPayments.component.textSearchFor')}
-                <Text semibold white>
-                  {' '}
-                  {i18n.t('sendQRPayments.component.textCodeTheUser')}
-                </Text>
-              </Text>
-            </View>
-          </BoxBlue>
-          <DivSpace height-20 />
-          <Text h14 white>
-            {i18n.t('sendQRPayments.component.textWriteCodeTwo')}
-          </Text>
-          <DivSpace height-20 />
-        </View>
-        <View paddingH-20>
-          <AnimateLabelInput
-            {...code}
-            label={i18n.t('sendQRPayments.component.textCodeUser')}
-            keyboardType={'email-address'}
-            autoCapitalize={'none'}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "height" : ""}
+        style={{ flex: 1 }}
+      >
+        <SafeAreaView forceInset={{ top: 'always' }}>
+          <NavigationBar
+            onBack={() => navigation.goBack()}
+            body={i18n.t('sendQRPayments.component.title')}
           />
-        </View>
-        <DivSpace height-20 />
-        <View centerH bottom>
-          <ButtonRounded
-            size="lg"
-            onPress={handlePressNext}
-            disabled={!isValid}
-          >
-            <Text h10 semibold>
-              {i18n.t('sendQRPayments.component.buttonSearch')}
+          <DivSpace height-15 />
+          <View centerH>
+            <BoxBlue
+              containerStyle={{
+                justifyContent: 'flex-start',
+                height: verticalScale(230)
+              }}
+            >
+              <View flex-1 centerH centerV>
+                <IconUserSearchQR width={scale(52)} height={verticalScale(52)} fill={brandTheme?.orange ?? Colors?.orange} fillSecondary={brandTheme?.white ?? Colors?.white} />
+              </View>
+              <View flex-1 centerH marginH-70>
+                <Text h16 white light center>
+                  {i18n.t('sendQRPayments.component.textSearchFor')}
+                  <Text semibold white>
+                    {' '}
+                    {i18n.t('sendQRPayments.component.textCodeTheUser')}
+                  </Text>
+                </Text>
+              </View>
+            </BoxBlue>
+            <DivSpace height-20 />
+            <Text h14 white>
+              {i18n.t('sendQRPayments.component.textWriteCodeTwo')}
             </Text>
-          </ButtonRounded>
-        </View>
-      </SafeAreaView>
+            <DivSpace height-20 />
+          </View>
+          <View paddingH-20>
+            <AnimateLabelInput
+              {...code}
+              label={i18n.t('sendQRPayments.component.textCodeUser')}
+              keyboardType={'email-address'}
+              autoCapitalize={'none'}
+            />
+          </View>
+          <DivSpace height-20 />
+          <View centerH bottom>
+            <ButtonRounded
+              size="lg"
+              onPress={handlePressNext}
+              disabled={!isValid}
+            >
+              <Text h10 semibold>
+                {i18n.t('sendQRPayments.component.buttonSearch')}
+              </Text>
+            </ButtonRounded>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };

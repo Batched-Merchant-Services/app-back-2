@@ -869,7 +869,7 @@
         "movementsAction": "Registro de\nMovimientos",
         "updateCardAction": "Actualizar\nTarjeta",
         "titleInfoReceived":"Mi tarjeta de \n Prepago Física",
-        "textIfYouReceived":"Si recibiste una tarjeta física Uulala",
+        "textIfYouReceived":"Si recibiste una tarjeta física SAVVY",
         "textAtWorkOrWe":"de parte de tu empresa o nosotros te la enviamos verifíca que se encuentre en un sobre",
         "textNewSealed":"nuevo y sellado.",
         "buttonNext": "Siguiente",
@@ -986,7 +986,7 @@
           "textReference":"Referencia",
           "textConsult":"Consultar",
           "textToConsultTheInformation":"Para consultar la información de sus tarjetas deberás",
-          "textEnterTheUulala":"ingresar al panel de tarjetas virtuales Uulala.",
+          "textEnterTheUulala":"ingresar al panel de tarjetas virtuales SAVVY.",
           "textYouWillHaveTo":"Tendrás que registrarte e ingresar para realizar la consulta."
         },
         "pinUpdate":{

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
 import * as Animatable from 'react-native-animatable';
 import i18n from '@utils/i18n';
@@ -82,7 +83,7 @@ const CreatePassword = ({ navigation }) => {
       const response = await changePassword(token, Password, ConfirmPassword);
       if (response.code < 400) {
         setTimeout(function () {
-          navigation.navigate('PasswordConfirmation');
+          navigation.navigate('PasswordConfirmation', { page: page });
           setIsLoadingModal(false);
         }, 1000);
 
@@ -113,39 +114,127 @@ const CreatePassword = ({ navigation }) => {
     setActionAnimated(true);
   };
 
-  console.log('secretAnswer',page)
+  console.log('secretAnswer', page)
   return (
     <SignUpWrapper forceInset={{ top: 0 }}>
-      {page === 'secretAnswer' && (
+
+      {page !== 'secretAnswer' && (
         <ResizeImageBackground source={background}>
-          <DivSpace height-10 />
+          <DivSpace height-20 />
           <NavigationBar body={newPass ? '' : i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={page === 'config' ? handlePressConfig : handlePressBack} />
           <DivSpace height-10 />
-          <View flex-1>
-            <View>
-              <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
-                <View centerH>
-                  <ImageComponent
-                    source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage}
-                    width={scale(220)}
-                    height={verticalScale(149)}
-                  />
+          <View flex-1 centerH >
+            <View >
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "position" : "height"}
+                style={{ flex: 0.9, alignItems: 'center' }}
+              >
+                <View>
+                  <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
+                    <View centerH>
+                      <ImageComponent
+                        source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage}
+                        width={scale(220)}
+                        height={verticalScale(149)}
+                      />
+                    </View>
+                  </Animatable.View>
                 </View>
-              </Animatable.View>
-            </View>
-            <DivSpace height-30 />
-            <View centerH paddingH-25 paddingV-40 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '88%' }}>
-                <Text h16 center medium>
-                  {newPass ? i18n.t('signUp.component.labelCreateNewPass') : ''}
-                </Text>
-                <DivSpace height-14 />
-                <View width-250>
-                  <Text h12 center>
-                    {i18n.t('signUp.component.descriptionCreatePassword')}
+                <DivSpace height-30 />
+                <View centerH paddingH-25 paddingV-20 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '88%' }}>
+                  <Text h16 center medium>
+                    {newPass ? i18n.t('signUp.component.labelCreateNewPass') : ''}
                   </Text>
+                  <DivSpace height-14 />
+                  <View width-250>
+                    <Text h12 center>
+                      {i18n.t('signUp.component.descriptionCreatePassword')}
+                    </Text>
+                  </View>
+                  <DivSpace height-20 />
+
+                  <Animatable.View animation={'zoomInUp'} >
+                    <AnimateLabelInput
+                      {...password}
+                      label={i18n.t('generics.password')}
+                      keyboardType={'default'}
+                      autoCapitalize={'none'}
+                      secureTextEntry
+                      style={{ color: brandTheme?.white ?? Colors.white }}
+                      containerStyle={{ backgroundColor: 'white' }}
+                    />
+                  </Animatable.View>
+                  <DivSpace height-8 />
+                  <Animatable.View animation={'zoomInUp'}>
+                    <AnimateLabelInput
+                      {...confirmPassword}
+                      label={i18n.t('generics.confirmPassword')}
+                      keyboardType={'default'}
+                      autoCapitalize={'none'}
+                      secureTextEntry
+                      style={{ color: brandTheme?.white ?? Colors.white }}
+                      containerStyle={{ backgroundColor: 'white' }}
+                    />
+                  </Animatable.View>
+
+                  <DivSpace height-20 />
+                  {page === 'config' && (
+                    <ButtonRounded disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
+                      <Text h10 semibold>
+                        {i18n.t('AppNewPin.component.AppConfirmationPin.buttonToUpdate')}
+                      </Text>
+                    </ButtonRounded>
+                  )}
+                  {page !== 'config' && (
+                    <ButtonNext
+                      disabled={!isValid && !buttonNext ? true : buttonNext}
+                      onPress={handlePressNext} />
+                  )}
                 </View>
+              </KeyboardAvoidingView>
+            </View>
+
+          </View>
+
+        </ResizeImageBackground>
+      )}
+      {page === 'secretAnswer' && (
+        <>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "position" : ""}
+            style={{ flex: 0.75 }}
+          >
+            <View style={{ height: '100%' }}>
               <DivSpace height-20 />
+              <NavigationBar body={newPass ? '' : i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={page === 'config' ? handlePressConfig : handlePressBack} />
+              <DivSpace height-10 />
               <View>
+                <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
+                  <View centerH>
+                    <ImageComponent
+                      source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage}
+                      width={scale(220)}
+                      height={verticalScale(149)}
+                    />
+                  </View>
+                </Animatable.View>
+                <DivSpace height-20 />
+                <Animatable.View animation={'zoomInUp'} >
+                  <View centerH>
+                    <Text h16 white center medium>
+                      {newPass ? i18n.t('signUp.component.labelCreateNewPass') : ''}
+                    </Text>
+                    <DivSpace height-14 />
+                    <View width-250>
+                      <Text h12 center textGray>
+                        {i18n.t('signUp.component.descriptionCreatePassword')}
+                      </Text>
+                    </View>
+                  </View>
+                </Animatable.View>
+              </View>
+              <DivSpace height-20 />
+              <View paddingH-20>
                 <Animatable.View animation={'zoomInUp'} >
                   <AnimateLabelInput
                     {...password}
@@ -153,11 +242,9 @@ const CreatePassword = ({ navigation }) => {
                     keyboardType={'default'}
                     autoCapitalize={'none'}
                     secureTextEntry
-                    style={{ color: brandTheme?.white ?? Colors.white }}
-                    containerStyle={{ backgroundColor: 'white' }}
                   />
                 </Animatable.View>
-                <DivSpace height-8 />
+                <DivSpace height-12 />
                 <Animatable.View animation={'zoomInUp'}>
                   <AnimateLabelInput
                     {...confirmPassword}
@@ -165,87 +252,12 @@ const CreatePassword = ({ navigation }) => {
                     keyboardType={'default'}
                     autoCapitalize={'none'}
                     secureTextEntry
-                    style={{ color: brandTheme?.white ?? Colors.white }}
-                    containerStyle={{ backgroundColor: 'white' }}
                   />
                 </Animatable.View>
                 <DivSpace height-20 />
               </View>
-              <View centerH >
-                <DivSpace height-20 />
-                {page === 'config' && (
-                  <ButtonRounded disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
-                    <Text h10 semibold>
-                      {i18n.t('AppNewPin.component.AppConfirmationPin.buttonToUpdate')}
-                    </Text>
-                  </ButtonRounded>
-
-                )}
-                {page !== 'config' && (
-                  <ButtonNext 
-                  disabled={!isValid && !buttonNext ? true : buttonNext}
-                   onPress={handlePressNext} />
-                )}
-              </View>
             </View>
-          </View>
-        </ResizeImageBackground>
-      )}
-      {page !== 'secretAnswer' && (
-        <Fragment>
-          <DivSpace height-10 />
-          <NavigationBar body={newPass ? '' : i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={page === 'config' ? handlePressConfig : handlePressBack} />
-          <DivSpace height-10 />
-          <View flex-1>
-            <View>
-              <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
-                <View centerH>
-                  <ImageComponent
-                    source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage}
-                    width={scale(220)}
-                    height={verticalScale(149)}
-                  />
-                </View>
-              </Animatable.View>
-              <DivSpace height-20 />
-              <Animatable.View animation={'zoomInUp'} >
-                <View centerH>
-                  <Text h16 white center medium>
-                    {newPass ? i18n.t('signUp.component.labelCreateNewPass') : ''}
-                  </Text>
-                  <DivSpace height-14 />
-                  <View width-250>
-                    <Text h12 center textGray>
-                      {i18n.t('signUp.component.descriptionCreatePassword')}
-                    </Text>
-                  </View>
-                </View>
-              </Animatable.View>
-            </View>
-            <DivSpace height-30 />
-            <View paddingH-20>
-              <Animatable.View animation={'zoomInUp'} >
-                <AnimateLabelInput
-                  {...password}
-                  label={i18n.t('generics.password')}
-                  keyboardType={'default'}
-                  autoCapitalize={'none'}
-                  secureTextEntry
-                />
-              </Animatable.View>
-              <DivSpace height-8 />
-              <Animatable.View animation={'zoomInUp'}>
-                <AnimateLabelInput
-                  {...confirmPassword}
-                  label={i18n.t('generics.confirmPassword')}
-                  keyboardType={'default'}
-                  autoCapitalize={'none'}
-                  secureTextEntry
-                />
-              </Animatable.View>
-              <DivSpace height-20 />
-            </View>
-            <View flex-1 centerH bottom>
+            <View centerH centerV >
               <DivSpace height-20 />
               {page === 'config' && (
                 <ButtonRounded disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
@@ -253,15 +265,16 @@ const CreatePassword = ({ navigation }) => {
                     {i18n.t('AppNewPin.component.AppConfirmationPin.buttonToUpdate')}
                   </Text>
                 </ButtonRounded>
-
               )}
               {page !== 'config' && (
-                <ButtonNext disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} />
+                <ButtonNext
+                  disabled={!isValid && !buttonNext ? true : buttonNext}
+                  onPress={handlePressNext} />
               )}
-              <DivSpace height-40 />
             </View>
-          </View>
-        </Fragment>
+          </KeyboardAvoidingView>
+
+        </>
       )}
       <SnackBar
         message={title}
@@ -273,6 +286,7 @@ const CreatePassword = ({ navigation }) => {
         <Loader
           isOpen={true}
           navigation={navigation} />)}
+
     </SignUpWrapper>
   );
 };

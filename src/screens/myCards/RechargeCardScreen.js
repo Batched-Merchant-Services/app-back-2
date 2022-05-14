@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { scale, verticalScale } from 'react-native-size-matters';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import {
   DivSpace,
   NavigationBar,
@@ -38,6 +39,10 @@ const RechargeCardScreen = ({ navigation }) => {
 
   return (
     <SignUpWrapper>
+    <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "position" : ""}
+          
+        >
       <NavigationBar
         onBack={handleBackPress}
         body={i18n.t('cardRecharge.component.title')}
@@ -88,6 +93,7 @@ const RechargeCardScreen = ({ navigation }) => {
           </Text>
         </ButtonRounded>
       </View>
+      </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };

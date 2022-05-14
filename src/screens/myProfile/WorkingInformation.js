@@ -125,10 +125,6 @@ const WorkingInformation = ({ navigation }) => {
                   <DivSpace height-5 />
                   <Text h12 medium white>{nameCompany}</Text>
                   <DivSpace height-20 />
-                  <Text h10 textGray>{i18n.t('myProfile.component.WorkingInformation.textPosition')}</Text>
-                  <DivSpace height-5 />
-                  <Text h12 medium white>{job}</Text>
-                  <DivSpace height-20 />
                   <Text h10 textGray>{i18n.t('myProfile.component.WorkingInformation.textAdmissionDate')}</Text>
                   <DivSpace height-5 />
                   <Text h12 medium white>{admissionDate}</Text>

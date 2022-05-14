@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import i18n from '@utils/i18n';
-import { ScrollView,Clipboard,TouchableOpacity } from 'react-native';
+import { ScrollView,Clipboard,TouchableOpacity,KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { scale, verticalScale } from 'react-native-size-matters';
 import { Bubbles } from 'react-native-loader';
@@ -164,6 +164,10 @@ const WalletRecharge = ({ navigation }) => {
   };
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
+     <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "height" : ""}
+        style={{ flex: 1 }}
+      >
       <NavigationBar
         onBack={() => navigation.goBack()}
         body={i18n.t('CryptoBalance.component.rechargeCrypto.titleBitcoinRechargeToWallet')}
@@ -296,6 +300,7 @@ const WalletRecharge = ({ navigation }) => {
           getLisCrypto(payload); 
         }}
       />
+      </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };

@@ -6,22 +6,15 @@ import ModalDeviceError from '@screens/ModalDeviceError';
 import {
   Text,
   View,
-  Link,
-  Loader,
   DivSpace,
-  SnackBar,
   ImageComponent,
   ButtonRounded,
-  AnimateLabelInput,
   ResizeImageBackground
 } from '@components';
 import * as Animatable from 'react-native-animatable';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import { scale, verticalScale } from 'react-native-size-matters';
 import { withNavigationFocus } from 'react-navigation';
-import LocalStorage from '@utils/localStorage';
-import TouchID from 'react-native-touch-id';
 import Styles from '@screens/signIn/styles';
 import WELCOME_BACK from '@assets/brand/savvy-white-logo.png';
 import background from '@assets/brand/backgroundImage.png';

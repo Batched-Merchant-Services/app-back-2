@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import passwordImage from '@assets/brand/password.png';
+import * as Animatable from 'react-native-animatable';
 import { forgotPassword, catalogSecurityQuestion } from '@utils/api/switch';
 import {
   ButtonNext,
@@ -85,55 +87,62 @@ const SecretAnswer = ({ navigation, }) => {
       <ResizeImageBackground source={background}>
         <DivSpace height-20 />
         <NavigationBar body={i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={handlePressGoBack} />
-        <DivSpace height-20 />
-        <View flex-1 style={{width:'100%'}}>
-            <View centerH>
-              <ImageComponent source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage} width={scale(260)} height={verticalScale(163)} />
-            </View>
-            <DivSpace height-30 />
-            <View centerH>
-              <Text h16 center medium>
-                {i18n.t('forgotPassword.component.labelAnswer')}
-              </Text>
-              <DivSpace height-19 />
-              <View width-250>
-                <Text h12 center>
-                  {i18n.t('forgotPassword.component.labelDescriptionForget')}
+        <DivSpace height-10 />
+        <View flex-1 >
+          <View >
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "position" : "height"}
+              style={{ flex: 0.9, alignItems: 'center' }}
+            >
+              <View >
+                <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
+                  <View centerH centerV>
+                    <ImageComponent source={brandThemeImages?.password ? brandThemeImages?.password : passwordImage} width={scale(155)} height={verticalScale(155)} />
+                  </View>
+                </Animatable.View>
+              </View>
+              <DivSpace height-40 />
+              <View centerH>
+                <Text h16 center medium>
+                  {i18n.t('forgotPassword.component.labelAnswer')}
                 </Text>
+                <DivSpace height-19 />
+                <View width-250>
+                  <Text h12 center>
+                    {i18n.t('forgotPassword.component.labelDescriptionForget')}
+                  </Text>
+                </View>
               </View>
-            </View>
-          <DivSpace height-40 />
-          <View flex-1 centerH marginH-25 paddingV-30 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1}}>
-            <View style={{ width: '85%' }}>
-              <AnimateLabelInput
-                {...email}
-                label={i18n.t('generics.emailOrPhone')}
-                keyboardType={'default'}
-                autoCapitalize={'none'}
-                style={{ color: Colors.white }}
-                containerStyle={{ backgroundColor: 'white' }}
-              />
-              <DivSpace height-60 />
-              <View  centerH>
-                <ButtonNext 
-                  disabled={!isValid && !buttonNext ? true : buttonNext} 
-                  onPress={PressForgotPassword} />
+              <DivSpace height-20 />
+              <View paddingV-30 centerH centerV  style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1 }}>
+              <View style={{ width: '92%' }}>
+                <Animatable.View animation={'zoomInUp'} >
+                  <AnimateLabelInput
+                    {...email}
+                    label={i18n.t('generics.emailOrPhone')}
+                    keyboardType={'default'}
+                    autoCapitalize={'none'}
+                    style={{ color: Colors.white }}
+                    containerStyle={{ backgroundColor: 'white' }}
+                  />
+                </Animatable.View>
+
+
+                <DivSpace height-20 />
+                <View centerH>
+                  <ButtonNext
+                    disabled={!isValid && !buttonNext ? true : buttonNext}
+                    onPress={PressForgotPassword} />
+                </View>
               </View>
-            </View>
+              </View>
+            </KeyboardAvoidingView>
           </View>
-          <DivSpace height-40 />
+
         </View>
-        <SnackBar
-          message={title}
-          isVisible={snakVisible}
-          onClose={handleCloseNotif}
-          animationAction={actionAnimated}
-        />
-        {isLoadingModal && (
-          <Loader
-            isOpen={true}
-            navigation={navigation} />)}
+
       </ResizeImageBackground>
+
     </SignUpWrapper>
   );
 };

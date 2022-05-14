@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import i18n from '@utils/i18n';
 import { useSelector} from 'react-redux';
-import { ScrollView } from 'react-native';
+import { ScrollView,KeyboardAvoidingView, Platform  } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { NavigationEvents } from 'react-navigation';
 import { useValidatedInput,isFormValid } from '@hooks/validation-hooks';
@@ -164,6 +164,10 @@ const CryptoTransferUsers = ({ navigation }) => {
 
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "height" : ""}
+        style={{ flex: 1 }}
+      >
       <NavigationBar
         onBack={() => navigation.goBack()}
         body={i18n.t('CryptoBalance.component.CryptoSendBetweenUser.textCryptoTransfer')}
@@ -309,6 +313,7 @@ const CryptoTransferUsers = ({ navigation }) => {
           getBalanceConvert(payload);
         }}
       />
+      </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };
