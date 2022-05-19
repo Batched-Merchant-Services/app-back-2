@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import passwordImage from '@assets/brand/password.png';
 import * as Animatable from 'react-native-animatable';
 import { forgotPassword, catalogSecurityQuestion } from '@utils/api/switch';
@@ -126,8 +126,6 @@ const SecretAnswer = ({ navigation, }) => {
                     containerStyle={{ backgroundColor: 'white' }}
                   />
                 </Animatable.View>
-
-
                 <DivSpace height-20 />
                 <View centerH>
                   <ButtonNext
@@ -140,9 +138,17 @@ const SecretAnswer = ({ navigation, }) => {
           </View>
 
         </View>
-
       </ResizeImageBackground>
-
+      <SnackBar
+          message={title}
+          isVisible={snakVisible}
+          onClose={handleCloseNotif}
+          animationAction={actionAnimated}
+        />
+        {isLoadingModal && (
+          <Loader
+            isOpen={true}
+            navigation={navigation} />)}
     </SignUpWrapper>
   );
 };
