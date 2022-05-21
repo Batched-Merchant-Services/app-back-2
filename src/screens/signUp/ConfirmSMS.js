@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { saveUser } from '@store/ducks/user.ducks';
 import { validateCode } from '@utils/api/switch';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -88,80 +89,95 @@ const ConfirmSMS = ({ navigation }) => {
       {page === 'secretAnswer' && (
         <ResizeImageBackground source={background}>
           <DivSpace height-20 />
-          <NavigationBar onBack={handlePressBack} />
+          <NavigationBar body={page === 'secretAnswer'?i18n.t('forgotPassword.component.navigatorRecoverMyPassword'):''} onBack={handlePressBack} />
           <DivSpace height-10 />
           <View flex-1 centerH centerV >
-            <Animatable.View animation={'zoomInUp'} easing={'ease'} style={{ alignItems: 'center' }}>
-              <ImageComponent source={brandThemeImages?.sms ? brandThemeImages?.sms : SMS} width={scale(220)} height={verticalScale(149)} />
-            </Animatable.View>
-            <DivSpace height-60 />
-            <View paddingH-40 paddingV-40 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '80%' }}>
-              <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={900} style={{ alignItems: 'center' }}>
-                <View width-210>
-                  <Text h16 center medium>
-                    {i18n.t('signUp.component.smsSent')}
-                  </Text>
+            <View >
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "position" : "height"}
+                style={{ flex: 0.95, alignItems: 'center' }}
+              >
+                <View centerH>
+                  <Animatable.View animation={'zoomInUp'} easing={'ease'} style={{ alignItems: 'center' }}>
+                    <ImageComponent source={brandThemeImages?.sms ? brandThemeImages?.sms : SMS} width={scale(220)} height={verticalScale(149)} />
+                  </Animatable.View>
+                  <DivSpace height-60 />
+                  <View paddingH-40 paddingV-40 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '90%' }}>
+                    <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={900} style={{ alignItems: 'center' }}>
+                      <View >
+                        <Text h16 center medium>
+                          {i18n.t('signUp.component.smsSent')}
+                        </Text>
+                      </View>
+                    </Animatable.View>
+                    <DivSpace height-55 />
+                    <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={1100} style={{ alignItems: 'center' }}>
+                      <Text h12 center medium>
+                        {i18n.t('signUp.component.labelWeHaveSentYouPin')}
+                      </Text>
+                    </Animatable.View>
+                    <DivSpace height-30 />
+                    <Animatable.View animation={'fadeInRight'} delay={1200} >
+                      <PinInput {...pinCode} colorStyle={{ color: 'white' }} contentStyle={{ backgroundColor: brandTheme.bgOrange02 ?? Colors?.bgOrange02 }} />
+                    </Animatable.View>
+                    <DivSpace height-35 />
+                    <Link linkStyle={{ color: brandTheme.bgOrange02 ?? Colors?.bgOrange02 }}>
+                      {i18n.t('myProfile.component.buttonForwardCode')}
+                    </Link>
+                  </View>
                 </View>
-              </Animatable.View>
-              <DivSpace height-55 />
-              <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={1100} style={{ alignItems: 'center' }}>
-                <Text h12 center medium>
-                  {i18n.t('signUp.component.labelWeHaveSentYouPin')}
-                </Text>
-              </Animatable.View>
-              <DivSpace height-30 />
-              <Animatable.View animation={'fadeInRight'} delay={1200} >
-                <PinInput {...pinCode} colorStyle={{color:'white'}} contentStyle={{backgroundColor:  brandTheme.bgOrange02 ?? Colors?.bgOrange02}}/>
-              </Animatable.View>
-              <DivSpace height-35 />
-              <Link linkStyle={{ color: brandTheme.bgOrange02 ?? Colors?.bgOrange02 }}>
-                {i18n.t('myProfile.component.buttonForwardCode')}
-              </Link>
+              </KeyboardAvoidingView>
             </View>
           </View>
         </ResizeImageBackground>
       )}
 
       {page !== 'secretAnswer' && (
-        <Fragment>
-          <DivSpace height-10 />
-          <NavigationBar onBack={handlePressBack} />
-          <DivSpace height-10 />
-          <View flex-1>
-            <View>
-              <Animatable.View animation={'zoomInUp'} easing={'ease'} style={{ alignItems: 'center' }}>
-                <ImageComponent source={brandThemeImages?.sms ? brandThemeImages?.sms : SMS} width={scale(220)} height={verticalScale(149)} />
-              </Animatable.View>
-              <DivSpace height-30 />
-              <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={900} style={{ alignItems: 'center' }}>
-                <View width-210>
-                  <Text h16 white center medium>
-                    {i18n.t('signUp.component.smsSent')}
+        <>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "position" : ""}
+            style={{ flex: 0.75 }}
+          >
+            <View style={{ height: '100%' }}>
+              <DivSpace height-20 />
+              <NavigationBar body={i18n.t('signUp.component.labelCreateNewPass')} onBack={handlePressBack} />
+              <DivSpace height-40 />
+              <View>
+                <Animatable.View animation={'zoomInUp'} easing={'ease'} style={{ alignItems: 'center' }}>
+                  <ImageComponent source={brandThemeImages?.sms ? brandThemeImages?.sms : SMS} width={scale(220)} height={verticalScale(149)} />
+                </Animatable.View>
+                <DivSpace height-30 />
+                <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={900} style={{ alignItems: 'center' }}>
+                  <View width-210>
+                    <Text h16 white center medium>
+                      {i18n.t('signUp.component.smsSent')}
+                    </Text>
+                  </View>
+                </Animatable.View>
+                <DivSpace height-55 />
+                <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={1100} style={{ alignItems: 'center' }}>
+                  <Text h12 white center medium>
+                    {i18n.t('signUp.component.labelWeHaveSentYouPin')}
                   </Text>
-                </View>
-              </Animatable.View>
-              <DivSpace height-55 />
-              <Animatable.View animation={'fadeIn'} easing={'ease-in-out'} delay={1100} style={{ alignItems: 'center' }}>
-                <Text h12 white center medium>
-                  {i18n.t('signUp.component.labelWeHaveSentYouPin')}
-                </Text>
-              </Animatable.View>
-              <DivSpace height-30 />
-              <Animatable.View animation={'fadeInRight'} delay={1200} style={{ alignItems: 'center' }}>
-                <PinInput {...pinCode}/>
-              </Animatable.View>
-              <DivSpace height-35 />
-              <Link>
-                {i18n.t('myProfile.component.buttonForwardCode')}
-              </Link>
+                </Animatable.View>
+                <DivSpace height-30 />
+                <Animatable.View animation={'fadeInRight'} delay={1200} style={{ alignItems: 'center' }}>
+                  <PinInput {...pinCode} />
+                </Animatable.View>
+                <DivSpace height-35 />
+                <Link>
+                  {i18n.t('myProfile.component.buttonForwardCode')}
+                </Link>
+              </View>
+              <View flex-1 centerH bottom>
+                <Animatable.View animation={'flipInY'} delay={1300} style={{ alignItems: 'center' }}>
+                  <DivSpace height-40 />
+                </Animatable.View>
+              </View>
             </View>
-            <View flex-1 centerH bottom>
-              <Animatable.View animation={'flipInY'} delay={1300} style={{ alignItems: 'center' }}>
-                <DivSpace height-40 />
-              </Animatable.View>
-            </View>
-          </View>
-        </Fragment>
+          </KeyboardAvoidingView>
+
+        </>
       )}
       <SnackBar
         message={title}

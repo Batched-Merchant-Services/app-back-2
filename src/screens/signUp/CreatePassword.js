@@ -116,18 +116,19 @@ const CreatePassword = ({ navigation }) => {
 
   console.log('secretAnswer', page)
   return (
+    <>
     <SignUpWrapper forceInset={{ top: 0 }}>
 
-      {page !== 'secretAnswer' && (
+      {page === 'secretAnswer' && (
         <ResizeImageBackground source={background}>
           <DivSpace height-20 />
-          <NavigationBar body={newPass ? '' : i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={page === 'config' ? handlePressConfig : handlePressBack} />
+          <NavigationBar body={page !== 'secretAnswer' ? '' : i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={page === 'config' ? handlePressConfig : handlePressBack} />
           <DivSpace height-10 />
           <View flex-1 centerH >
             <View >
               <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "position" : "height"}
-                style={{ flex: 0.9, alignItems: 'center' }}
+                style={{ flex: 0.93, alignItems: 'center' }}
               >
                 <View>
                   <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>
@@ -198,7 +199,7 @@ const CreatePassword = ({ navigation }) => {
 
         </ResizeImageBackground>
       )}
-      {page === 'secretAnswer' && (
+      {page !== 'secretAnswer' && (
         <>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "position" : ""}
@@ -257,7 +258,7 @@ const CreatePassword = ({ navigation }) => {
                 <DivSpace height-20 />
               </View>
             </View>
-            <View centerH centerV >
+            <View  centerH centerV >
               <DivSpace height-20 />
               {page === 'config' && (
                 <ButtonRounded disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
@@ -276,18 +277,21 @@ const CreatePassword = ({ navigation }) => {
 
         </>
       )}
+    </SignUpWrapper>
+    <View >
       <SnackBar
         message={title}
         isVisible={snakVisible}
         onClose={handleCloseNotif}
         animationAction={actionAnimated}
       />
+      </View>
+      
       {isLoadingModal && (
         <Loader
           isOpen={true}
           navigation={navigation} />)}
-
-    </SignUpWrapper>
+    </>
   );
 };
 

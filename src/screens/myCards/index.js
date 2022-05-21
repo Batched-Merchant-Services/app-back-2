@@ -65,18 +65,18 @@ const MyCards = ({ navigation }) => {
   const [currencyUser]=useState(userData?userData.currencyUser:'');
   const setChangueIndex = async (index) => { 
     setActiveSlide(index);
-    setBalance(CAROUSEL_ITEMS[index].balance);
-    setStatusRequestCard(CAROUSEL_ITEMS[index].statusRequestCard);
-    setActivationStatus(CAROUSEL_ITEMS[index].statusActivation);
-    setAvailable(CAROUSEL_ITEMS[index].disabled);
-    setProxyKey(CAROUSEL_ITEMS[index].proxyKey);
+    setBalance(CAROUSEL_ITEMS[index]?.balance);
+    setStatusRequestCard(CAROUSEL_ITEMS[index]?.statusRequestCard);
+    setActivationStatus(CAROUSEL_ITEMS[index]?.statusActivation);
+    setAvailable(CAROUSEL_ITEMS[index]?.disabled);
+    setProxyKey(CAROUSEL_ITEMS[index]?.proxyKey);
   };
 
   function renderItem({ item, index }) {
     const itemValues = { ...item };
-    const cardVirtual = itemValues.type; 
+    const cardVirtual = itemValues?.type; 
     setCardVirtualSwfit(cardVirtual);
-    itemValues.disabled = item.disabled || !available;
+    itemValues.disabled = item?.disabled || !available;
     return cardVirtual === 'EMPTY' ? <CardEmpty {...itemValues} available={true} ref={AnimationRef} /> : cardVirtual === 'PHYSICAL' ? <Cards {...itemValues} available={available} width={'100%'} height={'100%'}/> :<View centerH><ImageComponent source={brandThemeImages?.cardVirtual?brandThemeImages?.cardVirtual:swift} width={'100%'} height={'100%'} /></View>;
   }
 
@@ -89,14 +89,14 @@ const MyCards = ({ navigation }) => {
     try {
       const token = await LocalStorage.get('auth_token');
       const response = await getCards(token);
-      if (response.code < 400) {
-        setCAROUSEL_ITEMS(response.data);
+      if (response?.code < 400) {
+        setCAROUSEL_ITEMS(response?.data);
         setShowInfo(true);
-        setAvailable(response.data[activeSlide].disabled);
-        setProxyKey(response.data[activeSlide].proxyKey);
+        setAvailable(response?.data[activeSlide]?.disabled);
+        setProxyKey(response?.data[activeSlide]?.proxyKey);
       } 
-      setBalance(CAROUSEL_ITEMS[activeSlide].balance);
-      setActivationStatus(CAROUSEL_ITEMS[activeSlide].statusActivation);
+      setBalance(CAROUSEL_ITEMS[activeSlide]?.balance);
+      setActivationStatus(CAROUSEL_ITEMS[activeSlide]?.statusActivation);
     } catch (e) {
       setBalance(0);
     }
@@ -109,12 +109,12 @@ const MyCards = ({ navigation }) => {
       const token = await LocalStorage.get('auth_token');
       const response = await changueStatus(token,active,proxyKey);
       if (response.code < 400) {
-        const  availableCard = response.data.Status === 'DEACTIVATE' ? false: true;
+        const  availableCard = response?.data?.Status === 'DEACTIVATE' ? false: true;
         setAvailable(availableCard);
         getCard();
       } else{
         setSnakVisible(true);
-        setTitle(response.message);
+        setTitle(response?.message);
         setAvailable(false);
       }
     } catch (e) {
@@ -174,9 +174,9 @@ const MyCards = ({ navigation }) => {
   };
 
  
-  const isPhysical = showInfo?  CAROUSEL_ITEMS[activeSlide].type === 'PHYSICAL' : null; 
-  const isVirtual = showInfo?  CAROUSEL_ITEMS[activeSlide].type === 'VIRTUAL' : null;
-  const isEmpty = showInfo?  CAROUSEL_ITEMS[activeSlide].type === 'EMPTY' : null;
+  const isPhysical = showInfo?  CAROUSEL_ITEMS[activeSlide]?.type === 'PHYSICAL' : null; 
+  const isVirtual = showInfo?  CAROUSEL_ITEMS[activeSlide]?.type === 'VIRTUAL' : null;
+  const isEmpty = showInfo?  CAROUSEL_ITEMS[activeSlide]?.type === 'EMPTY' : null;
 
   return (
     <SignUpWrapper forceInset={{ top: 0 }}>
@@ -242,7 +242,7 @@ const MyCards = ({ navigation }) => {
                   inactiveDotOpacity={1}
                   inactiveDotScale={1}
                 />
-                {showInfo
+                {/* {showInfo
                   ? isEmpty &&( 
                     
                     <View  centerH centerV >
@@ -257,12 +257,12 @@ const MyCards = ({ navigation }) => {
                         <CardRequestCard navigation={navigation} dataAssociate={CAROUSEL_ITEMS[activeSlide]}/>
                       </Animatable.View>
                     </View>)
-                  :null}
+                  :null} */}
 
                   {showInfo
                   ? isVirtual && (
                     <View centerH >
-                      {!CAROUSEL_ITEMS[activeSlide].statusRequestCard && (
+                      {!CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && (
                         <Fragment>
                           <View marginH-40 centerH>
                             <Text h12 white>{i18n.t('myCards.component.textGenerateVirtualCard')}</Text>
@@ -282,14 +282,14 @@ const MyCards = ({ navigation }) => {
                           <CardVirtualActions navigation={navigation} dataVirtual={CAROUSEL_ITEMS[activeSlide]} />
                         </Fragment>
                       )}
-                      {CAROUSEL_ITEMS[activeSlide].statusRequestCard && (
+                      {CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && (
                         <View>
                           <DivSpace height-20 />
                           <Text medium h12 white center>
                             {i18n.t('myCards.component.textBalance')}
                           </Text>
                           <Text medium h32 white center>
-                            {moneyFormatter(CAROUSEL_ITEMS[activeSlide].balance)}
+                            {moneyFormatter(CAROUSEL_ITEMS[activeSlide]?.balance)}
                           </Text>
                           <Text medium h14 orange center>
                             {currencyUser}
@@ -302,7 +302,7 @@ const MyCards = ({ navigation }) => {
                   : null}
 
                 {showInfo
-                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide].statusRequestCard && !CAROUSEL_ITEMS[activeSlide].statusActivation &&( 
+                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && !CAROUSEL_ITEMS[activeSlide]?.statusActivation &&( 
                     <View  flex-1 centerH centerV >
                       <Text h14 white center bold>{i18n.t('myCards.component.requesCard.textPhysicalPrepaidCard')}</Text>
                       <DivSpace height-10 />
@@ -313,14 +313,14 @@ const MyCards = ({ navigation }) => {
                   :null}
 
                 {showInfo
-                  ? isPhysical && CAROUSEL_ITEMS[activeSlide].statusRequestCard && CAROUSEL_ITEMS[activeSlide].statusActivation &&( 
+                  ? isPhysical && CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && CAROUSEL_ITEMS[activeSlide]?.statusActivation &&( 
                     <View>
                       <DivSpace height-20 />
                       <Text medium h12 white center>
                         {i18n.t('myCards.component.textBalance')}
                       </Text>
                       <Text medium h32 white center>
-                        {moneyFormatter(CAROUSEL_ITEMS[activeSlide].balance)}
+                        {moneyFormatter(CAROUSEL_ITEMS[activeSlide]?.balance)}
                       </Text>
                       <Text medium h14 orange center>
                         {currencyUser}
@@ -330,7 +330,7 @@ const MyCards = ({ navigation }) => {
                   :null}
 
                 {showInfo
-                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide].statusActivation && CAROUSEL_ITEMS[activeSlide].statusRequestCard &&( 
+                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide]?.statusActivation && CAROUSEL_ITEMS[activeSlide]?.statusRequestCard &&( 
                     <CardDisabledFooter navigation={navigation} data={CAROUSEL_ITEMS[activeSlide]}/>)
                   :null}
               </View>

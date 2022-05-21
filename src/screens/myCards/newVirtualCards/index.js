@@ -10,7 +10,7 @@ import {
   NavigationBar,
   View
 } from '@components';
-import Styles from '../styles';
+import Styles from './styles';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import InfoVirtualStepOne from './InfoVirtualStepOne';
 import InfoVirtualStepTwo from './InfoVirtualStepTwo';
@@ -53,6 +53,7 @@ const newVirtualCards = ({ navigation }) => {
               itemWidth={scale(285)}
               inactiveSlideOpacity={1}
               onSnapToItem={index => setActiveSlide(index)}
+              removeClippedSubviews={false} 
             />
             <Pagination
               containerStyle={{

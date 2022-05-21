@@ -32,7 +32,7 @@ const InfoVirtualStepOne = ({ navigation }) => {
           {i18n.t('myCards.component.newVirtualCards.stepOne.textCopyTheFourDigit')}
         </Text>
         <DivSpace height-15 />
-        <View row>
+        <View centerH>
           <Text h11 white>
             {i18n.t('myCards.component.newVirtualCards.stepOne.textPressTheLinkToTheCard')}
           </Text>

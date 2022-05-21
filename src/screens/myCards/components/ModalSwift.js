@@ -35,7 +35,7 @@ const ModalSwift= ({ isOpen, onClose = () => null, navigation,page }) => {
   return (
     <ModalContainer showModal={!showOpen? showOpen : Open} style={{paddingTop: verticalScale(40)}}>
       <DivSpace height-10 />
-      <View  style={[Styles.containerModal,{ height: pageList?  verticalScale(560): null,backgroundColor: brandTheme?.textBlue01??Colors.textBlue01 }]}>
+      <View  style={[Styles.containerModal,{ backgroundColor: brandTheme?.textBlue01??Colors.textBlue01 }]}>
         {!pageList&&(
           <View style={[Styles.containerClose]} >
             <TouchableOpacity onPress={onClose} style={[Styles.buttonClose,{backgroundColor: brandTheme?.bgBlue01??Colors.bgBlue01}]} >

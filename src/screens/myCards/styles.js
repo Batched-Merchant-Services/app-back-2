@@ -47,7 +47,7 @@ export default StyleSheet.create({
   },
   containerModal: {
     width          : scale(325), 
-    height         : verticalScale(540), 
+    height         : verticalScale(530), 
     borderRadius   : 8 
   },
   touchableButton: {
