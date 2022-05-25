@@ -19,7 +19,7 @@ import {
   SnackBar 
 } from '@components';
 
-const ConfirmationPinUser = ({ navigation }) => {
+const BiometricChangeConfirmation = ({ navigation }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
@@ -122,4 +122,4 @@ const mapDispatchToProps = {saveUserRegistration };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigationFocus(ConfirmationPinUser));
+)(withNavigationFocus(BiometricChangeConfirmation));

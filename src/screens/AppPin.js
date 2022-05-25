@@ -27,7 +27,7 @@ const ConfirmationPinUser = ({ navigation }) => {
     if(inputtedPin.length < 6){
       clear();
     }else{
-      navigation.navigate('ConfirmationPinUser', {next, data}); 
+      navigation.navigate('BiometricChangeConfirmation', {next, data}); 
     }
   };
 

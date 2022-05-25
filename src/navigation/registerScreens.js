@@ -49,6 +49,7 @@ import AppConfirmationPin from '@screens/AppConfirmationPin';
 import AppNewPin from '@screens/AppNewPin';
 import AppPin from '@screens/AppPin';
 import ConfirmationPinUser from '@screens/ConfirmationPinUser';
+import BiometricChangeConfirmation from '@screens/BiometricChangeConfirmation';
 import Level from '@screens/levels';
 import LevelsInfo from '@screens/levels/LevelsInfo';
 import BuyPoints from '@screens/levels/BuyPoints';
@@ -332,6 +333,12 @@ export const signInScreens = {
     },
     ConfirmationPinUser: {
       screen           : ConfirmationPinUser,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    BiometricChangeConfirmation: {
+      screen           : BiometricChangeConfirmation,
       navigationOptions: {
         gesturesEnabled: false
       }

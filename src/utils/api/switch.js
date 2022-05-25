@@ -99,7 +99,7 @@ export const login = async ( phoneNumber,password ) => {
     version     : versionNumber,
     system      : OS,
     build_number: buildNumber,
-    group_id    : '0'
+    group_id    : -1
   });
   return await apiSavvyWallet.post(`/sessions/login`,body);
 };
