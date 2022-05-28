@@ -81,6 +81,7 @@
       "selectOne": "Please select one option",
       "next": "Next",
       "welcome": "Welcome to",
+      "welcomeLogin": "Welcome",
       "welcome_back": "Welcome Back!",
       "amount": "Payment amount",
       "sorry": "Sorry",
@@ -1025,11 +1026,11 @@
           "textUpdateYourPIN":"Update your PIN to approve payments and withdraw cash at ATMs",
           "textYourPINIsSecret":"Your PIN is secret",
           "textAndTheyShouldBeFour":"and they must be four numbers that are easy to remember, not consecutive or repetitive.",
-          "buttonUpdatePIN":"Update PIN",
+          "buttonUpdatePIN":"Set PIN for physical card",
           "textDefinePhysicalCardPIN":"Define Physical Card PIN",
           "textATabWillOpenIn":"A tab opens in your browser for you to enter your card PIN,",
           "textOnceFinishedYouCan":"once finished you can close the tab and return to the panel.",
-          "linkBackToPhysicalCard":"Back to physical card"
+          "linkBackToPhysicalCard":"Back to Physical Card"
         },
         "pinUpdateConfirmation":{
           "title":"Confirmation",
@@ -1132,7 +1133,7 @@
     },
     "cardRecharge": {
       "component": {
-        "title": "Recharge balance physical card",
+        "title": "Recharge balance to card",
         "walletAvailable": "Available in wallet",
         "amount": "Recharge amount:",
         "button": "Recharge card",

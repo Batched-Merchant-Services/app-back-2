@@ -32,9 +32,9 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
     const response = await userExternalId(token,code.value);
     if (response.code < 400) {
       setTimeout(function(){
-        const image =response.data.avatarImage;
-        const Name = response.data.firstName;
-        const LatsName = response.data.lastName;
+        const image =response?.data?.avatarImage;
+        const Name = response?.data?.firstName;
+        const LatsName = response?.data?.lastName;
         dispatch(saveInfoPayment({ imageUserQRScan: image, fullNameUserQRScan: Name +' '+ LatsName,nameQRScan: Name, lastNameQRScan: LatsName }));
         navigation.navigate('ContactInformation',{page: 'QRCodeSearch',codeExternal: code.value,imageSearch: image, nameSearch: Name, lastName:LatsName});
         setIsLoadingModal(false);
@@ -46,7 +46,7 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
         setIsLoadingModal(false);
         setSnakVisible(true);
         setButtonNext(true);
-        setTitle(response.message);
+        setTitle(response?.message);
       }, 1000);
     }
   };

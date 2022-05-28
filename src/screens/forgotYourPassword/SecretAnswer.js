@@ -59,7 +59,6 @@ const SecretAnswer = ({ navigation, }) => {
     if (response.code < 400) {
       setTimeout(function () {
         navigation.navigate('ConfirmSMS', { page: page ? page : 'secretAnswer' });
-
         setIsLoadingModal(false);
       }, 1000);
 
@@ -85,14 +84,15 @@ const SecretAnswer = ({ navigation, }) => {
   return (
     <SignUpWrapper forceInset={{ top: 0 }}>
       <ResizeImageBackground source={background}>
-        <DivSpace height-20 />
+      <DivSpace height-20 />
         <NavigationBar body={i18n.t('forgotPassword.component.navigatorRecoverMyPassword')} onBack={handlePressGoBack} />
         <DivSpace height-10 />
-        <View flex-1 >
-          <View >
+        <View  flex-1 style={{width:'90%'}}>
+        
+          <View flex-1>
             <KeyboardAvoidingView
               behavior={Platform.OS === "ios" ? "position" : "height"}
-              style={{ flex: 0.9, alignItems: 'center' }}
+              style={{ flex: 0.9}}
             >
               <View >
                 <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>

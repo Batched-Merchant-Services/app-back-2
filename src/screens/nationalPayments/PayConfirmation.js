@@ -60,11 +60,11 @@ const PayConfirmation = ({ navigation }) => {
         <BoxBlue>
           <View centerH flex-1>
             <DivSpace height-8 />
-            <View right marginR-30 style={{ width: '100%' }}>
+            {/* <View right marginR-30 style={{ width: '100%' }}>
               <TouchableOpacity  style={[Styles.onShare,{ backgroundColor: brandTheme?.bgBlue01??Colors.bgBlue01 }]}>
                 <ImageComponent white source={select} width={scale(16)} height={scale(16)}  />
               </TouchableOpacity>
-            </View>
+            </View> */}
             <DivSpace height-8 />
             <Text white h16 semibold>{page === 'QRCode' ? i18n.t('sendQRPayments.component.titlePaymentsent') :i18n.t('nationalPayments.component.textSuccessfulP')}</Text>
             <DivSpace height-15 />

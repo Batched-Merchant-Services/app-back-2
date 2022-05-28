@@ -134,6 +134,7 @@ const PinUpdateScreen = ({ navigation }) => {
               <ButtonRounded
                 style={{ width: scale(144), height: scale(30) }}
                 onPress={handleUpdatePin}
+                size='lg'
               >
                 <Text h10 semibold>
                   {i18n.t('myCards.component.pinUpdate.buttonUpdatePIN')}

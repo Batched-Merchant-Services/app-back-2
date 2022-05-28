@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { AsyncStorage } from 'react-native';
+import React from 'react';
 import i18n from '@utils/i18n';
 import { connect, useSelector } from 'react-redux';
-import ModalDeviceError from '@screens/ModalDeviceError';
 import {
   Text,
   View,
@@ -34,7 +32,7 @@ const Welcome = ({ navigation }) => {
     <>
       <SignUpWrapper forceInset={{ top: 0 }}>
         <ResizeImageBackground source={background}>
-          <View flex-1 centerH centerV>
+          <View flex-1 >
             <DivSpace height-20 />
             <Animatable.View style={{ alignItems: 'center' }}>
               <View centerH style={Styles.image}>
@@ -47,7 +45,7 @@ const Welcome = ({ navigation }) => {
             </Animatable.View>
             <DivSpace height-30 />
             <View bottom>
-            <View  paddingH-40 paddingV-40 style={{ borderColor: brandTheme?.bgOrange02??Colors?.bgOrange02, borderWidth: 1, width: '90%' }}>
+            <View  paddingH-40 paddingV-40 style={{ borderColor: brandTheme?.bgOrange02??Colors?.bgOrange02, borderWidth: 1 }}>
               <Text h16 center regular disabled>
                 {i18n.t('generics.welcome_back')}
               </Text>

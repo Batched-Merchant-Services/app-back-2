@@ -26,9 +26,9 @@ const ConfirmationQR = ({ navigation }) => {
     const response = await userExternalId(token,e.data);
     if (response.code < 400) {
       setTimeout(function(){
-        const image =response.data.avatarImage;
-        const Name = response.data.firstName? response.data.firstName: '';
-        const LatsName = response.data.lastName? response.data.lastName: '';
+        const image =response?.data?.avatarImage;
+        const Name = response?.data?.firstName? response?.data?.firstName: '';
+        const LatsName = response.data.lastName? response?.data?.lastName: '';
         dispatch(saveInfoPayment({ imageUserQRScan: image, fullNameUserQRScan: Name +' '+ LatsName,nameQRScan: Name, lastNameQRScan: LatsName }));
         navigation.navigate('ContactInformation',{page: 'QRCode',codeExternal: e.data,imageSearch: image, nameSearch: Name, lastName: LatsName});
         setIsLoadingModal(false);
@@ -40,7 +40,7 @@ const ConfirmationQR = ({ navigation }) => {
         setIsLoadingModal(false);
         setSnakVisible(true);
         setButtonNext(true);
-        setTitle(response.message);
+        setTitle(response?.message);
       }, 1000);
     }
   };

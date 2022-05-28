@@ -9,6 +9,7 @@ import RequestCompanyCode from '@screens/signUp/RequestCompanyCode';
 import CreatePassword from '@screens/signUp/CreatePassword';
 import Login from '@screens/signIn/Login';
 import WelcomeNew from '@screens/signIn/Welcome';
+import SelectCompany from '@screens/signIn/SelectCompany';
 import initRegisterProfile from '@screens/signUp/RegisterInitProfile';
 import InformationPersonal from '@screens/signUp/InformationPersonal';
 import onboarStepOne from '@screens/onboarding/StepOne';
@@ -877,6 +878,12 @@ export const signOutScreens = {
   },
   WelcomeNew: {
     screen           : WelcomeNew,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  SelectCompany: {
+    screen           : SelectCompany,
     navigationOptions: {
       gesturesEnabled: false
     }

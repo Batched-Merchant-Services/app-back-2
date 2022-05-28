@@ -12,7 +12,6 @@ import { SafeAreaView, Dimensions, TouchableOpacity } from 'react-native';
 import Carousel, { Pagination,getInputRangeFromIndexes } from 'react-native-snap-carousel';
 import LocalStorage from '@utils/localStorage';
 import Cards from '@screens/myCards/components/Cards';
-import * as Animatable from 'react-native-animatable';
 import CardEmpty from '@screens/myCards/components/CardEmpty';
 import ModalSwift from '@screens/myCards/components/ModalSwift';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';

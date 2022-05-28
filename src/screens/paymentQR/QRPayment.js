@@ -24,11 +24,11 @@ const QRPayment = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
-  const userData = redux.user;
+  const userData = redux?.user;
   const brandTheme = userData?.Theme?.colors;
 
   const handleCopy = () => {
-    Clipboard.setString(userData.idUser);
+    Clipboard.setString(userData?.idUser);
     setSnakVisible(true);
     setTitle(i18n.t('generics.NotificationCopiedText'));
   };

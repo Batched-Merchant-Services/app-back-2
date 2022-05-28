@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
     position  : 'absolute',
     resizeMode: 'stretch'
   },
-  image: { paddingTop: verticalScale(Platform.OS === 'android' ? 50 : 70) },
+  image: { paddingTop: verticalScale(Platform.OS === 'android' ? 50 : 60) },
   container: {
     flex: 1,borderColor:'red',borderWidth:1
   },

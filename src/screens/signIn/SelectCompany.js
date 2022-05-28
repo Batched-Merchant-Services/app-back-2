@@ -11,6 +11,7 @@ import {
   Select,
   DivSpace,
   SnackBar,
+  NavigationBar,
   ImageComponent,
   ButtonRounded,
   AnimateLabelInput,
@@ -34,7 +35,7 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import { saveTheme } from '@store/ducks/user.ducks';
 import { useDispatch } from 'react-redux';
 //Api
-import { login, getTheme } from '@utils/api/switch';
+import { login, getTheme, getCompaniesQuery } from '@utils/api/switch';
 
 const optionalConfigObject = {
   title: i18n.t('fingerPrint.component.textConfirmFootPrint'),
@@ -50,8 +51,9 @@ const optionalConfigObject = {
 
 
 async function handleSignIn(
-  Phone,
+  phone,
   Password,
+  Company,
   setIsLoadingModal,
   setStatusUser,
   setShowDeviceModal,
@@ -86,11 +88,11 @@ async function handleSignIn(
 
 
 
-  const response = await login(Phone, Password);
+  const response = await login(phone, Password, Company);
   console.log('response', response)
   if (response.code < 400) {
     await LocalStorage.set('auth_token', response.data.token);
-    await LocalStorage.set('user', Phone);
+    await LocalStorage.set('user', phone);
     await LocalStorage.set('password', Password);
     await LocalStorage.set('status', 'true');
     if (response.data.status !== 0) {
@@ -158,7 +160,7 @@ async function handleSignIn(
 }
 
 
-const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, screenProps }) => {
+const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, screenProps }) => {
   const [snakVisible, setSnakVisible] = useState(false);
   const [statusGet, setStatusGet] = useState('');
   const [statusUser, setStatusUser] = useState('');
@@ -170,8 +172,12 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
   const [valueChek, setChekValue] = useState(loginWithFingerPrint);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
   const password = useValidatedInput('loginPassword', '');
-  const phone = useValidatedInput('phone', '');
-  const isValid = isFormValid(phone);
+  const phone = navigation.getParam('phone');
+  const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
+    changeHandlerSelect: 'onSelect'
+  });
+
+  const isValid = isFormValid(company, password);
   const dispatch = useDispatch();
   const redux = useSelector(state => state);
   const userData = redux.user;
@@ -182,26 +188,43 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     const user = value === 'login' ? '' : await LocalStorage.get('user');
     const pass = value === 'login' ? '' : await LocalStorage.get('password');
     const text = value === 'login' ? true : false;
-    const Phone = !text ? user : phone?.value;
     const Password = !text ? pass : password?.value;
-    navigation.navigate('SelectCompany', { phone: Phone });
-    // await handleSignIn(Phone,
-    //   Password,
-    //   setIsLoadingModal,
-    //   setStatusUser,
-    //   setShowDeviceModal,
-    //   navigation,
-    //   setSnakVisible,
-    //   setButtonNext,
-    //   setTitle,
-    //   dispatch);
+    const Company = !text ? '' : company?.value;
 
+    await handleSignIn(phone,
+      Password,
+      Company,
+      setIsLoadingModal,
+      setStatusUser,
+      setShowDeviceModal,
+      navigation,
+      setSnakVisible,
+      setButtonNext,
+      setTitle,
+      dispatch);
   };
 
   useEffect(() => {
     handleBiometric();
   }, []);
 
+
+  useEffect(() => {
+    getCompanies();
+  }, []);
+
+
+  async function getCompanies() {
+    setIsLoadingModal(true);
+    const response = await getCompaniesQuery(phone);
+    if (response.code < 400) {
+      setCompanyOption(response.data);
+      setIsLoadingModal(false);
+    } else {
+      setCompanyOption([]);
+      setIsLoadingModal(false);
+    }
+  }
 
 
   async function handleBiometric() {
@@ -231,6 +254,10 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     setActionAnimated(true);
   };
 
+  function handlePressGoBack() {
+    navigation.goBack();
+  }
+
   async function handlePressBiometricAuthorizePress() {
     try {
       await TouchID.authenticate('', optionalConfigObject)
@@ -250,14 +277,17 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     <>
       <SignUpWrapper forceInset={{ top: 0 }}>
         <ResizeImageBackground source={background}>
+          <NavigationBar body={i18n.t('generics.welcomeLogin')} onBack={handlePressGoBack} />
+          <DivSpace height-10 />
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "position" : "height"}
-            style={{ flex: 0.8,width: '90%' }}
+            style={{ flex: 0.9, width: '90%' }}
           >
+           
             <View>
               <DivSpace height-20 />
               <Animatable.View style={{ alignItems: 'center' }}>
-                <View centerH style={Styles.image}>
+                <View centerH paddingT-15>
                   <ImageComponent
                     source={brandThemeImages?.welcomeLogo ? brandThemeImages?.welcomeLogo : WELCOME_BACK}
                     width={scale(239)}
@@ -271,57 +301,50 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
                   {i18n.t('generics.welcome_back')}
                 </Text>
               </View>
-              <DivSpace height-50 />
-              <View paddingH-20 paddingV-25 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1 }}>
-                <AnimateLabelInput
+              <DivSpace height-30 />
+              <View centerH paddingH-25 paddingV-25 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1 }}>
+                <View>
+                  {/* <AnimateLabelInput
                   {...phone}
                   label={i18n.t('generics.emailOrPhone')}
                   keyboardType={'default'}
                   autoCapitalize={'none'}
-                  style={{ color: brandTheme?.white ?? Colors.white }}
-                  containerStyle={{ backgroundColor: 'white' }}
-                />
-
-
-                {/*<DivSpace height-10 />
-                <AnimateLabelInput
-                  {...password}
-                  label={i18n.t('generics.password')}
-                  keyboardType={'default'}
-                  autoCapitalize={'none'}
-                  secureTextEntry
                   style={{ color: brandTheme?.white??Colors.white }}
                   containerStyle={{ backgroundColor: 'white' }}
-                />
-                 <Select
-                  {...company}
-                  label= {i18n.t('signUp.component.selectEntryCode')}
-                  options={companyOption}
-                  size="sm"
-                  dropLabelStyle={{color: brandTheme?.textBlue01??Colors.textBlue01}}
-                  dropStyle={{backgroundColor:brandTheme?.textBlue01??Colors.textBlue01,borderColor: brandTheme?.bgOrange02??Colors.bgOrange02 }}
                 /> */}
-                <DivSpace height-10 />
-                <View centerH>
-                  <ButtonRounded
-                    size='lg'
-                    disabled={!isValid && !buttonNext ? true : buttonNext} onPress={() => LoginAccount('login')}
-                  >
-                    <Text h10 semibold>
-                      {i18n.t('login.component.buttonEnter')}
-                    </Text>
-                  </ButtonRounded>
-                  <DivSpace height-20 />
-                  {/* <Link onPress={handlePressForgotPass} linkStyle={{ color: brandTheme.bgOrange02 ?? Colors?.bgOrange02 }}>
-                    {i18n.t('login.component.labelForgotPasswordLink')}
-                  </Link> */}
+                  <Select
+                    {...company}
+                    label={i18n.t('signUp.component.selectEntryCode')}
+                    options={companyOption}
+                    size="sm"
+                    dropLabelStyle={{ color: brandTheme?.textBlue01 ?? Colors.textBlue01 }}
+                    dropStyle={{ backgroundColor: brandTheme?.textBlue01 ?? Colors.textBlue01, borderColor: brandTheme?.bgOrange02 ?? Colors.bgOrange02 }}
+                  />
+                  <DivSpace height-10 />
+                  <AnimateLabelInput
+                    {...password}
+                    label={i18n.t('generics.password')}
+                    keyboardType={'default'}
+                    autoCapitalize={'none'}
+                    secureTextEntry
+                    style={{ color: brandTheme?.white ?? Colors.white }}
+                    containerStyle={{ backgroundColor: 'white' }}
+                  />
                 </View>
+                <DivSpace height-10 />
+                <ButtonRounded
+                  size='lg'
+                  disabled={!isValid && !buttonNext ? true : buttonNext} onPress={() => LoginAccount('login')}
+                >
+                  <Text h10 semibold>
+                    {i18n.t('login.component.buttonEnter')}
+                  </Text>
+                </ButtonRounded>
+                <DivSpace height-20 />
+                <Link onPress={handlePressForgotPass} linkStyle={{ color: brandTheme.bgOrange02 ?? Colors?.bgOrange02 }}>
+                  {i18n.t('login.component.labelForgotPasswordLink')}
+                </Link>
               </View>
-            </View>
-            {isLoadingModal && (
-              <Loader
-                isOpen={true}
-                navigation={navigation} />)}
               <View flex-1 bottom>
                 <SnackBar
                   message={title}
@@ -330,6 +353,12 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
                   animationAction={actionAnimated}
                 />
               </View>
+            </View>
+            {isLoadingModal && (
+              <Loader
+                isOpen={true}
+                navigation={navigation} />)}
+
             <ModalDeviceError isOpen={showDeviceModal} navigation={navigation} page={statusUser} onClose={hideModal} />
           </KeyboardAvoidingView>
         </ResizeImageBackground>
@@ -350,6 +379,6 @@ const mapDispatchToProps = { saveTheme };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigationFocus(Login));
+)(withNavigationFocus(SelectCompany));
 
 

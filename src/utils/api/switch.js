@@ -91,7 +91,9 @@ const pinCrypto = async(data) => {
   return infoPin;
 };
 
-export const login = async ( phoneNumber,password ) => {
+export const login = async ( phoneNumber,password,Company ) => {
+  const companyValue = Company?.value?Company?.value:'';
+  console.log('Company',companyValue)
   const body = await bodyCrypto({
     phoneNumber,
     password,
@@ -99,7 +101,7 @@ export const login = async ( phoneNumber,password ) => {
     version     : versionNumber,
     system      : OS,
     build_number: buildNumber,
-    group_id    : -1
+    group_id    : companyValue
   });
   return await apiSavvyWallet.post(`/sessions/login`,body);
 };
@@ -1130,9 +1132,9 @@ export const setPinPhysicalCard= async (token,id) => {
   return await apiSavvyWallet.get(`/cards/url_set_pin/${id}` ,{ headers });
 };
 
-export const getCompaniesQuery= async () => {
+export const getCompaniesQuery= async (emailPhone) => {
 
-  return await apiSavvyWallet.get(`/catalogs/companies?app=savvy`);
+  return await apiSavvyWallet.get(`/catalogs/companies?email_phone=${emailPhone}&app=savvy`);
 }; 
 
 

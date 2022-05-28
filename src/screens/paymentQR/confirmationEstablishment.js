@@ -21,7 +21,7 @@ import imageConfirm from '@assets/brand/imageConfirm.png';
 
 const confirmationEstablishment = ({ navigation }) => {
   const redux = useSelector(state => state);
-  const userData = redux.user;
+  const userData = redux?.user;
   const brandThemeImages = userData?.Theme?.images;
 
   function handlePressBack() {
