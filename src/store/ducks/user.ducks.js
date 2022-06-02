@@ -10,6 +10,7 @@ const ADD_CONTACTS = 'user/ADD_CONTACTS';
 const DELETE_CONTACTS = 'user/DELETE_CONTACTS';
 const ADD_THEME = 'user/ADD_THEME';
 const CLEAR_THEME = 'user/CLEAR_THEME';
+const DATA_COMPANY = 'user/DATA_COMPANY';
 
 const initialState = {
   
@@ -18,6 +19,7 @@ const initialState = {
   FavPayContacts      : [],
   Theme               : [],
   ClearTheme          : [],
+  DataCompany         : []
 };
 
 
@@ -92,10 +94,18 @@ function reducer(state = initialState, action) {
       ? { ...state, Theme: action.payload }
       : state;
 
+  case DATA_COMPANY:
+    return action.payload
+      ? { ...state, DataCompany: action.payload }
+      : state;
+
+
   case CLEAR_THEME:
     return action.payload
       ? { ...state, Theme: action.payload }
       : state;
+
+      
 
   default:
     return state;
@@ -156,6 +166,10 @@ export function InfoCrypto(data) {
   return { type: USER_CRYPTO, data };
 }
 
+export function CompanyData(data) {
+  return { type: DATA_COMPANY, data };
+}
+
 
 export function Theme(payload) {
   return { type: ADD_THEME, payload };
@@ -173,6 +187,14 @@ export function saveInfoCrypto(data) {
   return dispatch => {
     dispatch(
       InfoCrypto(data)
+    );
+  };
+}
+
+export function saveDataCompany(data) {
+  return dispatch => {
+    dispatch(
+      CompanyData(data)
     );
   };
 }

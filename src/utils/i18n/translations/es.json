@@ -1124,7 +1124,7 @@
     },
     "cardRecharge": {
       "component": {
-        "title": "Agregar saldo a tarjeta física",
+        "title": "Agregar saldo a tarjeta",
         "walletAvailable": "Disponible en monedero",
         "amount": "Monto a recargar:",
         "button": "Recargar Tarjeta",
@@ -1436,7 +1436,8 @@
           "textConfirmationTimeCan":"El tiempo de confirmación puede variar de 24 a 72 horas,",
           "textDependingOnTheSpeed":"dependiendo de la velocidad que tome la cadena de bloques de",
           "textBlockchainTakesAndThe":"y se realice la liquidación de los activos.",
-          "buttonToReturn":"Regresar"
+          "buttonToReturn":"Regresar",
+          "textThereIsNoAddress":"No hay dirección para mostrar"
         },
         "HistoryCrypto":{
           "title":"Historial de transacciones",

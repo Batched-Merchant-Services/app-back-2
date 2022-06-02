@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState,useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -15,6 +15,7 @@ import {
   NavigationBar,
   Text,
   View,
+  Select,
   SnackBar,
   Loader,
   ResizeImageBackground
@@ -25,6 +26,7 @@ import { toggleLoginWithFingerprint, saveUser } from '@store/ducks/user.ducks';
 import { forgotYourPassword, changePassword } from '@utils/api/switch';
 import { useSelector } from 'react-redux';
 import background from '@assets/brand/backgroundImage.png';
+import { getCompaniesQuery } from '../../utils/api/switch';
 
 const CreatePassword = ({ navigation }) => {
   const page = navigation.getParam('page');
@@ -38,13 +40,42 @@ const CreatePassword = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
+  const [companyOption, setCompanyOption] = useState([]);
   const newPass = page === 'secretAnswer' ? true : false;
   const dispatch = useDispatch();
   const password = useValidatedInput('password', '');
   const confirmPassword = useValidatedInput('confirmPassword', '', {
     validationParams: [password.value]
   });
-  const isValid = isFormValid(password, confirmPassword);
+  const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
+    changeHandlerSelect: 'onSelect'
+  });
+
+  const isValid = isFormValid(password, confirmPassword,company);
+
+
+  useEffect(() => {
+    if (page === 'secretAnswer' ) {
+      getCompanies();
+    }
+   
+  }, []);
+
+
+  async function getCompanies() {
+    setIsLoadingModal(true);
+    const response = await getCompaniesQuery(phone);
+    if (response.code < 400) {
+      setCompanyOption(response?.data);
+      setIsLoadingModal(false);
+    } else {
+      setCompanyOption([]);
+      errorSnackNotice(response);
+      setIsLoadingModal(false);
+    }
+  }
+
+
 
   function handlePressBack() {
     navigation.goBack();
@@ -60,8 +91,9 @@ const CreatePassword = ({ navigation }) => {
     dispatch(saveUser({ userPass: password.value }));
     const Password = password.value;
     const ConfirmPassword = confirmPassword.value;
+    const companyValue = company?.value
     if (newPass) {
-      const response = await forgotYourPassword(Password, ConfirmPassword, userData.email, Pin ? Pin : '');
+      const response = await forgotYourPassword(Password, ConfirmPassword, userData.email, Pin ? Pin : '',companyValue);
       if (response.code < 400) {
         setTimeout(function () {
           navigation.navigate('Login');
@@ -108,6 +140,19 @@ const CreatePassword = ({ navigation }) => {
     }
   }
 
+
+  function errorSnackNotice(response) {
+    setIsLoadingModal(true);
+    setTimeout(function () {
+      setSnakVisible(true);
+      setButtonNext(true);
+      setIsLoadingModal(false);
+      setTitle(response.message);
+    }, 1000);
+  }
+
+  
+
   const handleCloseNotif = () => {
     setSnakVisible(false);
     setButtonNext(false);
@@ -142,7 +187,7 @@ const CreatePassword = ({ navigation }) => {
                   </Animatable.View>
                 </View>
                 <DivSpace height-30 />
-                <View centerH paddingH-25 paddingV-20 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '88%' }}>
+                <View centerH paddingH-25 paddingV-20 style={{ borderColor: brandTheme?.bgOrange02 ?? Colors?.bgOrange02, borderWidth: 1, width: '90%' }}>
                   <Text h16 center medium>
                     {newPass ? i18n.t('signUp.component.labelCreateNewPass') : ''}
                   </Text>
@@ -155,6 +200,16 @@ const CreatePassword = ({ navigation }) => {
                   <DivSpace height-20 />
 
                   <Animatable.View animation={'zoomInUp'} >
+                    <Select
+                      {...company}
+                      label={i18n.t('signUp.component.selectEntryCode')}
+                      options={companyOption}
+                      size="sm"
+                      dropLabelStyle={{ color: brandTheme?.textBlue01 ?? Colors.textBlue01 }}
+                      dropStyle={{ backgroundColor: brandTheme?.textBlue01 ?? Colors.textBlue01, borderColor: brandTheme?.bgOrange02 ?? Colors.bgOrange02 }}
+                    />
+                    <DivSpace height-10 />
+
                     <AnimateLabelInput
                       {...password}
                       label={i18n.t('generics.password')}

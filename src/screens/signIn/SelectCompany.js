@@ -36,6 +36,7 @@ import { saveTheme } from '@store/ducks/user.ducks';
 import { useDispatch } from 'react-redux';
 //Api
 import { login, getTheme, getCompaniesQuery } from '@utils/api/switch';
+import { saveDataCompany } from '../../store/ducks/user.ducks';
 
 const optionalConfigObject = {
   title: i18n.t('fingerPrint.component.textConfirmFootPrint'),
@@ -217,11 +218,14 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
   async function getCompanies() {
     setIsLoadingModal(true);
     const response = await getCompaniesQuery(phone);
+    console.log('response',response)
     if (response.code < 400) {
-      setCompanyOption(response.data);
+      setCompanyOption(response?.data);
+      dispatch(saveUser({ dataCompany: response?.data}));
       setIsLoadingModal(false);
     } else {
       setCompanyOption([]);
+      errorSnackNotice(response);
       setIsLoadingModal(false);
     }
   }
@@ -257,6 +261,18 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
   function handlePressGoBack() {
     navigation.goBack();
   }
+
+
+  function errorSnackNotice(response) {
+    setIsLoadingModal(true);
+    setTimeout(function () {
+      setSnakVisible(true);
+      setButtonNext(true);
+      setIsLoadingModal(false);
+      setTitle(response.message);
+    }, 1000);
+  }
+
 
   async function handlePressBiometricAuthorizePress() {
     try {
@@ -345,14 +361,6 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
                   {i18n.t('login.component.labelForgotPasswordLink')}
                 </Link>
               </View>
-              <View flex-1 bottom>
-                <SnackBar
-                  message={title}
-                  isVisible={snakVisible}
-                  onClose={closeSnack}
-                  animationAction={actionAnimated}
-                />
-              </View>
             </View>
             {isLoadingModal && (
               <Loader
@@ -363,6 +371,14 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
           </KeyboardAvoidingView>
         </ResizeImageBackground>
       </SignUpWrapper>
+      <View>
+        <SnackBar
+          message={title}
+          isVisible={snakVisible}
+          onClose={closeSnack}
+          animationAction={actionAnimated}
+        />
+      </View>
     </>
   );
 };

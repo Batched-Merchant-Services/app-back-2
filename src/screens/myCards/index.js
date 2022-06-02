@@ -73,10 +73,11 @@ const MyCards = ({ navigation }) => {
 
   function renderItem({ item, index }) {
     const itemValues = { ...item };
+    console.log('itemValues',itemValues?.card_img)
     const cardVirtual = itemValues?.type; 
     setCardVirtualSwfit(cardVirtual);
     itemValues.disabled = item?.disabled || !available;
-    return cardVirtual === 'EMPTY' ? <CardEmpty {...itemValues} available={true} ref={AnimationRef} /> : cardVirtual === 'PHYSICAL' ? <Cards {...itemValues} available={available} width={'100%'} height={'100%'}/> :<View centerH><ImageComponent source={brandThemeImages?.cardVirtual?brandThemeImages?.cardVirtual:swift} width={'100%'} height={'100%'} /></View>;
+    return cardVirtual === 'EMPTY' ? <CardEmpty {...itemValues} available={true} ref={AnimationRef} /> : <Cards {...itemValues} available={available} width={'100%'} height={'100%'}/> ;
   }
 
   useEffect(() => {

@@ -127,13 +127,16 @@ export const forgotPassword = async ( email_phone,securityLabel, securityValue,a
 };
 
 
-export const forgotYourPassword = async ( password,confirmPassword,email,pin ) => {
-
+export const forgotYourPassword = async ( password,confirmPassword,email,pin,companyValue ) => {
+  console.log('password,confirmPassword,email,pin,companyValue',password,confirmPassword,email,pin,companyValue)
+  const company = companyValue?.value?companyValue?.value:'';
+  console.log('company',company)
   const body = await bodyCrypto({
     password,
     confirmPassword,
     email,
-    pin
+    pin,
+    group_id: company
   });
 
   return await apiSavvyWallet.put(`/sessions/reset_password`, body);

@@ -32,7 +32,6 @@ const MyCryptoBalance = ({ navigation }) => {
   const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
   const [priceCrypto]=useState(userData?userData.priceCrypto:'');
   const titleBalance = i18n.t('CryptoBalance.component.title')+' '+showNameCrypto;
-
   useEffect(() => {
     getBalanceConvert();
   },[]);

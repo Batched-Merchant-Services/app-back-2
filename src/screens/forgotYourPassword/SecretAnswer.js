@@ -44,7 +44,7 @@ const SecretAnswer = ({ navigation, }) => {
   const isValid = isFormValid(email);
   const dispatch = useDispatch();
 
-
+  console.log('appData',appData);
   function handlePressGoBack() {
     navigation.goBack();
   }

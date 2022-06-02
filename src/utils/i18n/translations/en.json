@@ -1445,7 +1445,8 @@
           "textConfirmationTimeCan":"Confirmation time can vary from 24 to 72 hours,",
           "textDependingOnTheSpeed":"depending on the speed that the",
           "textBlockchainTakesAndThe":"blockchain takes and the liquidation of the assets is carried out.",
-          "buttonToReturn":"To return"
+          "buttonToReturn":"To return",
+          "textThereIsNoAddress":"There is no address to show"
         },
         "HistoryCrypto":{
           "title":"Movement Record",

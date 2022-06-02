@@ -54,12 +54,13 @@ const ReceiveCrypto = ({ navigation }) => {
     const token = await LocalStorage.get('auth_token');
     const response = await getAddress(token,shortNameCrypto);
     if (response.code < 400) {
-      setAddress(response.data? response.data.address: '');
+      setAddress(response?.data?.address? response?.data?.address: i18n.t('CryptoBalance.component.receiveCrypto.textThereIsNoAddress'));
     } else{
       setAddress(response.message);
     }
   }
   
+  console.log('address',address !== ''?true:false);
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
       <NavigationBar
@@ -91,7 +92,11 @@ const ReceiveCrypto = ({ navigation }) => {
                 <DivSpace height-10 />
                 <Text h16>{address}</Text>
                 <DivSpace height-10 />
-                <Link onPress={handleCopy} linkStyle = {{color: brandTheme?.white??Colors.white}}>{i18n.t('CryptoBalance.component.receiveCrypto.buttonTapInTheBox')}</Link>
+                <View flex-1 bottom>
+                  <Link onPress={handleCopy} linkStyle = {{color: brandTheme?.white??Colors.white}}>{i18n.t('CryptoBalance.component.receiveCrypto.buttonTapInTheBox')}</Link>
+                  <DivSpace height-10 />
+                </View>
+                
               </View>
               :
               <View height-30 centerH centerV >
