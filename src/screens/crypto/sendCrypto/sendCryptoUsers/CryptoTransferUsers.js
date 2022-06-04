@@ -73,7 +73,7 @@ const CryptoTransferUsers = ({ navigation }) => {
   async function getBalanceConvert() {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,balanceCrypto);
+    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
     const responseFees = await getCryptoFess(token);
     if (responseBTC.code || responseFees.code < 400) {
       setIsLoadingModal(false);

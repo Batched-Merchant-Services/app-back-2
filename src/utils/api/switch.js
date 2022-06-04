@@ -26,7 +26,7 @@ var apiSavvyWallet = axios.create({
 
 apiSavvyWallet.interceptors.request.use(
   async config => {
-    config.headers = {...config.headers,'Accept-Language': i18n?.language };
+    config.headers = {...config.headers,'Accept-Language': i18n?.language,'app': 'savvy' };
     const authUrls = [];
     if (authUrls.includes(config.url)) {
       const token = await LocalStorage.get('session_token');

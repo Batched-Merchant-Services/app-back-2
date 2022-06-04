@@ -39,7 +39,7 @@ const MyCryptoBalance = ({ navigation }) => {
   
   async function getBalanceConvert() {
     const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,balanceCrypto);
+    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
     if (responseBTC.code < 400) {
       setBalanceConvert(responseBTC.data?.conversion?.toString());
     }

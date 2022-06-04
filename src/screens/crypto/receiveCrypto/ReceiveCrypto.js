@@ -19,6 +19,7 @@ import {
   NavigationBar,
   ButtonRounded
 } from '@components';
+import ModalConfirmationCrypto from '../ModalConfirmationCrypto';
 
 const ReceiveCrypto = ({ navigation }) => {
   const redux = useSelector(state => state);
@@ -31,6 +32,7 @@ const ReceiveCrypto = ({ navigation }) => {
   const [snakVisible, setSnakVisible] = useState(false);
   const [address,setAddress] = useState('');
   const [actionAnimated, setActionAnimated] = useState(false);
+  const [showModal,setShowModal] = useState(true);
 
   const handleCopy = () => {
     Clipboard.setString(address);
@@ -59,6 +61,10 @@ const ReceiveCrypto = ({ navigation }) => {
       setAddress(response.message);
     }
   }
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
   
   console.log('address',address !== ''?true:false);
   return (
@@ -126,6 +132,12 @@ const ReceiveCrypto = ({ navigation }) => {
         onClose={handleCloseNotif}
         animationAction={actionAnimated}
       />
+       {showModal&&(
+          <ModalConfirmationCrypto visible={showModal}
+          onRequestClose={() => { setShowModal(false)}}
+          onPressOverlay={handleClose}
+          />
+        )}
     </SignUpWrapper>
   );
 };

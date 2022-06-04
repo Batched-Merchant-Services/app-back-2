@@ -63,15 +63,22 @@ const RechargeOptions = ({ navigation }) => {
                     disabled
                   />
                   <DivSpace width-20/>
-                  <BoxOption
+                  {/* <BoxOption
                     label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonTransfersCoinPurse')}
                     image={cardDisabled}
                     badge={17}
                     onPress={handleTransfer}
                     disabled
+                  /> */}
+                  <BoxOption
+                    label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonPersonToPerson')}
+                    image={p2p}
+                    badge={17}
+                    onPress={handleTransfer}
+                    disabled
                   />
                 </View>
-                <DivSpace height-15/>
+                {/* <DivSpace height-15/>
                 <View row>
                   <BoxOption
                     label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonPersonToPerson')}
@@ -88,7 +95,7 @@ const RechargeOptions = ({ navigation }) => {
                     onPress={handleTransfer}
                     disabled
                   />
-                </View>
+                </View> */}
                 <DivSpace height-15/>
                 {Crypto&&(
                   <View row>

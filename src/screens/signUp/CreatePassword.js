@@ -64,13 +64,12 @@ const CreatePassword = ({ navigation }) => {
 
   async function getCompanies() {
     setIsLoadingModal(true);
-    const response = await getCompaniesQuery(phone);
+    const response = await getCompaniesQuery(userData?.email);
     if (response.code < 400) {
       setCompanyOption(response?.data);
       setIsLoadingModal(false);
     } else {
       setCompanyOption([]);
-      errorSnackNotice(response);
       setIsLoadingModal(false);
     }
   }
@@ -173,7 +172,7 @@ const CreatePassword = ({ navigation }) => {
             <View >
               <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "position" : "height"}
-                style={{ flex: 0.93, alignItems: 'center' }}
+                style={{ flex: 0.96, alignItems: 'center' }}
               >
                 <View>
                   <Animatable.View animation={'fadeIn'} delay={300} style={{ alignItems: 'center' }}>

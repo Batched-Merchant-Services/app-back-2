@@ -51,7 +51,14 @@ const styles = StyleSheet.create({
   },
   textChart:{
     color: '#61666E'
-  }
+  },
+  containerModal: {
+    backgroundColor: 'white',
+    width       : scale(280), 
+    height      : verticalScale(280), 
+    borderRadius: 8 ,
+    padding: verticalScale(20), 
+  },
 });
 
 export default styles;

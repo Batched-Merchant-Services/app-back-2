@@ -1421,7 +1421,12 @@
           "textACommissionIsDeducted":"*Al monto a transferir se descuenta una comisión.",
           "textCommissionForTransaction":"Comisión por transacción",
           "inputTransferReference":"Referencia de transferencia",
-          "buttonTransfer":"Transferir"
+          "buttonTransfer":"Transferir",
+          "textOnlySend":"Solo enviar",
+          "textCoin":"moneda",
+          "textToThisAddress":"a esta dirección",
+          "textSendingAnyOther":"Enviar cualquier otra criptomoneda resultará en una pérdida permanente.",
+          "textIUnderstand":"Entiendo"
 
         },
         "receiveCrypto":{

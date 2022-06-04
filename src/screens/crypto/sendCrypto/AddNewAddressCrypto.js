@@ -21,6 +21,8 @@ import {
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import LocalStorage from '@utils/localStorage';
 import { useSelector} from 'react-redux';
+import ModalConfirmationCrypto from '../ModalConfirmationCrypto';
+
 
 const AddNewAddressCrypto = ({ navigation }) => {
   const redux = useSelector(state => state);
@@ -31,6 +33,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
   const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
   const [iconCrypto]=useState(userData?userData.iconCrypto:'');
   const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
+  const [showModal,setShowModal] = useState(false);
   //messages
   const [isLoadingModal, setIsLoadingModal] = useState(false);
   const [snakVisible, setSnakVisible] = useState(false);
@@ -51,7 +54,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
   
   async function getBalanceConvert() {
     const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,balanceCrypto);
+    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
     if (responseBTC.code < 400) {
       setBalanceConvert(responseBTC.data?.conversion?.toString());
     }
@@ -66,6 +69,9 @@ const AddNewAddressCrypto = ({ navigation }) => {
     setShowInputQRCode(false);
   }
 
+  function getModal() {
+    setShowModal(true);
+  }
   
   async function handlePay() {
     setIsLoadingModal(true);
@@ -99,6 +105,11 @@ const AddNewAddressCrypto = ({ navigation }) => {
     setSnakVisible(false);
     setButtonNext(false);
     setActionAnimated(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    handlePay();
   };
 
 
@@ -221,7 +232,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
               <DivSpace height-10 />
               <View flex-1 centerH>
                 <ButtonRounded
-                  onPress={handlePay}
+                  onPress={getModal}
                   disabled={!isValid && !buttonNext ? true: buttonNext}
                   size='sm'
                 >
@@ -252,6 +263,12 @@ const AddNewAddressCrypto = ({ navigation }) => {
         }}
       />
       </KeyboardAvoidingView>
+      {showModal&&(
+        <ModalConfirmationCrypto visible={showModal}
+        onRequestClose={() => { setShowModal(false)}}
+        onPressOverlay={handleClose}
+        />
+      )}
     </SignUpWrapper>
   );
 };

@@ -1430,7 +1430,12 @@
           "textACommissionIsDeducted":"* A commission is deducted from the amount to be transferred.",
           "textCommissionForTransaction":"Commission per transaction",
           "inputTransferReference":"Transfer reference",
-          "buttonTransfer":"Transfer"
+          "buttonTransfer":"Transfer",
+          "textOnlySend":"Only send",
+          "textCoin":"coin",
+          "textToThisAddress":"to this address",
+          "textSendingAnyOther":"Sending any other cryptocurrency will result in permanent loss.",
+          "textIUnderstand":"I understand"
           
         },
         "receiveCrypto":{

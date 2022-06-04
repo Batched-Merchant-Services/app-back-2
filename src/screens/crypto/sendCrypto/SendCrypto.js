@@ -62,7 +62,7 @@ const SendCrypto = ({ navigation }) => {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const response = await getListExchangeWallet(token);
-    const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,balanceCrypto);
+    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
     setBalanceConvert(responseBTC.data?.conversion?.toString());
     if (response.code < 400) {
       setListExchanges(response.data);
@@ -97,7 +97,7 @@ const SendCrypto = ({ navigation }) => {
     const token = await LocalStorage.get('auth_token');
     if (currentCurrency === 'USD') {
       setIsLoadingModal(true);
-      const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,amountConvert);
+      const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',amountConvert);
       if (responseBTC.code < 400) {
         const conversionAmount = responseBTC.data?.conversion?.toString();
         setTimeout(function () {
