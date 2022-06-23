@@ -14,7 +14,6 @@ const buildNumber = DeviceInfo.getBuildNumber();
 const versionNumber = DeviceInfo.getVersion();
 const OS = Platform.OS;
 
-console.log('i18n?.language',i18n?.language);
 var apiSavvyWallet = axios.create({
   baseURL: BASEURLSWITCH,
   headers: {
@@ -938,7 +937,7 @@ export const getChartCrypto = async (token,currency) => {
     'Authorization': token,
   };
 
-  return await apiSavvyWallet.get(`/crypto_currencies/history/price?currency=${currency}`,  { headers });
+  return await apiSavvyWallet.get(`/crypto_currencies/history/price?currency=${currency}&chart=new`,  { headers });
 };
 
 

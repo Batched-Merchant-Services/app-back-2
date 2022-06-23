@@ -658,7 +658,7 @@
         "textProvider": "Provider",
         "textBiweeklyPayment": "fortnightly Pays",
         "buttonPay": "Pay",
-        "textTheFundsWillBe": "Funds will be automatically taken from Mi Wallet in case of debit.",
+        "textTheFundsWillBe": "Funds will be automatically taken from My Wallet in case of debit.",
         "textCreditDetail": "Credit Details",
         "textCapital": "Capital",
         "textInterestAmount": "Interest Amount",
@@ -1356,7 +1356,7 @@
         "textForYourUulala":"for your SAVVY \n application that",
         "textWillBeAvailable":"will be available soon.",
         "textIfYouWantMore":"If you want more information about \n the latest updates and news from \n SAVVY follow us on our social networks:",
-        "buttonReturn":"To return"
+        "buttonReturn":"Back"
       }
     },
     "CryptoBalance":{
@@ -1450,7 +1450,7 @@
           "textConfirmationTimeCan":"Confirmation time can vary from 24 to 72 hours,",
           "textDependingOnTheSpeed":"depending on the speed that the",
           "textBlockchainTakesAndThe":"blockchain takes and the liquidation of the assets is carried out.",
-          "buttonToReturn":"To return",
+          "buttonToReturn":"Back",
           "textThereIsNoAddress":"There is no address to show"
         },
         "HistoryCrypto":{
@@ -1578,7 +1578,7 @@
         "textWeHaveSentYouEmail":"We have sent you an email to your email.",
         "textEnterAndConfirm":"Enter and confirm that you want to register this mobile device.",
         "textOnceConfirmedLog":"Once confirmed, log in again and you can access your SAVVY wallet.",
-        "buttonToReturn":"To return"
+        "buttonToReturn":"Back"
       }
     },
     "Auth2fa":{

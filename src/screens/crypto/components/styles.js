@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex           : 1,
+    marginVertical: scale(20),
   },
   chart: {
     flex           : 1,

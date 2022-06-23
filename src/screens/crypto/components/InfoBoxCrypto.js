@@ -10,6 +10,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import rowRight from '@assets/icons/rowRight.png';
 import upRowGreen from '@assets/icons/upRowGreen.png';
 import Styles from './styles';
+import i18n from '@utils/i18n';
 
 const InfoBoxCrypto = ({ 
   icon,
@@ -49,7 +50,7 @@ const InfoBoxCrypto = ({
             <View flex-1 right>
               <View row centerV>
                 <Text orange h12 medium>
-                  Mi Balance
+                {i18n.t('CryptoBalance.component.titleMyBalance')}
                 </Text>
                 <DivSpace width-5 />
                 <ImageComponent

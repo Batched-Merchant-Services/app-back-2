@@ -67,7 +67,7 @@ const CryptoSale = ({ navigation }) => {
                 <DivSpace height-10 />
                 <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                 <View row centerH centerV >
-                  <Text h16 white>0.00012{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
+                  <Text h11 white>0.00012{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
                   <DivSpace width-10 />
                   <ImageComponent
                     white
@@ -76,7 +76,7 @@ const CryptoSale = ({ navigation }) => {
                     height={verticalScale(30)}
                   />
                   <DivSpace width-10 />
-                  <Text h16 white>1234.56{' '}<Text bgGray>{currencyUser}</Text></Text>
+                  <Text h11 white>1234.56{' '}<Text bgGray>{currencyUser}</Text></Text>
                 </View>
               </View>
             </ContainerCrypto>
