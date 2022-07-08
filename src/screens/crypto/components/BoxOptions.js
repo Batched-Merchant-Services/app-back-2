@@ -8,6 +8,8 @@ import IconSendCrypto from '@utils/iconSVG/IconSendCrypto';
 import IconHistory from '@utils/iconSVG/IconHistory';
 import buyCryptoDisabled from '@assets/icons/disabled/buyCrypto.png';
 import receiveCryptoDisabled from '@assets/icons/disabled/receiveCrypto.png';
+import confirmationSwap from '@assets/brand/confirmationSwap.png';
+import IconSwap from '@utils/iconSVG/IconSwap';
 import Colors from '@styles/Colors';
 import Styles from './styles';
 import i18n from '@utils/i18n';
@@ -21,6 +23,10 @@ const BoxOptions = ({ navigation, dataPhysical,buy }) => {
     navigation.navigate('WalletRecharge');
   }
 
+  function handleSwap() {
+    navigation.navigate('Swap');
+  }
+  
   function handleHistoryc() {
     navigation.navigate('HistoricCrypto');
   }
@@ -77,11 +83,11 @@ const BoxOptions = ({ navigation, dataPhysical,buy }) => {
             row
             flex-1
             paddingT-10
-            paddingB-8
           >
-            <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} srcImage={buyCryptoDisabled}  onPress={handleBuy} titleText={i18n.t('CryptoBalance.component.ButtonBuy')}/> 
-            <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }}  srcImage={receiveCryptoDisabled}  onPress={handleSale} titleText={i18n.t('CryptoBalance.component.ButtonSell')}/> 
+            <ButtonWallet navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconSwap}  onPress={handleSwap} titleText={i18n.t('Swap')}/> 
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconSendCrypto}  onPress={handleSend} titleText={i18n.t('CryptoBalance.component.ButtonSend')}/> 
+            {/* <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} srcImage={buyCryptoDisabled}  onPress={handleBuy} titleText={i18n.t('CryptoBalance.component.ButtonBuy')}/> 
+            <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }}  srcImage={receiveCryptoDisabled}  onPress={handleSale} titleText={i18n.t('CryptoBalance.component.ButtonSell')}/>  */}
           </View>
           <View row flex-1 paddingH-30>
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconReceiveCrypto}  onPress={handleReceived} titleText={i18n.t('CryptoBalance.component.ButtonReceive')}/> 

@@ -133,6 +133,11 @@ import CryptoTransferUsers from '@screens/crypto/sendCrypto/sendCryptoUsers/Cryp
 import UpdateVirtualCard from '@screens/myCards/newVirtualCards/UpdateVirtualCard';
 import ConfirmationUpdateCard from '@screens/myCards/newVirtualCards/ConfirmationUpdateCard';
 import NewVirtualCards from '@screens/myCards/newVirtualCards';
+import Swap from '@screens/crypto/swap/HomeSwap';
+import ListInformationSwap from '@screens/crypto/swap/ListInformationSwap';
+import ConfirmationSwap from '@screens/crypto/swap/ConfirmationSwap';
+
+
 
 export const signInScreens = {
   TabsMenu: {
@@ -823,7 +828,25 @@ export const signInScreens = {
       navigationOptions: {
         gesturesEnabled: false
       }
-    }
+    },
+    ListInformationSwap: {
+      screen           : ListInformationSwap,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    ConfirmationSwap: {
+      screen           : ConfirmationSwap,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Swap: {
+      screen           : Swap,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
   },
 };
 

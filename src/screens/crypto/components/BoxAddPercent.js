@@ -12,20 +12,26 @@ import styles from './styles';
 import { conversionCurrency } from '@utils/api/switch';
 import LocalStorage from '@utils/localStorage';
 
-const BoxAddPercent = ({ onFill,currency }) => {
+const BoxAddPercent = ({ onFill,currency,two }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
   const [typeCrypto]=useState(userData?userData.typeCrypto:'');
   
   const calculatePercentage = async(numberPercentage) => {
-    const token = await LocalStorage.get('auth_token');
-    const percent = Math.floor(balanceCrypto*numberPercentage)/100;
-    const percentConverts = await conversionCurrency(token,currency? 'USD':typeCrypto ,currency? typeCrypto:'USD' ,percent);
-    if (percentConverts.code < 400) {
-      const percentString = percentConverts.data?.conversion?.toString();
-      onFill(percentString); 
+    if( two ){
+      onFill(balanceCrypto); 
+    }else{
+      const token = await LocalStorage.get('auth_token');
+      const percent = Math.floor(balanceCrypto*numberPercentage)/100;
+      console.log('balanceCrypto',balanceCrypto,'currency',currency,'typeCrypto',typeCrypto)
+      const percentConverts = await conversionCurrency(token,currency? 'USD':typeCrypto ,currency? typeCrypto:'USD' ,percent);
+      if (percentConverts.code < 400) {
+        const percentString = percentConverts.data?.conversion?.toString();
+        onFill(percentString); 
+      }
     }
+   
   };
 
 

@@ -1555,7 +1555,26 @@
           "textCryptoTransfer":"Crypto Transfer",
           "textEnterTheAmountYou":"Enter the amount you want to send in Cryptocurrency or the equivalent in US Dollars.",
           "buttonSend":"Send"
+        },
+        "Swap":{
+          "titleSwap":"Swap",
+          "textCryptocurrencyTo":"Cryptocurrency to exchange for:",
+          "textAmountSent":"Amount Sent",
+          "textAmountReceived":"Amount received",
+          "textCommissionTransaction":"Commission per transaction",
+          "textTransactionID":"ID Transacción:",
+          "textYouCanCheckBalance":"You can check your balance in the section",
+          "textMyWallet":"My Wallet",
+          "textConfirmationTime":"Confirmation time can vary from 24 to 72 hours",
+          "textDependingOnTheSpeed":"depending on the speed that the bitcoin block chain takes and the liquidation of the assets is carried out.",
+          "textCryptoWallet":"Crypto wallet",
+          "textResume":"Resume",
+          "textYouPay":"You pay:",
+          "textYouWillReceive":"You’ll Receive:",
+          "textNetworkFees":"Network Fees",
+          "buttonSwap":"Swap"
         }
+     
       } 
     },
     "ModalKYC":{

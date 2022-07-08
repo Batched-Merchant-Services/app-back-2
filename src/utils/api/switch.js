@@ -1139,4 +1139,36 @@ export const getCompaniesQuery= async (emailPhone) => {
   return await apiSavvyWallet.get(`/catalogs/companies?email_phone=${emailPhone}&app=savvy`);
 }; 
 
+export const getCurrencySwap = async (token) => {
 
+  const headers = {
+    'Authorization': token
+  };
+
+  return await apiSavvyWallet.get(`/swap/available_currencies?swap=true`,{ headers });
+};
+
+export const getFeesSwap = async (token,currency) => {
+
+  const headers = {
+    'Authorization': token
+  };
+
+  return await apiSavvyWallet.get(`/swap/fees?currency=${currency}`,{ headers });
+};
+
+
+export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) => {
+
+  const headers = {
+    'Authorization': token
+  };
+
+  const body = {
+    from_currency: fromCurrency,
+    to_currency  : toCurrency,
+    amount       : amount,
+    pin          : pin
+  };
+  return await apiSavvyWallet.post(`/swap`,body,{ headers });
+};

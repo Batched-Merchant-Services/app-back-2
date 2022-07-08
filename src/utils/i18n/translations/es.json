@@ -1547,6 +1547,24 @@
           "textEnterTheAmountYou":"Ingresa el monto que deseas enviar en Criptodivisa o el equivalente en Dólares americanos.",
           "buttonSend":"Enviar"
 
+        },
+        "Swap":{
+          "titleSwap":"Swap",
+          "textCryptocurrencyTo":"Criptodivisa por la cual intercambiar:",
+          "textAmountSent":"Monto Enviado",
+          "textAmountReceived":"Monto Recibido",
+          "textCommissionTransaction":"Comisión por transacción",
+          "textTransactionID":"Transaction ID:",
+          "textYouCanCheckBalance":"Puedes consultar tu balance en la sección",
+          "textMyWallet":"Mi monedero",
+          "textConfirmationTime":"El tiempo de confirmación puede variar de 24 a 72 horas,",
+          "textDependingOnTheSpeed":"depending on the speed that the bitcoin block chain takes and the liquidation of the assets is carried out.",
+          "textCryptoWallet":"Crypto wallet",
+          "textResume":"Resumen",
+          "textYouPay":"Tu pagas:",
+          "textYouWillReceive":"Recibirás:",
+          "textNetworkFees":"Tarifas de red",
+          "buttonSwap":"Swap"
         }
       }
       

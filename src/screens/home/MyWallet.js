@@ -348,6 +348,7 @@ const MyWallet = ({ navigation,screenProps }) => {
         <NavigationEvents
           onWillFocus={payload => {
             getVerifyToken(payload);
+            getLisCrypto(payload);
           }}
         />
     </LinearGradient>

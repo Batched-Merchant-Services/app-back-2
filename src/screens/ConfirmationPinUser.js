@@ -28,7 +28,8 @@ import {
   sendCrypto,
   sendCryptoUsers,
   createCardVirtual,
-  updateCardVirtual
+  updateCardVirtual,
+  createTRXSwap
 } from '@utils/api/switch';
 import { withNavigationFocus } from 'react-navigation';
 import { useSelector } from 'react-redux';
@@ -308,7 +309,7 @@ async function createVirtualCards(
     setTextWarning(false);
   }
   else {
-    errorFunction(setIsLoadingModal, clear, setSnakVisible, setTitle, response);
+    closeSnackNotice(setIsLoadingModal, clear, setSnakVisible, setTitle, response);
   }
 }
 
@@ -335,9 +336,38 @@ async function updateVirtualCard(
     setTextWarning(false);
   }
   else {
-    errorFunction(setIsLoadingModal, clear, setSnakVisible, setTitle, response);
+    closeSnackNotice(setIsLoadingModal, clear, setSnakVisible, setTitle, response);
   }
 }
+
+async function createSwap(
+  token,
+  data,
+  inputtedPin,
+  navigation,
+  next,
+  setIsLoadingModal,
+  setTextWarning,
+  clear,
+  setSnakVisible,
+  setTitle
+) {
+  const shortNameCrypto = data?.shortNameCrypto ;
+  const totalSwap = data?.balanceConvert;
+  const toCurrency = data?.currencyChange?.short_name;
+  const response = await createTRXSwap(token,shortNameCrypto,toCurrency,totalSwap,inputtedPin);
+  if (response.code < 400) {
+    setTimeout(function () {
+      navigation.navigate(next,{data: response?.data,convert: totalSwap,amount: data?.amount });
+      setIsLoadingModal(false);
+    }, 1000);
+    setTextWarning(false);
+  }
+  else {
+    closeSnackNotice(setIsLoadingModal, clear, setSnakVisible, setTitle, response);
+  }
+}
+
 
 async function buyCrypto(
   token,
@@ -432,7 +462,7 @@ function closeSnackNotice(setIsLoadingModal, clear, setSnakVisible, setTitle, re
 
 }
 
-const AppConfirmationPin = ({ navigation }) => {
+const ConfirmationPinUser = ({ navigation }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
@@ -699,6 +729,19 @@ const AppConfirmationPin = ({ navigation }) => {
         setSnakVisible, 
         setTitle
       );
+    }else if (data.page === 'Swap') {
+      await createSwap(
+        token,
+        data, 
+        inputtedPin, 
+        navigation, 
+        next, 
+        setIsLoadingModal, 
+        setTextWarning, 
+        clear, 
+        setSnakVisible, 
+        setTitle
+      );
     }else{
       setSnakVisible(false);
       setIsLoadingModal(false);
@@ -798,7 +841,7 @@ const AppConfirmationPin = ({ navigation }) => {
   
 };
 
-export default withNavigationFocus(AppConfirmationPin);
+export default withNavigationFocus(ConfirmationPinUser);
 
 
 
