@@ -21,8 +21,6 @@ const MenuTabs = ({ ...props }) => {
     navigation.navigate(routeName);
   };
 
-
-console.log('routes',routes)
   return (
     <View row style={{ backgroundColor: brandTheme.bgOrange02 ?? Colors.bgOrange02}} >
       {routes.length > 0 &&(

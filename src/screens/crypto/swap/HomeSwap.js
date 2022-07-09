@@ -50,7 +50,6 @@ const HomeSwap = ({ navigation }) => {
   });
   const isValid = isFormValid(cryptoCurrency,amount);
 
-  console.log('isValid',isValid,amount,cryptoCurrency);
   // useEffect(() => {
   //   getBalanceConvert();
   // },[]);

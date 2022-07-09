@@ -24,7 +24,6 @@ const BoxAddPercent = ({ onFill,currency,two }) => {
     }else{
       const token = await LocalStorage.get('auth_token');
       const percent = Math.floor(balanceCrypto*numberPercentage)/100;
-      console.log('balanceCrypto',balanceCrypto,'currency',currency,'typeCrypto',typeCrypto)
       const percentConverts = await conversionCurrency(token,currency? 'USD':typeCrypto ,currency? typeCrypto:'USD' ,percent);
       if (percentConverts.code < 400) {
         const percentString = percentConverts.data?.conversion?.toString();

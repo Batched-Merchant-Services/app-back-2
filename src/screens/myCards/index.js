@@ -73,7 +73,6 @@ const MyCards = ({ navigation }) => {
 
   function renderItem({ item, index }) {
     const itemValues = { ...item };
-    console.log('itemValues',itemValues?.card_img)
     const cardVirtual = itemValues?.type; 
     setCardVirtualSwfit(cardVirtual);
     itemValues.disabled = item?.disabled || !available;

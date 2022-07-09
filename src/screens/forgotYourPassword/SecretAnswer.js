@@ -30,7 +30,6 @@ const SecretAnswer = ({ navigation, }) => {
   const appData = redux.user;
   const brandThemeImages = appData?.Theme?.images;
   const brandTheme = appData?.Theme?.colors;
-
   const [title, setTitle] = useState('');
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
@@ -44,7 +43,6 @@ const SecretAnswer = ({ navigation, }) => {
   const isValid = isFormValid(email);
   const dispatch = useDispatch();
 
-  console.log('appData',appData);
   function handlePressGoBack() {
     navigation.goBack();
   }

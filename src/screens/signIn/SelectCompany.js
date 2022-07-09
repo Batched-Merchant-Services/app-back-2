@@ -90,7 +90,7 @@ async function handleSignIn(
 
 
   const response = await login(phone, Password, Company);
-  console.log('response', response)
+  
   if (response.code < 400) {
     await LocalStorage.set('auth_token', response.data.token);
     await LocalStorage.set('user', phone);
@@ -218,7 +218,6 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
   async function getCompanies() {
     setIsLoadingModal(true);
     const response = await getCompaniesQuery(phone);
-    console.log('response',response)
     if (response.code < 400) {
       setCompanyOption(response?.data);
       dispatch(saveUser({ dataCompany: response?.data}));

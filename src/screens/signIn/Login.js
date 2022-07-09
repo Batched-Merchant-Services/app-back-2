@@ -87,7 +87,6 @@ async function handleSignIn(
 
 
   const response = await login(Phone, Password);
-  console.log('response', response)
   if (response.code < 400) {
     await LocalStorage.set('auth_token', response.data.token);
     await LocalStorage.set('user', Phone);

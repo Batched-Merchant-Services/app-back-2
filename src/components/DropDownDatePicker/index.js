@@ -47,7 +47,6 @@ const DropDownDatePicker = ({ buttonStyle = {}, onSelected,  textStyle = {}, pla
   };
  
   const setDate = (event, date) => {
-    console.log('newdate',date)
     let current_date = moment();
     let date_picker = moment(date);
     let edad = current_date.diff(date_picker._d, 'years');
@@ -65,7 +64,7 @@ const DropDownDatePicker = ({ buttonStyle = {}, onSelected,  textStyle = {}, pla
     setShowModal(!showModal);
   };
 
-  console.log('chosenDate',chosenDate)
+
   return (
     <View style={styles.heightContainer}>
       <Text h12 regular bgGray> {label} </Text>

@@ -10,7 +10,7 @@ const QrCode = ({ id, name, size }) => {
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandTheme = appData?.Theme?.colors;
-  console.log('id',id)
+  
   return (
     <View  padding-15 style={{overflow:'hidden' }}>
       <QRCode

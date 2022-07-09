@@ -1402,7 +1402,7 @@
           "textEnterTheAmount":"Enter the amount you want to sell in",
           "textTheEquivalentInYour":"the equivalent in your currency",
           "textTransactionFee":"Transaction fee",
-          "buttonSale":"Sale"
+          "buttonSale":"Sell"
         },
         "sendCrypto":{
           "title":"Send of",
@@ -1540,17 +1540,17 @@
           "titlePaymentsBetweenUsers":"Payments between users",
           "textSendingOrTransferring":"Sending or transferring crypto",
           "textTransferCryptoToOther":"Transfer crypto to other SAVVY wallets, external wallets or external exchange platforms.",
-          "boxOptionUserUulala":"User SAVVY",
+          "boxOptionUserUulala":"Savvy User",
           "boxOptionExternalWallet":"External wallet or exchange"
         },
         "CryptoSendBetweenUser":{
           "titleCryptocurrencyShipping":"Cryptocurrency shipping",
-          "textSearchUserUulala":"Search user SAVVY",
+          "textSearchUserUulala":"Search Savvy User",
           "inputUulalaUserID":"SAVVY user ID",
           "textIfYouDoNotHave":"If you do not have the ID key of your SAVVY contact, you can look for it in your agenda or scan its Addres QR.",
           "buttonScanQR":"Scan QR",
           "textYourContactWillFindTheir":"Your contact will find their SAVVY address and QR code to receive transfers by pressing the 'Receive' button within the section of the same cryptocurrency that you chose (Bitcon, Ethereum, Litecoin, Etc.)",
-          "textToUserUulala":"to user SAVVY",
+          "textToUserUulala":"to Savvy User",
           "textWalletBitcoin":"ID User",
           "textCryptoTransfer":"Crypto Transfer",
           "textEnterTheAmountYou":"Enter the amount you want to send in Cryptocurrency or the equivalent in US Dollars.",

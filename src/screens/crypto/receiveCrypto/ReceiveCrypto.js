@@ -66,7 +66,6 @@ const ReceiveCrypto = ({ navigation }) => {
     setShowModal(false);
   };
   
-  console.log('address',address !== ''?true:false);
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
       <NavigationBar

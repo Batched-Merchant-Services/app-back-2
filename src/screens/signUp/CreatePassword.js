@@ -50,21 +50,16 @@ const CreatePassword = ({ navigation }) => {
   const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
     changeHandlerSelect: 'onSelect'
   });
-
   const isValid = isFormValid(password, confirmPassword,company);
-
+  const isValidConfig = isFormValid(password, confirmPassword);
 
   useEffect(() => {
-    if (page === 'secretAnswer' ) {
       getCompanies();
-    }
-   
   }, []);
-
 
   async function getCompanies() {
     setIsLoadingModal(true);
-    const response = await getCompaniesQuery(userData?.email);
+    const response = await getCompaniesQuery(userData?.email||userData?.infoUser?.email);
     if (response.code < 400) {
       setCompanyOption(response?.data);
       setIsLoadingModal(false);
@@ -73,8 +68,6 @@ const CreatePassword = ({ navigation }) => {
       setIsLoadingModal(false);
     }
   }
-
-
 
   function handlePressBack() {
     navigation.goBack();
@@ -158,7 +151,6 @@ const CreatePassword = ({ navigation }) => {
     setActionAnimated(true);
   };
 
-  console.log('secretAnswer', page)
   return (
     <>
     <SignUpWrapper forceInset={{ top: 0 }}>
@@ -311,21 +303,21 @@ const CreatePassword = ({ navigation }) => {
                 </Animatable.View>
                 <DivSpace height-20 />
               </View>
-            </View>
-            <View  centerH centerV >
-              <DivSpace height-20 />
+              <DivSpace height-30 />
+              <View  centerH>
               {page === 'config' && (
-                <ButtonRounded disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
+                <ButtonRounded disabled={!isValidConfig && !buttonNext ? true : buttonNext} onPress={handlePressNext} size={'lg'}>
                   <Text h10 semibold>
                     {i18n.t('AppNewPin.component.AppConfirmationPin.buttonToUpdate')}
                   </Text>
                 </ButtonRounded>
+
               )}
               {page !== 'config' && (
-                <ButtonNext
-                  disabled={!isValid && !buttonNext ? true : buttonNext}
-                  onPress={handlePressNext} />
+                <ButtonNext disabled={!isValid && !buttonNext ? true : buttonNext} onPress={handlePressNext} />
               )}
+              <DivSpace height-30 />
+            </View>
             </View>
           </KeyboardAvoidingView>
 

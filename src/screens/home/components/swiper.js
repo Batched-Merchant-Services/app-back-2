@@ -22,7 +22,6 @@ const AccauntsSwiper = ({ balance, initialId, onChangeIndex }) => {
   const brandTheme = appData?.Theme?.colors;
   let windowWidth = Dimensions.get('window').width;
 
-  console.log('balance',balance)
   return (
     <View flex-1>
       <Swiper

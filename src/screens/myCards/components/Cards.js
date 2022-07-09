@@ -14,7 +14,7 @@ const Cards = ({ input, available,height,width, ...item }) => {
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
   const typeCard = item.type;
-  console.log('typeCard',item,typeCard)
+  
   return (
     <View style={{ height, width }}>
       <ImageBackground source={typeCard === 'PHYSICAL' || typeCard === 'EMPTY' ? item?.img_card ? item?.img_card !== "" ? { uri: item?.img_card }:cardFisica : cardFisica : item?.img_card !== "" ? { uri: item?.img_card } : cardVirtual} style={[typeCard === 'VIRTUAL' ? Styles.imageContainer : Styles.imageContainer]} imageStyle={{ borderRadius: typeCard === 'PHYSICAL' ? 12 : 0 }}>

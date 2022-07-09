@@ -13,7 +13,7 @@ const ButtonWallet = ({ titleText, IconButton,srcImage, buttonStyle = {},contain
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandTheme = appData?.Theme?.colors;
-  console.log('buttonStyle',buttonStyle)
+  
   return (
     
     <TouchableOpacity style={[Styles.containerButton, containButtonStyle]} onPress={invalid? null :onPress} {...props}>

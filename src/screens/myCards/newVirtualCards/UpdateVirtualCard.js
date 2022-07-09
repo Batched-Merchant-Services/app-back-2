@@ -38,7 +38,7 @@ const UpdateVirtualCard = ({ navigation }) => {
       setIsLoadingModal(true);
       const token = await LocalStorage.get('auth_token');
       const response = await updateCardVirtual(token, Cvv?.value, cardNumber?.value);
-      console.log('response', response)
+      
       if (response.code < 400) {
         setTimeout(function () {
           navigation.navigate('ConfirmationUpdateCard');

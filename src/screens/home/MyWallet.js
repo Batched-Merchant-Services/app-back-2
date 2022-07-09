@@ -69,6 +69,7 @@ const MyWallet = ({ navigation,screenProps }) => {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     getBalance();
+    getLisCrypto();
   }, [refreshing]);
 
 
@@ -348,7 +349,6 @@ const MyWallet = ({ navigation,screenProps }) => {
         <NavigationEvents
           onWillFocus={payload => {
             getVerifyToken(payload);
-            getLisCrypto(payload);
           }}
         />
     </LinearGradient>

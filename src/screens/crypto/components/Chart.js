@@ -40,15 +40,12 @@ const Chart = ({ shortName }) => {
   }
 
   handleSelect = (event) => {
-    console.log('eventtt',event)
     let entry = event.nativeEvent;
     if (entry == null) {
       //this.setState({ ...this.state, selectedEntry: null });
     } else {
       //this.setState({ ...this.state, selectedEntry: JSON.stringify(entry) });
     }
-
-    console.log(event.nativeEvent);
   }
 
 
