@@ -382,7 +382,7 @@ export const cardCancel = async (token,proxyKey,pin) => {
 };
 
 
-export const reloadCard = async (token,proxyKey,pin,amount,description) => {
+export const reloadCard = async (token,proxyKey,pin,amount,description,type) => {
   const Pin = await pinCrypto({pin});
   const headers = {
     'Authorization': token,
@@ -392,7 +392,8 @@ export const reloadCard = async (token,proxyKey,pin,amount,description) => {
     proxyKey   : proxyKey,
     pin        : Pin,
     amount     : amount,
-    description: description
+    description: description,
+    type_card  : type
   };
 
   return await apiSavvyWallet.post(`/cards/deposit`, await body, { headers });

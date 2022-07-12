@@ -73,13 +73,12 @@ const ListInformationSwap = ({ navigation }) => {
       setTotalSwapUSD(parseFloat(response?.data?.amount??0)+parseFloat(amountConvert??0));
       convertAmountSend(parseFloat(response?.data?.amount??0)+parseFloat(amountConvert??0),response?.data?.amount);
     }else{
-      setIsLoadingModal(false);
+      errorFunction(response);
     }
   }
 
   async function convertChangeCurrency() {
-  
-    setIsLoadingModal(true);
+
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token,shortNameCrypto,currencyChange?.short_name,amount);
 
@@ -89,9 +88,8 @@ const ListInformationSwap = ({ navigation }) => {
       if (responseUSD.code < 400) {
         setBalanceReceiveUSD(responseUSD.data?.conversion?.toString());
       }
-      setIsLoadingModal(false);
     }else{
-      setIsLoadingModal(false);
+      errorFunction(responseBTC);
     }
     
   }
@@ -114,6 +112,16 @@ const ListInformationSwap = ({ navigation }) => {
     }else{
       setIsLoadingModal(false);
     }
+  }
+
+  function errorFunction(response) {
+    setIsLoadingModal(true);
+    setTimeout(function () {
+      setSnakVisible(true);
+      setButtonNext(true);
+      setIsLoadingModal(false);
+      setTitle(response.message);
+    }, 1000);
   }
 
 

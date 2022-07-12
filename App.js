@@ -41,7 +41,7 @@ class App extends React.Component {
       timer.setTimeout(
         this, 'timePassed', () =>  this.setState({
           isRechargeUserModalOpened: ModalOpen,
-        }), 300000
+        }), 250000
       );
     }else if(nextAppState === 'active' || this.state.appState === 'active' ){
       timer.clearTimeout(this,'timePassed');
@@ -52,6 +52,7 @@ class App extends React.Component {
   };
 
   onAction = (active) => {
+    console.log('onAction')
     const ModalOpen =global.store.getState().app.modalState === 'closing'? false:  true;
     if (!active ) {
       this.setState({
@@ -72,7 +73,7 @@ class App extends React.Component {
       return (
         <ReduxProvider store={this.state.store}>
           <UserInactivity
-            timeForInactivity={300000}
+            timeForInactivity={250000}
             onAction={this.onAction}
           >
             <StatusBar

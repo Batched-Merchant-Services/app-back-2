@@ -14,6 +14,7 @@ import i18n from '@utils/i18n';
 import { useSelector } from 'react-redux';
 
 const ModalInactive = ({ isOpen, onClose, onEnter }) => {
+  console.log('isOpen',isOpen)
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandThemeImages = appData?.Theme?.images;

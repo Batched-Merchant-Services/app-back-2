@@ -53,6 +53,7 @@ const AmountCryptoTwo = ({  value, error, onChangeText,onFillConvert, ...props})
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',value);
+    console.log('responseBTC',responseBTC)
     if (responseBTC.code < 400) {
       setIsLoadingModal(false);
       currencyUSD.onChangeText(responseBTC.data?.conversion?.toString());
@@ -70,7 +71,7 @@ const AmountCryptoTwo = ({  value, error, onChangeText,onFillConvert, ...props})
             value={value}
             onChangeText={onChangeText}
             label={i18n.t('CryptoBalance.component.sendCrypto.inputAmountToSend')}
-            keyboardType={'number-pad'}
+            keyboardType="numeric"
             autoCapitalize={'none'}
             style={{fontSize: 16}}
             onEndEditing={handleBlur}

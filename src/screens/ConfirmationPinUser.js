@@ -70,7 +70,7 @@ async function payContacts(token,
   setSnakVisible,
   setTitle
 ) {
-  const response = await reloadCard(token, data.data.proxyKey, inputtedPin, data.amount, '');
+  const response = await reloadCard(token, data?.data?.proxyKey, inputtedPin, data.amount, '',data?.data?.type);
   if (response.code < 400) {
     setTimeout(function () {
       navigation.navigate(next);
