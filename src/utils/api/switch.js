@@ -1173,3 +1173,13 @@ export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) =>
   };
   return await apiSavvyWallet.post(`/swap`,body,{ headers });
 };
+
+export const getValidateSession = async (token) => {
+
+  const headers = {
+    'Authorization': token
+  };
+
+  return await apiSavvyWallet.get(`/sessions/validate?validate_token=true`,{ headers });
+};
+

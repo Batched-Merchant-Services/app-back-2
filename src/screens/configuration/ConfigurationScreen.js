@@ -300,7 +300,7 @@ const ConfigurationScreen = ({ navigation }) => {
             bgBlue06
             style={{ width: '100%'}}
           />
-          <DivSpace height-15 />
+          {/* <DivSpace height-15 />
           <Text h12 bgGray semibold>
             {i18n.t('configuration.component.textWalletBalanceCurrency')}
           </Text>
@@ -315,7 +315,7 @@ const ConfigurationScreen = ({ navigation }) => {
             options={currency}
             onFill={(code) => updateCurrency(code)}
             size='sm'
-          />
+          /> */}
           <DivSpace height-15/>
           <TouchableOpacity>
             <Text h11 white center>

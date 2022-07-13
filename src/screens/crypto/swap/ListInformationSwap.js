@@ -2,19 +2,16 @@ import React, { useState,useEffect } from 'react';
 import i18n from '@utils/i18n';
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { scale, verticalScale } from 'react-native-size-matters';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useSelector } from 'react-redux';
 import Colors from '@styles/Colors';
 import {
   Text,
   View,
-  Select,
   Loader,
   DivSpace,
   ContainerCrypto,
   SnackBar,
-  ImageResize,
   NavigationBar,
   ButtonRounded
 } from '@components';
@@ -81,7 +78,7 @@ const ListInformationSwap = ({ navigation }) => {
 
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token,shortNameCrypto,currencyChange?.short_name,amount);
-
+    console.log('conversion',responseBTC)
     if (responseBTC.code < 400) {
       setBalanceConvert(responseBTC.data?.conversion?.toString());
       const responseUSD = await conversionCurrency(token,currencyChange?.short_name,'USD',responseBTC.data?.conversion?.toString());
@@ -99,6 +96,7 @@ const ListInformationSwap = ({ navigation }) => {
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,total);
     const responseFee = await conversionCurrency(token,'USD',shortNameCrypto,fee);
+    console.log('conversion2 ',responseFee,responseBTC)
     if (responseBTC.code < 400) {
       setIsLoadingModal(false);
       setTotalSwap(parseFloat(responseBTC.data?.conversion?.toString()));

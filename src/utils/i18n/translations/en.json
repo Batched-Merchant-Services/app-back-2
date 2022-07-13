@@ -1027,7 +1027,7 @@
           "textYourPINIsSecret":"Your PIN is secret",
           "textAndTheyShouldBeFour":"and they must be four numbers that are easy to remember, not consecutive or repetitive.",
           "buttonUpdatePIN":"Set PIN for physical card",
-          "textDefinePhysicalCardPIN":"Define Physical Card PIN",
+          "textDefinePhysicalCardPIN":"Change Physical Card PIN",
           "textATabWillOpenIn":"A tab opens in your browser for you to enter your card PIN,",
           "textOnceFinishedYouCan":"once finished you can close the tab and return to the panel.",
           "linkBackToPhysicalCard":"Back to Physical Card"
