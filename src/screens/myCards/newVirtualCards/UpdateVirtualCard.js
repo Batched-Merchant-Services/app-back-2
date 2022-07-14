@@ -33,11 +33,13 @@ const UpdateVirtualCard = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const isValid = isFormValid(cardNumber, Expiration, Cvv);
 
+  console.log('cardNumber',data)
   async function handleNext() {
+   
     try {
       setIsLoadingModal(true);
       const token = await LocalStorage.get('auth_token');
-      const response = await updateCardVirtual(token, Cvv?.value, cardNumber?.value);
+      const response = await updateCardVirtual(token, Cvv?.value, cardNumber?.value,data?.id);
       
       if (response.code < 400) {
         setTimeout(function () {
@@ -136,12 +138,20 @@ const UpdateVirtualCard = ({ navigation }) => {
                 </Text>
               </ButtonRounded>
             </View>
-          </View>
-          
+          </View>   
         </KeyboardAvoidingView>
-       
       </SafeAreaView>
+      {isLoadingModal && (
+          <Loader
+            isOpen={true}
+            navigation={navigation} />)}
 
+        <SnackBar
+          message={title}
+          isVisible={snakVisible}
+          onClose={handleCloseNotif}
+          animationAction={actionAnimated}
+        />
     </SignUpWrapper>
   );
 };

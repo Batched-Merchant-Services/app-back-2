@@ -1090,11 +1090,12 @@ export const getTheme= async (token) => {
 
 //New Card Virtual
 
-export const updateCardVirtual= async (token,cvv,card_number) => {
+export const updateCardVirtual= async (token,cvv,card,id) => {
 
   const body = await bodyCrypto({
+    id,
     cvv,
-    card_number
+    card
   });
  
   const headers = {

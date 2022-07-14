@@ -61,6 +61,10 @@ const SideMenu = ({ navigation }) => {
       type   : 'SET_IS_MODAL_OPEN',
       payload: 'closing'
     }); 
+    global.store.dispatch({
+      type   : 'SET_IS_NAVIGATION_IN',
+      payload: false
+    }); 
     setTimeout(function(){
       navigation.navigate('Login'); 
     }, 1000);

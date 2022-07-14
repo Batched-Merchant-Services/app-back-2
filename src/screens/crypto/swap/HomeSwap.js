@@ -96,6 +96,14 @@ const HomeSwap = ({ navigation }) => {
   }
   function getCode(code) {
     setCurrentConvert(code);
+    if (code < 20) {
+      setSnakVisible(true);
+      setButtonNext(true);
+      setIsLoadingModal(false);
+      setTitle(i18n.t('CryptoBalance.component.Swap.snackNotice'));
+    } else {
+      setButtonNext(false);
+    }
   }
 
   const handleCloseNotif = () => {
@@ -186,7 +194,7 @@ const HomeSwap = ({ navigation }) => {
               <View marginH-50 centerH>
                 <ButtonRounded
                   onPress={handlePay}
-                  disabled={!isValid}
+                  disabled={!isValid && !buttonNext ? true: buttonNext}
                   size='lg'
                 >
                   <Text h10 semibold>

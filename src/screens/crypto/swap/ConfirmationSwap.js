@@ -29,6 +29,7 @@ const ConfirmationSwap = ({ navigation }) => {
   function handleBackHome() {
     navigation.navigate('MyWallet');
   }
+  console.log('amount',amount,data,data?.total,(data?.amount + data?.fee))
   return (
     <SignUpWrapper>
       <NavigationBar
@@ -53,7 +54,7 @@ const ConfirmationSwap = ({ navigation }) => {
               <Text h12 center regular white>{i18n.t('CryptoBalance.component.Swap.textAmountSent')}</Text>
               <DivSpace height-5 />
               <Text h20 white semibold center >
-                {amount}{' '}{data?.from_currency}
+                {data?.amount + data?.fee}{' '}{data?.from_currency}
               </Text>
               <DivSpace height-10 />
               <Text h12 center regular white>{i18n.t('CryptoBalance.component.Swap.textAmountReceived')}</Text>

@@ -327,7 +327,8 @@ async function updateVirtualCard(
 ) {
   const cvv = data?.CVV ;
   const cardNumber = data?.cardNumber;
-  const response = await updateCardVirtual(token,cvv,cardNumber);
+  const idCard = data?.id;
+  const response = await updateCardVirtual(token,cvv,cardNumber,idCard);
   if (response.code < 400) {
     setTimeout(function () {
       navigation.navigate(next,{ data, date: response?.data });
@@ -355,10 +356,11 @@ async function createSwap(
   const shortNameCrypto = data?.shortNameCrypto ;
   const totalSwap = data?.balanceConvert;
   const toCurrency = data?.currencyChange?.short_name;
+  const FeeAndAmount = data?.totalSwap;
   const response = await createTRXSwap(token,shortNameCrypto,toCurrency,totalSwap,inputtedPin);
   if (response.code < 400) {
     setTimeout(function () {
-      navigation.navigate(next,{data: response?.data,convert: totalSwap,amount: data?.amount });
+      navigation.navigate(next,{data: response?.data,convert: totalSwap,amount: data?.amount,total:FeeAndAmount });
       setIsLoadingModal(false);
     }, 1000);
     setTextWarning(false);

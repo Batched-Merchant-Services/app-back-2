@@ -1564,7 +1564,8 @@
           "textYouPay":"Tu pagas:",
           "textYouWillReceive":"Recibirás:",
           "textNetworkFees":"Tarifas de red",
-          "buttonSwap":"Swap"
+          "buttonSwap":"Swap",
+          "snackNotice":"No puedes enviar montos menores a 20 USD"
         }
       }
       

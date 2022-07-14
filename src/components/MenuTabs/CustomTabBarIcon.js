@@ -18,8 +18,12 @@ const CustomTabBarIcon = ({ index, focused, routeName,onPress, ...props }) => {
   
   useEffect(() => {
     global.store.dispatch({
+      type   : 'SET_IS_NAVIGATION_IN',
+      payload: true
+    }); 
+    global.store.dispatch({
       type   : 'SET_IS_MODAL_OPEN',
-      payload: routeName === 'Login' ? 'closing': 'open'
+      payload: 'open',
     }); 
   }, []);
 

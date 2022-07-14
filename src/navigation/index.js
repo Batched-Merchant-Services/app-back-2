@@ -66,6 +66,7 @@ const SignedInNav = createDrawerNavigator(
     overlayColor         : 'rgba(255,255,254, 0)',
     drawerBackgroundColor: 'rgba(255,255,254, 0)'
   }
+  
 );
 
 const SignedOutNav = createStackNavigator(
@@ -83,17 +84,13 @@ const AppNavigator = createSwitchNavigator(
       navigationOptions: ({ navigation: { state },navigation}) => {
         global.store.dispatch({
           type   : 'SET_DRAWER_STATE',
-          payload: state.drawerMovementDirection
+          payload: state.drawerMovementDirection,
         });
       }
     },
     SignedOutNav: {
       screen           : SignedOutNav ,
-      navigationOptions: ({ navigation }) => {
-        global.store.dispatch({
-          type   : 'SET_IS_MODAL_OPEN',
-          payload: 'closing'
-        }); 
+      navigationOptions: ({ navigation: { state } }) => {
       }
     }
   },
