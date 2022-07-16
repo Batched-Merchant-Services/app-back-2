@@ -76,8 +76,6 @@ const HomeSwap = ({ navigation }) => {
   }
 
 
-
-
   async function getBalanceConvert() {
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', balanceCrypto);

@@ -7,7 +7,6 @@ import NavigationService from './NavigationService';
 import store from '@store';
 import { ModalInactive } from '@components';
 import LocalStorage from '@utils/localStorage';
-import { conversionCurrency, getCurrencySwap } from '@utils/api/switch';
 import { getValidateSession } from './src/utils/api/switch';
 const timer = require('react-native-timer');
 
@@ -16,7 +15,6 @@ YellowBox.ignoreWarnings(['Remote debugger', 'Module RNSecureKeyStore']); // We 
 
 
 class App extends React.Component {
-
   state = {
     ready: false,
     store: null,
@@ -26,12 +24,10 @@ class App extends React.Component {
     timePassed: false,
     timeValid: false,
     validateToken: false,
-
   };
 
 
   async componentDidMount() {
-
     this.setState({ ready: true, store: await store, isRechargeUserModalOpened: false});
     AppState.addEventListener('change', this._handleAppStateChange);
     timer.clearTimeout(this, 'timePassed');
@@ -42,12 +38,9 @@ class App extends React.Component {
     );
   }
 
-
-
   async componentDidUpdate() {
     const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
     const sinIn = global.store.getState().app.navigationIn;
-    console.log('actualize', 'validateToken',this.state.validateToken,'ModalOpen',ModalOpen,'sinIn',sinIn)
     if (this.state.validateToken && sinIn) {
       const token = await LocalStorage.get('auth_token');
       const response = await getValidateSession(token);
@@ -61,9 +54,7 @@ class App extends React.Component {
         }), 250000
       );
     }
-   
   }
-
 
 
   _handleAppStateChange = async (nextAppState) => {
@@ -86,7 +77,6 @@ class App extends React.Component {
   onAction = async (active) => {
     const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
     const sinIn = global.store.getState().app.navigationIn;
-    console.log('active',active,'sinIn',sinIn,'ModalOpen',ModalOpen,!active && sinIn)
     setTimeout(() => {
       if (!active) {
         this.setState({
@@ -95,6 +85,7 @@ class App extends React.Component {
       }
     }, 1000);
   }
+
 
   render() {
     const { isRechargeUserModalOpened } = this.state;
@@ -131,8 +122,6 @@ class App extends React.Component {
             />
           </UserInactivity>
         </ReduxProvider>
-
-
       );
     }
     return null;
