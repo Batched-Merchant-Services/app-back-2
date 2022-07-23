@@ -1362,7 +1362,7 @@
         "ButtonMovementRecord":"Registro de \n Movimientos",
         "textSelectTheCryptocurrency":"Selecciona la criptodivisa que deseas comprar.",
         "textInMyWallet":"En mi Wallet",
-        "textAvailableForPurchase":"Disponibles para compra",
+        "textAvailableForPurchase":"Lista de activos",
         "buyCrypto":{
           "titlePurchaseOf":"Compra de criptodivisas",
           "textBuy":"Compra",

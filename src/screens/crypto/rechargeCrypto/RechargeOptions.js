@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { verticalScale } from 'react-native-size-matters';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import i18n from '@utils/i18n';
 import {
   View,
@@ -33,7 +33,7 @@ const RechargeOptions = ({ navigation }) => {
 
 
   return (
-    <SignUpWrapper forceInset={{top: 'always'}}>
+    <SignUpWrapper forceInset={{ top: 'always' }}>
       <NavigationBar
         onBack={() => navigation.goBack()}
         body={i18n.t('CryptoBalance.component.rechargeCrypto.titleReloadingOptions')}
@@ -43,18 +43,18 @@ const RechargeOptions = ({ navigation }) => {
       <ScrollView >
         <SafeAreaView >
           <View marginH-10 centerH>
-            <BoxBlue containerStyle={{ height: verticalScale(510)}}>
-              <DivSpace height-25/>
+            <BoxBlue containerStyle={{ height: verticalScale(510) }}>
+              <DivSpace height-25 />
               <View marginH-20>
                 <Text white h14 center>{i18n.t('CryptoBalance.component.rechargeCrypto.textRecharge')}</Text>
-                <DivSpace height-5/>
+                <DivSpace height-5 />
                 <Text orange h14 center>{i18n.t('CryptoBalance.component.rechargeCrypto.textMyWallet')}</Text>
-                <DivSpace height-5/>
-                <Text white h10 center>{i18n.t('CryptoBalance.component.rechargeCrypto.textSelectTheOption')}</Text>
+                {/* <DivSpace height-5 />
+                <Text white h10 center>{i18n.t('CryptoBalance.component.rechargeCrypto.textSelectTheOption')}</Text> */}
               </View>
-              <DivSpace height-20/>
+              <DivSpace height-20 />
               <View flex-1 centerH>
-                <View row>
+                {/* <View row>
                   <BoxOption
                     label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonTransferBanking')}
                     image={bankTransfer}
@@ -63,13 +63,13 @@ const RechargeOptions = ({ navigation }) => {
                     disabled
                   />
                   <DivSpace width-20/>
-                  {/* <BoxOption
+                  <BoxOption
                     label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonTransfersCoinPurse')}
                     image={cardDisabled}
                     badge={17}
                     onPress={handleTransfer}
                     disabled
-                  /> */}
+                  />
                   <BoxOption
                     label={i18n.t('CryptoBalance.component.rechargeCrypto.buttonPersonToPerson')}
                     image={p2p}
@@ -77,7 +77,7 @@ const RechargeOptions = ({ navigation }) => {
                     onPress={handleTransfer}
                     disabled
                   />
-                </View>
+                </View> */}
                 {/* <DivSpace height-15/>
                 <View row>
                   <BoxOption
@@ -96,7 +96,7 @@ const RechargeOptions = ({ navigation }) => {
                     disabled
                   />
                 </View> */}
-                <DivSpace height-15/>
+                <DivSpace height-15 />
                 {Crypto&&(
                   <View row>
                     <View flex-1 right>
@@ -112,7 +112,7 @@ const RechargeOptions = ({ navigation }) => {
                     <View flex-1/>
                   </View>
                 )}
-               
+
               </View>
             </BoxBlue>
           </View>

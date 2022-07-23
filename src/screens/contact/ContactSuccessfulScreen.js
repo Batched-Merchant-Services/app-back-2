@@ -59,6 +59,7 @@ const ContactSuccessfulScreen = ({navigation}) => {
             {i18n.t('contact.component.welcome')}
           </Text>
         </ButtonRounded>
+        <DivSpace height-20 />
       </View>
     </SignUpWrapper>
   );

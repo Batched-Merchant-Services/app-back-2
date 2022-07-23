@@ -914,21 +914,19 @@ export const getSellCrypto = async (token,address,amount,type_crypto,type_amount
 };
 
 
-export const getBuyCrypto = async (token,address,amount,type_crypto,type_amount,currency,pin)=>{
+export const getBuyCrypto = async (token,amount,conversion_amount,currency,pin)=>{
   const Pin = await pinCrypto({pin});
   const headers = {
     'Authorization': token,
   };
   const body = {
-    address    : address,
-    amount     : amount,
-    type_crypto: type_crypto,
-    type_amount: 'amount',
+    amount:conversion_amount, 
+    conversion_amount:amount, 
     currency   : currency,
     pin        : Pin,
   };
 
-  return await apiSavvyWallet.post(`/wallet/buy_crypto`, body, { headers });
+  return await apiSavvyWallet.post(`/crypto/transfer_request`, body, { headers });
 };
 
 

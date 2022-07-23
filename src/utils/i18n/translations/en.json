@@ -1368,10 +1368,10 @@
         "ButtonSell":"Sell",
         "ButtonSend":"Send or transfer",
         "ButtonReceive":"Receive",
-        "ButtonMovementRecord":"Movement \n Record",
+        "ButtonMovementRecord":"Transactions \n History",
         "textSelectTheCryptocurrency":"Select the cryptocurrency you want to buy.",
         "textInMyWallet":"In my Wallet",
-        "textAvailableForPurchase":"Available for purchase",
+        "textAvailableForPurchase":"Assets List",
         "buyCrypto":{
           "titlePurchaseOf":"Purchase of cryptocurrencies",
           "textBuy":"Buy",
@@ -1454,7 +1454,7 @@
           "textThereIsNoAddress":"There is no address to show"
         },
         "HistoryCrypto":{
-          "title":"Movement Record",
+          "title":"Transactions History",
           "textTransactionDetail":"Transaction detail",
           "textTransactionFee":"Transaction fee",
           "textTransactionID":"Transaction ID",

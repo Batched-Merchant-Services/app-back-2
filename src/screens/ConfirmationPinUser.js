@@ -370,7 +370,6 @@ async function createSwap(
   }
 }
 
-
 async function buyCrypto(
   token,
   data,
@@ -384,11 +383,10 @@ async function buyCrypto(
   setTitle
 ) {
 
-  const response = await getBuyCrypto(token,data.infoData.id,data.amountConvert,data.infoData.typeCrypto,data.showCurrency,data.infoData.currencyUser,inputtedPin);
-
+  const response = await getBuyCrypto(token,data?.amount?.value,data?.amountConvert,data?.shortNameCrypto,inputtedPin)
   if (response.code < 400) {
     setTimeout(function () {
-      navigation.navigate(next,{data: data });
+      navigation.navigate(next,{data: data,dataInfo: response.data });
       setIsLoadingModal(false);
     }, 1000);
     setTextWarning(false);

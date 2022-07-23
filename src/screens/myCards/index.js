@@ -264,9 +264,11 @@ const MyCards = ({ navigation }) => {
                       {!CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && (
                         <Fragment>
                           <View marginH-40 centerH>
+                            <DivSpace height-10 />
                             <Text h12 white>{i18n.t('myCards.component.textGenerateVirtualCard')}</Text>
                             <DivSpace height-10 />
-                            <Text h10 white center>{i18n.t('myCards.component.textTheNumbersAre')}<Text white bold>{' '}{i18n.t('myCards.component.textRememberToCreate')}</Text></Text>
+                            {/* <DivSpace height-10 />
+                            <Text h10 white center>{i18n.t('myCards.component.textTheNumbersAre')}<Text white bold>{' '}{i18n.t('myCards.component.textRememberToCreate')}</Text></Text> */}
                           </View>
                           <DivSpace height-20 />
                           <ButtonRounded

@@ -61,7 +61,6 @@ const BoxOptions = ({ navigation, dataPhysical,buy }) => {
             row
             flex-1
           >
-            <ButtonWallet invalid navigation={navigation} buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} delay={100} srcImage={receiveCryptoDisabled}  onPress={handleBuy} titleText={i18n.t('CryptoBalance.component.ButtonBuy')}/> 
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} IconButton={IconReceiveCrypto}  onPress={handleReceived} titleText={i18n.t('CryptoBalance.component.ButtonReceive')}/> 
           </View>
         </View>
@@ -86,10 +85,12 @@ const BoxOptions = ({ navigation, dataPhysical,buy }) => {
           >
             <ButtonWallet navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconSwap}  onPress={handleSwap} titleText={i18n.t('Swap')}/> 
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconSendCrypto}  onPress={handleSend} titleText={i18n.t('CryptoBalance.component.ButtonSend')}/> 
+            <ButtonWallet  navigation={navigation} buttonStyle={{ backgroundColor: brandTheme?.textBlueDark??Colors.textBlueDark }} delay={100} IconButton={IconBuyCrypto}  onPress={handleBuy} titleText={i18n.t('CryptoBalance.component.ButtonBuy')}/> 
             {/* <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} srcImage={buyCryptoDisabled}  onPress={handleBuy} titleText={i18n.t('CryptoBalance.component.ButtonBuy')}/> 
             <ButtonWallet invalid navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }}  srcImage={receiveCryptoDisabled}  onPress={handleSale} titleText={i18n.t('CryptoBalance.component.ButtonSell')}/>  */}
           </View>
           <View row flex-1 paddingH-30>
+           
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconReceiveCrypto}  onPress={handleReceived} titleText={i18n.t('CryptoBalance.component.ButtonReceive')}/> 
             <ButtonWallet  navigation={navigation} delay={100} buttonStyle={{ backgroundColor:Colors.textBlueDark }} IconButton={IconHistory}  onPress={handleHistoric} titleText={i18n.t('CryptoBalance.component.ButtonMovementRecord')}/> 
           </View>
