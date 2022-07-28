@@ -49,7 +49,7 @@ const MyCards = ({ navigation }) => {
   const brandThemeImages = userData?.Theme?.images;
   const [activeSlide, setActiveSlide] = useState(0);
   const [Open, setIsOpen] = useState(false);
-  const [proxyKey, setProxyKey]= useState('');
+  const [idCard, setIdCard]= useState('');
   const [balance, setBalance] = useState(0);
   const [available, setAvailable] = useState(false);
   const [activationStatus, setActivationStatus] = useState(false);
@@ -61,14 +61,14 @@ const MyCards = ({ navigation }) => {
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [title, setTitle] = useState('');
-  const [currencyUser]=useState(userData?userData.currencyUser:'');
+  const [currencyUser]=useState(userData?userData?.currencyUser:'');
   const setChangueIndex = async (index) => { 
     setActiveSlide(index);
     setBalance(CAROUSEL_ITEMS[index]?.balance);
     setStatusRequestCard(CAROUSEL_ITEMS[index]?.statusRequestCard);
     setActivationStatus(CAROUSEL_ITEMS[index]?.statusActivation);
     setAvailable(CAROUSEL_ITEMS[index]?.disabled);
-    setProxyKey(CAROUSEL_ITEMS[index]?.proxyKey);
+    setIdCard(CAROUSEL_ITEMS[index]?.id);
   };
 
   function renderItem({ item, index }) {
@@ -88,14 +88,16 @@ const MyCards = ({ navigation }) => {
     try {
       const token = await LocalStorage.get('auth_token');
       const response = await getCards(token);
-      if (response?.code < 400) {
+      if (response.code < 400) {
         setCAROUSEL_ITEMS(response?.data);
         setShowInfo(true);
         setAvailable(response?.data[activeSlide]?.disabled);
-        setProxyKey(response?.data[activeSlide]?.proxyKey);
+        setIdCard(response?.data[activeSlide]?.id);
+        if (response?.data[activeSlide]?.type === 'PHYSICAL') {
+          setActivationStatus(response?.data[activeSlide]?.statusActivation);
+        }
       } 
       setBalance(CAROUSEL_ITEMS[activeSlide]?.balance);
-      setActivationStatus(CAROUSEL_ITEMS[activeSlide]?.statusActivation);
     } catch (e) {
       setBalance(0);
     }
@@ -106,14 +108,14 @@ const MyCards = ({ navigation }) => {
     setAvailable(val);
     try {
       const token = await LocalStorage.get('auth_token');
-      const response = await changueStatus(token,active,proxyKey);
+      const response = await changueStatus(token,active,idCard);
       if (response.code < 400) {
-        const  availableCard = response?.data?.Status === 'DEACTIVATE' ? false: true;
+        const availableCard = response?.data?.Status === 'DEACTIVATE' ? false: true;
         setAvailable(availableCard);
         getCard();
       } else{
         setSnakVisible(true);
-        setTitle(response?.message);
+        setTitle(response.message);
         setAvailable(false);
       }
     } catch (e) {
@@ -148,30 +150,6 @@ const MyCards = ({ navigation }) => {
   const handleOncloseModal =() => {
     setIsCardModal(false);  
   };
-
-  const _scrollInterpolator = (index, carouselProps) =>{
-    const range = [1, 2, 1, 0, -1];
-    const inputRange = getInputRangeFromIndexes(range, index, carouselProps);
-    const outputRange = range;
-
-    return { inputRange, outputRange };
-  };
-
-  const _animatedStyles =(index, animatedValue, carouselProps) => {
- 
-
-    return {
-   
-      transform: [{
-        rotate: animatedValue.interpolate({
-          inputRange : [-1, 0, 1, 2, 3],
-          outputRange: ['-30deg', '0deg', '0deg', '2deg', '0deg'],
-          extrapolate: 'clamp'
-        })
-      }]
-    };
-  };
-
  
   const isPhysical = showInfo?  CAROUSEL_ITEMS[activeSlide]?.type === 'PHYSICAL' : null; 
   const isVirtual = showInfo?  CAROUSEL_ITEMS[activeSlide]?.type === 'VIRTUAL' : null;
@@ -190,21 +168,20 @@ const MyCards = ({ navigation }) => {
               <DivSpace height-5 />
               <View centerH style={{ width: '100%' }}>
                 <View style={Styles.containerSwitch}>
-                  {!isVirtual && activationStatus &&(<Switch
-                    value={available}  
+                {!isVirtual &&(<Switch
+                    value={activationStatus?true:false}  
                     onValueChange={(val) => setChangueSwitch(val)}
                     circleSize={25}
-                    backgroundActive={!available ?Colors.textGray : Colors.green}
-                    backgroundInactive={!available ? Colors.textGray : Colors.green }
+                    backgroundActive={Colors.green}
+                    backgroundInactive={Colors.textGray}
                     switchWidthMultiplier={1.73}
                     circleBorderWidth={0}
-                    circleActiveColor={'white'}
-                    circleInActiveColor={'white'}
+                    circleActiveColor={Colors.white}
+                    circleInActiveColor={Colors.white}
                     renderInsideCircle={() => (
                       <View centerH>
                         <ImageComponent
-                          textGray
-                          source={!available ? switchBlocked : switchUnblocked }
+                          source={!activationStatus ? switchBlocked : switchUnblocked }
                           width={12}
                           height={12}
                         />

@@ -792,6 +792,15 @@
           "textCryptocurrencies":"Criptodivisas",
           "textTakeAdvantageOfMarket":"Aprovecha las oportunidades del mercado; compra, vende, envía y recíbe las criptodivisas más importantes del mundo de manera rápida y confiable.",
           "textCryptocurrenciesAreVirtualCurrencies":"Las criptodivisas son monedas virtuales que suelen utilizar una red descentralizada para realizar transacciones financieras seguras."
+        },
+        "modalInternationalWire":{
+          "title":"WIRING INSTRUCTIONS",
+          "textTheInternational":"Send the international transfer to the following account:",
+          "textOne":"Correspondent Bank SWIFT: FW084106768 \nBeneficiary Name: Evolve Bank & Trust \nBeneficiary Address: Memphis, TN \nBeneficiary Bank Country: United States of America \nSpecial Instructions: Account 9900009730 for Batched LLC",
+          "textPleaseInclude":"PLEASE INCLUDE YOUR FIRST AND LAST NAME AND EMAIL ADDRESS ASSOCIATED WITH YOUR ACCOUNT ON THE WIRE DESCRIPTION.",
+          "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.Wires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
+          "textToRegister":"To register your deposit please write us at",
+          "buttonUnderstood":"Understood!"
         }
       }
     },
@@ -1402,6 +1411,7 @@
           "textFromYourWallet":"de tu wallet a wallet o exchange externo",
           "textShippingInformation":"Ingresa la dirección ”Address” de tu contacto o escanéa su código QR de wallet",
           "inputAddressOfTheWallet":"Dirección “Address” de la wallet a enviar",
+          "dropDownAddress":"Address",
           "buttonScanQR":"Escanear QR",
           "buttonAddThe":"Agregar el",
           "textEnterTheAmountYou":"ngresa el monto que deseas enviar en",

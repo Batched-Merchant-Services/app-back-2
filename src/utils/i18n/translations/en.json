@@ -795,6 +795,15 @@
           "textCryptocurrencies":"Cryptocurrencies",
           "textTakeAdvantageOfMarket":"Take advantage of market opportunities; buy, sell, send and receive the most important cryptocurrencies in the world quickly and reliably.",
           "textCryptocurrenciesAreVirtualCurrencies":"Cryptocurrencies are virtual currencies that usually use a decentralized network to carry out secure financial transactions."
+        },
+        "modalInternationalWire":{
+          "title":"WIRING INSTRUCTIONS",
+          "textTheInternational":"Send the international transfer to the following account:",
+          "textOne":"Correspondent Bank SWIFT: FW084106768 \nBeneficiary Name: Evolve Bank & Trust \nBeneficiary Address: Memphis, TN \nBeneficiary Bank Country: United States of America \nSpecial Instructions: Account 9900009730 for Batched LLC",
+          "textPleaseInclude":"PLEASE INCLUDE YOUR FIRST AND LAST NAME AND EMAIL ADDRESS ASSOCIATED WITH YOUR ACCOUNT ON THE WIRE DESCRIPTION.",
+          "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.Wires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
+          "textToRegister":"To register your deposit please write us at",
+          "buttonUnderstood":"Understood!"
         }
       }
     },
@@ -1412,6 +1421,7 @@
           "textShippingInformation":"Shipping information: Enter the address of your contact or scan their wallet QR code",
           "inputAddressOfTheWallet":"Address 'Address' of the wallet to send",
           "buttonScanQR":"Scan QR",
+          "dropDownAddress":"Address",
           "buttonAddThe":"Add the",
           "textEnterTheAmountYou":"Enter the amount you want to send in",
           "textOrTheEquivalent":"or the equivalent in your currency",

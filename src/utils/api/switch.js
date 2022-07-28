@@ -116,7 +116,7 @@ export const logOut = async ( token ) => {
 };
 
 
-export const forgotPassword = async ( email_phone,securityLabel, securityValue,answer ) => {
+export const forgotPassword = async ( email_phone ) => {
   
   const body = {
     email_phone
@@ -127,15 +127,13 @@ export const forgotPassword = async ( email_phone,securityLabel, securityValue,a
 
 
 export const forgotYourPassword = async ( password,confirmPassword,email,pin,companyValue ) => {
-  console.log('password,confirmPassword,email,pin,companyValue',password,confirmPassword,email,pin,companyValue)
-  const company = companyValue?.value?companyValue?.value:'';
-  console.log('company',company)
+
   const body = await bodyCrypto({
     password,
     confirmPassword,
     email,
     pin,
-    group_id: company
+    
   });
 
   return await apiSavvyWallet.put(`/sessions/reset_password`, body);
@@ -322,14 +320,14 @@ export const getCards= async (token) => {
 };
 
 
-export const changueStatus= async (token,status,proxyKey) => {
+export const changueStatus= async (token,status,id) => {
 
   const headers = {
     'Authorization': token,
   };
   const body = {
     status  : status,
-    proxyKey: proxyKey
+    proxyKey: id
    
   };
   return await apiSavvyWallet.put(`/cards/change_status`,body,{ headers });
@@ -398,6 +396,7 @@ export const reloadCard = async (token,proxyKey,pin,amount,description,type) => 
 
   return await apiSavvyWallet.post(`/cards/deposit`, await body, { headers });
 };
+
 
 
 export const requestCard = async (token) => {
@@ -939,6 +938,15 @@ export const getChartCrypto = async (token,currency) => {
   return await apiSavvyWallet.get(`/crypto_currencies/history/price?currency=${currency}&chart=new`,  { headers });
 };
 
+// export const getChartCrypto = async (token,currency) => {
+  
+//   const headers = {
+//     'Authorization': token,
+//   };
+
+//   return await apiSavvyWallet.get(`/crypto_currencies/history/price?currency=${currency}`,  { headers });
+// };
+
 
 export const getLiquidCrypto = async (token) => {
   
@@ -1019,13 +1027,14 @@ export const sendCryptoUsers = async (token,currency,amount,id,note,pin) => {
   return await apiSavvyWallet.post(`/wallet/crypto/send`,body,{ headers });
 };
 
-export const getListExchangeWallet= async (token) => {
+export const getListExchangeWallet= async (token,currency) => {
 
   const headers = {
     'Authorization': token
   };
-  return await apiSavvyWallet.get(`/crypto/wallets`,{ headers });
+  return await apiSavvyWallet.get(`/crypto/wallets?currency=${currency}`,{ headers });
 }; 
+
 export const getCryptoFess= async (token) => {
 
   const headers = {
@@ -1157,7 +1166,6 @@ export const getFeesSwap = async (token,currency) => {
   return await apiSavvyWallet.get(`/swap/fees?currency=${currency}`,{ headers });
 };
 
-
 export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) => {
 
   const headers = {
@@ -1173,6 +1181,7 @@ export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) =>
   return await apiSavvyWallet.post(`/swap`,body,{ headers });
 };
 
+
 export const getValidateSession = async (token) => {
 
   const headers = {
@@ -1181,4 +1190,3 @@ export const getValidateSession = async (token) => {
 
   return await apiSavvyWallet.get(`/sessions/validate?validate_token=true`,{ headers });
 };
-

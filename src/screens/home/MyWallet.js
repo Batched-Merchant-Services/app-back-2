@@ -30,7 +30,7 @@ import { View,
   DivSpace,
   ButtonRounded,
   MenuContainer,
-  ModalBalances,
+  ModalInternationalWire,
   ButtonWallet,
   ModalDisabled ,
   Loader,
@@ -263,7 +263,7 @@ const MyWallet = ({ navigation,screenProps }) => {
                     {i18n.t('homeWallet.component.textInformation')}
                   </Text>
                 </Link>
-                {/* {!showTypeCrypto &&(
+                {!showTypeCrypto &&(
                   <Fragment>
                     <DivSpace height-20 />
                     <ButtonRounded size='lg' onPress={()=> setIsRechargeQRModal(true)}>
@@ -272,7 +272,7 @@ const MyWallet = ({ navigation,screenProps }) => {
                       </Text>
                     </ButtonRounded>
                   </Fragment>
-                )} */}
+                )}
               </View>
               <DivSpace height-12 />
               <View flex-1 centerH>
@@ -330,7 +330,7 @@ const MyWallet = ({ navigation,screenProps }) => {
             {showModalInst &&(
               <ModalInstruction isOpen={true} navigation={navigation} onClose={handleCloseModalIns}/>)}
             {isRechargeQRModal &&(
-              <ModalBalances 
+              <ModalInternationalWire 
                 isOpen={true}
                 onClose={handleOncloseModal}
                 navigation={navigation} />)}

@@ -200,7 +200,7 @@ const SendCrypto = ({ navigation }) => {
               <Select
                 {...userToTransfer}
                 onFill={(code) => onFill(code)}
-                label={i18n.t('requestInternationalPayments.component.textCountryWhereyourContact')}
+                label={i18n.t('CryptoBalance.component.sendCrypto.dropDownAddress')}
                 options={listExchanges}
                 size="sm"
               />

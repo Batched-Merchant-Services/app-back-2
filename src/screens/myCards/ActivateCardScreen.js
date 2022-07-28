@@ -37,10 +37,10 @@ const ActivateCardScreen = ({ navigation }) => {
     try {
       setIsLoadingModal(true);
       const token = await LocalStorage.get('auth_token');
-      const response =  page === 'associate' ? await associateCard(token,cardNumber.value,cardExpiration.value,cardCVV.value): await validateCardInformation(token,data.proxyKey,cardNumber.value,cardExpiration.value,cardCVV.value);
+      const response =  page === 'associate' ? await associateCard(token,cardNumber?.value,cardExpiration?.value,cardCVV?.value): await validateCardInformation(token,data?.id,cardNumber?.value,cardExpiration?.value,cardCVV?.value);
       if (response.code < 400) {
         setTimeout(function(){
-          navigation.navigate('ActivateCardPin',{ Proxy: response.data.proxyKey });
+          navigation.navigate('PinUpdateScreen',{ Proxy: data?.proxyKey });
           setIsLoadingModal(false);
         }, 1000);
         
@@ -55,8 +55,8 @@ const ActivateCardScreen = ({ navigation }) => {
       }
     } catch (e) {
     }
-    
   };
+  
 
   function handleBackPress() {
     navigation.goBack();

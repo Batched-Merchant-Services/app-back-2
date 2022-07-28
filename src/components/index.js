@@ -28,6 +28,7 @@ import ModalShowLevel from '@components/ModalShowLevel';
 import ModalDisabled from '@components/ModalDisabled';
 import ModalVerifyStatus from '@components/ModalVerifyStatus';
 import ModalBalances from '@components/ModalBalances';
+import ModalInternationalWire from '@components/ModalInternationalWire';
 import ModalInactive from '@components/ModalInactive';
 import NoticeToast from '@components/NoticeToast';
 import MarkersComponent from '@components/MarkersComponent';
@@ -91,6 +92,7 @@ export {
   ModalDisabled,
   ModalVerifyStatus,
   ModalBalances,
+  ModalInternationalWire,
   ModalInactive,
   Map,
   NoticeToast,
