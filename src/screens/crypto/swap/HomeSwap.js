@@ -20,7 +20,6 @@ import {
   ButtonRounded
 } from '@components';
 import rowEquals from '@assets/icons/rowEquals.png';
-import AmountCrypto from '@screens/crypto/components/AmountCrypto';
 import AmountCryptoTwo from '@screens/crypto/components/AmountCryptoTwo';
 import LocalStorage from '@utils/localStorage';
 import { conversionCurrency, getCurrencySwap } from '@utils/api/switch';
@@ -37,7 +36,6 @@ const HomeSwap = ({ navigation }) => {
   const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
   const [showCatalog, setShowCatalog] = useState([]);
   const [amountConvert, setAmountConvert] = useState('');
-  const amount = useValidatedInput('amount', '');
   const [balanceConvert, setBalanceConvert] = useState('');
   //snack notifications
   const [title, setTitle] = useState('');
@@ -50,6 +48,7 @@ const HomeSwap = ({ navigation }) => {
   const cryptoCurrency = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
     changeHandlerSelect: 'onSelect'
   });
+  const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(cryptoCurrency, amount);
 
   // useEffect(() => {

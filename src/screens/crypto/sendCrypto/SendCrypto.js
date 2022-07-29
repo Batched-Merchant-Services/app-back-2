@@ -125,6 +125,18 @@ const SendCrypto = ({ navigation }) => {
     setAmountConvert(code);
   }
 
+  function getCode(code) {
+    setCurrentConvert(code);
+    if (code < 20) {
+      setSnakVisible(true);
+      setButtonNext(true);
+      setIsLoadingModal(false);
+      setTitle(i18n.t('CryptoBalance.component.Swap.snackNotice'));
+    } else {
+      setButtonNext(false);
+    }
+  }
+
 
   async function onCurrency(code){
     setCurrentCurrency(code);
@@ -219,7 +231,7 @@ const SendCrypto = ({ navigation }) => {
               <DivSpace height-10 />
               <Text h11 white center>{i18n.t('CryptoBalance.component.sendCrypto.textEnterTheAmount')}</Text>
               <DivSpace height-10/>
-              <AmountCrypto addAmount={amountConvert}  onChange={(code) => onFillAmount(code)}  onCurrency={(code) => onCurrency(code)} />
+              <AmountCryptoTwo {...amount} onFillConvert={(code) => getCode(code)} />
               <DivSpace height-10 />
               <Text h11 textGray center semibold>{i18n.t('CryptoBalance.component.sendCrypto.textACommissionIsDeducted')}</Text>  
               <DivSpace height-10 />
@@ -237,7 +249,7 @@ const SendCrypto = ({ navigation }) => {
               <View flex-1 centerH>
                 <ButtonRounded
                   onPress={handlePay}
-                  disabled={!isValid || (validation)}
+                  disabled={!isValid}
                   size='sm'
                 >
                   <Text h10 semibold>

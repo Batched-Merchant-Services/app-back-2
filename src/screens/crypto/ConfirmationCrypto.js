@@ -23,16 +23,14 @@ const ConfirmationCrypto = ({navigation}) => {
   const PageSale = data?.page === 'saleCrypto'? true: false;
   const PageSend = data?.page === 'sendOrTransferCrypto' || data?.page === 'sendCryptoUsers'? true: false;
   const PageBuy = data?.page === 'buyCrypto' || dataInfo?.page === 'buyCrypto'? true: false;
-
   const [showNameCrypto]=useState(userData?userData.nameCrypto:'');
-  const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
   const [iconCrypto]=useState(userData?userData.iconCrypto:'');
   const [currencyUser]=useState(userData?userData.currencyUser:'');
   function handleBackHome() {
     navigation.navigate('MyWallet');
   }
 
-  console.log('entrooo',dataInfo,data,PageSale,PageSend,PageBuy)
+
   return (
     <SignUpWrapper>
       <SafeAreaView style={Styles.viewInfoCntc} forceInset={{top: 'always'}}>
@@ -49,11 +47,13 @@ const ConfirmationCrypto = ({navigation}) => {
                 {i18n.t('CryptoBalance.component.sendCrypto.title')+' '+showNameCrypto+' '+i18n.t('CryptoBalance.component.sendCrypto.textPurchase')}
               </Text>
             )}
+            <DivSpace height-10 />
             {PageSale &&(
               <Text h16 white bold center>
                 {i18n.t('CryptoBalance.component.saleCrypto.title')+' '+showNameCrypto+' '+i18n.t('CryptoBalance.component.saleCrypto.textPurchase')}
               </Text>
             )}
+            <DivSpace height-10 />
             {PageBuy &&(
               <Text h16 white bold center>
                 {i18n.t('CryptoBalance.component.confirmationCrypto.textSuccessful')+' '+showNameCrypto+' '+i18n.t('CryptoBalance.component.confirmationCrypto.textPurchase')}
@@ -65,21 +65,41 @@ const ConfirmationCrypto = ({navigation}) => {
             </BoxGradient>
             <DivSpace height-15 />
             {PageSend &&(
-              <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textTransactionAmount')}</Text>
-            )}
-            {PageSale &&(
-              <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textSalesAmount')}</Text>
-            )}
-            {PageBuy &&(
               <Fragment>
-                <Text h12 center white medium>{i18n.t('CryptoBalance.component.confirmationCrypto.textPurchaseAmount')}</Text>
-                <Text h18 white semibold center>{PageBuy?data.amount_total:dataInfo.amount_total} <Text white semibold>{data?.currency}</Text></Text>
+                <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textTransactionAmount')}</Text>
+                <Text h18 white semibold center>{dataInfo.amount} <Text white regular>{dataInfo?.currency}</Text></Text>
               </Fragment>
             )}
             <DivSpace height-10 />
-            <Text h10 white>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionFee')}</Text>
-            <Text h10 white bold>{PageBuy?data.fee:dataInfo.fee} {currencyUser}</Text>
-            <DivSpace height-15/>
+            {PageBuy &&(
+              <Fragment>
+                <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.confirmationCrypto.textPurchaseAmount')}</Text>
+                <Text h18 white semibold center>{PageBuy?data.amount_total:dataInfo.amount_total} <Text white regular>{data?.currency}</Text></Text>
+              </Fragment>
+            )}
+            <DivSpace height-10 />
+            {PageSale &&(
+              <Fragment>
+                <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textSalesAmount')}</Text>
+                <Text h18 white semibold center>{dataInfo.amount} <Text white regular>{dataInfo?.currency}</Text></Text>
+              </Fragment>
+            )}
+            <DivSpace height-10 />
+            {PageSend &&(
+              <Fragment>
+                <Text h10 bgGray>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionFee')}</Text>
+                <Text h10 bgGray bold>{dataInfo.fee}{' '}{dataInfo.currency}</Text>
+              </Fragment>
+            )}
+            <DivSpace height-10 />
+            {!PageSend &&(
+              <Fragment>
+                <Text h10 bgGray>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionFee')}</Text>
+                <Text h10 bgGray bold>{PageBuy?data.fee:dataInfo.fee} {currencyUser}</Text>
+              </Fragment>
+            )}
+            <DivSpace height-10 />
+
             <Text h10 white regular>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionID')}:</Text>
             <Text white h10 semibold>{PageBuy?data.id:dataInfo.id}</Text>
             <DivSpace height-10 />
@@ -88,7 +108,6 @@ const ConfirmationCrypto = ({navigation}) => {
                 <Text h10 center white medium>{i18n.t('CryptoBalance.component.saleCrypto.textAddress')}</Text>
                 <Text h10 center white>{dataInfo.address}</Text>
               </Fragment>
-              
             )}
             <DivSpace height-15 />
             {PageSend &&(
@@ -102,7 +121,7 @@ const ConfirmationCrypto = ({navigation}) => {
             )}
             <DivSpace height-20 />
             <Text h10 white semibold center>-{i18n.t('CryptoBalance.component.confirmationCrypto.textAConfirmationWasSent')}</Text>
-            <Text h10 white semibold center>-{i18n.t('CryptoBalance.component.confirmationCrypto.textConfirmationTimeCan')}{''}<Text h10 white regular>{i18n.t('CryptoBalance.component.confirmationCrypto.textDependingOnTheSpeed')}{' '}{i18n.t('CryptoBalance.component.confirmationCrypto.textBlockchainTakesAndThe')}</Text></Text>
+            <Text h10 white semibold center>-{i18n.t('CryptoBalance.component.confirmationCrypto.textConfirmationTimeCan')}{''}<Text white h10 regular>{i18n.t('CryptoBalance.component.confirmationCrypto.textDependingOnTheSpeed')}{' '}{i18n.t('CryptoBalance.component.confirmationCrypto.textBlockchainTakesAndThe')}</Text></Text>
             <DivSpace height-10 />   
           </View>
           <View centerH centerV bottom>

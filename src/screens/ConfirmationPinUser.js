@@ -95,7 +95,7 @@ async function cardCancelFunction(
   setSnakVisible,
   setTitle
 ) {
-  const response = await cardCancel(token, data.data.proxyKey, inputtedPin);
+  const response = await cardCancel(token, data?.data?.id, inputtedPin);
   if (response.code < 400) {
     setTimeout(function () {
       navigation.navigate(next);
@@ -412,7 +412,7 @@ async function sendCryptoInfo(
   const response =  data.page === 'sendCryptoUsers'? await sendCryptoUsers(token,data.showNameCrypto,data.amountConvert || data.conversionAmount,data.addressCrypto,data.transferReference.value,inputtedPin) : await sendCrypto(token,data.showNameCrypto,data.amountConvert || data.conversionAmount,data.addressCrypto,data.transferReference.value,inputtedPin);
   if (response.code < 400) {
     setTimeout(function () {
-      navigation.navigate(next,{data: response.data,dataInfo: data });
+      navigation.navigate(next, { data: response.data, dataInfo: data });
       setSnakVisible(false);
       setIsLoadingModal(false);
     }, 1000);

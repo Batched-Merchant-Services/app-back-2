@@ -31,6 +31,7 @@ import { View,
   ButtonRounded,
   MenuContainer,
   ModalInternationalWire,
+  ModalBalances,
   ButtonWallet,
   ModalDisabled ,
   Loader,
@@ -53,6 +54,7 @@ const MyWallet = ({ navigation,screenProps }) => {
   const [ clientId,setClientId ]=useState('USD');
   const [ showButtons ]=useState(false);
   const [ isRechargeQRModal, setIsRechargeQRModal ] = useState(false);
+  const [ isModalWire, setIsModalWire ] = useState(false);
   //loading
   const [title, setTitle] = useState('');
   const [snakVisible, setSnakVisible] = useState(false);
@@ -164,6 +166,10 @@ const MyWallet = ({ navigation,screenProps }) => {
     setShowModalInst(false);
   };
 
+  const handleOncloseIsWire =() => {
+    setIsModalWire(false);  
+  };
+
   const handleCloseModalIns =() => {
     setShowModalInst(false);
   };
@@ -266,7 +272,7 @@ const MyWallet = ({ navigation,screenProps }) => {
                 {!showTypeCrypto &&(
                   <Fragment>
                     <DivSpace height-20 />
-                    <ButtonRounded size='lg' onPress={()=> setIsRechargeQRModal(true)}>
+                    <ButtonRounded size='lg' onPress={()=> setIsModalWire(true)}>
                       <Text h10 semibold>
                         {i18n.t('homeWallet.component.buttonTransfer')}
                       </Text>
@@ -330,9 +336,14 @@ const MyWallet = ({ navigation,screenProps }) => {
             {showModalInst &&(
               <ModalInstruction isOpen={true} navigation={navigation} onClose={handleCloseModalIns}/>)}
             {isRechargeQRModal &&(
-              <ModalInternationalWire 
+              <ModalBalances 
                 isOpen={true}
                 onClose={handleOncloseModal}
+                navigation={navigation} />)}
+            {isModalWire &&(
+              <ModalInternationalWire 
+                isOpen={true}
+                onClose={handleOncloseIsWire}
                 navigation={navigation} />)}
           </ScrollView>
           {isLoadingModal &&(
