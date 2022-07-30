@@ -749,7 +749,7 @@
         "labelMyWallet": "Mi Monedero",
         "labelUulalaCard": "Tarjeta SAVVY",
         "buttonUseVirtualCard": "Usar con Tarjeta Virtual",
-        "buttonTransfer": "Transferencias",
+        "buttonTransfer": "Transferencias electrónicas",
         "buttonRechargueWallet": "Recargar Monedero",
         "buttonPayUsers": "Pagos a Usuarios",
         "buttonTransferBank": "Transferencias Bancarias",
@@ -799,7 +799,7 @@
           "textOne":"Correspondent Bank SWIFT: FW084106768 \nBeneficiary Name: Evolve Bank & Trust \nBeneficiary Address: Memphis, TN \nBeneficiary Bank Country: United States of America \nSpecial Instructions: Account 9900009730 for Batched LLC",
           "textPleaseInclude":"PLEASE INCLUDE YOUR FIRST AND LAST NAME AND EMAIL ADDRESS ASSOCIATED WITH YOUR ACCOUNT ON THE WIRE DESCRIPTION.",
           "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.Wires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
-          "textToRegister":"To register your deposit please write us at",
+          "textToRegister":"To register your deposit please write to",
           "buttonUnderstood":"Understood!"
         }
       }
@@ -1430,7 +1430,7 @@
           "textEquivalentAmount":"Monto equivalente*",
           "textACommissionIsDeducted":"*Al monto a transferir se descuenta una comisión.",
           "textCommissionForTransaction":"Comisión por transacción",
-          "inputTransferReference":"Referencia de transferencia",
+          "inputTransferReference":"Descripción",
           "buttonTransfer":"Transferir",
           "textOnlySend":"Solo enviar",
           "textCoin":"moneda",

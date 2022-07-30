@@ -408,11 +408,11 @@ async function sendCryptoInfo(
   setSnakVisible,
   setTitle
 ) {
-
-  const response =  data.page === 'sendCryptoUsers'? await sendCryptoUsers(token,data.showNameCrypto,data.amountConvert || data.conversionAmount,data.addressCrypto,data.transferReference.value,inputtedPin) : await sendCrypto(token,data.showNameCrypto,data.amountConvert || data.conversionAmount,data.addressCrypto,data.transferReference.value,inputtedPin);
+  console.log('sendAddress',data)
+  const response =  data.page === 'sendCryptoUsers'? await sendCryptoUsers(token,data.shortNameCrypto,data?.amountCurrency,data?.sendAddress,data?.transferReference?.value,inputtedPin) : await sendCrypto(token,data.shortNameCrypto,data?.amountCurrency,data?.sendAddress,data?.transferReference?.value,inputtedPin);
   if (response.code < 400) {
     setTimeout(function () {
-      navigation.navigate(next, { data: response.data, dataInfo: data });
+      navigation.navigate(next, { data: response?.data, dataInfo: data });
       setSnakVisible(false);
       setIsLoadingModal(false);
     }, 1000);

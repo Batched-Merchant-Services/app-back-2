@@ -1006,9 +1006,9 @@ export const sendCrypto = async (token,currency,amount,id,note,pin) => {
     note            : note,
     pin             : Pin
   };
-
   return await apiSavvyWallet.post(`/wallet/crypto/send`,body,{ headers });
 };
+
 
 export const sendCryptoUsers = async (token,currency,amount,id,note,pin) => {
   const Pin = await pinCrypto({pin});
@@ -1043,6 +1043,14 @@ export const getCryptoFess= async (token) => {
   return await apiSavvyWallet.get(`/wallet/fees`,{ headers });
 }; 
 
+export const getFeeSendExternal = async (token) => {
+
+  const headers = {
+    'Authorization': token,
+  };
+
+  return await apiSavvyWallet.get(`/wallet/fees?t_fee=EXTERNAL_WALLET`, { headers });
+};
 
 export const conversionCurrency = async (token,from_currency,to_currency,amount) => {
   

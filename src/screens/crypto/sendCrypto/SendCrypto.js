@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import i18n from '@utils/i18n';
-import { ScrollView,KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView,NavigationEvents } from 'react-navigation';
 import { useValidatedInput,isFormValid } from '@hooks/validation-hooks';
 import {
@@ -18,10 +18,10 @@ import {
 } from '@components';
 
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-import  AmountCrypto  from '@screens/crypto/components/AmountCrypto';
+import  AmountCryptoTwo  from '@screens/crypto/components/AmountCryptoTwo';
 import Styles from '../styles';
 import { useSelector} from 'react-redux';
-import { getListExchangeWallet,getCryptoFess,conversionCurrency } from '@utils/api/switch';
+import { getListExchangeWallet,conversionCurrency,getFeeSendExternal } from '@utils/api/switch';
 import LocalStorage from '@utils/localStorage';
 
 const SendCrypto = ({ navigation }) => {
@@ -44,24 +44,26 @@ const SendCrypto = ({ navigation }) => {
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
+  const [currentConvert,setCurrentConvert] = useState('');
   const transferReference = useValidatedInput('reference', '');
   const userToTransfer = useValidatedInput('dropdownSelect',{name: i18n.t('generics.selectOne')},{
     changeHandlerSelect: 'onSelect'
   });
+  const amount = useValidatedInput('amount', '');
   const validation = amountConvert === ''? true: false;
-  const isValid = isFormValid(transferReference,userToTransfer);
+  const isValid = isFormValid(amount,transferReference,userToTransfer);
   
 
   useEffect(() => {
     getListExternalWallet();
-    getCryptoFees();
+    getFee();
     
   },[]);
 
   async function getListExternalWallet() {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
-    const response = await getListExchangeWallet(token);
+    const response = await getListExchangeWallet(token,shortNameCrypto);
     const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
     setBalanceConvert(responseBTC.data?.conversion?.toString());
     if (response.code < 400) {
@@ -73,9 +75,10 @@ const SendCrypto = ({ navigation }) => {
     }
   }
 
-  async function getCryptoFees() {
+  async function getFee() {
+    console.log('feee external')
     const token = await LocalStorage.get('auth_token');
-    const response = await getCryptoFess(token);
+    const response = await getFeeSendExternal(token);
     if (response.code < 400) {
       setFees(response?.data?.fee_total);
     } else{
@@ -94,15 +97,19 @@ const SendCrypto = ({ navigation }) => {
 
   async function handlePay() {
     const addressCrypto = codeQR?codeQR:idAddress;
+    const amountCurrency = amount?.value;
+    const dropDownAddress = userToTransfer?.value?.id;
+    const sendAddress = addressCrypto || dropDownAddress ;
     const token = await LocalStorage.get('auth_token');
+
     if (currentCurrency === 'USD') {
       setIsLoadingModal(true);
-      const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',amountConvert);
+      const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',amountCurrency);
       if (responseBTC.code < 400) {
         const conversionAmount = responseBTC.data?.conversion?.toString();
         setTimeout(function () {
           navigation.navigate('ConfirmationPinUser', {
-            data: {page: 'sendOrTransferCrypto',showNameCrypto,conversionAmount,addressCrypto,transferReference},
+            data: {page: 'sendOrTransferCrypto',shortNameCrypto,conversionAmount,sendAddress,transferReference},
             next: 'ConfirmationCrypto'
           });
           setIsLoadingModal(false);
@@ -112,7 +119,7 @@ const SendCrypto = ({ navigation }) => {
       }
     }else{
       navigation.navigate('ConfirmationPinUser', {
-        data: {page: 'sendOrTransferCrypto',showNameCrypto,amountConvert,addressCrypto,transferReference},
+        data: {page: 'sendOrTransferCrypto',shortNameCrypto,amountCurrency,sendAddress,transferReference},
         next: 'ConfirmationCrypto'
       });     
     } 
@@ -127,14 +134,6 @@ const SendCrypto = ({ navigation }) => {
 
   function getCode(code) {
     setCurrentConvert(code);
-    if (code < 20) {
-      setSnakVisible(true);
-      setButtonNext(true);
-      setIsLoadingModal(false);
-      setTitle(i18n.t('CryptoBalance.component.Swap.snackNotice'));
-    } else {
-      setButtonNext(false);
-    }
   }
 
 
@@ -170,10 +169,6 @@ const SendCrypto = ({ navigation }) => {
 
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
-    <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "height" : ""}
-        style={{ flex: 1 }}
-      >
       <NavigationBar
         onBack={() => navigation.goBack()}
         body={i18n.t('CryptoBalance.component.sendCrypto.title')+' '+ shortNameCrypto}
@@ -200,7 +195,6 @@ const SendCrypto = ({ navigation }) => {
                   <View flex-1>
                     <Text h11 white center>{' '}{balanceConvert}{' '}<Text bgGray>USD</Text></Text>
                   </View>
-                  
                 </View>
               </View>
             </ContainerCrypto>
@@ -278,7 +272,6 @@ const SendCrypto = ({ navigation }) => {
           getListExternalWallet(payload);
         }}
       />
-    </KeyboardAvoidingView>
     </SignUpWrapper>
   );
 };

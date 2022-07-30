@@ -90,7 +90,7 @@ const ModalInternationalWire = ({ isOpen, onClose = () => null, navigation }) =>
           </Text>
           <DivSpace height-10 />
           <Text h11 white semibold>
-            {i18n.t('homeWallet.component.modalInternationalWire.textToRegister')}<Text h11 orange semibold>support@savvywallet.io</Text> 
+            {i18n.t('homeWallet.component.modalInternationalWire.textToRegister')}{' '}<Text h11 orange semibold>support@savvywallet.io</Text> 
           </Text>
         </View>
         <View flex-1 bottom centerH>

@@ -68,37 +68,40 @@ const ConfirmationCrypto = ({navigation}) => {
               <Fragment>
                 <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textTransactionAmount')}</Text>
                 <Text h18 white semibold center>{dataInfo.amount} <Text white regular>{dataInfo?.currency}</Text></Text>
+                <DivSpace height-10 />
               </Fragment>
             )}
-            <DivSpace height-10 />
+         
             {PageBuy &&(
               <Fragment>
                 <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.confirmationCrypto.textPurchaseAmount')}</Text>
                 <Text h18 white semibold center>{PageBuy?data.amount_total:dataInfo.amount_total} <Text white regular>{data?.currency}</Text></Text>
+                <DivSpace height-10 />
               </Fragment>
             )}
-            <DivSpace height-10 />
             {PageSale &&(
               <Fragment>
                 <Text h12 center bgGray medium>{i18n.t('CryptoBalance.component.saleCrypto.textSalesAmount')}</Text>
                 <Text h18 white semibold center>{dataInfo.amount} <Text white regular>{dataInfo?.currency}</Text></Text>
+                <DivSpace height-10 />
               </Fragment>
             )}
-            <DivSpace height-10 />
             {PageSend &&(
               <Fragment>
                 <Text h10 bgGray>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionFee')}</Text>
                 <Text h10 bgGray bold>{dataInfo.fee}{' '}{dataInfo.currency}</Text>
+                <DivSpace height-10 />
               </Fragment>
             )}
-            <DivSpace height-10 />
+            
             {!PageSend &&(
               <Fragment>
                 <Text h10 bgGray>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionFee')}</Text>
                 <Text h10 bgGray bold>{PageBuy?data.fee:dataInfo.fee} {currencyUser}</Text>
+                <DivSpace height-10 />
               </Fragment>
             )}
-            <DivSpace height-10 />
+            
 
             <Text h10 white regular>{i18n.t('CryptoBalance.component.confirmationCrypto.textTransactionID')}:</Text>
             <Text white h10 semibold>{PageBuy?data.id:dataInfo.id}</Text>
