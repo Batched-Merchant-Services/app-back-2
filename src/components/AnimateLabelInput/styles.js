@@ -25,7 +25,7 @@ const Styles = StyleSheet.create({
     height      : '100%'
   },
   inputSecure: {
-    color        : 'transparent',
+    //color        : 'transparent',
     fontSize     : moderateScale(Platform.OS === 'ios' ? 16 : 20, 0.2),
     letterSpacing: 3
   },

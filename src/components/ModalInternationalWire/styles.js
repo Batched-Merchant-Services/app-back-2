@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   containerModal: {
     backgroundColor: '#37458B', 
     width          : scale(325), 
-    height         : verticalScale(545), 
+    height         : verticalScale(575),
     borderRadius   : 8 
   },
   touchableButton: {

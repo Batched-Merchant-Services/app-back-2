@@ -71,11 +71,11 @@ const ModalInternationalWire = ({ isOpen, onClose = () => null, navigation }) =>
         <DivSpace height-15 />
         <View centerH centerV>
           <Animated.View style={[{ opacity: scaleValue,alignItems: 'center',justifyContent: 'center',transform: [{scale: translateX}] }]}>
-            <BoxGradient size={scale(70)}>
+            <BoxGradient size={scale(60)}>
               <ImageComponent
                 source={ brandThemeImages?.cardWallet?brandThemeImages?.cardWallet:cardWallet}
-                width={scale(60)}
-                height={scale(60)}
+                width={scale(50)}
+                height={scale(50)}
               />
             </BoxGradient>
           </Animated.View>
@@ -83,9 +83,11 @@ const ModalInternationalWire = ({ isOpen, onClose = () => null, navigation }) =>
         <DivSpace height-10 />
         <View  marginH-20>
           <Text h11 white semibold><Text h11 orange semibold>1.</Text> {i18n.t('homeWallet.component.modalInternationalWire.textTheInternational')}</Text>
+          <Text h11 white>{i18n.t('homeWallet.component.modalInternationalWire.textReceivingFinancial')}</Text>
           <Text h11 white>{i18n.t('homeWallet.component.modalInternationalWire.textOne')}</Text>
-          <DivSpace height-10 />
-          <Text h11 white> <Text h11 orange semibold>2.</Text><Text h11 white semibold>{i18n.t('homeWallet.component.modalInternationalWire.textPleaseInclude')}</Text>{' '}
+          <Text h11 white >{i18n.t('homeWallet.component.modalInternationalWire.textPleaseInclude')}</Text>
+          <DivSpace height-8 />
+          <Text h11 white>
             {i18n.t('homeWallet.component.modalInternationalWire.textTwo')}
           </Text>
           <DivSpace height-10 />
@@ -102,7 +104,7 @@ const ModalInternationalWire = ({ isOpen, onClose = () => null, navigation }) =>
             {i18n.t('homeWallet.component.modalInternationalWire.buttonUnderstood')}
             </Text>
           </ButtonRounded>
-          <DivSpace height-20 />
+          <DivSpace height-15 />
         </View>
       </View>
     </ModalContainer>

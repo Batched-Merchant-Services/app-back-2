@@ -749,7 +749,7 @@
         "labelMyWallet": "Mi Monedero",
         "labelUulalaCard": "Tarjeta SAVVY",
         "buttonUseVirtualCard": "Usar con Tarjeta Virtual",
-        "buttonTransfer": "Transferencias electrónicas",
+        "buttonTransfer": "Wire Instructions",
         "buttonRechargueWallet": "Recargar Monedero",
         "buttonPayUsers": "Pagos a Usuarios",
         "buttonTransferBank": "Transferencias Bancarias",
@@ -795,11 +795,12 @@
         },
         "modalInternationalWire":{
           "title":"WIRING INSTRUCTIONS",
-          "textTheInternational":"Send the international transfer to the following account:",
-          "textOne":"Correspondent Bank SWIFT: FW084106768 \nBeneficiary Name: Evolve Bank & Trust \nBeneficiary Address: Memphis, TN \nBeneficiary Bank Country: United States of America \nSpecial Instructions: Account 9900009730 for Batched LLC",
-          "textPleaseInclude":"PLEASE INCLUDE YOUR FIRST AND LAST NAME AND EMAIL ADDRESS ASSOCIATED WITH YOUR ACCOUNT ON THE WIRE DESCRIPTION.",
-          "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.Wires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
-          "textToRegister":"To register your deposit please write to",
+          "textTheInternational":"Send the wire to the following account information:",
+          "textReceivingFinancial":"Receiving Financial Bank Name Evolve Bank & Trust",
+          "textOne":"Address :Memphis TN USA\nPhone: 901-259-0796\nBeneficiary Name: Batched LLC\nAccount Number :990009730\nABA Routing number: 084106768 (Domestic USA Wires)\nSwift Code: FW084106768 (International Wires outside of USA)",
+          "textPleaseInclude":"Special Notes or Reference (Provide your Full name and Email address associated with your Savvy Account)",
+          "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.\nWires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
+          "textToRegister":"To register your deposit please write us at",
           "buttonUnderstood":"Understood!"
         }
       }
