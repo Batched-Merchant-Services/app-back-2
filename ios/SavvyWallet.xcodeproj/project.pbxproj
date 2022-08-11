@@ -13,11 +13,11 @@
 		02D883CB28175DD10060F9DA /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C728175DD10060F9DA /* Montserrat-Bold.otf */; };
 		02D883CC28175DD10060F9DA /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C828175DD10060F9DA /* Montserrat-Medium.otf */; };
 		02D883CD28175DD10060F9DA /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D883C928175DD10060F9DA /* Montserrat-SemiBold.otf */; };
-		0735FE24D56A99627C670638 /* libPods-SavvyWallet-SavvyWalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4C315C8052D0487F4886EE /* libPods-SavvyWallet-SavvyWalletTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		D82CB6DE4F02790587DFF05B /* libPods-SavvyWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D148A3DB0867668EA26F801E /* libPods-SavvyWallet.a */; };
+		6034C9A6FCC1DAC002EE15C6 /* libPods-SavvyWallet-SavvyWalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E53FD17A6511A5F5B370800 /* libPods-SavvyWallet-SavvyWalletTests.a */; };
+		DE7A6A88703F20E9B3FD0BD9 /* libPods-SavvyWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2FAD6F3C52F50263B1DD098 /* libPods-SavvyWallet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,18 +39,18 @@
 		02D883C728175DD10060F9DA /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "../src/assets/fonts/Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		02D883C828175DD10060F9DA /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.otf"; path = "../src/assets/fonts/Montserrat-Medium.otf"; sourceTree = "<group>"; };
 		02D883C928175DD10060F9DA /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.otf"; path = "../src/assets/fonts/Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
-		0301DD223BDDEB32231BD6B7 /* Pods-SavvyWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet.release.xcconfig"; path = "Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet.release.xcconfig"; sourceTree = "<group>"; };
+		05B8A3F9F9DBFF72D6FFA6EC /* Pods-SavvyWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet.debug.xcconfig"; path = "Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SavvyWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SavvyWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SavvyWallet/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SavvyWallet/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SavvyWallet/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SavvyWallet/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SavvyWallet/main.m; sourceTree = "<group>"; };
-		5FA3EDED42B7DCCAEC14B636 /* Pods-SavvyWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet.debug.xcconfig"; path = "Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet.debug.xcconfig"; sourceTree = "<group>"; };
-		7F4C315C8052D0487F4886EE /* libPods-SavvyWallet-SavvyWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SavvyWallet-SavvyWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4E1325572DB459599CAA36E /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet-SavvyWalletTests.release.xcconfig"; path = "Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests.release.xcconfig"; sourceTree = "<group>"; };
-		D148A3DB0867668EA26F801E /* libPods-SavvyWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SavvyWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7DCC28FADD50B170C494897 /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E53FD17A6511A5F5B370800 /* libPods-SavvyWallet-SavvyWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SavvyWallet-SavvyWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		633B08166B51DC54E6C04A09 /* Pods-SavvyWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet.release.xcconfig"; path = "Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet.release.xcconfig"; sourceTree = "<group>"; };
+		6BF6D5AB1D62A07EC1806EA1 /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet-SavvyWalletTests.release.xcconfig"; path = "Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		A2FAD6F3C52F50263B1DD098 /* libPods-SavvyWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SavvyWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E586D0308DB24A640D2F2AEC /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0735FE24D56A99627C670638 /* libPods-SavvyWallet-SavvyWalletTests.a in Frameworks */,
+				6034C9A6FCC1DAC002EE15C6 /* libPods-SavvyWallet-SavvyWalletTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D82CB6DE4F02790587DFF05B /* libPods-SavvyWallet.a in Frameworks */,
+				DE7A6A88703F20E9B3FD0BD9 /* libPods-SavvyWallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +94,10 @@
 		02F645C6A09263EB04D1B3EB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5FA3EDED42B7DCCAEC14B636 /* Pods-SavvyWallet.debug.xcconfig */,
-				0301DD223BDDEB32231BD6B7 /* Pods-SavvyWallet.release.xcconfig */,
-				D7DCC28FADD50B170C494897 /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */,
-				A4E1325572DB459599CAA36E /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */,
+				05B8A3F9F9DBFF72D6FFA6EC /* Pods-SavvyWallet.debug.xcconfig */,
+				633B08166B51DC54E6C04A09 /* Pods-SavvyWallet.release.xcconfig */,
+				E586D0308DB24A640D2F2AEC /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */,
+				6BF6D5AB1D62A07EC1806EA1 /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -119,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				D148A3DB0867668EA26F801E /* libPods-SavvyWallet.a */,
-				7F4C315C8052D0487F4886EE /* libPods-SavvyWallet-SavvyWalletTests.a */,
+				A2FAD6F3C52F50263B1DD098 /* libPods-SavvyWallet.a */,
+				4E53FD17A6511A5F5B370800 /* libPods-SavvyWallet-SavvyWalletTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,12 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SavvyWalletTests" */;
 			buildPhases = (
-				C4F14386EBE525A1F535C303 /* [CP] Check Pods Manifest.lock */,
+				6FF9FED1C08199CD9E1C60A2 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				E12754789B2B19B23D01981D /* [CP] Embed Pods Frameworks */,
-				7511C26236E571AAA5F9E732 /* [CP] Copy Pods Resources */,
+				593719B5C99E7023C73DC513 /* [CP] Embed Pods Frameworks */,
+				C3E7CC9923F06331D556168D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -188,14 +188,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SavvyWallet" */;
 			buildPhases = (
-				65F46B63398082E0519E1673 /* [CP] Check Pods Manifest.lock */,
+				686EC641251863427411DAEE /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				E7D116904B3EB707BFA55987 /* [CP] Embed Pods Frameworks */,
-				12A8CBB9B96BDBA028DC746C /* [CP] Copy Pods Resources */,
+				0BF3ACB733414937B38ED892 /* [CP] Embed Pods Frameworks */,
+				7E7FBB292561E579DC5D2887 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,24 +280,41 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		12A8CBB9B96BDBA028DC746C /* [CP] Copy Pods Resources */ = {
+		0BF3ACB733414937B38ED892 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		65F46B63398082E0519E1673 /* [CP] Check Pods Manifest.lock */ = {
+		593719B5C99E7023C73DC513 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		686EC641251863427411DAEE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -319,24 +336,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7511C26236E571AAA5F9E732 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C4F14386EBE525A1F535C303 /* [CP] Check Pods Manifest.lock */ = {
+		6FF9FED1C08199CD9E1C60A2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -358,38 +358,38 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E12754789B2B19B23D01981D /* [CP] Embed Pods Frameworks */ = {
+		7E7FBB292561E579DC5D2887 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E7D116904B3EB707BFA55987 /* [CP] Embed Pods Frameworks */ = {
+		C3E7CC9923F06331D556168D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet/Pods-SavvyWallet-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SavvyWallet-SavvyWalletTests/Pods-SavvyWallet-SavvyWalletTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -455,7 +455,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7DCC28FADD50B170C494897 /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */;
+			baseConfigurationReference = E586D0308DB24A640D2F2AEC /* Pods-SavvyWallet-SavvyWalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -482,7 +482,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4E1325572DB459599CAA36E /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */;
+			baseConfigurationReference = 6BF6D5AB1D62A07EC1806EA1 /* Pods-SavvyWallet-SavvyWalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -506,13 +506,14 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FA3EDED42B7DCCAEC14B636 /* Pods-SavvyWallet.debug.xcconfig */;
+			baseConfigurationReference = 05B8A3F9F9DBFF72D6FFA6EC /* Pods-SavvyWallet.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = J7NJWF67GA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SavvyWallet/Info.plist;
@@ -537,13 +538,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0301DD223BDDEB32231BD6B7 /* Pods-SavvyWallet.release.xcconfig */;
+			baseConfigurationReference = 633B08166B51DC54E6C04A09 /* Pods-SavvyWallet.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = J7NJWF67GA;
 				INFOPLIST_FILE = SavvyWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
