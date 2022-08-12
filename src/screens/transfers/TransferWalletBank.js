@@ -34,7 +34,7 @@ const TransferWalletBank = ({ navigation }) => {
   const [buttonNext, setButtonNext] = useState(false);
 
   async function  handlePressNext() {
-    navigation.navigate('ConfirmationPinUser',{
+    navigation.navigate('Pin2faConfirmation',{
       data: {page: 'transferWallet', amount: amount.value, clabe: clabe,bank: bank },
       next: 'TransferWalletBankSuccess'
     });

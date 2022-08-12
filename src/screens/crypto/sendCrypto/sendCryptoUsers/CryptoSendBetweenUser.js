@@ -79,7 +79,7 @@ const CryptoSendBetweenUser = ({ navigation }) => {
 
   // function handlePay() {
   //   const addressCrypto = codeQR ? codeQR : idUser;
-  //   navigation.navigate('ConfirmationPinUser', {
+  //   navigation.navigate('Pin2faConfirmation', {
       
   //     data: { page: 'sendOrTransferCrypto', showNameCrypto, amountConvert, addressCrypto },
   //     next: 'ConfirmationCrypto'

@@ -51,6 +51,7 @@ import AppNewPin from '@screens/AppNewPin';
 import AppPin from '@screens/AppPin';
 import ConfirmationPinUser from '@screens/ConfirmationPinUser';
 import BiometricChangeConfirmation from '@screens/BiometricChangeConfirmation';
+
 import Level from '@screens/levels';
 import LevelsInfo from '@screens/levels/LevelsInfo';
 import BuyPoints from '@screens/levels/BuyPoints';
@@ -133,10 +134,21 @@ import CryptoTransferUsers from '@screens/crypto/sendCrypto/sendCryptoUsers/Cryp
 import UpdateVirtualCard from '@screens/myCards/newVirtualCards/UpdateVirtualCard';
 import ConfirmationUpdateCard from '@screens/myCards/newVirtualCards/ConfirmationUpdateCard';
 import NewVirtualCards from '@screens/myCards/newVirtualCards';
+import Auth2fa from '@screens/auth2fa';
+import TwoFactorInstructions from '@screens/auth2fa/TwoFactorInstructions';
+import TwoFactorActivation from '@screens/auth2fa/TwoFactorActivation';
+import TwoFactorCodeActivation from '@screens/auth2fa/TwoFactorCodeActivation';
+import TwoFactorConfirmationActivation from '@screens/auth2fa/TwoFactorConfirmationActivation';
+import Auth2faSms from '@screens/auth2fa/auth2faSms';
+import ActivationSms from '@screens/auth2fa/auth2faSms/ActivationSms';
+import ConfirmationAuth from '@screens/auth2fa/ConfirmationAuth';
+import Auth2faEmail from '@screens/auth2fa/auth2faEmail';
+import ActivationEmail from '@screens/auth2fa/auth2faEmail/ActivationEmail';
+import Auth2faApp from '@screens/auth2fa/auth2faApp';
+import Pin2faConfirmation from '@screens/auth2fa/Pin2faConfirmation';
 import Swap from '@screens/crypto/swap/HomeSwap';
 import ListInformationSwap from '@screens/crypto/swap/ListInformationSwap';
 import ConfirmationSwap from '@screens/crypto/swap/ConfirmationSwap';
-
 
 
 export const signInScreens = {
@@ -829,20 +841,94 @@ export const signInScreens = {
         gesturesEnabled: false
       }
     },
+    Auth2fa: {
+      screen           : Auth2fa,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
     ListInformationSwap: {
       screen           : ListInformationSwap,
       navigationOptions: {
         gesturesEnabled: false
       }
     },
+ 
     ConfirmationSwap: {
       screen           : ConfirmationSwap,
       navigationOptions: {
         gesturesEnabled: false
       }
     },
+
+    TwoFactorActivation:{
+      screen           : TwoFactorActivation,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
     Swap: {
       screen           : Swap,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Auth2fa: {
+      screen           : Auth2fa,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    TwoFactorCodeActivation:{
+      screen           : TwoFactorCodeActivation,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    TwoFactorConfirmationActivation:{
+      screen           : TwoFactorConfirmationActivation,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Auth2faSms:{
+      screen           : Auth2faSms,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    ActivationSms:{
+      screen           : ActivationSms,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    ConfirmationAuth:{
+      screen           : ConfirmationAuth,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Auth2faEmail:{
+      screen           : Auth2faEmail,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    ActivationEmail:{
+      screen           : ActivationEmail,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Auth2faApp:{
+      screen           : Auth2faApp,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Pin2faConfirmation : {
+      screen           : Pin2faConfirmation,
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -958,5 +1044,77 @@ export const signOutScreens = {
     navigationOptions: {
       gesturesEnabled: false
     }
-  }
+  },
+  Auth2fa: {
+    screen           : Auth2fa,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  TwoFactorInstructions: {
+    screen           : TwoFactorInstructions,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  TwoFactorActivation:{
+    screen           : TwoFactorActivation,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  TwoFactorCodeActivation:{
+    screen           : TwoFactorCodeActivation,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  TwoFactorConfirmationActivation:{
+    screen           : TwoFactorConfirmationActivation,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Auth2faSms:{
+    screen           : Auth2faSms,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  ActivationSms:{
+    screen           : ActivationSms,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  ConfirmationAuth:{
+    screen           : ConfirmationAuth,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Auth2faEmail:{
+    screen           : Auth2faEmail,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  ActivationEmail:{
+    screen           : ActivationEmail,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Auth2faApp:{
+    screen           : Auth2faApp,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Pin2faConfirmation : {
+    screen           : Pin2faConfirmation,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
 };

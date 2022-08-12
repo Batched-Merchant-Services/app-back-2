@@ -36,7 +36,7 @@ const CardPhysicalActions = ({navigation, dataPhysical }) => {
 
   function handleChangePIN() {
     const ProxyKey = dataPhysical? dataPhysical.proxyKey : '';
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { page: 'UpdatePINCard',ProxyKey: ProxyKey },
       next: 'PinUpdateScreen',
     });

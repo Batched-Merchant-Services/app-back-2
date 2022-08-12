@@ -37,7 +37,7 @@ const ProviderPaymentAmountScreen = ({ navigation }) => {
   }
 
   function handleNextPress() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {page: 'payServices', data: infoPayment ? data.data: data ,phone ,reference, amountParam,feeService,feeTransaction},
       next: 'ProviderPaymentSuccessful'
     });

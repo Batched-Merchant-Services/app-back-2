@@ -34,7 +34,7 @@ const DetailBuyPoints = ({ navigation }) => {
 
   function handlePressNext() {
 
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { },
       next: 'ConfirmBuyPoints'
     });

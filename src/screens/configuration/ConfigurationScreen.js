@@ -155,11 +155,12 @@ const ConfigurationScreen = ({ navigation }) => {
   }
  
   function handleForgetYourPassword() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { page: 'config' },
-      next: 'CreatePassword',
+      next: 'CreatePassword'
     });
   }
+
 
   function onFill(code) {
     getCode(setIsLoadingModal, setSnakVisible, code, setTitle,navigation);
@@ -211,7 +212,7 @@ const ConfigurationScreen = ({ navigation }) => {
             size='sm'
           />
           <DivSpace height-10 />
-          <View
+          {/* <View
             height-1
             bgBlue06
             style={{ width: '100%' }}
@@ -230,7 +231,7 @@ const ConfigurationScreen = ({ navigation }) => {
               {i18n.t('configuration.component.buttonUpdatePIN')}
             </Text>
           </ButtonRounded>
-          <DivSpace height-20 />
+          <DivSpace height-20 /> */}
           <View
             height-1
             bgBlue06

@@ -12,7 +12,7 @@ const ScanQrReceived = ({ navigation }) => {
   };
 
   const handlePressNext = () => {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {},
       next: 'RechargeReceivedSuccessful'
     });
@@ -20,7 +20,7 @@ const ScanQrReceived = ({ navigation }) => {
 
   const handlePressButton = () => {
     //navigation.navigate('paymentToEstablishment');
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {},
       next: 'RechargeReceivedSuccessful'
     });

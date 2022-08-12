@@ -116,17 +116,20 @@ export const logOut = async ( token ) => {
 };
 
 
-export const forgotPassword = async ( email_phone ) => {
-  
+export const forgotPassword = async (email_phone, company) => {
+  const companyValue = company?.value?company?.value:'';
+
   const body = {
-    email_phone
+    email_phone,
+    company_id: companyValue
+
   };
- 
+
   return await apiSavvyWallet.post(`/sessions/recover_password`, body);
 };
 
 
-export const forgotYourPassword = async ( password,confirmPassword,email,pin,companyValue ) => {
+export const forgotYourPassword = async ( password,confirmPassword,email,pin ) => {
 
   const body = await bodyCrypto({
     password,
@@ -274,8 +277,9 @@ export const payToContacts = async ( token, phoneNumber,amount, pin, description
   const body = {
     phone : phoneNumber,
     amount: amount,
-    pin   : Pin,
-    note  : description
+    code: pin,
+    note: description,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/core/transactions/contact`, await body, { headers });
@@ -293,7 +297,8 @@ export const scanQrCode = async ( token,externalId,amount,note,pin ) => {
     externalId: externalId,
     amount    : amount,
     note      : note,
-    pin       : Pin,
+    code      : pin,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/core/transactions/qr`, await body, { headers });
@@ -343,7 +348,7 @@ export const CardActivation= async (token,proxyKey,pin) => {
 
   const body = {
     proxyKey: proxyKey,
-    pin     : Pin
+    pin     : pin,
   };
 
   return await apiSavvyWallet.put(`/cards/set_pin`,body,{ headers });
@@ -373,8 +378,9 @@ export const cardCancel = async (token,proxyKey,pin) => {
   };
 
   const body = {
-    proxyKey: proxyKey,
-    pin     : Pin,
+    proxyKey  : proxyKey,
+    code      : pin,
+    two_factor: true
   };
   return await apiSavvyWallet.post(`/cards/cancel`, body, { headers });
 };
@@ -388,10 +394,11 @@ export const reloadCard = async (token,proxyKey,pin,amount,description,type) => 
 
   const body = {
     proxyKey   : proxyKey,
-    pin        : Pin,
+    code       : pin,
     amount     : amount,
     description: description,
-    type_card  : type
+    type_card  :type,
+    two_factor : true
   };
 
   return await apiSavvyWallet.post(`/cards/deposit`, await body, { headers });
@@ -645,7 +652,8 @@ export const walletToAccount = async (token,amount,pin) => {
   };
   const body = {
     amount: amount,
-    pin   : Pin,
+    code  : pin,
+    two_factor: true
   };
   return await apiSavvyWallet.post(`/wallet/account`, await body,{ headers });
 };
@@ -790,8 +798,9 @@ export const TransferWalletToCard = async (token,from,amount,to,typeTransfer,pin
     amount      : amount,
     to          : to,
     typeTransfer: typeTransfer,
-    pin         : Pin,
-    note        : ''
+    code        : pin,
+    note        : '',
+    two_factor  : true
   };
   return await apiSavvyWallet.post(`/transactions/reloading/account`, await body,{ headers });
 };
@@ -839,7 +848,8 @@ export const createServicePayment = async (token,amount,sku_id,biller_id,type_sk
     type_sku : type_sku,
     phone    : phone,
     reference: reference,
-    pin      : Pin
+    code: pin,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/services_payments`, body, { headers });
@@ -858,7 +868,8 @@ export const validatePayment = async (token,amount,sku_id,biller_id,type_sku,pho
     type_sku : type_sku,
     phone    : phone,
     reference: reference,
-    pin      : Pin
+    code     : pin,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/services_payments/amount_due`, body, { headers });
@@ -906,7 +917,8 @@ export const getSellCrypto = async (token,address,amount,type_crypto,type_amount
     type_crypto: type_crypto,
     type_amount: 'amount',
     currency   : currency,
-    pin        : Pin
+    code: pin,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/wallet/sell_crypto`, body, { headers });
@@ -919,10 +931,11 @@ export const getBuyCrypto = async (token,amount,conversion_amount,currency,pin)=
     'Authorization': token,
   };
   const body = {
-    amount:conversion_amount, 
-    conversion_amount:amount, 
-    currency   : currency,
-    pin        : Pin,
+    amount           : conversion_amount, 
+    conversion_amount: amount, 
+    currency         : currency,
+    code             : pin,
+    two_factor       : true
   };
 
   return await apiSavvyWallet.post(`/crypto/transfer_request`, body, { headers });
@@ -1004,11 +1017,12 @@ export const sendCrypto = async (token,currency,amount,id,note,pin) => {
     amount          : amount,
     send_external_id: id,
     note            : note,
-    pin             : Pin
+    code            : pin,
+    two_factor      : true
   };
+
   return await apiSavvyWallet.post(`/wallet/crypto/send`,body,{ headers });
 };
-
 
 export const sendCryptoUsers = async (token,currency,amount,id,note,pin) => {
   const Pin = await pinCrypto({pin});
@@ -1021,7 +1035,8 @@ export const sendCryptoUsers = async (token,currency,amount,id,note,pin) => {
     amount  : amount,
     send_id : id,
     note    : note,
-    pin     : Pin
+    code    : pin,
+    two_factor: true
   };
 
   return await apiSavvyWallet.post(`/wallet/crypto/send`,body,{ headers });
@@ -1043,14 +1058,6 @@ export const getCryptoFess= async (token) => {
   return await apiSavvyWallet.get(`/wallet/fees`,{ headers });
 }; 
 
-export const getFeeSendExternal = async (token) => {
-
-  const headers = {
-    'Authorization': token,
-  };
-
-  return await apiSavvyWallet.get(`/wallet/fees?t_fee=EXTERNAL_WALLET`, { headers });
-};
 
 export const conversionCurrency = async (token,from_currency,to_currency,amount) => {
   
@@ -1123,8 +1130,9 @@ export const updateCardVirtual= async (token,cvv,card,id) => {
 export const createCardVirtual= async (token,amount,code) => {
   const Pin = await pinCrypto({code});
   const body = {
-      amount: amount,
-      code  : Pin
+      amount    : amount,
+      code      : code,
+      two_factor: true
   };
 
   const headers = {
@@ -1165,6 +1173,16 @@ export const getCurrencySwap = async (token) => {
   return await apiSavvyWallet.get(`/swap/available_currencies?swap=true`,{ headers });
 };
 
+export const getFeeSendExternal = async (token) => {
+
+  const headers = {
+    'Authorization': token,
+  };
+
+  return await apiSavvyWallet.get(`/wallet/fees?t_fee=EXTERNAL_WALLET`, { headers });
+};
+
+
 export const getFeesSwap = async (token,currency) => {
 
   const headers = {
@@ -1184,7 +1202,8 @@ export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) =>
     from_currency: fromCurrency,
     to_currency  : toCurrency,
     amount       : amount,
-    pin          : pin
+    code         : pin,
+    two_factor   : true
   };
   return await apiSavvyWallet.post(`/swap`,body,{ headers });
 };

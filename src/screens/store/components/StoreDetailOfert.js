@@ -50,7 +50,7 @@ const StoreDetailOfert = ({ ofert ,page, navigation}) => {
   };
 
   const handelBuy = async () => { 
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {},
       next: 'ConfirmationBuyStore'
     });

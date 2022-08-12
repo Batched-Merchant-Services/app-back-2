@@ -21,7 +21,7 @@ const CancelCardCancelScreen = ({ navigation }) => {
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
   function handleCancelPress() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { page: 'cardCancel',data: data },
       next: 'CancelCardConfirmation',
     });

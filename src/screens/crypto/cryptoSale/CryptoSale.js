@@ -31,7 +31,7 @@ const CryptoSale = ({ navigation }) => {
  
 
   function handlePay() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {page: 'saleCrypto',infoData, amountConvert,showCurrency},
       next: 'ConfirmationCrypto'
     });

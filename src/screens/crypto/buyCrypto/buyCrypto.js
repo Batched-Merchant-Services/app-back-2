@@ -37,7 +37,7 @@ const BuyCrypto = ({ navigation }) => {
   const amount = useValidatedInput('amount', '');
   const [balanceConvert,setBalanceConvert]=useState('');
   function handlePay() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {page: 'buyCrypto',infoData, amount,amountConvert,shortNameCrypto },
       next: 'ConfirmationCrypto'
     });

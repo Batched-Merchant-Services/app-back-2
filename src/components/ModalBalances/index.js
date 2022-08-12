@@ -67,7 +67,7 @@ const ModalBalances = ({ isOpen, onClose = () => null, navigation }) => {
   const isValid = isFormValid(amount,Origin,Destiny);
  
   const goTransfer = async () => {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {
         page       : 'transferBalance',
         amount     : amount.value,

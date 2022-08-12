@@ -48,7 +48,7 @@ const GiftCardDetails = ({ navigation }) => {
   });
 
   const handelBuy = async () => { 
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {},
       next: 'GiftCardConfirmation'
     });

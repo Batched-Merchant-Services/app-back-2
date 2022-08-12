@@ -70,7 +70,7 @@ const ContactInformation = ({ navigation }) => {
 
 
   async function handlePressNext() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { page: QRCode ? 'QRCode' : 'contacts', amount: amount.value, externalId: external },
       next: 'PayConfirmation'
     });

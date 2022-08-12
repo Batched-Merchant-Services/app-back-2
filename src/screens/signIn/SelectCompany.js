@@ -21,7 +21,6 @@ import * as Animatable from 'react-native-animatable';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import { scale, verticalScale } from 'react-native-size-matters';
-import { saveUser } from '@store/ducks/user.ducks';
 import { withNavigationFocus } from 'react-navigation';
 import LocalStorage from '@utils/localStorage';
 import TouchID from 'react-native-touch-id';
@@ -32,11 +31,11 @@ import Colors from '@styles/Colors';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
 //redux
-import { saveTheme } from '@store/ducks/user.ducks';
+import { isTwoFactor, save2fa, type2fa, saveUser, saveTheme } from '../../store/ducks/user.ducks';
 import { useDispatch } from 'react-redux';
 //Api
-import { login, getTheme, getCompaniesQuery } from '@utils/api/switch';
-import { saveDataCompany } from '../../store/ducks/user.ducks';
+import { login, getTheme,getCompaniesQuery } from '@utils/api/switch';
+import { loginGraph } from '../../utils/api/graph';
 
 const optionalConfigObject = {
   title: i18n.t('fingerPrint.component.textConfirmFootPrint'),
@@ -50,69 +49,83 @@ const optionalConfigObject = {
   passcodeFallback: false
 };
 
-
 async function handleSignIn(
   phone,
   Password,
   Company,
   setIsLoadingModal,
+  setShowModalInfo,
   setStatusUser,
   setShowDeviceModal,
   navigation,
   setSnakVisible,
   setButtonNext,
   setTitle,
-  dispatch) {
+  dispatch,
+  userData) {
   setIsLoadingModal(true);
 
-
-  // const response = await loginGraph(Phone, Password);
-  // console.log('response',response,response?.getLoggin?.isTwoFactor)
-  // if (response?.getLoggin) {
-  //   if (!response?.getLoggin?.isTwoFactor) {
-  //       setIsLoadingModal(false);
-  //       await LocalStorage.set('auth_token', response?.getLoggin?.token);
-  //       await LocalStorage.set('user', Phone);
-  //       await LocalStorage.set('password', Password);
-  //       await LocalStorage.set('left', response?.getLoggin?.left);
-  //       dispatch(saveUser({ 
-  //         isTwoFactor: response?.getLoggin?.isTwoFactor,
-  //         type2fa: response?.getLoggin?.type2fa,
-  //       }));
-  //       navigation.navigate('Pin2faConfirmation',{page: 'Login' });
-  //   } else {
-  //     console.log('false')
-  //   }
-  // } else {
-  //   errorSnackNotice(response);
-  // }
-
-
-
-  const response = await login(phone, Password, Company);
-  
-  if (response.code < 400) {
-    await LocalStorage.set('auth_token', response.data.token);
+  const response = await loginGraph(phone, Password, Company);
+  console.log('response',response,Company?.value);
+  if (response?.getLoggin) {
+    dispatch(save2fa(true));
+    const type2faLogin = response?.getLoggin?.type2fa;
+    const isTwoFactorLogin = response?.getLoggin?.isTwoFactor;
+    await LocalStorage.set('auth_token', response?.getLoggin?.token);
     await LocalStorage.set('user', phone);
     await LocalStorage.set('password', Password);
-    await LocalStorage.set('status', 'true');
-    if (response.data.status !== 0) {
-      setTimeout(function () {
-        getThemeBrand(response.data.token);
+    await LocalStorage.set('left', response?.getLoggin?.left);
+    await LocalStorage.set('uuid', response?.getLoggin?.uuid);
+    getThemeBrand(response?.getLoggin?.token);
+    dispatch(type2fa(type2faLogin));
+    dispatch(isTwoFactor(isTwoFactorLogin));
+    dispatch(saveUser({ companyValue: Company?.value}));
+    console.log('es falso',userData);
+    if (!response?.getLoggin?.isTwoFactor) {
+      if (userData?.stateModalInfo2fa) {
+        setIsLoadingModal(false);
         navigation.navigate('MyWallet');
+        setShowModalInfo(false);
+      } else {
+   
+        setShowModalInfo(true);
         setIsLoadingModal(false);
-      }, 1000);
+      }
+    } else {
+      navigation.navigate('Pin2faConfirmation', { page: 'Login' });
+      setShowModalInfo(false);
+      setIsLoadingModal(false);
     }
-    else {
-      setTimeout(function () {
-        navigation.navigate('initRegisterProfile');
-        setIsLoadingModal(false);
-      }, 1000);
-    }
+
+  } else {
+    errorSnackNotice(response);
   }
-  else {
-    errorSnackNotice();
-  }
+
+
+
+  // const response = await login(phone, Password,Company);
+  // if (response.code < 400) {
+  //   await LocalStorage.set('auth_token', response.data.token);
+  //   await LocalStorage.set('user', phone);
+  //   await LocalStorage.set('password', Password);
+  //   await LocalStorage.set('status', 'true');
+  //   if (response.data.status !== 0) {
+  //     setTimeout(function () {
+  //       getThemeBrand(response.data.token);
+  //       navigation.navigate('MyWallet');
+  //       setIsLoadingModal(false);
+  //     }, 1000);
+  //   }
+  //   else {
+  //     setTimeout(function () {
+  //       navigation.navigate('initRegisterProfile');
+  //       setIsLoadingModal(false);
+  //     }, 1000);
+  //   }
+  // }
+  // else {
+  //   errorSnackNotice();
+  // }
 
 
   function errorSnackNotice() {
@@ -122,7 +135,7 @@ async function handleSignIn(
       setSnakVisible(true);
       setButtonNext(true);
       setIsLoadingModal(false);
-      setTitle(response.message);
+      setTitle(response.Message);
       setStatusUser(response.status);
       setShowDeviceModal(Status ? true : false);
     }, 1000);
@@ -140,7 +153,7 @@ async function handleSignIn(
   //   }, 1000);
   // }
 
-
+  
 
   async function getThemeBrand(token) {
     const response = await getTheme(token);
@@ -160,7 +173,6 @@ async function handleSignIn(
 
 }
 
-
 const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, screenProps }) => {
   const [snakVisible, setSnakVisible] = useState(false);
   const [statusGet, setStatusGet] = useState('');
@@ -172,13 +184,14 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
   const [companyOption, setCompanyOption] = useState([]);
   const [valueChek, setChekValue] = useState(loginWithFingerPrint);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
+  const [showModalInfo, setShowModalInfo] = useState(false);
   const password = useValidatedInput('loginPassword', '');
   const phone = navigation.getParam('phone');
   const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
     changeHandlerSelect: 'onSelect'
   });
 
-  const isValid = isFormValid(company, password);
+  const isValid = isFormValid( password);
   const dispatch = useDispatch();
   const redux = useSelector(state => state);
   const userData = redux.user;
@@ -196,13 +209,16 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
       Password,
       Company,
       setIsLoadingModal,
+      setShowModalInfo,
       setStatusUser,
       setShowDeviceModal,
       navigation,
       setSnakVisible,
       setButtonNext,
       setTitle,
-      dispatch);
+      dispatch,
+      userData);
+
   };
 
   useEffect(() => {
@@ -348,8 +364,9 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
                 </View>
                 <DivSpace height-10 />
                 <ButtonRounded
-                  size='lg'
-                  disabled={!isValid && !buttonNext ? true : buttonNext} onPress={() => LoginAccount('login')}
+                  size = 'lg'
+                  //disabled={!isValid && !buttonNext ? true : buttonNext} onPress={() => LoginAccount('login')}
+                  onPress={() => LoginAccount('login')}
                 >
                   <Text h10 semibold>
                     {i18n.t('login.component.buttonEnter')}

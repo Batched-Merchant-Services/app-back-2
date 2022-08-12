@@ -18,7 +18,7 @@ import Colors from '@styles/Colors';
 const InfoVirtualStepThree = ({ navigation }) => {
 
   const handleNext = () =>{
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: { page: 'createVirtualCard' },
       next: 'ConfirmationUpdateCard'
     });

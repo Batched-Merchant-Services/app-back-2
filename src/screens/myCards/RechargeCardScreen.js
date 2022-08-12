@@ -27,7 +27,7 @@ const RechargeCardScreen = ({ navigation }) => {
   const isValid = isFormValid(amount);
 
   function handleRechargePress() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {page: 'topUp',data: data, amount: amount.value},
       next: 'RechargeCardConfirmation'
     });

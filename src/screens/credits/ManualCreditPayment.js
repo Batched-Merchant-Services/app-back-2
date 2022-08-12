@@ -26,7 +26,7 @@ const ManualCreditPayment = ({ navigation }) => {
   }
 
   function handlePay() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {},
       next: 'ManualCreditPaymentSuccessful'
     });

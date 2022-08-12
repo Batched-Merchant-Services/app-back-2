@@ -47,7 +47,7 @@ const ListInformationSwap = ({ navigation }) => {
   const currencyChange = navigation.getParam('currencyChange');
 
   function handlePay() {
-    navigation.navigate('ConfirmationPinUser', {
+    navigation.navigate('Pin2faConfirmation', {
       data: {page: 'Swap',shortNameCrypto,balanceConvert,currencyChange,amountConvert,totalSwap},
       next: 'ConfirmationSwap'
     });

@@ -108,7 +108,7 @@ const SendCrypto = ({ navigation }) => {
       if (responseBTC.code < 400) {
         const conversionAmount = responseBTC.data?.conversion?.toString();
         setTimeout(function () {
-          navigation.navigate('ConfirmationPinUser', {
+          navigation.navigate('Pin2faConfirmation', {
             data: {page: 'sendOrTransferCrypto',shortNameCrypto,conversionAmount,sendAddress,transferReference},
             next: 'ConfirmationCrypto'
           });
@@ -118,7 +118,7 @@ const SendCrypto = ({ navigation }) => {
         closeSnackNotice(responseBTC);
       }
     }else{
-      navigation.navigate('ConfirmationPinUser', {
+      navigation.navigate('Pin2faConfirmation', {
         data: {page: 'sendOrTransferCrypto',shortNameCrypto,amountCurrency,sendAddress,transferReference},
         next: 'ConfirmationCrypto'
       });     
