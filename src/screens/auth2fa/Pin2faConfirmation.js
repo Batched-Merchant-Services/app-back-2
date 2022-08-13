@@ -21,7 +21,7 @@ import Colors from '@styles/Colors';
 import IconCode from '@assets/brand/iconCode.png';
 import Modal2faConfirmation from './Modal2faConfirmation';
 import { maskNumbers, maskEmail } from '../../utils/formatters';
-import { getDataUser, loginTwoFactor } from '../../utils/api/graph';
+import { getCodeEmail, getCodeSms, getDataUser, loginTwoFactor } from '../../utils/api/graph';
 import LocalStorage from '@utils/localStorage';
 import { getTheme } from '@utils/api/switch';
 import { saveInfoUserGraph, saveTheme } from '../../store/ducks/user.ducks';
@@ -40,7 +40,7 @@ import {
   sendCrypto,
   sendCryptoUsers
 } from '@utils/api/switch';
-import { createCardVirtual, createTRXSwap, updateCardVirtual, validateEmail, validateSMS } from '../../utils/api/switch';
+import { createCardVirtual, createTRXSwap, updateCardVirtual } from '../../utils/api/switch';
 
 async function transactionWallet(
   token,
@@ -858,9 +858,10 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
 
   async function getSMS() {
     const token = await LocalStorage.get('auth_token');
-    const response = await validateSMS(token);
-    if (response.code < 400) {
-      setGetCodeLeft(response.data);
+    const response = await getCodeSms(token);
+    console.log('code',response)
+    if (response?.getSecurityCodeDirect) {
+      setGetCodeLeft(response?.getSecurityCodeDirect);
       setSnakVisible(true);
       setTitle('codigo Enviado');
     }
@@ -868,14 +869,14 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
 
   async function getEmail() {
     const token = await LocalStorage.get('auth_token');
-    const responseEmail = await validateEmail(token);
-    if (responseEmail.code < 400) {
-      setGetCodeLeft(responseEmail.data);
+    const responseEmail = await getCodeEmail(token);
+    if (responseEmail?.getSecurityCodeDirectSES) {
+      setGetCodeLeft(responseEmail?.getSecurityCodeDirectSES);
       setSnakVisible(true);
       setTitle('codigo Enviado');
     }
   }
-
+//73448-594864
 
   useEffect(() => {
     if (appData?.isTwoFactor) {

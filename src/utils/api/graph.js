@@ -56,13 +56,12 @@ apiGraph.interceptors.response.use(
 
 export const loginGraph = async ( phoneNumber,password,Company ) => {
   const companyValue = Company?.value?Company?.value:'';
-  console.log('company',phoneNumber,password,companyValue);
   const variables = {
     user: phoneNumber,
     password:  generateRSA(password),
     languaje: 3,
     id: generateRSA(device),
-    groupid: 324,
+    groupid: companyValue,
     reference:''
   }
   
@@ -176,7 +175,7 @@ export const setForgotPasswordInside = async (company,email,phone,type) => {
 
 export const setConfirmPassword = async (type2fa,password,confirmPassword,pin,CodeLeft,Code) => {
   const variables = {
-    token: type2fa === 1 ? CodeLeft : Code,
+    token: type2fa !== 1 ? CodeLeft : Code,
     code: pin,
     password: generateRSA(password),
     confirmPassword: generateRSA(confirmPassword)
