@@ -157,6 +157,21 @@ const SideMenu = ({ navigation }) => {
             <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
           </View>
         </Ripple>
+        <Ripple style={Styles.menuEl} onPress={() => navigation.navigate('Auth2fa',{ page: 'config' })}>
+          <View
+            style={Styles.menuText}
+            row
+            centerV
+            paddingV-13
+            paddingL-30
+            paddingR-5
+          >
+            <Text h17 medium white>
+              {i18n.t('sideMenu.component.labelSecurity')}
+            </Text>
+            <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
+          </View>
+        </Ripple>
       </View>
       <View flex-1 bottom marginB-40>
         <Ripple style={Styles.menuEl} onPress={handleExitPress}>

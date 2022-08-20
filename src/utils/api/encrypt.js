@@ -16,6 +16,7 @@ export const generateRSA = (text) => {
 };
 
 export const getTicks = () => {
+  console.log('getTicks')
   try {
     let date = getUTCDateString();
     return (((date.getTime() + (date.getTimezoneOffset() * 60000)) * 10000) + 621355968000000000)

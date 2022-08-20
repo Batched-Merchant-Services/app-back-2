@@ -39,7 +39,7 @@ const successHandler = (response) => {
 
 apiGraph.interceptors.request.use(
   async config => {
-    console.log('request', config);
+    console.log('request',config,getTicks());
     config.headers = { ...config.headers,  'content-hash': generateRSA('AppSavyy' + '|' + getTicks())};
     return config;
   },function (error) {
@@ -47,6 +47,7 @@ apiGraph.interceptors.request.use(
     return  Promise.reject(error);
   }
 );
+
 
 apiGraph.interceptors.response.use(
   response => successHandler(response),

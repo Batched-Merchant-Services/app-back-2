@@ -10,7 +10,6 @@ import LocalStorage from '@utils/localStorage';
 import { getValidateSession } from './src/utils/api/switch';
 const timer = require('react-native-timer');
 
-
 YellowBox.ignoreWarnings(['Remote debugger', 'Module RNSecureKeyStore']); // We know, use remote debugger might slow down app performance...
 
 
