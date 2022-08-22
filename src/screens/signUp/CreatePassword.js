@@ -27,10 +27,13 @@ import { forgotYourPassword, changePassword } from '@utils/api/switch';
 import { useSelector } from 'react-redux';
 import background from '@assets/brand/backgroundImage.png';
 import { getCompaniesQuery } from '../../utils/api/switch';
+import { setConfirmPassword } from '../../utils/api/graph';
 
 const CreatePassword = ({ navigation }) => {
   const page = navigation.getParam('page');
   const Pin = navigation.getParam('pin');
+  const CodeLeft = navigation.getParam('CodeLeft');
+  const Code = navigation.getParam('Code');
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandThemeImages = userData?.Theme?.images;
@@ -103,21 +106,23 @@ const CreatePassword = ({ navigation }) => {
       }
 
     } else if (page === 'config') {
-      const token = await LocalStorage.get('auth_token');
-      const response = await changePassword(token, Password, ConfirmPassword);
-      if (response.code < 400) {
-        setTimeout(function () {
-          navigation.navigate('PasswordConfirmation', { page: page });
+      const Password =password.value;
+      const ConfirmPassword =confirmPassword.value;
+      const response = await setConfirmPassword(userData?.type2fa,Password,ConfirmPassword,Pin,CodeLeft,Code);
+      console.log('response',response)
+      if (response?.setResetPwd) {
+        setTimeout(function(){
+          navigation.navigate('PasswordConfirmation'); 
           setIsLoadingModal(false);
         }, 1000);
-
+        
       } else {
         setIsLoadingModal(true);
-        setTimeout(function () {
+        setTimeout(function(){
           setIsLoadingModal(false);
           setSnakVisible(true);
           setButtonNext(true);
-          setTitle(response.message);
+          setTitle(response.Message);
         }, 1000);
       }
     } else {

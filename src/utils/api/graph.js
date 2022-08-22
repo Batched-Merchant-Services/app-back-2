@@ -1,6 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
-import { GRAPH_PRODUCTION_API_URL } from '@env';
+import { GRAPH_PRODUCTION_API_URL,USER_AGENT } from '@env';
 import { GRAPHQL_API,LOGIN_QUERY } from '@utils/api/constants';
 import { generateRSA,getTicks } from "@utils/api/encrypt";
 import { ACTIVATION_EMAIL, ACTIVATION_SMS, ACTIVATION_THIRD_PARTY, AUTHENTICATION_TWO_FACTORS_EMAIL, AUTHENTICATION_TWO_FACTORS_QR, AUTHENTICATION_TWO_FACTORS_SMS, GET_DATA_USER, LOGIN_TWO_FACTOR_QUERY, SET_CONFIRM_PASSWORD, SET_FORGOT_PASSWORD } from './constants';
@@ -16,7 +16,8 @@ var apiGraph = axios.create({
   baseURL: BASEURLGRAPH,
   headers: {
     'Content-Type': 'application/json',
-    'Accept':'application/json'
+    'Accept':'application/json',
+    'User-Agent'  : USER_AGENT,
   }
 });
 
@@ -33,6 +34,7 @@ const errorHandler = (error) => {
 };
 
 const successHandler = (response) => {
+  console.log('response', response);
   return response?.data?.data;
 };
 
@@ -176,7 +178,7 @@ export const setForgotPasswordInside = async (company,email,phone,type) => {
 
 export const setConfirmPassword = async (type2fa,password,confirmPassword,pin,CodeLeft,Code) => {
   const variables = {
-    token: type2fa !== 1 ? CodeLeft : Code,
+    token: type2fa === 1 ? CodeLeft : Code,
     code: pin,
     password: generateRSA(password),
     confirmPassword: generateRSA(confirmPassword)

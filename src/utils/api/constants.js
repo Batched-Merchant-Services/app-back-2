@@ -1,4 +1,4 @@
-export const GRAPHQL_API ='https://services.apps-uulala.io/AccessPoint/graphql';
+export const GRAPHQL_API ='https://core.batchedservices.com/AccessPoint/graphql';
 
 
 export const LOGIN_QUERY =`

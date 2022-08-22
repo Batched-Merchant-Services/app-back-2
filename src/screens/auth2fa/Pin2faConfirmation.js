@@ -242,9 +242,11 @@ async function changePINCard(
 }
 
 
+
 async function changePassword(
   data,
   code,
+  setGetCodeLeft,
   navigation,
   next,
   setIsLoadingModal,
@@ -255,20 +257,21 @@ async function changePassword(
   
   setIsLoadingModal(true);
   const phone = '+' + appData?.infoUser?.lada + appData?.infoUser?.phoneNumber;
-  const type = appData?.type2fa === 2 ? 1 : appData?.type2fa === 3 ? 2 : 3
+  const type = appData?.type2fa === 2 ? 1 : appData?.type2fa === 3 ? 2 : 3;
   const response = await setForgotPasswordInside(appData?.companyValue, appData?.infoUser?.email, phone, type);
-  const codeSecurity = appData?.type2fa !== 1 ? response?.setRecoveryPwd + '-' + code : '2fa' + '-' + code;
-  console.log('code',appData,'codeSecurity',codeSecurity)
   if (response?.setRecoveryPwd) {
-    setTimeout(function () {
-      navigation.navigate(next, { pin: codeSecurity,CodeLeft:response?.setRecoveryPwd,Code:code, page: data.page });
-      setIsLoadingModal(false);
-    }, 1000);
+    setGetCodeLeft(response?.setRecoveryPwd);
+    // navigation.navigate(next, { pin: codeSecurity,CodeLeft: response?.setRecoveryPwd,Code: code, page: data.page });
+    setIsLoadingModal(false);
+
   }
   else {
     errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
   }
 }
+
+
+
 async function createPaymentServices(
   token,
   data,
@@ -600,16 +603,12 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
         );
       } else if (data.page === 'config') {
 
-        await changePassword(
-          data,
-          code,
-          navigation,
-          next,
-          setIsLoadingModal,
-          setSnakVisible,
-          setTitle,
-          appData
-        );
+        const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
+        setTimeout(function () {
+          navigation.navigate(next, { pin: codeSecurity,CodeLeft: getCodeLeft,Code: code, page: data.page });
+          setIsLoadingModal(false);
+        }, 1000);
+
       } else if (data.page === 'UpdatePINCard') {
 
         await changePINCard(
@@ -835,8 +834,26 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
   }
 
   useEffect(() => {
+    if (data?.page === 'config') {
+      const code = codeActivation?.value;
+      changePassword(
+        data,
+        code,
+        setGetCodeLeft,
+        navigation,
+        next,
+        setIsLoadingModal,
+        setSnakVisible,
+        setTitle,
+        appData
+      );
+    }
+  }, []);
+
+
+  useEffect(() => {
     if (params !== 'Login') {
-      if (params !== 'LoginChange') {
+      if (data?.page !== 'config') {
         switch (appData?.type2fa) {
           case 1:
             setCodeSmsEmail('2fa');
