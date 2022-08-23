@@ -31,7 +31,7 @@ export default async function configureStore(rootReducer) {
   const themeBrand = await AsyncStorage.getItem('brandTheme');
   // Override values
   initialState.app = {drawerState: 'closing',modalState: 'closing',navigationIn:false};
-  initialState.user = {Theme: themeBrand?JSON.parse(themeBrand??{}):{colors: Colors} ,FavPayContacts: [],FavPayServices:[] };
+  //initialState.user = {Theme: themeBrand?JSON.parse(themeBrand??{}):{colors: Colors} ,FavPayContacts: [],FavPayServices:[] };
 
   error && console.log('Error loading redux state', error);
 

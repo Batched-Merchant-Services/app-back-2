@@ -44,11 +44,11 @@ const TwoFactorConfirmationActivation = ({ navigation, route, navigation: { goBa
 
   function handleGoToAuth() {
     if (appData?.pageNavigation2fa ==='config') {
-      navigation.navigate('MyWallet')
+      navigation.navigate('MyWallet');
     }if (appData?.pageNavigation2fa ==='Login') {
-      navigation.navigate('Login')
+      navigation.navigate('MyWallet');
     } else {
-      navigation.navigate('MyWallet')
+      navigation.navigate('MyWallet');
     }
   }
 
@@ -68,10 +68,12 @@ const TwoFactorConfirmationActivation = ({ navigation, route, navigation: { goBa
   return (
     <SignUpWrapper >
       <SafeAreaView forceInset={{ top: 'always' }}>
-        <NavigationBar
-          onBack={() => navigation.goBack()}
-          body={i18n.t('Auth2fa.titleSecurity')}
-        />
+      {appData?.pageNavigation2fa !=='Login'&&(
+          <NavigationBar
+            onBack={() => navigation.goBack()}
+            body={i18n.t('Auth2fa.titleSecurity')}
+          />
+        )}
         <DivSpace height-15 />
         <View centerH>
           <BoxBlue textBlue01 containerStyle={{ height: verticalScale(520) }}>
@@ -110,7 +112,7 @@ const TwoFactorConfirmationActivation = ({ navigation, route, navigation: { goBa
                 onPress={handleGoToAuth}
               >
                 <Text h11 semibold textBlue01 center>
-                  {i18n.t('Auth2fa.buttonBackToSecurity')}
+                  {appData?.pageNavigation2fa ==='Login'?i18n.t('Auth2fa.buttonBackToLogin'):i18n.t('Auth2fa.buttonBackToSecurity')}
                 </Text>
               </ButtonRounded>
             </View>

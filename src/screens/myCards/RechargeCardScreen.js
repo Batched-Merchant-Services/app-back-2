@@ -16,26 +16,38 @@ import { useSelector } from 'react-redux';
 import { moneyFormatter } from '@utils/formatters';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import Styles from './styles';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const RechargeCardScreen = ({ navigation }) => {
   const data = navigation.getParam('dataBackup');
   const redux = useSelector((state) => state);
   const userData = redux.user;
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const [currencyUser]=useState(userData?userData.currencyUser:'');
   const [balanceWallet]=useState(userData?userData.balanceWallet:'');
   const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(amount);
 
   function handleRechargePress() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {page: 'topUp',data: data, amount: amount.value},
-      next: 'RechargeCardConfirmation'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {page: 'topUp',data: data, amount: amount.value},
+        next: 'RechargeCardConfirmation'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: 'topUp',data: data, amount: amount.value});   
+    }
   }
 
   function handleBackPress() {
     navigation.goBack();
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <SignUpWrapper>
@@ -94,6 +106,12 @@ const RechargeCardScreen = ({ navigation }) => {
         </ButtonRounded>
       </View>
       </KeyboardAvoidingView>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

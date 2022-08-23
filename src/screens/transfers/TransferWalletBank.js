@@ -18,10 +18,12 @@ import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import LocalStorage from '@utils/localStorage';
 import Styles from '@screens/nationalPayments/styles';
 import { getInfoTransfer } from '@utils/api/switch';
-
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import { useSelector } from 'react-redux';
 
 const TransferWalletBank = ({ navigation }) => {
+  const redux = useSelector(state => state);
+  const userData = redux.user;
   const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(amount);
   const [data, setData] = useState([]);
@@ -32,13 +34,25 @@ const TransferWalletBank = ({ navigation }) => {
   const [actionAnimated, setActionAnimated] = useState(false);
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
+  const [showModal2fa, setShowModal2fa] = useState(false);
+
 
   async function  handlePressNext() {
-    navigation.navigate('Pin2faConfirmation',{
-      data: {page: 'transferWallet', amount: amount.value, clabe: clabe,bank: bank },
-      next: 'TransferWalletBankSuccess'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation',{
+        data: {page: 'transferWallet', amount: amount.value, clabe: clabe,bank: bank },
+        next: 'TransferWalletBankSuccess'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: 'transferWallet', amount: amount.value, clabe: clabe,bank: bank });
+    }
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   useEffect(() => {
     getInfo();
@@ -142,6 +156,12 @@ const TransferWalletBank = ({ navigation }) => {
         <Loader 
           isOpen={true}
           navigation={navigation} />)}
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
 import { ScrollView,KeyboardAvoidingView, Platform  } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
@@ -13,34 +13,42 @@ import {
 import Chart from '@screens/crypto/components/Chart';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import LocalStorage from '@utils/localStorage';
-import  AmountCrypto  from '@screens/crypto/components/AmountCrypto';
-import  AmountCryptoTwo  from '@screens/crypto/components/AmountCryptoTwo';
-import { useSelector} from 'react-redux';
+import AmountCrypto from '@screens/crypto/components/AmountCrypto';
+import AmountCryptoTwo from '@screens/crypto/components/AmountCryptoTwo';
+import { useSelector } from 'react-redux';
 import { moneyFormatter } from '@utils/formatters';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import { conversionCurrency } from '@utils/api/switch';
 import styles from './styles';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const BuyCrypto = ({ navigation }) => {
-
   const redux = useSelector(state => state);
   const userData = redux.user;
-  const infoData =  userData ? userData :'';
-  const [balanceInwallet]=useState(userData?userData.balanceWallet:'');
-  const [balanceCrypto]=useState(userData?userData.priceCrypto:'');
+  const infoData = userData ? userData : '';
+  const [balanceInwallet] = useState(userData ? userData.balanceWallet : '');
+  const [balanceCrypto] = useState(userData ? userData.priceCrypto : '');
   const [showNameCrypto] = useState(userData ? userData.nameCrypto : '');
   const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
   const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
   const [currencyUser] = useState(userData ? userData.currencyUser : '');
-  const [amountConvert,setAmountConvert] = useState('');
-  const [showCurrency,setShowCurrency] = useState('');
+  const [amountConvert, setAmountConvert] = useState('');
+  const [showCurrency, setShowCurrency] = useState('');
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const amount = useValidatedInput('amount', '');
-  const [balanceConvert,setBalanceConvert]=useState('');
+  const [balanceConvert, setBalanceConvert] = useState('');
+
   function handlePay() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {page: 'buyCrypto',infoData, amount,amountConvert,shortNameCrypto },
-      next: 'ConfirmationCrypto'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'buyCrypto', infoData, amountConvert, showCurrency },
+        next: 'ConfirmationCrypto'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: 'buyCrypto',infoData, amountConvert,showCurrency });
+    }
   }
 
   // useEffect(() => {
@@ -49,7 +57,7 @@ const BuyCrypto = ({ navigation }) => {
 
 
   async function getBalanceConvert() {
-    console.log('balanceCrypto',userData)
+    console.log('balanceCrypto', userData)
     const token = await LocalStorage.get('auth_token');
     const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', balanceCrypto);
     if (responseBTC.code < 400) {
@@ -60,18 +68,21 @@ const BuyCrypto = ({ navigation }) => {
 
 
   function getCode(code) {
-    console.log('code',code)
+    console.log('code', code)
     setAmountConvert(code);
   }
-  
-  const onFill =(code)=> {
-    console.log('code',code)
+
+  const onFill = (code) => {
+    console.log('code', code)
     setAmountConvert(code);
   };
-  const onCurrency =(code)=> {
+  const onCurrency = (code) => {
     setShowCurrency(code);
   };
 
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
@@ -140,6 +151,12 @@ const BuyCrypto = ({ navigation }) => {
         </SafeAreaView>
       </ScrollView>
       </KeyboardAvoidingView>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

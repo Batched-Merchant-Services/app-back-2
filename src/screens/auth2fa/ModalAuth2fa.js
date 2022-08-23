@@ -90,7 +90,7 @@ const ModalAuth2fa = ({ visible, onRequestClose, getData, onPressOverlay, ...pro
               disabled={showButtonModal}
             >
               <Text h11 semibold textBlue01>
-                Volver a seguridad
+                {appData?.pageNavigation2fa ==='Login'?i18n.t('Auth2fa.buttonBackToLogin'):i18n.t('Auth2fa.buttonBackToSecurity')}
               </Text>
             </ButtonRounded>
           </View>

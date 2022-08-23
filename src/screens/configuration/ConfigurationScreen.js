@@ -4,6 +4,7 @@ import { Switch } from 'react-native-switch';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { catalogLanguages,getListCurrency,updateCurrency } from '@utils/api/switch';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 import {
   ButtonRounded,
   DivSpace,
@@ -108,6 +109,7 @@ const ConfigurationScreen = ({ navigation }) => {
   const [currency, setCurrency] = useState([]);
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const [title, setTitle] = useState('');
   const [isLoadingModal, setIsLoadingModal] = useState(false);
   const language = useValidatedInput(
@@ -155,10 +157,15 @@ const ConfigurationScreen = ({ navigation }) => {
   }
  
   function handleForgetYourPassword() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: { page: 'config' },
-      next: 'CreatePassword'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true); 
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'config' },
+        next: 'CreatePassword'
+      });
+    }
   }
 
 
@@ -176,6 +183,11 @@ const ConfigurationScreen = ({ navigation }) => {
     setActionAnimated(true);
   };
 
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+
+  
   return (
     <SignUpWrapper
       keyboardAware={false}
@@ -337,6 +349,12 @@ const ConfigurationScreen = ({ navigation }) => {
         animationAction={actionAnimated}
       />
       {isLoadingModal && <Loader isOpen={true} navigation={navigation} />}
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false); }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

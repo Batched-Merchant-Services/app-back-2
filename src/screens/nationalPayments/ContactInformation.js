@@ -26,7 +26,7 @@ import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import CircleAvatar from '@screens/nationalPayments/components/CircleAvatar';
 import Colors from '@styles/Colors';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const ContactInformation = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ const ContactInformation = ({ navigation }) => {
   const [name] = useState(nameSearch ? nameSearch : '');
   const [lastname] = useState(lastName ? lastName : '');
   const [selectFavs, setSelectFavs] = useState(false);
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const [currencyUser] = useState(userData ? userData.currencyUser : '');
   const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(amount);
@@ -68,13 +69,19 @@ const ContactInformation = ({ navigation }) => {
 
   }, []);
 
-
   async function handlePressNext() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: { page: QRCode ? 'QRCode' : 'contacts', amount: amount.value, externalId: external },
-      next: 'PayConfirmation'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation',{
+        data: {page: QRCode ? 'QRCode' : 'contacts',  amount: amount.value, externalId: external },
+        next: 'PayConfirmation'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: QRCode ? 'QRCode' : 'contacts',  amount: amount.value, externalId: external });   
+    }
   }
+
   const handleTouchStart = () => {
     setSelectFavs(!selectFavs);
 
@@ -94,6 +101,9 @@ const ContactInformation = ({ navigation }) => {
     setActionAnimated(true);
   };
 
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <>
@@ -181,6 +191,12 @@ const ContactInformation = ({ navigation }) => {
           isVisible={snakVisible}
           onClose={handleCloseNotif}
           animationAction={actionAnimated}
+        />
+        <Modal2faConfirmation
+          visible={showModal2fa}
+          onRequestClose={() => { setShowModal2fa(false) }}
+          onPressOverlay={handleClose}
+          navigation={navigation}
         />
       </SignUpWrapper>
     </>

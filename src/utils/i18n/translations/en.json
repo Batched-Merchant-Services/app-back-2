@@ -1693,7 +1693,8 @@
       "textWeHaveSentYou":"We have sent you a SMS 6 digit code to the Phone",
       "textWeHaveSentEmail":"We have sent you a 6 digit code to your Email",
       "textWeHaveSentApp":"Enter the 6 digit code that appears in your",
-      "textAuthenticatorApp":"Authenticator App."
+      "textAuthenticatorApp":"Authenticator App.",
+      "buttonBackToLogin":"Continue"
     }
   }
 }

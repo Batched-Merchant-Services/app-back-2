@@ -22,6 +22,7 @@ import rowLeft from '@assets/icons/rowBack.png';
 import slide from '@assets/store/slide.png';
 import Colors from '@styles/Colors';
 import { useSelector } from 'react-redux';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const EntertainmentItems = [
   {
@@ -36,7 +37,7 @@ const StoreDetailOfert = ({ ofert ,page, navigation}) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
-
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isCredit] = useState(true);
   const setChangueIndex = async (index) => { 
@@ -50,10 +51,20 @@ const StoreDetailOfert = ({ ofert ,page, navigation}) => {
   };
 
   const handelBuy = async () => { 
-    navigation.navigate('Pin2faConfirmation', {
-      data: {},
-      next: 'ConfirmationBuyStore'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {},
+        next: 'ConfirmationBuyStore'
+      });
+      //navigation.navigate('Pin2faConfirmation');  
+    } 
+  };
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
   };
 
   const agreeCheck = useValidatedInput('agree', true, {
@@ -236,6 +247,12 @@ const StoreDetailOfert = ({ ofert ,page, navigation}) => {
           </View>
         )}
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </View>
   );
 };

@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import i18n from '@utils/i18n';
 import { connect, useSelector } from 'react-redux';
 import ModalDeviceError from '@screens/ModalDeviceError';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 import {
   Text,
   View,
@@ -66,9 +67,7 @@ async function handleSignIn(
   setIsLoadingModal(true);
 
   const response = await loginGraph(phone, Password, Company);
-  console.log('response',response,Company?.value);
   if (response?.getLoggin) {
-    dispatch(save2fa(true));
     const type2faLogin = response?.getLoggin?.type2fa;
     const isTwoFactorLogin = response?.getLoggin?.isTwoFactor;
     await LocalStorage.set('auth_token', response?.getLoggin?.token);
@@ -77,7 +76,7 @@ async function handleSignIn(
     await LocalStorage.set('left', response?.getLoggin?.left);
     await LocalStorage.set('uuid', response?.getLoggin?.uuid);
     getThemeBrand(response?.getLoggin?.token);
-    dispatch(type2fa(type2faLogin));
+    dispatch(saveUser({ type2fa: type2faLogin}));
     dispatch(isTwoFactor(isTwoFactorLogin));
     dispatch(saveUser({ companyValue: Company?.value}));
     console.log('es falso',userData);
@@ -87,9 +86,10 @@ async function handleSignIn(
         navigation.navigate('MyWallet');
         setShowModalInfo(false);
       } else {
-   
         setShowModalInfo(true);
         setIsLoadingModal(false);
+        dispatch(page2fa('Login'))
+        dispatch(saveUser({ type2fa: type2faLogin}));
       }
     } else {
       navigation.navigate('Pin2faConfirmation', { page: 'Login' });
@@ -219,7 +219,8 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
       dispatch,
       userData);
 
-  };
+    };
+
 
   useEffect(() => {
     handleBiometric();
@@ -288,6 +289,10 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     }, 1000);
   }
 
+  const handleClose = () => {
+    setShowModalInfo(!showModalInfo);
+  };
+
 
   async function handlePressBiometricAuthorizePress() {
     try {
@@ -302,6 +307,12 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
         });
     } catch (e) {
     }
+  }
+
+  function handleGoToDashboard() {
+    dispatch(save2fa(true));
+    setShowModalInfo(!showModalInfo);
+    navigation.navigate('MyWallet');
   }
 
   return (
@@ -382,7 +393,14 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
               <Loader
                 isOpen={true}
                 navigation={navigation} />)}
-
+            <Modal2faConfirmation
+              visible={showModalInfo}
+              onRequestClose={() => { setShowModalInfo(false); }}
+              onPressOverlay={handleClose}
+              onPressLater={handleGoToDashboard}
+              navigation={navigation}
+              login
+            />
             <ModalDeviceError isOpen={showDeviceModal} navigation={navigation} page={statusUser} onClose={hideModal} />
           </KeyboardAvoidingView>
         </ResizeImageBackground>
@@ -404,7 +422,7 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = { saveTheme };
+const mapDispatchToProps = { saveTheme,save2fa };
 
 
 

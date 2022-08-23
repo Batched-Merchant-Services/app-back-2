@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
 import { ScrollView } from 'react-native';
-import { SafeAreaView,NavigationEvents } from 'react-navigation';
-import { useValidatedInput,isFormValid } from '@hooks/validation-hooks';
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
+import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import {
   Text,
   View,
@@ -18,77 +18,80 @@ import {
 } from '@components';
 
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-import  AmountCryptoTwo  from '@screens/crypto/components/AmountCryptoTwo';
+import AmountCryptoTwo from '@screens/crypto/components/AmountCryptoTwo';
 import Styles from '../styles';
-import { useSelector} from 'react-redux';
-import { getListExchangeWallet,conversionCurrency,getFeeSendExternal } from '@utils/api/switch';
+import { useSelector } from 'react-redux';
+import { getListExchangeWallet, conversionCurrency, getFeeSendExternal } from '@utils/api/switch';
 import LocalStorage from '@utils/localStorage';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+
 
 const SendCrypto = ({ navigation }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
   const codeQR = navigation.getParam('data');
-  const [amountConvert,setAmountConvert] = useState('');
-  const [currentCurrency,setCurrentCurrency] = useState('');
-  const [showNameCrypto]=useState(userData?userData.nameCrypto:'');
-  const [balanceConvert,setBalanceConvert]=useState('');
-  const [listExchanges,setListExchanges ] = useState([]);
+  const [amountConvert, setAmountConvert] = useState('');
+  const [currentCurrency, setCurrentCurrency] = useState('');
+  const [showNameCrypto] = useState(userData ? userData.nameCrypto : '');
+  const [balanceConvert, setBalanceConvert] = useState('');
+  const [listExchanges, setListExchanges] = useState([]);
   const [idAddress, setIDAddress] = useState('');
-  const [fees,setFees ] = useState('');
-  const [showInputQRCode,setShowInputQRCode]=useState(codeQR?true:false);
-  const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
-  const [iconCrypto]=useState(userData?userData.iconCrypto:'');
-  const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
+  const [fees, setFees] = useState('');
+  const [showInputQRCode, setShowInputQRCode] = useState(codeQR ? true : false);
+  const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
+  const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
+  const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const [currentConvert,setCurrentConvert] = useState('');
+  const [currentConvert, setCurrentConvert] = useState('');
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const transferReference = useValidatedInput('reference', '');
-  const userToTransfer = useValidatedInput('dropdownSelect',{name: i18n.t('generics.selectOne')},{
+  const userToTransfer = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
     changeHandlerSelect: 'onSelect'
   });
   const amount = useValidatedInput('amount', '');
-  const validation = amountConvert === ''? true: false;
-  const isValid = isFormValid(amount,transferReference,userToTransfer);
-  
+  const validation = amountConvert === '' ? true : false;
+  const isValid = isFormValid(amount, transferReference, userToTransfer);
+
 
   useEffect(() => {
     getListExternalWallet();
     getFee();
-    
-  },[]);
+
+  }, []);
 
   async function getListExternalWallet() {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
-    const response = await getListExchangeWallet(token,shortNameCrypto);
-    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
+    const response = await getListExchangeWallet(token, shortNameCrypto);
+    const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', balanceCrypto);
     setBalanceConvert(responseBTC.data?.conversion?.toString());
     if (response.code < 400) {
       setListExchanges(response.data);
       setIsLoadingModal(false);
-    } else{
+    } else {
       setListExchanges([]);
       setIsLoadingModal(false);
     }
   }
 
   async function getFee() {
-    console.log('feee external')
+
     const token = await LocalStorage.get('auth_token');
     const response = await getFeeSendExternal(token);
     if (response.code < 400) {
       setFees(response?.data?.fee_total);
-    } else{
+    } else {
       setFees('');
     }
   }
-  
+
 
   function getAddress() {
-    setShowInputQRCode(codeQR?true:false);
+    setShowInputQRCode(codeQR ? true : false);
   }
 
   function handleAddNewAddress() {
@@ -96,33 +99,42 @@ const SendCrypto = ({ navigation }) => {
   }
 
   async function handlePay() {
-    const addressCrypto = codeQR?codeQR:idAddress;
+    const addressCrypto = codeQR ? codeQR : idAddress;
     const amountCurrency = amount?.value;
     const dropDownAddress = userToTransfer?.value?.id;
-    const sendAddress = addressCrypto || dropDownAddress ;
+    const sendAddress = addressCrypto || dropDownAddress;
     const token = await LocalStorage.get('auth_token');
-
+    const foobar = [3, 2, 1];
     if (currentCurrency === 'USD') {
       setIsLoadingModal(true);
-      const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',amountCurrency);
+      const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', amountCurrency);
       if (responseBTC.code < 400) {
         const conversionAmount = responseBTC.data?.conversion?.toString();
-        setTimeout(function () {
-          navigation.navigate('Pin2faConfirmation', {
-            data: {page: 'sendOrTransferCrypto',shortNameCrypto,conversionAmount,sendAddress,transferReference},
-            next: 'ConfirmationCrypto'
-          });
-          setIsLoadingModal(false);
-        }, 1000);
-      }else{
+        if (!foobar.includes(userData?.type2fa)) {
+          setShowModal2fa(true);
+        } else {
+          setTimeout(function () {
+            navigation.navigate('Pin2faConfirmation', {
+              data: { page: 'sendOrTransferCrypto', shortNameCrypto, conversionAmount, sendAddress, transferReference },
+              next: 'ConfirmationCrypto'
+            });
+
+            setIsLoadingModal(false);
+          }, 1000);
+        }
+      } else {
         closeSnackNotice(responseBTC);
       }
-    }else{
-      navigation.navigate('Pin2faConfirmation', {
-        data: {page: 'sendOrTransferCrypto',shortNameCrypto,amountCurrency,sendAddress,transferReference},
-        next: 'ConfirmationCrypto'
-      });     
-    } 
+    } else {
+      if (!foobar.includes(userData?.type2fa)) {
+        setShowModal2fa(true);
+      } else {
+        navigation.navigate('Pin2faConfirmation', {
+          data: { page: 'sendOrTransferCrypto', shortNameCrypto, amountCurrency, sendAddress, transferReference },
+          next: 'ConfirmationCrypto'
+        });
+      }
+    }
   }
 
   function onFill(code) {
@@ -137,15 +149,15 @@ const SendCrypto = ({ navigation }) => {
   }
 
 
-  async function onCurrency(code){
+  async function onCurrency(code) {
     setCurrentCurrency(code);
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
-    const response = await conversionCurrency(token,code === 'USD'?shortNameCrypto:'USD',code === shortNameCrypto?shortNameCrypto:'USD',amountConvert);
+    const response = await conversionCurrency(token, code === 'USD' ? shortNameCrypto : 'USD', code === shortNameCrypto ? shortNameCrypto : 'USD', amountConvert);
     if (response.code < 400) {
       setIsLoadingModal(false);
       setAmountConvert(response.data?.conversion?.toString());
-    }else{
+    } else {
       setAmountConvert(0);
       closeSnackNotice(response);
     }
@@ -166,6 +178,12 @@ const SendCrypto = ({ navigation }) => {
       setTitle(response.message);
     }, 1000);
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+
+
 
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
@@ -271,6 +289,12 @@ const SendCrypto = ({ navigation }) => {
           getAddress(payload);
           getListExternalWallet(payload);
         }}
+      />
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
       />
     </SignUpWrapper>
   );

@@ -1685,7 +1685,8 @@
       "textWeHaveSentYou":"Te hemos enviado un código SMS de 6 dígitos al Teléfono",
       "textWeHaveSentEmail":"Te hemos enviado un código de 6 dígitos a tu Email",
       "textWeHaveSentApp":"Ingresar el código de 6 dígitos que aparece en tu ",
-      "textAuthenticatorApp":"Authenticator App."
+      "textAuthenticatorApp":"Authenticator App.",
+      "buttonBackToLogin":"Continuar"
     }
   }
 }

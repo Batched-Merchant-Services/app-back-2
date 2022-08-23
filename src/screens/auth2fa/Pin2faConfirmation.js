@@ -56,6 +56,7 @@ async function transactionWallet(
   appData
 ) {
   setIsLoadingModal(true);
+  console.log('type',data)
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
   const response = await TransferWalletToCard(token, data.origin, data.amount, data.destiny, data.typeTrans, codeSecurity);
   if (response.code < 400) {

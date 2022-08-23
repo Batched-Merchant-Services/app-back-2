@@ -13,6 +13,8 @@ import { useSelector} from 'react-redux';
 import { moneyFormatter } from '@utils/formatters';
 import i18n from '@utils/i18n';
 import Styles from '@screens/store/styles';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+
 
 const ProviderPaymentAmountScreen = ({ navigation }) => {
   const redux = useSelector(state => state);
@@ -25,6 +27,7 @@ const ProviderPaymentAmountScreen = ({ navigation }) => {
   const referenceSend = navigation.getParam('datum1');
   const phoneSend = navigation.getParam('datum2');
   const amountSend = navigation.getParam('amount');
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const data = infoPayment ? infoPayment.data: dataSend;
   const phone = phoneSend ? phoneSend : data.phone;
   const reference = referenceSend ? referenceSend : data.reference;
@@ -36,13 +39,22 @@ const ProviderPaymentAmountScreen = ({ navigation }) => {
     navigation.goBack();
   }
 
+  
   function handleNextPress() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {page: 'payServices', data: infoPayment ? data.data: data ,phone ,reference, amountParam,feeService,feeTransaction},
-      next: 'ProviderPaymentSuccessful'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {page: 'payServices', data: infoPayment ? data.data: data ,phone ,reference, amountParam,feeService,feeTransaction},
+        next: 'ProviderPaymentSuccessful'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: 'payServices', data: infoPayment ? data.data: data ,phone ,reference, amountParam,feeService,feeTransaction});   
+    }
   } 
-
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
   return (
     <SignUpWrapper>
       <NavigationBar
@@ -127,6 +139,12 @@ const ProviderPaymentAmountScreen = ({ navigation }) => {
         </View>
         <DivSpace height-30 />
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import i18n from '@utils/i18n';
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
@@ -14,33 +14,44 @@ import {
 } from '@components';
 import rowEquals from '@assets/icons/rowEquals.png';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-import  AmountCrypto  from '@screens/crypto/components/AmountCrypto';
+import AmountCrypto from '@screens/crypto/components/AmountCrypto';
 import styles from './styles';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const CryptoSale = ({ navigation }) => {
   const redux = useSelector(state => state);
   const userData = redux.user;
-  const infoData =  userData ? userData :'';
-  const [showNameCrypto]=useState(userData?userData.nameCrypto:'');
-  const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
-  const [currencyUser]=useState(userData?userData.currencyUser:'');
-  const [iconCrypto]=useState(userData?userData.iconCrypto:'');
-  const [showCurrency,setShowCurrency] = useState('');
-  const [amountConvert,setAmountConvert] = useState('');
- 
+  const infoData = userData ? userData : '';
+  const [showNameCrypto] = useState(userData ? userData.nameCrypto : '');
+  const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
+  const [currencyUser] = useState(userData ? userData.currencyUser : '');
+  const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
+  const [showCurrency, setShowCurrency] = useState('');
+  const [amountConvert, setAmountConvert] = useState('');
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   function handlePay() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {page: 'saleCrypto',infoData, amountConvert,showCurrency},
-      next: 'ConfirmationCrypto'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'saleCrypto', infoData, amountConvert, showCurrency },
+        next: 'ConfirmationCrypto'
+      });
+      //navigation.navigate('Pin2faConfirmation',{page: 'saleCrypto',infoData, amountConvert,showCurrency});
+    }
   }
-  const onFill =(code)=> {
+  const onFill = (code) => {
     setAmountConvert(code);
   };
-  const onCurrency =(code)=> {
+  const onCurrency = (code) => {
     setShowCurrency(code);
+  };
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
   };
   
   return (
@@ -104,6 +115,12 @@ const CryptoSale = ({ navigation }) => {
           </View>
         </ScrollView>
       </SafeAreaView>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

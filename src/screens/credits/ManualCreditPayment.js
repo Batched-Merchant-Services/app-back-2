@@ -10,7 +10,8 @@ import {
   AnimateLabelAmount
 } from '@components';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import { useSelector } from 'react-redux';
 import i18n from '@utils/i18n';
 import { moneyFormatter } from '@utils/formatters';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
@@ -18,20 +19,32 @@ import Styles from './styles';
 import CreditImage from '@assets/credits/credit-image.png';
 
 const ManualCreditPayment = ({ navigation }) => {
+  const redux = useSelector((state) => state);
+  const userData = redux.user;
   const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(amount);
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   function handlePressBack() {
     navigation.goBack();
   }
 
   function handlePay() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {},
-      next: 'ManualCreditPaymentSuccessful'
-    });
+    console.log('go transfer')
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(appData?.type2fa)) {      
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {},
+        next: 'ManualCreditPaymentSuccessful'
+      });
+    }
   }
-
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+  
   return (
     <SignUpWrapper forceInset={{ bottom: 'never' }}>
       <NavigationBar
@@ -93,6 +106,12 @@ const ManualCreditPayment = ({ navigation }) => {
           <DivSpace height-59 />
         </View>
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

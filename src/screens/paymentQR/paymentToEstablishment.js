@@ -16,20 +16,33 @@ import { moneyFormatter } from '@utils/formatters';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import Styles from './styles';
 import liverpool from '@assets/store/providers/liverpool.png';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import { useSelector } from 'react-redux';
+
 
 const paymentToEstablishment = ({ navigation }) => {
+  const redux = useSelector(state => state);
+  const userData = redux.user;
   const amount = useValidatedInput('amount', '');
   const isValid = isFormValid(amount);
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   function handlePressBack() {
     navigation.goBack();
   }
 
+  
   function handlePay() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {},
-      next: 'confirmationEstablishment'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {},
+        next: 'confirmationEstablishment'
+      });
+      //navigation.navigate('Pin2faConfirmation');   
+    }
   }
 
   return (
@@ -94,6 +107,12 @@ const paymentToEstablishment = ({ navigation }) => {
           <DivSpace height-59 />
         </View>
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

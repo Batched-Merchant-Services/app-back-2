@@ -82,7 +82,7 @@ const Auth2fa = ({ navigation, route, navigation: { goBack } }) => {
     <SignUpWrapper >
       <SafeAreaView forceInset={{ top: 'always' }}>
         <NavigationBar
-          onBack={() => navigation.goBack()}
+          onBack={() => params !== 'Login'?navigation.goBack(): navigation.navigate("Login")}
           body={i18n.t('Auth2fa.titleSecurity')}
         />
         <ScrollView scrollEventThrottle={16}>

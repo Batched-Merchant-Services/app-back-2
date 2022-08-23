@@ -20,6 +20,7 @@ import { useValidatedInput } from '@hooks/validation-hooks';
 import LocalStorage from '@utils/localStorage';
 import Styles from './styles';
 import { conversionCurrency, getFeesSwap } from '../../../utils/api/switch';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const ListInformationSwap = ({ navigation }) => {
   const redux = useSelector(state => state);
@@ -39,6 +40,7 @@ const ListInformationSwap = ({ navigation }) => {
   const [convertFee,setConvertFee]=useState(0);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
   const [balanceReceiveUSD, setBalanceReceiveUSD] = useState('');
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const answer = useValidatedInput('', {name: i18n.t('generics.selectOne')}, {
     changeHandlerSelect: 'onSelect'
   });
@@ -47,10 +49,15 @@ const ListInformationSwap = ({ navigation }) => {
   const currencyChange = navigation.getParam('currencyChange');
 
   function handlePay() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: {page: 'Swap',shortNameCrypto,balanceConvert,currencyChange,amountConvert,totalSwap},
-      next: 'ConfirmationSwap'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {page: 'Swap',shortNameCrypto,balanceConvert,currencyChange,amountConvert,totalSwap},
+        next: 'ConfirmationSwap'
+      });
+    }
   }
 
   useEffect(() => {
@@ -128,6 +135,9 @@ const ListInformationSwap = ({ navigation }) => {
     setActionAnimated(true);
   };
 
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <SignUpWrapper>
@@ -229,6 +239,12 @@ const ListInformationSwap = ({ navigation }) => {
       {isLoadingModal &&(
         <Loader 
           isOpen={true} />)}
+       <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

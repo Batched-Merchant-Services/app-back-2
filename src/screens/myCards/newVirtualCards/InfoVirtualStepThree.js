@@ -11,18 +11,32 @@ import {
   Link
 } from '@components';
 import Styles from '@screens/nationalPayments/styles';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 import stepThreeCards from '@assets/cards/virtualStepThree.png';
+import { useSelector } from 'react-redux';
 import Colors from '@styles/Colors';
 
 const InfoVirtualStepThree = ({ navigation }) => {
+  const redux = useSelector((state) => state);
+  const userData = redux.user;
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   const handleNext = () =>{
-    navigation.navigate('Pin2faConfirmation', {
-      data: { page: 'createVirtualCard' },
-      next: 'ConfirmationUpdateCard'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'createVirtualCard' },
+        next: 'ConfirmationUpdateCard'
+      });
+      //navigation.navigate('Pin2faConfirmation',{ page: 'createVirtualCard' });   
+    }
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <View textBlueDark style={Styles.carouselItem} paddingV-20>
@@ -62,6 +76,12 @@ const InfoVirtualStepThree = ({ navigation }) => {
           </Text>
         </Link>
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </View>
   );
 };

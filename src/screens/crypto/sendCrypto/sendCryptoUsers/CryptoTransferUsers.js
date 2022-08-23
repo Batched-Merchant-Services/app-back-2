@@ -1,11 +1,11 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
-import { useSelector} from 'react-redux';
-import { ScrollView,KeyboardAvoidingView, Platform  } from 'react-native';
+import { useSelector } from 'react-redux';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { NavigationEvents } from 'react-navigation';
-import { useValidatedInput,isFormValid } from '@hooks/validation-hooks';
-import { getCryptoFess,conversionCurrency } from '@utils/api/switch';
+import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
+import { getCryptoFess, conversionCurrency } from '@utils/api/switch';
 import { scale } from 'react-native-size-matters';
 import Styles from '@screens/crypto/styles';
 
@@ -24,9 +24,9 @@ import {
 } from '@components';
 
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
-import  AmountCrypto  from '@screens/crypto/components/AmountCrypto';
+import AmountCrypto from '@screens/crypto/components/AmountCrypto';
 import CircleAvatar from '@screens/nationalPayments/components/CircleAvatar';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 
 const CryptoTransferUsers = ({ navigation }) => {
@@ -34,19 +34,20 @@ const CryptoTransferUsers = ({ navigation }) => {
   const userData = redux.user;
   const codeQR = navigation.getParam('data');
   const infoUser = navigation.getParam('info');
-  const [amountConvert,setAmountConvert] = useState('');
-  const [currentCurrency,setCurrentCurrency] = useState('');
-  const [balanceConvert,setBalanceConvert]=useState('');
-  const [showNameCrypto]=useState(userData?userData.nameCrypto:'');
-  const [imageUser]=useState('');
+  const [amountConvert, setAmountConvert] = useState('');
+  const [currentCurrency, setCurrentCurrency] = useState('');
+  const [balanceConvert, setBalanceConvert] = useState('');
+  const [showNameCrypto] = useState(userData ? userData.nameCrypto : '');
+  const [imageUser] = useState('');
   const [idAddress, setIDAddress] = useState('');
-  const [fees,setFees ] = useState('');
-  const [showInputQRCode,setShowInputQRCode]=useState(codeQR?true:false);
-  const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
-  const [currencyUser]=useState(userData?userData.currencyUser:'');
-  const [iconCrypto]=useState(userData?userData.iconCrypto:'');
-  const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
-  const [showCurrency,setShowCurrency] = useState('');
+  const [fees, setFees] = useState('');
+  const [showInputQRCode, setShowInputQRCode] = useState(codeQR ? true : false);
+  const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
+  const [currencyUser] = useState(userData ? userData.currencyUser : '');
+  const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
+  const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
+  const [showModal2fa, setShowModal2fa] = useState(false);
+  const [showCurrency, setShowCurrency] = useState('');
   //snack notice
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
@@ -62,65 +63,76 @@ const CryptoTransferUsers = ({ navigation }) => {
     changeHandlerSelect: 'onSelect'
   });
 
-  const validation = amountConvert === ''? true: false;
+  const validation = amountConvert === '' ? true : false;
   const isValid = isFormValid(transferReference);
 
   useEffect(() => {
     getBalanceConvert();
-  },[]);
+  }, []);
 
-  
+
   async function getBalanceConvert() {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token,shortNameCrypto,'USD',balanceCrypto);
+    const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', balanceCrypto);
     const responseFees = await getCryptoFess(token);
     if (responseBTC.code || responseFees.code < 400) {
       setIsLoadingModal(false);
       setFees(responseFees?.data?.fee_total);
       setBalanceConvert(responseBTC?.data?.conversion?.toString());
-    }else{
+    } else {
       closeSnackNotice(responseBTC.code || responseFees.code);
     }
   }
 
   function getAddress() {
-    setShowInputQRCode(codeQR?true:false);
+    setShowInputQRCode(codeQR ? true : false);
 
   }
   function handleAddNewAddress() {
     navigation.navigate('AddNewAddressCrypto');
   }
-  
+
   function handleScanQRAddress() {
     navigation.navigate('ScanQRAddress');
   }
-		
+
   async function handlePay() {
-    const addressCrypto = codeQR?codeQR:infoUser?.id;
+    const addressCrypto = codeQR ? codeQR : infoUser?.id;
     const token = await LocalStorage.get('auth_token');
+    const foobar = [3, 2, 1];
     if (currentCurrency === 'USD') {
       setIsLoadingModal(true);
-      const responseBTC = await conversionCurrency(token,'USD',shortNameCrypto,amountConvert);
+      const responseBTC = await conversionCurrency(token, 'USD', shortNameCrypto, amountConvert);
       if (responseBTC.code < 400) {
         const conversionAmount = responseBTC.data?.conversion?.toString();
-        setTimeout(function () {
-          navigation.navigate('Pin2faConfirmation', {
-            data: {page: 'sendCryptoUsers',showNameCrypto,conversionAmount,addressCrypto,transferReference},
-            next: 'ConfirmationCrypto'
-          });
-          setIsLoadingModal(false);
-        }, 1000);
-      }else{
+      if (!foobar.includes(userData?.type2fa)) {
+          setShowModal2fa(true);
+        } else {
+          setTimeout(function () {
+            navigation.navigate('Pin2faConfirmation', {
+              data: { page: 'sendCryptoUsers', showNameCrypto, conversionAmount, addressCrypto, transferReference },
+              next: 'ConfirmationCrypto'
+            });
+            //navigation.navigate('Pin2faConfirmation',{page: 'sendCryptoUsers',showNameCrypto,conversionAmount,addressCrypto,transferReference});   
+            setIsLoadingModal(false);
+          }, 1000);
+        }
+      } else {
         closeSnackNotice(responseBTC);
       }
-    }else{
-      navigation.navigate('Pin2faConfirmation', {
-        data: {page: 'sendCryptoUsers',showNameCrypto,amountConvert,addressCrypto,transferReference},
-        next: 'ConfirmationCrypto'
-      });
+    } else {
+      if (!foobar.includes(userData?.type2fa)) {
+        setShowModal2fa(true);
+      } else {
+        navigation.navigate('Pin2faConfirmation', {
+          data: { page: 'sendCryptoUsers', showNameCrypto, amountConvert, addressCrypto, transferReference },
+          next: 'ConfirmationCrypto'
+        });
+        //navigation.navigate('Pin2faConfirmation',{page: 'sendCryptoUsers',showNameCrypto,amountConvert,addressCrypto,transferReference});   
+      }
     }
-    
+
   }
 
 
@@ -132,15 +144,15 @@ const CryptoTransferUsers = ({ navigation }) => {
   }
 
 
-  async function onCurrency(code){
+  async function onCurrency(code) {
     setIsLoadingModal(true);
     setCurrentCurrency(code);
     const token = await LocalStorage.get('auth_token');
-    const response = await conversionCurrency(token,code === 'USD'?shortNameCrypto:'USD',code === shortNameCrypto?shortNameCrypto:'USD',amountConvert);
+    const response = await conversionCurrency(token, code === 'USD' ? shortNameCrypto : 'USD', code === shortNameCrypto ? shortNameCrypto : 'USD', amountConvert);
     if (response.code < 400) {
       setIsLoadingModal(false);
       setAmountConvert(response.data?.conversion?.toString());
-    }else{
+    } else {
       setAmountConvert(0);
       closeSnackNotice(response);
     }
@@ -161,6 +173,12 @@ const CryptoTransferUsers = ({ navigation }) => {
       setTitle(response.message);
     }, 1000);
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+
+
 
   return (
     <SignUpWrapper forceInset={{top: 'always'}}>
@@ -314,6 +332,12 @@ const CryptoTransferUsers = ({ navigation }) => {
         }}
       />
       </KeyboardAvoidingView>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

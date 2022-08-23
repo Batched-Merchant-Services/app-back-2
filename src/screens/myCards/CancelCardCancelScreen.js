@@ -14,22 +14,36 @@ import IconCancelCard from '@utils/iconSVG/IconCancelCard';
 import { useSelector } from 'react-redux';
 import { verticalScale } from 'react-native-size-matters';
 import Colors from '@styles/Colors';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const CancelCardCancelScreen = ({ navigation }) => {
   const data = navigation.getParam('dataBackup');
   const redux = useSelector(state => state);
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
+  const [showModal2fa, setShowModal2fa] = useState(false);
+
+
   function handleCancelPress() {
-    navigation.navigate('Pin2faConfirmation', {
-      data: { page: 'cardCancel',data: data },
-      next: 'CancelCardConfirmation',
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'cardCancel',data: data },
+        next: 'CancelCardConfirmation',
+      });
+      //navigation.navigate('Pin2faConfirmation',{ page: 'cardCancel',data: data });   
+    }
   }
 
   function handleBackPress() {
     navigation.goBack();
   }
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <SignUpWrapper>
@@ -78,6 +92,12 @@ const CancelCardCancelScreen = ({ navigation }) => {
           {i18n.t('cardCancel.component.footer2')}
         </Text>
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

@@ -13,14 +13,14 @@ import IconCancelCard from '@utils/iconSVG/IconCancelCard';
 import IconChangeNip from '@utils/iconSVG/IconChangeNip';
 import Colors from '@styles/Colors';
 import ModalChangePin from './ModalChangePin';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
 const CardPhysicalActions = ({navigation, dataPhysical }) => {
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandTheme = appData?.Theme?.colors;
   const [ showModalChangePin,setShowModalChangePin] = useState(false);
-
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   function handleRechargePress() {
     navigation.navigate('RechargeCard',{ dataBackup: dataPhysical });
@@ -36,15 +36,26 @@ const CardPhysicalActions = ({navigation, dataPhysical }) => {
 
   function handleChangePIN() {
     const ProxyKey = dataPhysical? dataPhysical.proxyKey : '';
-    navigation.navigate('Pin2faConfirmation', {
-      data: { page: 'UpdatePINCard',ProxyKey: ProxyKey },
-      next: 'PinUpdateScreen',
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(appData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { page: 'UpdatePINCard',ProxyKey: ProxyKey },
+        next: 'PinUpdateScreen',
+      });
+      //navigation.navigate('Pin2faConfirmation',{ page: 'UpdatePINCard',ProxyKey: ProxyKey });   
+    }
   }
 
   const handlePressNext = () => {
     setShowModalChangePin(false);
   };
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+
 
   return (
     <View  style={{ width: '100%' }}>
@@ -111,6 +122,12 @@ const CardPhysicalActions = ({navigation, dataPhysical }) => {
       </View>}
       {showModalChangePin &&(
         <ModalChangePin isOpen={true} navigation={navigation} onClose={handlePressNext}/>)}
+        <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </View>
   );
 };

@@ -7,7 +7,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import IconCode from '@assets/brand/iconCode.png';
 import { save2fa } from '../../store/ducks/user.ducks';
 
-const ModalAuth2fa = ({ visible, onRequestClose, getData, onPressOverlay, navigation,...props }) => {
+const ModalAuth2fa = ({ visible, onRequestClose, getData, onPressOverlay, navigation,login,onPressLater,...props }) => {
   const dispatch = useDispatch();
   const redux = useSelector(state => state);
   const appData = redux.user;
@@ -24,16 +24,9 @@ const ModalAuth2fa = ({ visible, onRequestClose, getData, onPressOverlay, naviga
     }, 5000);
   }, [showButtonModal]);
 
-  
-
-  function handleGoToDashboard() {
-    dispatch(save2fa(true));
-    onPressOverlay();
-    navigation.navigate('MyWallet');
-  }
 
   function handleGoToActivate() {
-    navigation.navigate('Auth2fa',{page:'Login'});
+    navigation.navigate('Auth2fa',{page: login?'Login':''});
     onPressOverlay();
   }
 
@@ -68,9 +61,11 @@ const ModalAuth2fa = ({ visible, onRequestClose, getData, onPressOverlay, naviga
               </Text>
             </ButtonRounded>
             <DivSpace height-20 />
-            <Link onPress={handleGoToDashboard}>
-              <Text h12 orange left>{i18n.t('Auth2fa.textActivateLater')}</Text>
-            </Link>
+            {login&&(
+              <Link onPress={onPressLater}>
+                <Text h12 orange left>{i18n.t('Auth2fa.textActivateLater')}</Text>
+              </Link>
+            )}
           </View>
           <DivSpace height-40 />
         </View>

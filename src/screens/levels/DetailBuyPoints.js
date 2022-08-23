@@ -16,7 +16,8 @@ import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import UulalaPoints from '@assets/levels/UulalaPoints.png';
 import Styles from './styles';
 import Colors from '@styles/Colors';
-
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import { useSelector } from 'react-redux';
 
 const optionalConfigObject = {
   title                 : (i18n.t('fingerPrint.component.textConfirmFootPrint')),
@@ -31,16 +32,27 @@ const optionalConfigObject = {
 };
 
 const DetailBuyPoints = ({ navigation }) => {
+  const redux = useSelector(state => state);
+  const userData = redux.user;
+  const [showModal2fa, setShowModal2fa] = useState(false);
 
   function handlePressNext() {
-
-    navigation.navigate('Pin2faConfirmation', {
-      data: { },
-      next: 'ConfirmBuyPoints'
-    });
-    
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: { },
+        next: 'ConfirmBuyPoints'
+      });
+      //navigation.navigate('Pin2faConfirmation');
+    }
   }
  
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
+
   return (
     <SignUpWrapper>
       <SafeAreaView style={Styles.viewInfoCntc} forceInset={{top: 'always'}}>
@@ -73,6 +85,12 @@ const DetailBuyPoints = ({ navigation }) => {
           </View>
         </View>
       </SafeAreaView>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </SignUpWrapper>
   );
 };

@@ -21,14 +21,19 @@ import {
   Link
 } from '@components';
 import arrowDown from '@assets/icons/arrowDown.png';
+import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 import Colors from '@styles/Colors';
+import { useSelector } from 'react-redux';
 
 const GiftCardDetails = ({ navigation }) => {
   const scrollView = useRef(null);
+  const redux = useSelector(state => state);
+  const userData = redux.user;
   const gift = navigation.getParam('gift');
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenTwo, setIsOpenTwo] = useState(false);
   const [isOpenThree, setIsOpenThree] = useState(false);
+  const [showModal2fa, setShowModal2fa] = useState(false);
   const [isCredit] = useState(true);
   
   function handlePress(state) {
@@ -48,14 +53,24 @@ const GiftCardDetails = ({ navigation }) => {
   });
 
   const handelBuy = async () => { 
-    navigation.navigate('Pin2faConfirmation', {
-      data: {},
-      next: 'GiftCardConfirmation'
-    });
+    var foobar = [3, 2, 1];
+    if (!foobar.includes(userData?.type2fa)) {
+      setShowModal2fa(true);
+    } else {
+      navigation.navigate('Pin2faConfirmation', {
+        data: {},
+        next: 'GiftCardConfirmation'
+      });
+      //navigation.navigate('Pin2faConfirmation');  
+    } 
   };
 
   const handleGoUpPress = () =>
     scrollView.current.scrollTo({ x: 0, y: 0, animated: true });
+
+  const handleClose = () => {
+    setShowModal2fa(!showModal2fa);
+  };
 
   return (
     <View bgBlue01 style={{ height: '100%'}}>
@@ -292,6 +307,12 @@ const GiftCardDetails = ({ navigation }) => {
           </View>
         </ScrollView> 
       </View>
+      <Modal2faConfirmation
+        visible={showModal2fa}
+        onRequestClose={() => { setShowModal2fa(false) }}
+        onPressOverlay={handleClose}
+        navigation={navigation}
+      />
     </View>
   );
 };
