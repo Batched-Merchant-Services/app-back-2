@@ -79,6 +79,7 @@
       "password": "Password",
       "confirmPassword": "Confirm password",
       "selectOne": "Please select one option",
+      "select": "Select",
       "next": "Next",
       "welcome": "Welcome to",
       "welcomeLogin": "Welcome",
@@ -1382,6 +1383,9 @@
         "textSelectTheCryptocurrency":"Select the cryptocurrency you want to buy.",
         "textInMyWallet":"In my Wallet",
         "textAvailableForPurchase":"Assets List",
+        "InputAmount":"Amount",
+        "InputConversion":"Conversion",
+        "SelectCurrency":"Select currency",
         "buyCrypto":{
           "titlePurchaseOf":"Purchase of cryptocurrencies",
           "textBuy":"Buy",

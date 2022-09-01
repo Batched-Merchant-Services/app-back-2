@@ -30,6 +30,7 @@ const BuyCrypto = ({ navigation }) => {
   const [balanceCrypto] = useState(userData ? userData.priceCrypto : '');
   const [showNameCrypto] = useState(userData ? userData.nameCrypto : '');
   const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
+  const [nameCurrency, setNameCurrency] = useState('');
   const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
   const [currencyUser] = useState(userData ? userData.currencyUser : '');
   const [amountConvert, setAmountConvert] = useState('');
@@ -39,46 +40,28 @@ const BuyCrypto = ({ navigation }) => {
   const [balanceConvert, setBalanceConvert] = useState('');
 
   function handlePay() {
+    const amountEnv = nameCurrency === 'USD' ? amount?.value:amountConvert;
+    const amountConv = nameCurrency === 'USD' ? amountConvert: amount?.value;
     var foobar = [3, 2, 1];
     if (!foobar.includes(userData?.type2fa)) {
       setShowModal2fa(true);
     } else {
       navigation.navigate('Pin2faConfirmation', {
-        data: { page: 'buyCrypto', infoData, amountConvert, showCurrency },
+        data: { page: 'buyCrypto', infoData, amountEnv ,amountConv, shortNameCrypto },
         next: 'ConfirmationCrypto'
       });
       //navigation.navigate('Pin2faConfirmation',{page: 'buyCrypto',infoData, amountConvert,showCurrency });
     }
   }
 
-  // useEffect(() => {
-  //   getBalanceConvert();
-  // }, []);
-
-
-  async function getBalanceConvert() {
-    console.log('balanceCrypto', userData)
-    const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token, shortNameCrypto, 'USD', balanceCrypto);
-    if (responseBTC.code < 400) {
-      setBalanceConvert(responseBTC.data?.conversion?.toString());
-    }
+ 
+  function getDateConvert(value) {
+    setNameCurrency(value);
   }
-
-
 
   function getCode(code) {
-    console.log('code', code)
     setAmountConvert(code);
   }
-
-  const onFill = (code) => {
-    console.log('code', code)
-    setAmountConvert(code);
-  };
-  const onCurrency = (code) => {
-    setShowCurrency(code);
-  };
 
   const handleClose = () => {
     setShowModal2fa(!showModal2fa);
@@ -130,8 +113,8 @@ const BuyCrypto = ({ navigation }) => {
               <DivSpace height-10 />
               <Text  center textGray h10>{i18n.t('CryptoBalance.component.buyCrypto.textAvailableInWallet')}</Text>
               <Text  center textGray h10 semibold>{moneyFormatter(balanceInwallet)}{' '}{currencyUser}</Text>
-              <DivSpace height-10 />
-              <AmountCryptoTwo {...amount} onFillConvert={(code) => getCode(code)} />
+              <DivSpace height-30 />
+              <AmountCryptoTwo {...amount} numberConvert={(code) => getCode(code)} convertData={(value) => getDateConvert(value)}/> 
               <DivSpace height-15 />
               <View flex-1 centerH>
                 <ButtonRounded

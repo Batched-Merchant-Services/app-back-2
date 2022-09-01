@@ -13,14 +13,14 @@ import {
 } from '@components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
 import Colors from '@styles/Colors';
 import IconSms from '@assets/brand/iconSms.png';
 import { maskEmail } from '../../../utils/formatters';
-import { getCodeEmail,setActivationEmail } from '../../../utils/api/graph';
+import { getCodeEmail, setActivationEmail } from '../../../utils/api/graph';
 import LocalStorage from '@utils/localStorage';
 import { saveUser } from '../../../store/ducks/user.ducks';
 
@@ -60,7 +60,7 @@ const ActivationEmail = ({ navigation, route, navigation: { goBack } }) => {
     const response = await setActivationEmail(code)
     if (response?.setEnabled2faEmail) {
       navigation.push('ConfirmationAuth', { page: 'Email' })
-      dispatch(saveUser({ 
+      dispatch(saveUser({
         type2fa: 3
       }));
       setIsLoadingModal(false);
@@ -83,41 +83,51 @@ const ActivationEmail = ({ navigation, route, navigation: { goBack } }) => {
 
   const closeSnack = () => {
     setSnakVisible(false);
+    setButtonNext(false);
     setActionAnimated(true);
   };
 
   return (
     <SignUpWrapper >
-      <SafeAreaView forceInset={{ top: 'always' }}>
-        <NavigationBar
-          onBack={() => navigation.goBack()}
-          body={i18n.t('Auth2fa.textAuthenticationVia') + i18n.t('Auth2fa.textEmail')}
-        />
-        <DivSpace height-15 />
-        <View centerH>
-          <BoxBlue textBlue01 containerStyle={{ height: verticalScale(280), padding: 20 }}>
-            <View centerH>
-              <DivSpace height-10 />
-              <Text h13 regular textGray>{i18n.t('Auth2fa.textActivateEmailAuthentication')}</Text>
-              <DivSpace height-15 />
-              <ImageComponent
-                source={IconSms}
-                width={scale(115)}
-                height={verticalScale(115)}
-              />
-              <DivSpace height-15 />
-              <Text h10 white regular center>{i18n.t('Auth2fa.textToEnableEmailAuthentication')}{' '}<Text white semibold>{appData?.pageNavigation2fa === 'Login'?'': maskEmail(appData?.dataUserGraph?.email)}</Text></Text>
-              <DivSpace height-20 />
-              <Text h10 white regular center>{i18n.t('Auth2fa.textPleaseEnterTheSecurity')}</Text>
-            </View>
-          </BoxBlue>
-        </View>
-        <DivSpace height-25 />
-        <View centerH>
-          <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
-          <PinInput {...codeActivation} />
-        </View>
-        <DivSpace height-50 />
+      <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always' }}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "position" : "height"}
+          style={{ flex: 0.8 }}
+        >
+          <NavigationBar
+            onBack={() => navigation.goBack()}
+            body={i18n.t('Auth2fa.textAuthenticationVia') + i18n.t('Auth2fa.textEmail')}
+          />
+          <DivSpace height-15 />
+          <View centerH>
+            <BoxBlue textBlue01 containerStyle={{ height: verticalScale(280), padding: 20 }}>
+              <View centerH>
+                <DivSpace height-10 />
+                <Text h13 regular textGray>{i18n.t('Auth2fa.textActivateEmailAuthentication')}</Text>
+                <DivSpace height-15 />
+                <ImageComponent
+                  source={IconSms}
+                  width={scale(115)}
+                  height={verticalScale(115)}
+                />
+                <DivSpace height-15 />
+                <Text h10 white regular center>{i18n.t('Auth2fa.textToEnableEmailAuthentication')}{' '}<Text white semibold>{appData?.pageNavigation2fa === 'Login' ? '' : maskEmail(appData?.dataUserGraph?.email)}</Text></Text>
+                <DivSpace height-20 />
+                <Text h10 white regular center>{i18n.t('Auth2fa.textPleaseEnterTheSecurity')}</Text>
+              </View>
+            </BoxBlue>
+          </View>
+          <DivSpace height-25 />
+          <View centerH>
+            <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
+            <PinInput {...codeActivation} />
+          </View>
+          <DivSpace height-50 />
+          {isLoadingModal && (
+            <Loader
+              isOpen={true}
+              navigation={navigation} />)}
+        </KeyboardAvoidingView>
         <View centerH>
           <ButtonRounded
             onPress={getInfo}
@@ -128,19 +138,13 @@ const ActivationEmail = ({ navigation, route, navigation: { goBack } }) => {
             </Text>
           </ButtonRounded>
         </View>
-        {isLoadingModal && (
-          <Loader
-            isOpen={true}
-            navigation={navigation} />)}
       </SafeAreaView>
-      <View flex-1 bottom>
-        <SnackBar
-          message={title}
-          isVisible={snakVisible}
-          onClose={closeSnack}
-          animationAction={actionAnimated}
-        />
-      </View>
+      <SnackBar
+        message={title}
+        isVisible={snakVisible}
+        onClose={closeSnack}
+        animationAction={actionAnimated}
+      />
     </SignUpWrapper>
   );
 }

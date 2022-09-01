@@ -30,6 +30,7 @@ import Colors from '@styles/Colors';
 import {
   View,
   Text,
+  Loader,
   DivSpace,
   ModalContainer,
   ImageComponent,
@@ -60,6 +61,7 @@ const MyCards = ({ navigation }) => {
   const [isCardModal, setIsCardModal] = useState(false);
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
+  const [isLoadingModal, setIsLoadingModal] = useState(false);
   const [title, setTitle] = useState('');
   const [currencyUser]=useState(userData?userData?.currencyUser:'');
   const setChangueIndex = async (index) => { 
@@ -75,7 +77,6 @@ const MyCards = ({ navigation }) => {
     const itemValues = { ...item };
     const cardVirtual = itemValues?.type; 
     setCardVirtualSwfit(cardVirtual);
-    itemValues.disabled = item?.disabled || !available;
     return cardVirtual === 'EMPTY' ? <CardEmpty {...itemValues} available={true} ref={AnimationRef} /> : <Cards {...itemValues} available={available} width={'100%'} height={'100%'}/> ;
   }
 
@@ -104,19 +105,21 @@ const MyCards = ({ navigation }) => {
   }
 
   const setChangueSwitch = async (val) => {
+    setIsLoadingModal(true);
     const active = val ? 'ACTIVATE' : 'DEACTIVATE';
     setAvailable(val);
     try {
       const token = await LocalStorage.get('auth_token');
       const response = await changueStatus(token,active,idCard);
       if (response.code < 400) {
-        const availableCard = response?.data?.Status === 'DEACTIVATE' ? false: true;
+        const availableCard = response?.data?.setOrderActiveStatusCard === 'True' ? true: false;
         setAvailable(availableCard);
+        setIsLoadingModal(false);
         getCard();
-      } else{
+      }else{
+        setIsLoadingModal(false);
         setSnakVisible(true);
         setTitle(response.message);
-        setAvailable(false);
       }
     } catch (e) {
     }
@@ -168,8 +171,8 @@ const MyCards = ({ navigation }) => {
               <DivSpace height-5 />
               <View centerH style={{ width: '100%' }}>
                 <View style={Styles.containerSwitch}>
-                {!isVirtual &&(<Switch
-                    value={activationStatus?true:false}  
+                  {!isVirtual &&(<Switch
+                    value={available?false:true}  
                     onValueChange={(val) => setChangueSwitch(val)}
                     circleSize={25}
                     backgroundActive={Colors.green}
@@ -181,7 +184,7 @@ const MyCards = ({ navigation }) => {
                     renderInsideCircle={() => (
                       <View centerH>
                         <ImageComponent
-                          source={!activationStatus ? switchBlocked : switchUnblocked }
+                          source={available ? switchBlocked : switchUnblocked }
                           width={12}
                           height={12}
                         />
@@ -213,8 +216,8 @@ const MyCards = ({ navigation }) => {
                   }}
                   dotsLength={CAROUSEL_ITEMS.length}
                   activeDotIndex={activeSlide}
-                  dotStyle={[{backgroundColor: brandTheme?.bgOrange02??Colors.bgOrange02}]}
-                  inactiveDotStyle={[{backgroundColor: brandTheme?.bgBlue06??Colors?.bgBlue06}]}
+                  dotStyle={[{backgroundColor: brandTheme?.bgBlue06??Colors?.bgBlue06}]}
+                  inactiveDotStyle={[{backgroundColor: brandTheme?.bgOrange02??Colors.bgOrange02}]}
                   inactiveDotOpacity={1}
                   inactiveDotScale={1}
                 />
@@ -238,7 +241,7 @@ const MyCards = ({ navigation }) => {
                   {showInfo
                   ? isVirtual && (
                     <View centerH >
-                      {!CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && (
+                      {CAROUSEL_ITEMS[activeSlide].statusRequestCard && !CAROUSEL_ITEMS[activeSlide]?.statusActivation &&(
                         <Fragment>
                           <View marginH-40 centerH>
                             <DivSpace height-10 />
@@ -260,7 +263,7 @@ const MyCards = ({ navigation }) => {
                           <CardVirtualActions navigation={navigation} dataVirtual={CAROUSEL_ITEMS[activeSlide]} />
                         </Fragment>
                       )}
-                      {CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && (
+                      {CAROUSEL_ITEMS[activeSlide].statusRequestCard && CAROUSEL_ITEMS[activeSlide]?.statusActivation && (
                         <View>
                           <DivSpace height-20 />
                           <Text medium h12 white center>
@@ -290,8 +293,8 @@ const MyCards = ({ navigation }) => {
                     </View>)
                   :null}
 
-                {showInfo
-                  ? isPhysical && CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && CAROUSEL_ITEMS[activeSlide]?.statusActivation &&( 
+                  {showInfo
+                  ? isPhysical && CAROUSEL_ITEMS[activeSlide].statusRequestCard && CAROUSEL_ITEMS[activeSlide].statusActivation  && !CAROUSEL_ITEMS[activeSlide].disabled && ( 
                     <View>
                       <DivSpace height-20 />
                       <Text medium h12 white center>
@@ -307,9 +310,27 @@ const MyCards = ({ navigation }) => {
                     </View>)
                   :null}
 
-                {showInfo
-                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide]?.statusActivation && CAROUSEL_ITEMS[activeSlide]?.statusRequestCard &&( 
+                  {showInfo
+                  ? isPhysical && !CAROUSEL_ITEMS[activeSlide].statusActivation && CAROUSEL_ITEMS[activeSlide].statusRequestCard &&( 
                     <CardDisabledFooter navigation={navigation} data={CAROUSEL_ITEMS[activeSlide]}/>)
+                  :null}
+
+                  {showInfo
+                  ? isPhysical && CAROUSEL_ITEMS[activeSlide].statusActivation && CAROUSEL_ITEMS[activeSlide].statusRequestCard && CAROUSEL_ITEMS[activeSlide].disabled &&( 
+                    <View centerH>
+                      <DivSpace height-20 />
+                      <View style={{width:'80%'}}>
+                        <Text medium h14 center white>
+                          Tarjeta inactiva
+                        </Text>
+                        <DivSpace height-20 />
+                        <Text center h12 medium white>
+                          Si deseas realizar pagos con ella presiona el icono del candado en la parte superior de la tarjeta.
+                        </Text>
+                      </View>
+                      <CardPhysicalActions navigation={navigation} dataPhysical={CAROUSEL_ITEMS[activeSlide]} inactive/>
+                    </View>
+                  )
                   :null}
               </View>
             </View>}
@@ -380,6 +401,10 @@ const MyCards = ({ navigation }) => {
           <ModalSwift 
             isOpen={true}
             onClose={handleOncloseModal}
+            navigation={navigation} />)}
+        {isLoadingModal && (
+          <Loader
+            isOpen={true}
             navigation={navigation} />)}
       </SafeAreaView>
       <NavigationEvents

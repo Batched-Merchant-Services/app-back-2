@@ -33,22 +33,24 @@ const HomeSwap = ({ navigation }) => {
   const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
   const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
   const [currencyUser] = useState(userData ? userData.currencyUser : '');
-  const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
-  const [showCatalog, setShowCatalog] = useState([]);
-  const [amountConvert, setAmountConvert] = useState('');
-  const [balanceConvert, setBalanceConvert] = useState('');
+  const [balanceCrypto]=useState(userData?userData.balanceCrypto:'');
+  const [ showCatalog,setShowCatalog ] = useState([]);
+  const [amountConvert,setAmountConvert] = useState('');
+  const amount = useValidatedInput('amount', '');
+  const [balanceConvert,setBalanceConvert]=useState('');
   //snack notifications
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
   const [snakVisible, setSnakVisible] = useState(false);
+  const [nameCurrency, setNameCurrency] = useState('');
   const [actionAnimated, setActionAnimated] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const [currentCurrency, setCurrentCurrency] = useState('');
-  const [currentConvert, setCurrentConvert] = useState('');
-  const cryptoCurrency = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
+  const [currentCurrency,setCurrentCurrency] = useState('');
+  const [currentConvert,setCurrentConvert] = useState('');
+  const cryptoCurrency = useValidatedInput('dropdownSelect', {name: i18n.t('generics.selectOne')}, {
     changeHandlerSelect: 'onSelect'
-  });
-  const amount = useValidatedInput('amount', '');
+  }); 
+
   const isValid = isFormValid(cryptoCurrency, amount);
 
   // useEffect(() => {
@@ -89,8 +91,15 @@ const HomeSwap = ({ navigation }) => {
     //   data: {page: 'saleCrypto',infoData, amountConvert,showCurrency},
     //   next: 'ConfirmationCrypto'
     // });
-    navigation.navigate('ListInformationSwap', { amount: amount?.value, currencyChange: cryptoCurrency?.value, amountConvert: currentConvert });
+    navigation.navigate('ListInformationSwap', { amount: amount?.value, currencyChange: cryptoCurrency?.value, amountConvert: currentConvert, nameConvert: nameCurrency });
   }
+
+  
+  function getDateConvert(value) {
+    console.log('value',value)
+    setNameCurrency(value);
+  }
+
   function getCode(code) {
     setCurrentConvert(code);
     if (code < 20) {
@@ -122,7 +131,6 @@ const HomeSwap = ({ navigation }) => {
     }
   };
 
-
   function errorFunction(response) {
     setIsLoadingModal(true);
     setTimeout(function () {
@@ -132,6 +140,8 @@ const HomeSwap = ({ navigation }) => {
       setTitle(response.message);
     }, 1000);
   }
+
+  
 
   return (
     <SignUpWrapper>
@@ -161,7 +171,7 @@ const HomeSwap = ({ navigation }) => {
                   <DivSpace height-10 />
                   <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                   <View row centerH centerV >
-                    <Text h12 semibold white>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
+                    <Text h10 semibold white>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
                     <DivSpace width-10 />
                     <ImageComponent
                       white
@@ -170,7 +180,7 @@ const HomeSwap = ({ navigation }) => {
                       height={verticalScale(30)}
                     />
                     <DivSpace width-10 />
-                    <Text h12 semibold white>{balanceConvert}{' '}<Text bgGray>{currencyUser}</Text></Text>
+                    <Text h10 semibold white>{balanceConvert}{' '}<Text bgGray>{currencyUser}</Text></Text>
                   </View>
                 </View>
               </ContainerCrypto>
@@ -185,8 +195,8 @@ const HomeSwap = ({ navigation }) => {
               />
               <DivSpace height-5 />
               <Text center white h10>{i18n.t('CryptoBalance.component.saleCrypto.textEnterTheAmount')} {showNameCrypto} {i18n.t('CryptoBalance.component.saleCrypto.textTheEquivalentInYour')}</Text>
-              <DivSpace height-20 />
-              <AmountCryptoTwo {...amount} onFillConvert={(code) => getCode(code)} />
+              <DivSpace height-30 />
+              <AmountCryptoTwo {...amount} onFillConvert={(code) => getCode(code)} convertData={(value) => getDateConvert(value)}/>
               <DivSpace height-15 />
               <View marginH-50 centerH>
                 <ButtonRounded

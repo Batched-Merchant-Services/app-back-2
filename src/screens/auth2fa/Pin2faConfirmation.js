@@ -13,7 +13,7 @@ import {
 } from '@components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
-import { SafeAreaView, AsyncStorage } from 'react-native';
+import { KeyboardAvoidingView, Platform,SafeAreaView,AsyncStorage } from 'react-native';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -56,7 +56,6 @@ async function transactionWallet(
   appData
 ) {
   setIsLoadingModal(true);
-  console.log('type',data)
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
   const response = await TransferWalletToCard(token, data.origin, data.amount, data.destiny, data.typeTrans, codeSecurity);
   if (response.code < 400) {
@@ -87,7 +86,7 @@ async function payContacts(
   setIsLoadingModal(true);
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
 
-  const response = await reloadCard(token, data.data.proxyKey, codeSecurity, data.amount, '', data.data.type);
+  const response = await reloadCard(token, data?.data?.id, codeSecurity, data?.amount, '', data?.data?.type);
 
   if (response.code < 400) {
     setTimeout(function () {
@@ -243,7 +242,6 @@ async function changePINCard(
 }
 
 
-
 async function changePassword(
   data,
   code,
@@ -270,7 +268,6 @@ async function changePassword(
     errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
   }
 }
-
 
 
 async function createPaymentServices(
@@ -408,7 +405,8 @@ async function buyCrypto(
 ) {
   setIsLoadingModal(true);
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
-  const response = await getBuyCrypto(token, data?.amount?.value, data?.amountConvert, data?.shortNameCrypto, codeSecurity);
+  console.log('dataa buy crypto', data?.amountEnv, data?.amountConv, data?.shortNameCrypto, codeSecurity);
+  const response = await getBuyCrypto(token, data?.amountEnv, data?.amountConv, data?.shortNameCrypto, codeSecurity);
   if (response.code < 400) {
     setTimeout(function () {
       navigation.navigate(next, { data: data, dataInfo: response.data });
@@ -603,13 +601,11 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
           appData
         );
       } else if (data.page === 'config') {
-
         const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
         setTimeout(function () {
           navigation.navigate(next, { pin: codeSecurity,CodeLeft: getCodeLeft,Code: code, page: data.page });
           setIsLoadingModal(false);
         }, 1000);
-
       } else if (data.page === 'UpdatePINCard') {
 
         await changePINCard(
@@ -851,7 +847,6 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
     }
   }, []);
 
-
   useEffect(() => {
     if (params !== 'Login') {
       if (data?.page !== 'config') {
@@ -921,48 +916,55 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
 
 
 
+
+
   return (
     <SignUpWrapper >
-      <SafeAreaView forceInset={{ top: 'always' }}>
-        <NavigationBar
-          onBack={() => navigation.goBack()}
-          body={i18n.t('Auth2fa.titleSecurity')}
-        />
-        <DivSpace height-15 />
-        <View centerH>
-          <BoxBlue textBlue01 containerStyle={{ height: verticalScale(300) }}>
-            <View centerH centerV marginH-20>
-              <DivSpace height-10 />
-              <Text h13 regular textGray>{i18n.t('Auth2fa.textSecurityOfYourAccount')}</Text>
-              <DivSpace height-5 />
-              <Text h11 regular textGray center>{i18n.t('Auth2fa.textForUsYourSafetyIs')}</Text>
-              <DivSpace height-10 />
-              <ImageComponent
-                source={IconCode}
-                width={scale(115)}
-                height={verticalScale(115)}
-              />
-              <DivSpace height-10 />
-              <Text h16 textGray>{i18n.t('Auth2fa.textAuthentication')}</Text>
-              <DivSpace height-10 />
-              {appData?.type2fa === 2 && (
-                <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentYou')}{' '}<Text h12 textGray semibold>{maskNumbers(appData?.dataUserGraph?.phoneNumber || params?.phone)}</Text></Text>
-              )}
-              {appData?.type2fa === 3 && (
-                <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentEmail')}{' '}<Text h12 textGray semibold>{maskEmail(appData?.dataUserGraph?.email || params?.email)}</Text></Text>
-              )}
-              {appData?.type2fa === 1 && (
-                <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentApp')}{' '}<Text textGray semibold>{i18n.t('Auth2fa.textAuthenticatorApp')}</Text></Text>
-              )}
-            </View>
-          </BoxBlue>
-        </View>
-        <DivSpace height-30 />
-        <View centerH>
-          <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
-          <PinInput {...codeActivation} />
-        </View>
-        <DivSpace height-50 />
+      <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always' }}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "position" : "height"}
+          style={{ flex: 0.89 }}
+        >
+          <NavigationBar
+            onBack={() => navigation.goBack()}
+            body={i18n.t('Auth2fa.titleSecurity')}
+          />
+          <DivSpace height-15 />
+          <View centerH>
+            <BoxBlue textBlue01 containerStyle={{ height: verticalScale(300) }}>
+              <View centerH centerV marginH-20>
+                <DivSpace height-10 />
+                <Text h13 regular textGray>{i18n.t('Auth2fa.textSecurityOfYourAccount')}</Text>
+                <DivSpace height-5 />
+                <Text h11 regular textGray center>{i18n.t('Auth2fa.textForUsYourSafetyIs')}</Text>
+                <DivSpace height-10 />
+                <ImageComponent
+                  source={IconCode}
+                  width={scale(115)}
+                  height={verticalScale(115)}
+                />
+                <DivSpace height-10 />
+                <Text h16 textGray>{i18n.t('Auth2fa.textAuthentication')}</Text>
+                <DivSpace height-10 />
+                {appData?.type2fa === 2 && (
+                  <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentYou')}{' '}<Text h12 textGray semibold>{maskNumbers(appData?.dataUserGraph?.phoneNumber || params?.phone)}</Text></Text>
+                )}
+                {appData?.type2fa === 3 && (
+                  <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentEmail')}{' '}<Text h12 textGray semibold>{maskEmail(appData?.dataUserGraph?.email || params?.email)}</Text></Text>
+                )}
+                {appData?.type2fa === 1 && (
+                  <Text h11 regular textGray center>{i18n.t('Auth2fa.textWeHaveSentApp')}{' '}<Text textGray semibold>{i18n.t('Auth2fa.textAuthenticatorApp')}</Text></Text>
+                )}
+              </View>
+            </BoxBlue>
+          </View>
+          <DivSpace height-30 />
+          <View centerH>
+            <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
+            <PinInput {...codeActivation} />
+          </View>
+          <DivSpace height-50 />
+        </KeyboardAvoidingView>
         <View centerH>
           <ButtonRounded
             onPress={getInfo}
@@ -973,20 +975,17 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
             </Text>
           </ButtonRounded>
         </View>
-        {isLoadingModal && (
-          <Loader
-            isOpen={true}
-            navigation={navigation} />)}
-
       </SafeAreaView>
-      <View flex-1 bottom>
-        <SnackBar
-          message={title}
-          isVisible={snakVisible}
-          onClose={closeSnack}
-          animationAction={actionAnimated}
-        />
-      </View>
+      {isLoadingModal && (
+        <Loader
+          isOpen={true}
+          navigation={navigation} />)}
+      <SnackBar
+        message={title}
+        isVisible={snakVisible}
+        onClose={closeSnack}
+        animationAction={actionAnimated}
+      />
     </SignUpWrapper>
   );
 }

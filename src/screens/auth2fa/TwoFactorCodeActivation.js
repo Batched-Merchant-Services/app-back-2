@@ -13,7 +13,7 @@ import {
 } from '@components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -43,7 +43,7 @@ const TwoFactorCodeActivation = ({ navigation, route, navigation: { goBack } }) 
     const response = await setActivationThirdParty(code)
     if (response?.setEnabled2faThirdParty) {
       navigation.push('TwoFactorConfirmationActivation', { page: 'App' })
-      dispatch(saveUser({ 
+      dispatch(saveUser({
         type2fa: 1
       }));
       setIsLoadingModal(false);
@@ -71,45 +71,52 @@ const TwoFactorCodeActivation = ({ navigation, route, navigation: { goBack } }) 
 
   return (
     <SignUpWrapper >
-      <SafeAreaView forceInset={{ top: 'always' }}>
-        <NavigationBar
-          onBack={() => navigation.goBack()}
-          body={i18n.t('Auth2fa.titleSecurity')}
-        />
-        <DivSpace height-20 />
-        <View centerH>
-          <BoxBlue textBlue01 containerStyle={{ height: verticalScale(210) }}>
-            <View centerH>
-              <DivSpace height-10 />
-              {params !== 'change' && (
-                <Text h13 regular textGray>{i18n.t('Auth2fa.textActivateTwoFactorAuthentication')}</Text>
-              )}
-              {params === 'change' && (
-                <Text h13 regular textGray>{i18n.t('Auth2fa.textChangeTwoFactorAuthentication')}</Text>
-              )}
-              <ImageComponent
-                source={IconCode}
-                width={scale(115)}
-                height={verticalScale(115)}
-              />
-              <DivSpace height-20 />
-              {params !== 'change' && (
-                <Text h10 textGray semibold>{i18n.t('Auth2fa.textEnterTheCodeYou')}{' '}<Text white regular>{i18n.t('Auth2fa.textIfTimeRunsOut')}</Text></Text>
-              )}
-              {params === 'change' && (
-                <Text h10 textGray semibold>{i18n.t('Auth2fa.textEnterTheCodeYouGot')}<Text white regular>{i18n.t('Auth2fa.textIfTimeRunsOut')}</Text></Text>
-              )}
-            </View>
-          </BoxBlue>
-        </View>
-        <DivSpace height-30 />
-
-        <DivSpace height-10 />
-        <View centerH>
-          <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
-          <PinInput {...codeActivation} />
-        </View>
-        <DivSpace height-50 />
+      <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always' }}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "position" : "height"}
+          style={{ flex: 0.75}}
+        >
+          <NavigationBar
+            onBack={() => navigation.goBack()}
+            body={i18n.t('Auth2fa.titleSecurity')}
+          />
+          <DivSpace height-20 />
+          <View centerH>
+            <BoxBlue textBlue01 containerStyle={{ height: verticalScale(210) }}>
+              <View centerH>
+                <DivSpace height-10 />
+                {params !== 'change' && (
+                  <Text h13 regular textGray>{i18n.t('Auth2fa.textActivateTwoFactorAuthentication')}</Text>
+                )}
+                {params === 'change' && (
+                  <Text h13 regular textGray>{i18n.t('Auth2fa.textChangeTwoFactorAuthentication')}</Text>
+                )}
+                <ImageComponent
+                  source={IconCode}
+                  width={scale(115)}
+                  height={verticalScale(115)}
+                />
+                <DivSpace height-20 />
+                {params !== 'change' && (
+                  <Text h10 textGray semibold>{i18n.t('Auth2fa.textEnterTheCodeYou')}{' '}<Text white regular>{i18n.t('Auth2fa.textIfTimeRunsOut')}</Text></Text>
+                )}
+                {params === 'change' && (
+                  <Text h10 textGray semibold>{i18n.t('Auth2fa.textEnterTheCodeYouGot')}<Text white regular>{i18n.t('Auth2fa.textIfTimeRunsOut')}</Text></Text>
+                )}
+              </View>
+            </BoxBlue>
+          </View>
+          <DivSpace height-40 />
+          <View centerH>
+            <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
+            <PinInput {...codeActivation} />
+          </View>
+          <DivSpace height-50 />
+          {isLoadingModal && (
+            <Loader
+              isOpen={true}
+              navigation={navigation} />)}
+        </KeyboardAvoidingView>
         <View centerH>
           <ButtonRounded
             onPress={getInfo}
@@ -120,19 +127,13 @@ const TwoFactorCodeActivation = ({ navigation, route, navigation: { goBack } }) 
             </Text>
           </ButtonRounded>
         </View>
-        {isLoadingModal && (
-          <Loader
-            isOpen={true}
-            navigation={navigation} />)}
       </SafeAreaView>
-      <View flex-1 bottom>
-        <SnackBar
-          message={title}
-          isVisible={snakVisible}
-          onClose={closeSnack}
-          animationAction={actionAnimated}
-        />
-      </View>
+      <SnackBar
+        message={title}
+        isVisible={snakVisible}
+        onClose={closeSnack}
+        animationAction={actionAnimated}
+      />
     </SignUpWrapper>
   );
 }

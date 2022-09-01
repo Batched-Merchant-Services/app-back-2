@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { scale } from 'react-native-size-matters';
 import {
   DivSpace,

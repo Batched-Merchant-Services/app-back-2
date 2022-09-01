@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { QrCodeReader, View } from '@components';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import i18n from '@utils/i18n';

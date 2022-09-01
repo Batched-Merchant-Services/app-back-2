@@ -139,11 +139,11 @@ const AddNewAddressCrypto = ({ navigation }) => {
                 <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                 <View flex-1 row centerH centerV >
                   <View flex-1>
-                    <Text h11 white center>{balanceCrypto}{' '}<Text textGray>{shortNameCrypto}</Text>{' '}</Text>
+                    <Text h10 white center>{balanceCrypto}{' '}<Text textGray>{shortNameCrypto}</Text>{' '}</Text>
                   </View>
                   <View width-21 height-2 white ></View>
                   <View flex-1>
-                    <Text h11 white center>{' '}{balanceConvert}{' '}<Text textGray>USD</Text></Text>
+                    <Text h10 white center>{' '}{balanceConvert}{' '}<Text textGray>USD</Text></Text>
                   </View>
                   
                 </View>

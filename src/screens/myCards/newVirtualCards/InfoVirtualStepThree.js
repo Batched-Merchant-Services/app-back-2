@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React,{useState} from 'react';
 import { scale, verticalScale } from 'react-native-size-matters';
 import i18n from '@utils/i18n';
 import {

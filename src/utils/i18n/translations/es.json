@@ -79,6 +79,7 @@
       "password": "Contraseña",
       "confirmPassword": "Confirmar contraseña",
       "selectOne": "Selecciona una opción",
+      "select": "Selecciona",
       "next": "Siguiente",
       "welcome": "¡Bienvenido a SAVVY!",
       "welcomeLogin": "Bienvenido",
@@ -1373,6 +1374,9 @@
         "textSelectTheCryptocurrency":"Selecciona la criptodivisa que deseas comprar.",
         "textInMyWallet":"En mi Wallet",
         "textAvailableForPurchase":"Lista de activos",
+        "InputAmount":"Monto",
+        "InputConversion":"Conversión",
+        "SelectCurrency":"Currency",
         "buyCrypto":{
           "titlePurchaseOf":"Compra de criptodivisas",
           "textBuy":"Compra",

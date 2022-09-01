@@ -119,6 +119,7 @@ const Historics = ({ navigation }) => {
   async function getInfo() {
     const token = await LocalStorage.get('auth_token');
     const response = await getHistoriTransactions(token);
+    console.log('error',response)
     if (response.code < 400){
       if (!response.data) {
         setHistoricTrans([]);
@@ -136,7 +137,7 @@ const Historics = ({ navigation }) => {
 
   async function getIdInfo() {
     const token = await LocalStorage.get('auth_token');
-    const proxy = data ? data.proxyKey: '';
+    const proxy = data ? data?.id: '';
     const response = await getHistoriId(token, proxy);
     if (response.code < 400)
       if (!response.data) {

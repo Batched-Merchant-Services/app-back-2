@@ -55,7 +55,7 @@ const CardRequestCard = ({ navigation, dataVirtual }) => {
         paddingV-16
         row
       >
-        {!dataVirtual?.statusRequestCard && (
+        {dataVirtual?.statusRequestCard && !dataVirtual?.statusActivation &&(
           <Animatable.View style={Styles.containerButton} animation="flipInX" delay={150}>
             <Ripple rippleDuration={800} style={{ flex: 1 }} onPress={handleInstruction}>
               <View flex-1 centerH>
@@ -70,7 +70,7 @@ const CardRequestCard = ({ navigation, dataVirtual }) => {
             </Ripple>
           </Animatable.View>
         )}
-        {dataVirtual?.statusRequestCard && (
+        {dataVirtual?.statusActivation && dataVirtual?.statusRequestCard &&(
           <Fragment>
             <Animatable.View style={Styles.containerButton} animation="flipInX" >
               <Ripple style={{ flex: 1 }} onPress={handleRechargePress}>

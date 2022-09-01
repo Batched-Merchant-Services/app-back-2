@@ -41,6 +41,7 @@ const SendCrypto = ({ navigation }) => {
   const [shortNameCrypto] = useState(userData ? userData.typeCrypto : '');
   const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
   const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
+  const [nameCurrency, setNameCurrency] = useState('');
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
   const [snakVisible, setSnakVisible] = useState(false);
@@ -100,7 +101,8 @@ const SendCrypto = ({ navigation }) => {
 
   async function handlePay() {
     const addressCrypto = codeQR ? codeQR : idAddress;
-    const amountCurrency = amount?.value;
+    const amountCurrency = nameCurrency === 'USD' ? currentConvert : amount?.value;
+    console.log('amountCurrency',amountCurrency)
     const dropDownAddress = userToTransfer?.value?.id;
     const sendAddress = addressCrypto || dropDownAddress;
     const token = await LocalStorage.get('auth_token');
@@ -136,32 +138,33 @@ const SendCrypto = ({ navigation }) => {
       }
     }
   }
+  
 
   function onFill(code) {
     setIDAddress(code.id);
-  }
-  function onFillAmount(code) {
-    setAmountConvert(code);
   }
 
   function getCode(code) {
     setCurrentConvert(code);
   }
 
+  function getDateConvert(value) {
+    setNameCurrency(value);
+  }
 
-  async function onCurrency(code) {
-    setCurrentCurrency(code);
-    setIsLoadingModal(true);
-    const token = await LocalStorage.get('auth_token');
-    const response = await conversionCurrency(token, code === 'USD' ? shortNameCrypto : 'USD', code === shortNameCrypto ? shortNameCrypto : 'USD', amountConvert);
-    if (response.code < 400) {
-      setIsLoadingModal(false);
-      setAmountConvert(response.data?.conversion?.toString());
-    } else {
-      setAmountConvert(0);
-      closeSnackNotice(response);
-    }
-  };
+
+  function getSnackUsd(data) {
+    console.log('getSnackUsd', data)
+    // if (data < 20) {
+    //   setSnakVisible(true);
+    //   setButtonNext(true);
+    //   setIsLoadingModal(false);
+    //   setTitle(i18n.t('CryptoBalance.component.Swap.snackNotice'));
+    // } else {
+    //   setButtonNext(false);
+    // }
+  }
+  
 
   const handleCloseNotif = () => {
     setSnakVisible(false);
@@ -207,11 +210,11 @@ const SendCrypto = ({ navigation }) => {
                 <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                 <View flex-1 row centerH centerV >
                   <View flex-1>
-                    <Text h11 white center>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text>{' '}</Text>
+                    <Text h10 white center>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text>{' '}</Text>
                   </View>
                   <View width-21 height-2 white></View>
                   <View flex-1>
-                    <Text h11 white center>{' '}{balanceConvert}{' '}<Text bgGray>USD</Text></Text>
+                    <Text h10 white center>{' '}{balanceConvert}{' '}<Text bgGray>USD</Text></Text>
                   </View>
                 </View>
               </View>
@@ -242,8 +245,8 @@ const SendCrypto = ({ navigation }) => {
               </View>
               <DivSpace height-10 />
               <Text h11 white center>{i18n.t('CryptoBalance.component.sendCrypto.textEnterTheAmount')}</Text>
-              <DivSpace height-10/>
-              <AmountCryptoTwo {...amount} onFillConvert={(code) => getCode(code)} />
+              <DivSpace height-30 />
+              <AmountCryptoTwo {...amount} onFillConvert={(data) => getSnackUsd(data)} numberConvert={(code) => getCode(code)} convertData={(value) => getDateConvert(value)}/>
               <DivSpace height-10 />
               <Text h11 textGray center semibold>{i18n.t('CryptoBalance.component.sendCrypto.textACommissionIsDeducted')}</Text>  
               <DivSpace height-10 />

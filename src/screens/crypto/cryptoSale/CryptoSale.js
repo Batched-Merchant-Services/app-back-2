@@ -15,6 +15,7 @@ import {
 import rowEquals from '@assets/icons/rowEquals.png';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import AmountCrypto from '@screens/crypto/components/AmountCrypto';
+import AmountCryptoTwo from '@screens/crypto/components/AmountCryptoTwo';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
@@ -78,7 +79,7 @@ const CryptoSale = ({ navigation }) => {
                 <DivSpace height-10 />
                 <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                 <View row centerH centerV >
-                  <Text h11 white>0.00012{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
+                  <Text h10 white>0.00012{' '}<Text bgGray>{shortNameCrypto}</Text></Text>
                   <DivSpace width-10 />
                   <ImageComponent
                     white
@@ -87,7 +88,7 @@ const CryptoSale = ({ navigation }) => {
                     height={verticalScale(30)}
                   />
                   <DivSpace width-10 />
-                  <Text h11 white>1234.56{' '}<Text bgGray>{currencyUser}</Text></Text>
+                  <Text h10 white>1234.56{' '}<Text bgGray>{currencyUser}</Text></Text>
                 </View>
               </View>
             </ContainerCrypto>
@@ -95,8 +96,8 @@ const CryptoSale = ({ navigation }) => {
             <View paddingT-10 paddingH-11 textBlue01 style={{ borderRadius: 10}}>
               <DivSpace height-10 />
               <Text center white h10>{i18n.t('CryptoBalance.component.saleCrypto.textEnterTheAmount')} {showNameCrypto} {i18n.t('CryptoBalance.component.saleCrypto.textTheEquivalentInYour')}</Text>
-              <DivSpace height-10 />
-              <AmountCrypto  onFillAmount={(code) => onFill(code)} onCurrency={(code) => onCurrency(code)}/>
+              <DivSpace height-30 />
+              <AmountCryptoTwo {...amount} numberConvert={(code) => getCode(code)} convertData={(value) => getDateConvert(value)}/> 
               <DivSpace height-15 />
               <View flex-1 centerH>
                 <ButtonRounded

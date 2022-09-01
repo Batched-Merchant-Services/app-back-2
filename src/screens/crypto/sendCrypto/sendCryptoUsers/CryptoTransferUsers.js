@@ -224,17 +224,17 @@ const CryptoTransferUsers = ({ navigation }) => {
                 <Text h11 orange>{i18n.t('CryptoBalance.component.titleMyBalance')}:</Text>
                 <View flex-1 row centerH centerV >
                   <View flex-1>
-                    <Text h11 white center>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text>{' '}</Text>
+                    <Text h10 white center>{balanceCrypto}{' '}<Text bgGray>{shortNameCrypto}</Text>{' '}</Text>
                   </View>
                   <View width-21 height-2 white></View>
                   <View flex-1>
-                    <Text h11 white center>{' '}{balanceConvert}{' '}<Text bgGray>USD</Text></Text>
+                    <Text h10 white center>{' '}{balanceConvert}{' '}<Text bgGray>USD</Text></Text>
                   </View>
                   
                 </View>
               </View>
             </ContainerCrypto>
-            <DivSpace height-15 />
+            <DivSpace height-30 />
             <View padding-15 textBlue01 style={{borderRadius: 10}}>
               {/* <Text  center white h11>{i18n.t('CryptoBalance.component.CryptoSendBetweenUser.textEnterTheAmountYou')}</Text>
               <DivSpace height-15 />
@@ -284,7 +284,7 @@ const CryptoTransferUsers = ({ navigation }) => {
                   </Text>
                 </ButtonRounded>
               </View> */}
-              <AmountCrypto addAmount={amountConvert}  onChange={(code) => onFillAmount(code)} onCurrency={(code) => onCurrency(code)}/>
+              <AmountCryptoTwo {...amount} onFillConvert={(data) => getSnackUsd(data)} numberConvert={(code) => getCode(code)} convertData={(value) => getDateConvert(value)}/>
               <DivSpace height-10 />
               <Text h11 textGray center semibold>{i18n.t('CryptoBalance.component.sendCrypto.textACommissionIsDeducted')}</Text>  
               <DivSpace height-10 />

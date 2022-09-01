@@ -52,17 +52,16 @@ const Select = ({ error, label, value, options, size,onSelect, languages,onFill,
   };
 
   const handleAdjustFrame = (style, showInBottom) => {
-    
     style.width = width;
+    console.log('width',style.width)
     if (showInBottom) {
       style.height = verticalScale(1 * options.length + 130, 0.40);
-      style.left = style.left - verticalScale(1, 0.3);
+      style.left = style.width > 150 ? style.left - verticalScale(1, 0.3): null;
       style.top = Platform.OS === 'ios' ? style.top = style.top - moderateScale(3, 0.3) :  style.top - verticalScale(29);
       setIsOnTop(false);
     } else {
       style.height = verticalScale(1 * options.length + 130, 0.40);
-      style.left = style.left - verticalScale(1, 0.3);
-      style.top = Platform.OS === 'ios' ? style.top = style.top - moderateScale(3, 0.3) :  style.top + style.height - verticalScale(135);;
+      style.top = Platform.OS === 'ios' ? style.top = style.top - moderateScale(3, 0.3) :  style.top + style.height - verticalScale(135);
       setIsOnTop(true);
     }
     return style;
@@ -71,7 +70,7 @@ const Select = ({ error, label, value, options, size,onSelect, languages,onFill,
   const dropdownRenderRow = ({ emoji, name, icon, balance, typeMoney, amount }) => {
     onSelect(option);
     return (
-      <TouchableHighlight underlayColor='transparent' style={Styles.option}>
+      <TouchableHighlight underlayColor='transparent' style={[Styles.option,{left:10}]}>
         <Option size={size} emoji={emoji} name={amount? amount   : name} icon={icon? icon: ''} balance={balance? balance: ''} typeMoney={typeMoney? typeMoney: ''}/>
       </TouchableHighlight>
     );

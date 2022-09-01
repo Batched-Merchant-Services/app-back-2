@@ -25,6 +25,7 @@ var apiSavvyWallet = axios.create({
 
 apiSavvyWallet.interceptors.request.use(
   async config => {
+    console.log('request', config);
     config.headers = {...config.headers,'Accept-Language': i18n?.language,'app': 'savvy' };
     const authUrls = [];
     if (authUrls.includes(config.url)) {
@@ -40,7 +41,7 @@ apiSavvyWallet.interceptors.request.use(
 );
 
 const errorHandler = (error) => {
-  console.log('errorHandler',error.config);
+  console.log('errorHandler',error);
   if(error.config) {
     
   }
@@ -249,7 +250,7 @@ export const getHistoriId = async (token,id ) => {
   const headers = {
     'Authorization': token,
   };
-  return await apiSavvyWallet.get(`/transactions/${id}`, {headers});
+  return await apiSavvyWallet.get(`/transactions?proxy_key=${id}`, {headers});
 };
 
 
@@ -682,20 +683,19 @@ export const getVirtualCards = async (token) => {
 };
 
 
-
 export const validatePin = async (token,pin) => {
-  const Pin = await pinCrypto({pin});
-
   const headers = {
     'Authorization': token,
   };
   const body = {
-    pin: Pin
+    code        : pin,
+    two_factor  : true
   };
   
 
   return await apiSavvyWallet.post(`/users/pin`, body, { headers });
 };
+
 
 export const changePasswordReset = async ( token, password,passwordConfirm ) => {
 
@@ -931,8 +931,8 @@ export const getBuyCrypto = async (token,amount,conversion_amount,currency,pin)=
     'Authorization': token,
   };
   const body = {
-    amount           : conversion_amount, 
-    conversion_amount: amount, 
+    amount           : amount, 
+    conversion_amount:conversion_amount, 
     currency         : currency,
     code             : pin,
     two_factor       : true
@@ -1208,6 +1208,22 @@ export const createTRXSwap = async (token,fromCurrency,toCurrency,amount,pin) =>
   return await apiSavvyWallet.post(`/swap`,body,{ headers });
 };
 
+
+export const validateSMS = async (token) => {
+
+  const headers = {
+    'Authorization': token
+  };
+  return await apiSavvyWallet.get(`/wallet/generate/pin/direct`,{ headers });
+};
+
+export const validateEmail = async (token) => {
+
+  const headers = {
+    'Authorization': token
+  };
+  return await apiSavvyWallet.get(`/wallet/generate/pin/direct_ses`,{ headers });
+};
 
 export const getValidateSession = async (token) => {
 
