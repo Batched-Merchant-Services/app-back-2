@@ -405,7 +405,6 @@ async function buyCrypto(
 ) {
   setIsLoadingModal(true);
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
-  console.log('dataa buy crypto', data?.amountEnv, data?.amountConv, data?.shortNameCrypto, codeSecurity);
   const response = await getBuyCrypto(token, data?.amountEnv, data?.amountConv, data?.shortNameCrypto, codeSecurity);
   if (response.code < 400) {
     setTimeout(function () {
@@ -433,8 +432,8 @@ async function sendCryptoInfo(
   appData
 ) {
   setIsLoadingModal(true);
-  //console.log('data',token,data.shortNameCrypto,data?.amountCurrency,data?.sendAddress,data?.transferReference?.value)
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
+  console.log('data 1',token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity)
   const response = data.page === 'sendCryptoUsers' ? await sendCryptoUsers(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity) : await sendCrypto(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity);
   if (response.code < 400) {
     setTimeout(function () {

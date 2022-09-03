@@ -133,6 +133,7 @@ const PersonalInformation = ({ navigation }) => {
                   {...name}
                   label={i18n.t('myProfile.component.labelName')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -140,6 +141,7 @@ const PersonalInformation = ({ navigation }) => {
                   {...lastName}
                   label={i18n.t('myProfile.component.labelFirstLastName')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -147,6 +149,7 @@ const PersonalInformation = ({ navigation }) => {
                   {...slastName}
                   label={i18n.t('myProfile.component.labelSecondLastName')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />

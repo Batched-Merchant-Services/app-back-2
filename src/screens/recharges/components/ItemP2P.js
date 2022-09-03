@@ -72,6 +72,7 @@ const ItemP2P = ({ openToast, onP2P }) => {
           {...amount}
           label={i18n.t('recharges.component.textAmountToReload') + ':'}
           keyboardType={'default'}
+          returnKeyType={'done'}
           autoCapitalize={'none'}
           raiseLabel
         />

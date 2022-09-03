@@ -51,10 +51,10 @@ const ConfirmationSwap = ({ navigation }) => {
                 <IconSwapConfirmation width={scale(58)} height={verticalScale(58)}  fill={brandTheme?.bgBlue06??Colors?.bgBlue06} />
               </BoxGradient>
               <DivSpace height-15 />
-              <Text h12 center regular white>{i18n.t('CryptoBalance.component.Swap.textAmountSent')}</Text>
-              <DivSpace height-5 />
+              {/* <Text h12 center regular white>{i18n.t('CryptoBalance.component.Swap.textAmountSent')}</Text>
+              <DivSpace height-5 /> */}
               <Text h20 white semibold center >
-                {data?.amount + data?.fee}{' '}{data?.from_currency}
+                {data?.amount + data?.fee}{' '}{data?.to_currency}{' '}{i18n.t('CryptoBalance.component.Swap.textOn')}{' '}{data?.from_currency}
               </Text>
               <DivSpace height-10 />
               <Text h12 center regular white>{i18n.t('CryptoBalance.component.Swap.textAmountReceived')}</Text>

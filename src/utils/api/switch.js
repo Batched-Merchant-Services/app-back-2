@@ -961,13 +961,13 @@ export const getChartCrypto = async (token,currency) => {
 // };
 
 
-export const getLiquidCrypto = async (token) => {
+export const getLiquidCrypto = async (token,currency) => {
   
   const headers = {
     'Authorization': token,
   };
 
-  return await apiSavvyWallet.get(`/liquid_currencies/payments`,  { headers });
+  return await apiSavvyWallet.get(`/liquid_currencies/payments?short_name=${currency}`,  { headers });
 };
 
 

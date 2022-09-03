@@ -91,6 +91,7 @@ const paymentToEstablishment = ({ navigation }) => {
               {...amount}
               label={i18n.t('PaymentToEstablishment.component.inputPayAmount')}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
             />
           </View>

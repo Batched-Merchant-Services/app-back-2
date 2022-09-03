@@ -210,6 +210,7 @@ const CreatePassword = ({ navigation }) => {
                       {...password}
                       label={i18n.t('generics.password')}
                       keyboardType={'default'}
+                      returnKeyType={'done'}
                       autoCapitalize={'none'}
                       secureTextEntry
                       style={{ color: brandTheme?.white ?? Colors.white }}
@@ -222,6 +223,7 @@ const CreatePassword = ({ navigation }) => {
                       {...confirmPassword}
                       label={i18n.t('generics.confirmPassword')}
                       keyboardType={'default'}
+                      returnKeyType={'done'}
                       autoCapitalize={'none'}
                       secureTextEntry
                       style={{ color: brandTheme?.white ?? Colors.white }}
@@ -292,6 +294,7 @@ const CreatePassword = ({ navigation }) => {
                     {...password}
                     label={i18n.t('generics.password')}
                     keyboardType={'default'}
+                    returnKeyType={'done'}
                     autoCapitalize={'none'}
                     secureTextEntry
                   />
@@ -302,6 +305,7 @@ const CreatePassword = ({ navigation }) => {
                     {...confirmPassword}
                     label={i18n.t('generics.confirmPassword')}
                     keyboardType={'default'}
+                    returnKeyType={'done'}
                     autoCapitalize={'none'}
                     secureTextEntry
                   />

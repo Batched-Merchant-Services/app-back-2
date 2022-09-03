@@ -1588,6 +1588,7 @@
           "textYouWillReceive":"You’ll Receive:",
           "textNetworkFees":"Network Fees",
           "buttonSwap":"Swap",
+          "textOn":"on",
           "snackNotice":"You cannot send amounts less than 20 USD"
         }
      

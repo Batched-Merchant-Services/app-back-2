@@ -160,6 +160,7 @@ const ContactScreen = ({ navigation }) => {
               {...message}
               label={i18n.t('contact.component.message')}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
               numberOfLines={5}
               multiline

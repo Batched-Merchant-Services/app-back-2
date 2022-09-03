@@ -258,6 +258,7 @@ const SendCrypto = ({ navigation }) => {
                 {...transferReference}
                 label={i18n.t('CryptoBalance.component.sendCrypto.inputTransferReference')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-15 />

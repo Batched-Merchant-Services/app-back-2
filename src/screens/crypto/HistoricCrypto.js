@@ -153,6 +153,7 @@ const HistoricCrypto = ({ navigation }) => {
   const userData = redux.user;
   const brandTheme = userData?.Theme?.colors;
   const scrollView = useRef(null);
+  const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
   const [ historicTrans,setHistoricTrans] = useState([]);
   const [ showEmpty,seshowEmpty] = useState(true);
   
@@ -165,7 +166,7 @@ const HistoricCrypto = ({ navigation }) => {
 
   async function getLisCrypto() {
     const token = await LocalStorage.get('auth_token');
-    const responseList = await getLiquidCrypto(token);
+    const responseList = await getLiquidCrypto(token,shortNameCrypto);
     if (responseList.code < 400) {
       setHistoricTrans(responseList.data);
       seshowEmpty(false);

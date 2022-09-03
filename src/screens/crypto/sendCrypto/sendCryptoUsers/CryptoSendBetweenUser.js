@@ -144,6 +144,7 @@ const CryptoSendBetweenUser = ({ navigation }) => {
                     {...idUser}
                     label={i18n.t('CryptoBalance.component.CryptoSendBetweenUser.inputUulalaUserID')}
                     keyboardType={'default'}
+                    returnKeyType={'done'}
                     autoCapitalize={'none'}
                     onEndEditing={getInfoUser}
                   />

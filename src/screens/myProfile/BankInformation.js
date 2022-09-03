@@ -122,6 +122,7 @@ const BankInformation = ({ navigation }) => {
                   {...bank}
                   label={i18n.t('myProfile.component.selectBakn')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -129,6 +130,7 @@ const BankInformation = ({ navigation }) => {
                   {...accountNo}
                   label={i18n.t('myProfile.component.inputAccountNo')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -136,6 +138,7 @@ const BankInformation = ({ navigation }) => {
                   {...interbankClabe}
                   label={i18n.t('myProfile.component.inputInterbankClabe')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-15 />

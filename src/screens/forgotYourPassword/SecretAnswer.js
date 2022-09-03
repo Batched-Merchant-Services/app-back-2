@@ -119,6 +119,7 @@ const SecretAnswer = ({ navigation, }) => {
                     {...email}
                     label={i18n.t('generics.emailOrPhone')}
                     keyboardType={'default'}
+                    returnKeyType={'done'}
                     autoCapitalize={'none'}
                     style={{ color: Colors.white }}
                     containerStyle={{ backgroundColor: 'white' }}

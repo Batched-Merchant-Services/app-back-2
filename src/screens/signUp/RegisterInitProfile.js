@@ -188,6 +188,7 @@ const RegisterInitProfile = ({ navigation }) => {
                 {...name}
                 label={i18n.t('myProfile.component.labelName')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-13 />
@@ -195,6 +196,7 @@ const RegisterInitProfile = ({ navigation }) => {
                 {...flastname}
                 label={i18n.t('myProfile.component.labelFirstLastName')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-13 />
@@ -202,6 +204,7 @@ const RegisterInitProfile = ({ navigation }) => {
                 {...slastname}
                 label={i18n.t('myProfile.component.labelSecondLastName')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-13 />
@@ -252,6 +255,7 @@ const RegisterInitProfile = ({ navigation }) => {
                   {...answer}
                   label={i18n.t('generics.answerSecret')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
               </View>

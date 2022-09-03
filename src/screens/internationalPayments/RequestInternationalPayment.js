@@ -72,6 +72,7 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
                 {...amount}
                 label={i18n.t('requestInternationalPayments.component.labelInpuAmount')+':'}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
             </View>
@@ -83,6 +84,7 @@ const RequestInternationalPaymentsScreen = ({ navigation }) => {
             {...concept}
             label={i18n.t('requestInternationalPayments.component.textConcept')}
             keyboardType={'default'}
+            returnKeyType={'done'}
             autoCapitalize={'none'}
             multiline
             multiInput

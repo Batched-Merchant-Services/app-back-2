@@ -141,6 +141,7 @@ const ProviderPaymentScreen = ({ navigation }) => {
                 {...datum1}
                 label={i18n.t('storeProviderPayments.component.textReference')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-5 />
@@ -148,6 +149,7 @@ const ProviderPaymentScreen = ({ navigation }) => {
                 {...datum2}
                 label={i18n.t('storeProviderPayments.component.textPhone')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-12 />
@@ -173,6 +175,7 @@ const ProviderPaymentScreen = ({ navigation }) => {
                         {...amount}
                         label={i18n.t('storeProviderPayments.component.amount')}
                         keyboardType={'default'}
+                        returnKeyType={'done'}
                         autoCapitalize={'none'}
                       />)
                   }

@@ -90,6 +90,7 @@ const RechargeCardScreen = ({ navigation }) => {
             {...amount}
             label={i18n.t('cardRecharge.component.amount')}
             keyboardType={'default'}
+            returnKeyType={'done'}
             autoCapitalize={'none'}
           />
         </View>

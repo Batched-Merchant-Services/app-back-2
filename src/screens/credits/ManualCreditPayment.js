@@ -90,6 +90,7 @@ const ManualCreditPayment = ({ navigation }) => {
               {...amount}
               label={i18n.t('manualCreditPayment.component.amount')}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
             />
           </View>

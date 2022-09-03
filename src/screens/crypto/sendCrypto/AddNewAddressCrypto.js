@@ -170,6 +170,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
                       {...address}
                       label={i18n.t('CryptoBalance.component.sendCrypto.inputAddressOfTheWallet')}
                       keyboardType={'default'}
+                      returnKeyType={'done'}
                       autoCapitalize={'none'}
                       multiline
                     />
@@ -220,6 +221,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
                 {...nameContact}
                 label={i18n.t('CryptoBalance.component.AddNewAddressCrypto.inputContactName')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-10/>
@@ -227,6 +229,7 @@ const AddNewAddressCrypto = ({ navigation }) => {
                 {...emailTransfer}
                 label={i18n.t('CryptoBalance.component.AddNewAddressCrypto.inputTransferNotificationEmail')}
                 keyboardType={'default'}
+                returnKeyType={'done'}
                 autoCapitalize={'none'}
               />
               <DivSpace height-10 />

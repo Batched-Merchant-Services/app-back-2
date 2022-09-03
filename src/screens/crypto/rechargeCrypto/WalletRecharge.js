@@ -212,6 +212,7 @@ const WalletRecharge = ({ navigation }) => {
               {...amount}
               label={i18n.t('CryptoBalance.component.rechargeCrypto.textTransactionAmountIn') +' '+currencyUser}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
             />
             <DivSpace height-10 />
@@ -219,6 +220,7 @@ const WalletRecharge = ({ navigation }) => {
               {...idTransaction}
               label={i18n.t('CryptoBalance.component.rechargeCrypto.textTransactionID')}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
             />
             <DivSpace height-10 />

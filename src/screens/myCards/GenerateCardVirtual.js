@@ -147,6 +147,7 @@ const GenerateCardVirtual = ({ navigation }) => {
               {...amount}
               label={i18n.t('myCards.component.generateVirtualCard.inputNewVirtualCard') + ':'}
               keyboardType={'default'}
+              returnKeyType={'done'}
               autoCapitalize={'none'}
             />
           </View>

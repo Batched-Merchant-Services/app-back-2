@@ -350,6 +350,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
                   {...phone}
                   label={i18n.t('generics.emailOrPhone')}
                   keyboardType={'default'}
+                   returnKeyType={'done'}
                   autoCapitalize={'none'}
                   style={{ color: brandTheme?.white??Colors.white }}
                   containerStyle={{ backgroundColor: 'white' }}
@@ -367,6 +368,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
                     {...password}
                     label={i18n.t('generics.password')}
                     keyboardType={'default'}
+                    returnKeyType={'done'}
                     autoCapitalize={'none'}
                     secureTextEntry
                     style={{ color: brandTheme?.white ?? Colors.white }}

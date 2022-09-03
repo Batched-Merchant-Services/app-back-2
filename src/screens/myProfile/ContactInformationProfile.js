@@ -167,6 +167,7 @@ const ContactInformationProfile = ({ navigation }) => {
                   {...street}
                   label={i18n.t('myProfile.component.labelStreet')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -176,6 +177,7 @@ const ContactInformationProfile = ({ navigation }) => {
                       {...numberOutIn}
                       label={i18n.t('myProfile.component.labelOutInsNumber')}
                       keyboardType={'default'}
+                      returnKeyType={'done'}
                       autoCapitalize={'none'}
                     />
                     <DivSpace height-10 />
@@ -187,6 +189,7 @@ const ContactInformationProfile = ({ navigation }) => {
                       {...suburb}
                       label={i18n.t('myProfile.component.labelSuburb')}
                       keyboardType={'default'}
+                      returnKeyType={'done'}
                       autoCapitalize={'none'}
                     />
                     <DivSpace height-10 />
@@ -196,6 +199,7 @@ const ContactInformationProfile = ({ navigation }) => {
                   {...delegation}
                   label={i18n.t('myProfile.component.SelectDelegationOrMunicipality')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -203,6 +207,7 @@ const ContactInformationProfile = ({ navigation }) => {
                   {...state}
                   label={i18n.t('myProfile.component.SelectState')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />
@@ -211,6 +216,7 @@ const ContactInformationProfile = ({ navigation }) => {
                   {...CP}
                   label={i18n.t('myProfile.component.SelectCP')}
                   keyboardType={'default'}
+                  returnKeyType={'done'}
                   autoCapitalize={'none'}
                 />
                 <DivSpace height-10 />

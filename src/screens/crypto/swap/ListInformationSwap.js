@@ -39,13 +39,14 @@ const ListInformationSwap = ({ navigation }) => {
   const [totalSwapUSD,setTotalSwapUSD]=useState(0);
   const [convertFee,setConvertFee]=useState(0);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const [balanceReceiveUSD, setBalanceReceiveUSD] = useState('');
   const [showModal2fa, setShowModal2fa] = useState(false);
+  const [balanceReceiveUSD, setBalanceReceiveUSD] = useState('');
   const answer = useValidatedInput('', {name: i18n.t('generics.selectOne')}, {
     changeHandlerSelect: 'onSelect'
   });
   const amount = navigation.getParam('amount');
   const amountConvert = navigation.getParam('amountConvert');
+  const nameConvert = navigation.getParam('nameConvert');
   const currencyChange = navigation.getParam('currencyChange');
 
   function handlePay() {
@@ -84,7 +85,7 @@ const ListInformationSwap = ({ navigation }) => {
   async function convertChangeCurrency() {
 
     const token = await LocalStorage.get('auth_token');
-    const responseBTC = await conversionCurrency(token,shortNameCrypto,currencyChange?.short_name,amount);
+    const responseBTC = await conversionCurrency(token,nameConvert,currencyChange?.short_name,amount);
     console.log('conversion',responseBTC)
     if (responseBTC.code < 400) {
       setBalanceConvert(responseBTC.data?.conversion?.toString());
@@ -123,7 +124,6 @@ const ListInformationSwap = ({ navigation }) => {
     setIsLoadingModal(true);
     setTimeout(function () {
       setSnakVisible(true);
-      setButtonNext(true);
       setIsLoadingModal(false);
       setTitle(response.message);
     }, 1000);
