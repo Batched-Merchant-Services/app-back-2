@@ -51,7 +51,6 @@ import AppNewPin from '@screens/AppNewPin';
 import AppPin from '@screens/AppPin';
 import ConfirmationPinUser from '@screens/ConfirmationPinUser';
 import BiometricChangeConfirmation from '@screens/BiometricChangeConfirmation';
-
 import Level from '@screens/levels';
 import LevelsInfo from '@screens/levels/LevelsInfo';
 import BuyPoints from '@screens/levels/BuyPoints';
@@ -135,6 +134,7 @@ import UpdateVirtualCard from '@screens/myCards/newVirtualCards/UpdateVirtualCar
 import ConfirmationUpdateCard from '@screens/myCards/newVirtualCards/ConfirmationUpdateCard';
 import NewVirtualCards from '@screens/myCards/newVirtualCards';
 import Auth2fa from '@screens/auth2fa';
+import DeleteAccount from '@screens/auth2fa/DeleteAccount';
 import TwoFactorInstructions from '@screens/auth2fa/TwoFactorInstructions';
 import TwoFactorActivation from '@screens/auth2fa/TwoFactorActivation';
 import TwoFactorCodeActivation from '@screens/auth2fa/TwoFactorCodeActivation';
@@ -843,6 +843,12 @@ export const signInScreens = {
     },
     Auth2fa: {
       screen           : Auth2fa,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    DeleteAccount: {
+      screen           : DeleteAccount,
       navigationOptions: {
         gesturesEnabled: false
       }

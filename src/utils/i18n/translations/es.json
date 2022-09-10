@@ -1691,7 +1691,14 @@
       "textWeHaveSentEmail":"Te hemos enviado un código de 6 dígitos a tu Email",
       "textWeHaveSentApp":"Ingresar el código de 6 dígitos que aparece en tu ",
       "textAuthenticatorApp":"Authenticator App.",
-      "buttonBackToLogin":"Continuar"
+      "buttonBackToLogin":"Continuar",
+      "titleDeleteYourAccount":"Eliminar tu cuenta",
+      "textDeleteAccountFromThePlatforms":"Elimine su cuenta de las plataformas, una vez hecho esto no podrá acceder a su aplicación, portal de Tarjeta, Cuenta y otras plataformas relacionadas con Savvy.",
+      "textYourPhysicalAndVirtual":"Sus tarjetas físicas y virtuales serán canceladas.",
+      "textThisOperationCannot":"Esta operación no se puede revertir.",
+      "buttonContinueToYourPortal":"Continuar a su portal",
+      "buttonCancel":"Cancelar",
+      "textDeleteAccount":"Eliminar cuenta"
     }
   }
 }

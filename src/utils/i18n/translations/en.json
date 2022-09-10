@@ -1699,7 +1699,14 @@
       "textWeHaveSentEmail":"We have sent you a 6 digit code to your Email",
       "textWeHaveSentApp":"Enter the 6 digit code that appears in your",
       "textAuthenticatorApp":"Authenticator App.",
-      "buttonBackToLogin":"Continue"
+      "buttonBackToLogin":"Continue",
+      "titleDeleteYourAccount":"Delete your account",
+      "textDeleteAccountFromThePlatforms":"Delete your account from the platforms, once done you will not be able to access your application, Card portal, Account and other platforms related to Savvy.",
+      "textYourPhysicalAndVirtual":"Your physical and virtual cards will be cancelled.",
+      "textThisOperationCannot":"This operation cannot be reversed.",
+      "buttonContinueToYourPortal":"Continue to your portal",
+      "buttonCancel":"Cancel",
+      "textDeleteAccount":"Delete account"
     }
   }
 }

@@ -7,7 +7,7 @@ import {
   View,
   Link
 } from '@components';
-import { SafeAreaView, ScrollView, Switch } from 'react-native';
+import { SafeAreaView, ScrollView, Switch,TouchableOpacity } from 'react-native';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useSelector, useDispatch } from 'react-redux';
 import i18n from '@utils/i18n';
@@ -82,7 +82,7 @@ const Auth2fa = ({ navigation, route, navigation: { goBack } }) => {
     <SignUpWrapper >
       <SafeAreaView forceInset={{ top: 'always' }}>
         <NavigationBar
-          onBack={() => params !== 'Login'?navigation.goBack(): navigation.navigate("Login")}
+          onBack={() => params !== 'Login'? navigation.goBack(): navigation.navigate("Login")}
           body={i18n.t('Auth2fa.titleSecurity')}
         />
         <ScrollView scrollEventThrottle={16}>
@@ -100,9 +100,10 @@ const Auth2fa = ({ navigation, route, navigation: { goBack } }) => {
                   height={verticalScale(100)}
                 />
               </View>
-              {/* <View row centerV>
+              <DivSpace height-10 />
+              <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row'}} onPress={()=>navigation.navigate("DeleteAccount")}>
                 <View flex-1 >
-                  <Text h11 white>{i18n.t('Auth2fa.linkChangePassword')}</Text>
+                  <Text h11 white>Eliminar cuenta</Text>
                 </View>
                 <View right bgBlue01 padding-5 centerV centerH style={{ borderRadius: scale(30), width: scale(30), height: scale(30) }}>
                   <ImageComponent
@@ -112,7 +113,7 @@ const Auth2fa = ({ navigation, route, navigation: { goBack } }) => {
                     height={verticalScale(12)}
                   />
                 </View>
-              </View> */}
+              </TouchableOpacity>
             </View>
             <DivSpace height-15 />
             <View textBlue01 padding-15  style={{borderRadius:8}}>

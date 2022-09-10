@@ -241,7 +241,7 @@ const MyCards = ({ navigation }) => {
                   {showInfo
                   ? isVirtual && (
                     <View centerH >
-                      {CAROUSEL_ITEMS[activeSlide].statusRequestCard && !CAROUSEL_ITEMS[activeSlide]?.statusActivation &&(
+                      {!CAROUSEL_ITEMS[activeSlide]?.statusRequestCard && !CAROUSEL_ITEMS[activeSlide]?.statusActivation &&(
                         <Fragment>
                           <View marginH-40 centerH>
                             <DivSpace height-10 />
