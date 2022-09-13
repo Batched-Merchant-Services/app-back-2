@@ -13,13 +13,13 @@ import {
 } from '@components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
-import { SafeAreaView } from 'react-native';
+import { Linking, SafeAreaView } from 'react-native';
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
 import Colors from '@styles/Colors';
 import IconSms from '@assets/brand/iconSms.png';
-
+import { getSites } from '../../utils/api/switch';
 
 const DeleteAccount = ({ navigation, route, navigation: { goBack } }) => {
   const dispatch = useDispatch();
@@ -37,13 +37,40 @@ const DeleteAccount = ({ navigation, route, navigation: { goBack } }) => {
   const [buttonNext, setButtonNext] = useState(false);
   const isValid = isFormValid(codeActivation);
 
-  function getLink() {
-    console.log('send card portal')
+
+  async function getLink() {
+    setIsLoadingModal(true);
+    const token = await LocalStorage.get('auth_token');
+    const response = await getSites(token);
+    console.log('response', response)
+    if (response.code < 400) {
+      Linking.openURL(response?.data?.url);
+      setIsLoadingModal(false);
+    }
+    else {
+      errorSnackNotice(response);
+      setIsLoadingModal(false);
+    }
   }
 
-  function cancel() {
-    console.log('cancel')
+  function errorSnackNotice(response) {
+    setIsLoadingModal(true);
+    setTimeout(function () {
+      setSnakVisible(true);
+      setIsLoadingModal(false);
+      setTitle(response.message);
+    }, 1000);
   }
+
+
+  function cancel() {
+    navigation.navigate("Auth2fa");
+  }
+
+  const closeSnack = () => {
+    setSnakVisible(false);
+    setActionAnimated(true);
+  };
 
 
   return (
@@ -93,7 +120,19 @@ const DeleteAccount = ({ navigation, route, navigation: { goBack } }) => {
             </View>
           </BoxBlue>
         </View>
+        {isLoadingModal && (
+          <Loader
+            isOpen={true}
+            navigation={navigation} />)}
       </SafeAreaView>
+      <View flex-1 bottom>
+        <SnackBar
+          message={title}
+          isVisible={snakVisible}
+          onClose={closeSnack}
+          animationAction={actionAnimated}
+        />
+      </View>
     </SignUpWrapper>
   );
 }
