@@ -19,6 +19,7 @@ import i18n from '@utils/i18n';
 import { scale, verticalScale } from 'react-native-size-matters';
 import Colors from '@styles/Colors';
 import IconSms from '@assets/brand/iconSms.png';
+import LocalStorage from '@utils/localStorage';
 import { getSites } from '../../utils/api/switch';
 
 const DeleteAccount = ({ navigation, route, navigation: { goBack } }) => {
@@ -42,7 +43,6 @@ const DeleteAccount = ({ navigation, route, navigation: { goBack } }) => {
     setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const response = await getSites(token);
-    console.log('response', response)
     if (response.code < 400) {
       Linking.openURL(response?.data?.url);
       setIsLoadingModal(false);

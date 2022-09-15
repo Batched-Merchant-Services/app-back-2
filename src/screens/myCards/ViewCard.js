@@ -30,13 +30,13 @@ const ViewCard = ({ navigation }) =>   {
           <DivSpace height-35/>
           <BoxVirtualCard {...params}/>
         </View>
-        <View centerH style={Styles.imageBottom}>
+        {/* <View centerH style={Styles.imageBottom}>
           <ImageComponent
             source={logoUulala}
             width={scale(330)}
             height={verticalScale(238)}
           />
-        </View>
+        </View> */}
         <Text white h12 center>{i18n.t('myCards.component.modalTextClickOnAny')}</Text>
         <DivSpace height-30/>
       </SafeAreaView>

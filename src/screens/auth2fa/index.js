@@ -103,7 +103,7 @@ const Auth2fa = ({ navigation, route, navigation: { goBack } }) => {
               <DivSpace height-10 />
               <TouchableOpacity style={{flex:1, alignItems:'center',flexDirection:'row'}} onPress={()=>navigation.navigate("DeleteAccount")}>
                 <View flex-1 >
-                  <Text h11 white>Eliminar cuenta</Text>
+                  <Text h11 white>{i18n.t('Auth2fa.textDeleteAccount')}</Text>
                 </View>
                 <View right bgBlue01 padding-5 centerV centerH style={{ borderRadius: scale(30), width: scale(30), height: scale(30) }}>
                   <ImageComponent
