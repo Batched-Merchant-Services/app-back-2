@@ -206,6 +206,7 @@ const OfficialIdentification = ({ navigation }) => {
   const typeIdentif= KycState ?KycState.typeIdentification:'';
   const inputIdAddress= addressState.length  > 0 ?userInfo.address[0].id?userInfo.address[0].id:'':'';
   const [typeIdentification, setTypeIdentification ] = useState([]);
+  const [dataIdentification, setDataIdentification ] = useState([]);
   const [showPhotoFront, setshowPhotoFront ] = useState(imageFront);
   const [showPhotoBack, setshowPhotoBack ] = useState(imageBack);
   const [showPhotoSelfie, setshowPhotoSelfie ] = useState(imageSelfie);
@@ -240,8 +241,23 @@ const OfficialIdentification = ({ navigation }) => {
     if (response.code < 400) {
       setTypeIdentification(response.data);
     } 
-   
   }
+
+  useEffect(() => {
+    let typeLanguage = typeIdentification?.map((item) => {
+      const billedIdSaved = {name: i18n.t(`${item?.name}`),value:item?.value};
+      console.log('billedIdSaved',billedIdSaved)
+      return billedIdSaved;
+    });
+    console.log('typeLanguage',typeLanguage)
+    setDataIdentification(typeLanguage);
+  }, [typeIdentification]);
+
+
+  console.log('dataIdentification',dataIdentification)
+
+
+  
 
   const isValid =showPhotoFront && showPhotoBack && showPhotoSelfie;
 
@@ -327,7 +343,7 @@ const OfficialIdentification = ({ navigation }) => {
               <Select
                 {...OfficialIdent}
                 label={i18n.t('myProfile.component.OfficialIdentification.textTypeOfOfficial')}
-                options={typeIdentification}
+                options={dataIdentification}
               />
               <DivSpace height-7 />
               { showPhotoFront === null || showPhotoFront === ''  ?

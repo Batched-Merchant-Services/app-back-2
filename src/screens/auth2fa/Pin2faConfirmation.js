@@ -434,7 +434,7 @@ async function sendCryptoInfo(
   setIsLoadingModal(true);
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
   console.log('data 1',token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity)
-  const response = data.page === 'sendCryptoUsers' ? await sendCryptoUsers(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity) : await sendCrypto(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity);
+  const response = data.page === 'sendCryptoUsers' ? await sendCryptoUsers(token, data.shortNameCrypto, data?.amountCurrency, data?.addressCrypto, data?.transferReference?.value, codeSecurity) : await sendCrypto(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity);
   if (response.code < 400) {
     setTimeout(function () {
       navigation.navigate(next, { data: response?.data, dataInfo: data });

@@ -8,7 +8,6 @@ const deviceLanguage =
         : NativeModules.I18nManager.localeIdentifier;    
 const sliceLanguage = deviceLanguage.slice(0,2);
 
-console.log('sliceLanguage',sliceLanguage)
 export default {
   init  : Function.prototype,
   type  : 'languageDetector',

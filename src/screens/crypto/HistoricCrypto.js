@@ -7,6 +7,7 @@ import { Bubbles } from 'react-native-loader';
 import {
   Text,
   View,
+  Loader,
   DivSpace,
   NavigationBar,
   ButtonFloating
@@ -154,6 +155,7 @@ const HistoricCrypto = ({ navigation }) => {
   const brandTheme = userData?.Theme?.colors;
   const scrollView = useRef(null);
   const [shortNameCrypto]=useState(userData?userData.typeCrypto:'');
+  const [isLoadingModal, setIsLoadingModal] = useState(false);
   const [ historicTrans,setHistoricTrans] = useState([]);
   const [ showEmpty,seshowEmpty] = useState(true);
   
@@ -165,14 +167,17 @@ const HistoricCrypto = ({ navigation }) => {
   }, []);
 
   async function getLisCrypto() {
+    setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const responseList = await getLiquidCrypto(token,shortNameCrypto);
     if (responseList.code < 400) {
       setHistoricTrans(responseList.data);
       seshowEmpty(false);
+      setIsLoadingModal(false);
     } else{
       setHistoricTrans([]);
       seshowEmpty(false);
+      setIsLoadingModal(false);
     }
   }
 
@@ -209,6 +214,10 @@ const HistoricCrypto = ({ navigation }) => {
         </View>
       )}
       <DivSpace height-20 />
+      {isLoadingModal &&(
+        <Loader 
+          isOpen={true}
+          navigation={navigation} />)}
     </SignUpWrapper>
   );
 };

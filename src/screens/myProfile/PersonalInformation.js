@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { formatDate, formatDateSend } from '@utils/formatters';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import i18n from '@utils/i18n';
@@ -51,6 +51,7 @@ const PersonalInformation = ({ navigation }) => {
   const onclickSegment = useValidatedInput('segment', false, {
     changeHandlerName: 'onChangeSeg'
   });
+
   const onFill = code => {
     setGender(code === 1 ? 'F' : code === 2 ? 'M' : 'O');
   };
@@ -60,6 +61,11 @@ const PersonalInformation = ({ navigation }) => {
     const format = formatDateSend(date);
     setIsBirthday({ text: format, message: ' ' });
   };
+
+  useEffect(() => {
+    setGender(inputGender === 1 || inputGender === 'F'  ? 'F' : inputGender === 2 || inputGender === 'M' ? 'M' : 'O');
+  }, []);
+
 
   function handlePressBack() {
     navigation.goBack();

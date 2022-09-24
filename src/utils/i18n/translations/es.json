@@ -128,6 +128,14 @@
         "labelMenuTransferMyBank": "Transferencia a mi cuenta bancaria"
       }
     },
+    "dropdown": {
+      "identificacion": {
+        "govermentid":"INE",
+        "passport":"Pasaporte",
+        "diverlicence":"Licencia",
+        "visa":"Visa"
+      }
+    },
     "emptyState": {
       "component": {
         "textThereIsNoInformation":"No existe información \npara mostrar aún.",
@@ -798,10 +806,10 @@
           "title":"WIRING INSTRUCTIONS",
           "textTheInternational":"Send the wire to the following account information:",
           "textReceivingFinancial":"Receiving Financial Bank Name Evolve Bank & Trust",
-          "textOne":"Address :Memphis TN USA\nPhone: 901-259-0796\nBeneficiary Name: Batched LLC\nAccount Number :990009730\nABA Routing number: 084106768 (Domestic USA Wires)\nSwift Code: FW084106768 (International Wires outside of USA)",
-          "textPleaseInclude":"Special Notes or Reference (Provide your Full name and Email address associated with your Savvy Account)",
-          "textTwo":"If name and/or email are incorrect this will delay the funds being deposited to your account.\nWires received on or before 1:00pm Pacific time will normally be credited within 24 hours. Wires received after 1:00pm Pacific time will be credited within 48 hours, as long as it does not fall on a weekend or a banking holiday. Wires will not be credited on weekends or holidays.",
-          "textToRegister":"To register your deposit please email us at",
+          "textOne":"Address: 7813 Office Park Blvd Baton Rouge LA 70809\nBeneficiary Name: Evolve Bank & Trust\nBeneficiary Address: 6070 Poplar Ave. #200\nMemphis TN 38119 USA Account Number: 084106768\nSWIFT Code: FRNAUS44",
+          "textPleaseInclude":"Special Note or Reference:You must include Batched, LLC Account Number 9900009730",
+          "textTwo":"Also provide your full name and Email address associated with your Batched Merchant Services Account on the wire instructions.",
+          "textToRegister":"",
           "buttonUnderstood":"Understood!"
         }
       }

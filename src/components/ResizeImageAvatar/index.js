@@ -6,7 +6,7 @@ import { useSelector} from 'react-redux';
 import Colors from '@styles/Colors';
 import styles from './styles';
 
-const ResizeImageAvatar = ({ source, height, width }) => {
+const ResizeImageAvatar = ({ source, height, width,...props }) => {
   const redux = useSelector(state => state);
   const appData = redux.user;
   const brandTheme = appData?.Theme?.colors;

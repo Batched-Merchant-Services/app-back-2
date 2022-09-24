@@ -7,6 +7,7 @@ import { getHistoriTransactions,getHistoriId } from '@utils/api/switch';
 import {
   Text,
   View,
+  Loader,
   DivSpace,
   NavigationBar,
   ButtonFloating
@@ -106,6 +107,7 @@ const Historics = ({ navigation }) => {
   const brandTheme = appData?.Theme?.colors;
   const scrollView = useRef(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isLoadingModal, setIsLoadingModal] = useState(false);
   const page = navigation.getParam('page');
   const data = navigation.getParam('dataBackup');
   const [ historicTrans,setHistoricTrans ]=useState([]);
@@ -117,6 +119,7 @@ const Historics = ({ navigation }) => {
   
 
   async function getInfo() {
+    setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const response = await getHistoriTransactions(token);
     console.log('error',response)
@@ -124,30 +127,39 @@ const Historics = ({ navigation }) => {
       if (!response.data) {
         setHistoricTrans([]);
         setShowData(false);
+        setIsLoadingModal(false);
       } else {
         setShowData(true);
         setRefreshing(false);
+        setIsLoadingModal(false);
         const orderABC = response.data ? response.data.sort((a, b) => a.transactionDate.localeCompare(b.transactionDate)): '';
         setHistoricTrans( orderABC? orderABC.reverse(): []);
       }
     }else{
       setRefreshing(false);
+      setIsLoadingModal(false);
     }
   }
 
   async function getIdInfo() {
+    setIsLoadingModal(true);
     const token = await LocalStorage.get('auth_token');
     const proxy = data ? data?.id: '';
     const response = await getHistoriId(token, proxy);
-    if (response.code < 400)
+    if (response.code < 400){
       if (!response.data) {
         setHistoricTrans([]);
         setShowData(false);
+        setIsLoadingModal(false);
       } else {
         setShowData(true);
         const orderABC = response.data ? response.data.sort((a, b) => a.transactionDate.localeCompare(b.transactionDate)): '';
         setHistoricTrans( orderABC? orderABC.reverse(): []);
+        setIsLoadingModal(false);
       }
+    }else{
+      setIsLoadingModal(false);
+    }
   }
 
   const handleGoUpPress = () =>
@@ -195,6 +207,10 @@ const Historics = ({ navigation }) => {
         </View>
       )}
       <DivSpace height-18 />
+      {isLoadingModal &&(
+        <Loader 
+          isOpen={true}
+          navigation={navigation} />)}
     </SignUpWrapper>
   );
 };

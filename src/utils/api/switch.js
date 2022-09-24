@@ -23,6 +23,7 @@ var apiSavvyWallet = axios.create({
   }
 });
 
+
 apiSavvyWallet.interceptors.request.use(
   async config => {
     console.log('request', config);
@@ -513,11 +514,20 @@ export const getStateCatalog= async () => {
   return await apiSavvyWallet.get(`/catalogs/regions/MX`);
 };
 
+export const getIdentificationsCatalog = async () => {
 
-export const getIdentificationsCatalog= async () => {
+  var valueLanguage = i18n?.language === 'es'? 2 : 3;
+  var valueCountry = i18n?.language === 'es'? 484 : 840;
 
-  return await apiSavvyWallet.get(`/catalogs/identifications/?language=${i18n?.language}`);
+  console.log('valueLanguage',valueLanguage,valueCountry)
+
+  return await apiSavvyWallet.get(`/catalogs/combos/Identificacion-${valueCountry}/${valueLanguage}`);
 };
+
+// export const getIdentificationsCatalog= async () => {
+
+//   return await apiSavvyWallet.get(`/catalogs/identifications/?language=${i18n?.language}`);
+// };
 
 
 export const updateUser = async (token,firstName,middleName,lastName,gender,birthday,curp,rfc) => {

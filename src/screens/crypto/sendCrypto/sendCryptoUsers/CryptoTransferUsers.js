@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
 import { useSelector } from 'react-redux';
-import { ScrollView } from 'react-native';
+import { ScrollView,KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { NavigationEvents } from 'react-navigation';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import { getCryptoFess, conversionCurrency } from '@utils/api/switch';
-import { scale } from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import Styles from '@screens/crypto/styles';
 
 import LocalStorage from '@utils/localStorage';
@@ -25,6 +25,7 @@ import {
 
 import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import AmountCrypto from '@screens/crypto/components/AmountCrypto';
+import AmountCryptoTwo from '@screens/crypto/components/AmountCryptoTwo';
 import CircleAvatar from '@screens/nationalPayments/components/CircleAvatar';
 import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
 
@@ -47,6 +48,8 @@ const CryptoTransferUsers = ({ navigation }) => {
   const [iconCrypto] = useState(userData ? userData.iconCrypto : '');
   const [balanceCrypto] = useState(userData ? userData.balanceCrypto : '');
   const [showModal2fa, setShowModal2fa] = useState(false);
+  const [nameCurrency, setNameCurrency] = useState('');
+  const [currentConvert, setCurrentConvert] = useState('');
   const [showCurrency, setShowCurrency] = useState('');
   //snack notice
   const [title, setTitle] = useState('');
@@ -55,10 +58,8 @@ const CryptoTransferUsers = ({ navigation }) => {
   const [actionAnimated, setActionAnimated] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
   //validate Input
-  const amountToTransfer = useValidatedInput('amountToTransfer', '');
   const transferReference = useValidatedInput('reference', '');
-  const equivalentAmount = useValidatedInput('equivalentAmount', '');
-  const address = useValidatedInput('address', codeQR);
+  const amount = useValidatedInput('amount', '');
   const userToTransfer = useValidatedInput('userToTransfer', '', {
     changeHandlerSelect: 'onSelect'
   });
@@ -89,16 +90,13 @@ const CryptoTransferUsers = ({ navigation }) => {
     setShowInputQRCode(codeQR ? true : false);
 
   }
-  function handleAddNewAddress() {
-    navigation.navigate('AddNewAddressCrypto');
-  }
 
-  function handleScanQRAddress() {
-    navigation.navigate('ScanQRAddress');
-  }
 
   async function handlePay() {
+    console.log('handle play')
     const addressCrypto = codeQR ? codeQR : infoUser?.id;
+    const amountCurrency = nameCurrency === 'USD' ? currentConvert : amount?.value;
+    console.log('amountCurrency',amountCurrency)
     const token = await LocalStorage.get('auth_token');
     const foobar = [3, 2, 1];
     if (currentCurrency === 'USD') {
@@ -111,7 +109,7 @@ const CryptoTransferUsers = ({ navigation }) => {
         } else {
           setTimeout(function () {
             navigation.navigate('Pin2faConfirmation', {
-              data: { page: 'sendCryptoUsers', showNameCrypto, conversionAmount, addressCrypto, transferReference },
+              data: { page: 'sendCryptoUsers', shortNameCrypto, conversionAmount, addressCrypto, transferReference },
               next: 'ConfirmationCrypto'
             });
             //navigation.navigate('Pin2faConfirmation',{page: 'sendCryptoUsers',showNameCrypto,conversionAmount,addressCrypto,transferReference});   
@@ -126,7 +124,7 @@ const CryptoTransferUsers = ({ navigation }) => {
         setShowModal2fa(true);
       } else {
         navigation.navigate('Pin2faConfirmation', {
-          data: { page: 'sendCryptoUsers', showNameCrypto, amountConvert, addressCrypto, transferReference },
+          data: { page: 'sendCryptoUsers', shortNameCrypto, amountCurrency, addressCrypto, transferReference },
           next: 'ConfirmationCrypto'
         });
         //navigation.navigate('Pin2faConfirmation',{page: 'sendCryptoUsers',showNameCrypto,amountConvert,addressCrypto,transferReference});   
@@ -135,28 +133,26 @@ const CryptoTransferUsers = ({ navigation }) => {
 
   }
 
-
-  function onFill(code) {
-    setIDAddress(code.id);
-  }
-  function onFillAmount(code) {
-    setAmountConvert(code);
+  function getCode(code) {
+    setCurrentConvert(code);
   }
 
+  function getDateConvert(value) {
+    setNameCurrency(value);
+  }
 
-  async function onCurrency(code) {
-    setIsLoadingModal(true);
-    setCurrentCurrency(code);
-    const token = await LocalStorage.get('auth_token');
-    const response = await conversionCurrency(token, code === 'USD' ? shortNameCrypto : 'USD', code === shortNameCrypto ? shortNameCrypto : 'USD', amountConvert);
-    if (response.code < 400) {
-      setIsLoadingModal(false);
-      setAmountConvert(response.data?.conversion?.toString());
-    } else {
-      setAmountConvert(0);
-      closeSnackNotice(response);
-    }
-  };
+
+  function getSnackUsd(data) {
+    console.log('getSnackUsd', data)
+    // if (data < 20) {
+    //   setSnakVisible(true);
+    //   setButtonNext(true);
+    //   setIsLoadingModal(false);
+    //   setTitle(i18n.t('CryptoBalance.component.Swap.snackNotice'));
+    // } else {
+    //   setButtonNext(false);
+    // }
+  }
 
   const handleCloseNotif = () => {
     setSnakVisible(false);
@@ -198,7 +194,7 @@ const CryptoTransferUsers = ({ navigation }) => {
             <View flex-1 padding-15 centerH centerV textBlue01 style={{ borderRadius: 10}}>
             
               {infoUser.avatarImage === '' ? (
-                <CircleAvatar size={70}>
+                <CircleAvatar size={verticalScale(70)}>
                   <Text h20 bold white>{infoUser.alias}</Text>
                 </CircleAvatar>
               ):(
@@ -236,6 +232,7 @@ const CryptoTransferUsers = ({ navigation }) => {
             </ContainerCrypto>
             <DivSpace height-30 />
             <View padding-15 textBlue01 style={{borderRadius: 10}}>
+              <DivSpace height-15 />
               {/* <Text  center white h11>{i18n.t('CryptoBalance.component.CryptoSendBetweenUser.textEnterTheAmountYou')}</Text>
               <DivSpace height-15 />
               <View>
@@ -303,7 +300,7 @@ const CryptoTransferUsers = ({ navigation }) => {
               <View flex-1 centerH>
                 <ButtonRounded
                   onPress={handlePay}
-                  disabled={!isValid || (validation)}
+                  disabled={!isValid}
                   size='sm'
                 >
                   <Text h10 semibold>

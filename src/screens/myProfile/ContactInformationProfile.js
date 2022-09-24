@@ -68,6 +68,7 @@ const ContactInformationProfile = ({ navigation }) => {
     }
   }
 
+
   const country = useValidatedInput('country', inputCountry === '' || inputCountry === undefined ? { name: i18n.t('generics.selectOne') } : { name: inputCountry }, {
     changeHandlerSelect: 'onSelect'
   });

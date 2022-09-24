@@ -85,7 +85,7 @@ const ReceivedPaymentAccepted = ({ navigation }) => {
               <View flex-1 centerH centerV row>
                 <ImageComponent white source={reloj} width={scale(10)} height={moderateScale(10)}  />
                 <DivSpace width-3 />
-                <Text h12 white>01:24 PM </Text>
+                <Text h12 white>01:24 PM</Text>
               </View>
               <View centerV>
                 <View width-2 textBlueDark style={{ height: moderateScale(30)}}></View>
