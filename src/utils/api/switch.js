@@ -519,8 +519,6 @@ export const getIdentificationsCatalog = async () => {
   var valueLanguage = i18n?.language === 'es'? 2 : 3;
   var valueCountry = i18n?.language === 'es'? 484 : 840;
 
-  console.log('valueLanguage',valueLanguage,valueCountry)
-
   return await apiSavvyWallet.get(`/catalogs/combos/Identificacion-${valueCountry}/${valueLanguage}`);
 };
 

@@ -118,7 +118,7 @@ const SecretAnswer = ({ navigation, }) => {
                   <AnimateLabelInput
                     {...email}
                     label={i18n.t('generics.emailOrPhone')}
-                    keyboardType={'default'}
+                    keyboardType={'email-address'}
                     returnKeyType={'done'}
                     autoCapitalize={'none'}
                     style={{ color: Colors.white }}

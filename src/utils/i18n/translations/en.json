@@ -22,7 +22,7 @@
       "slastNamePresence": "Please enter your second last name",
       "answerSPresence": "Please enter your answer",
       "nameFormat": "Letters only",
-      "emailOrPhonePresence": "Please enter a email or phone",
+      "emailOrPhonePresence": "Please enter a email",
       "emailPresence": "Please enter a email address",
       "emailFormat": "Please enter a valid email address",
       "curpPresence": "Please enter a CURP address",
@@ -71,7 +71,7 @@
     "generics": {
       "country": "Country",
       "email": "Email",
-      "emailOrPhone": "Email or Phone",
+      "emailOrPhone": "Email",
       "RemovedFromFavorites":"Removed from favorites",
       "AddedToFavorites":"Added to favorites",
       "phone": "Phone number (10 digits)",
@@ -161,13 +161,13 @@
       "component": {
         "navigatorRecoverMyPassword": "Forgot Password",
         "logoWhatIsYourFavoriteFood?": "What is your favorite Food?",
-        "labelAnswer": "Email or Telephone",
+        "labelAnswer": "Email",
         "labelPassword": "Password",
         "textCreateNewPassword": "Create a new password",
         "weHaveSentYouPIN": "We have sent you a PIN to your phone",
         "buttonNext": "Next",
         "labelConfirmPass": "Confirm password",
-        "labelDescriptionForget": "You will receive a 6 digit SMS code with which you can recover your password",
+        "labelDescriptionForget": "You will receive a 6 digit Email code with which you can recover your password",
         "linkAuthenticate": "Authenticate with call"
       },
       "message": {

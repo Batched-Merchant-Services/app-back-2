@@ -253,12 +253,6 @@ const OfficialIdentification = ({ navigation }) => {
     setDataIdentification(typeLanguage);
   }, [typeIdentification]);
 
-
-  console.log('dataIdentification',dataIdentification)
-
-
-  
-
   const isValid =showPhotoFront && showPhotoBack && showPhotoSelfie;
 
   function handlePressBack() {
