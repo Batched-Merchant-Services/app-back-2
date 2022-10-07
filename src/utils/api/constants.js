@@ -1,15 +1,20 @@
 export const GRAPHQL_API ='https://core.batchedservices.com/AccessPoint/graphql';
 
 
+
 export const LOGIN_QUERY =`
 query ($user:String!,$password:String!,$languaje:Int!,$id:String!,$groupid:Int!,$reference:String!){
   getLoggin(user: $user, password:$password,languaje:$languaje, id:$id,groupid:$groupid,reference:$reference){
-      token
+     token
       uuid
       timeOut
+      locked
       isTwoFactor
       type2fa
-      left        
+      phoneNumber
+      email
+      left
+      deviceStatus      
   }
 }`;
 export const LOGIN_TWO_FACTOR_QUERY =`

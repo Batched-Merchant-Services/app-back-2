@@ -4,6 +4,7 @@ import i18n from '@utils/i18n';
 import { connect, useSelector } from 'react-redux';
 import ModalDeviceError from '@screens/ModalDeviceError';
 import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import ModalSecureDevicesNew from '@screens/ModalSecureDevicesNew';
 import {
   Text,
   View,
@@ -55,6 +56,8 @@ async function handleSignIn(
   Password,
   Company,
   setIsLoadingModal,
+  setShowSecureModal,
+  setDeviceStatus,
   setShowModalInfo,
   setStatusUser,
   setShowDeviceModal,
@@ -70,36 +73,49 @@ async function handleSignIn(
   if (response?.getLoggin) {
     const type2faLogin = response?.getLoggin?.type2fa;
     const isTwoFactorLogin = response?.getLoggin?.isTwoFactor;
+    const isToken = response?.getLoggin?.token;
+    const deviceStatus = response?.getLoggin?.deviceStatus;
     await LocalStorage.set('auth_token', response?.getLoggin?.token);
     await LocalStorage.set('user', phone);
     await LocalStorage.set('password', Password);
     await LocalStorage.set('left', response?.getLoggin?.left);
     await LocalStorage.set('uuid', response?.getLoggin?.uuid);
     getThemeBrand(response?.getLoggin?.token);
-    dispatch(saveUser({ type2fa: type2faLogin}));
+    dispatch(saveUser({ type2fa: type2faLogin }));
     dispatch(isTwoFactor(isTwoFactorLogin));
-    dispatch(saveUser({ companyValue: Company?.value}));
-    console.log('es falso',userData);
-    if (!response?.getLoggin?.isTwoFactor) {
-      if (userData?.stateModalInfo2fa) {
-        setIsLoadingModal(false);
-        navigation.navigate('MyWallet');
-        setShowModalInfo(false);
-      } else {
-        setShowModalInfo(true);
-        setIsLoadingModal(false);
-        dispatch(page2fa('Login'))
-        dispatch(saveUser({ type2fa: type2faLogin}));
-      }
-    } else {
-      navigation.navigate('Pin2faConfirmation', { page: 'Login' });
-      setShowModalInfo(false);
+    dispatch(saveUser({ companyValue: Company?.value }));
+    setDeviceStatus(deviceStatus);
+
+ 
+    if(isToken === '' && deviceStatus === 100 || deviceStatus === 303){
       setIsLoadingModal(false);
+      return setShowSecureModal(true);
+    }else{
+      if (!response?.getLoggin?.isTwoFactor) {
+        if (userData?.stateModalInfo2fa) {
+          setIsLoadingModal(false);
+          navigation.navigate('MyWallet');
+          setShowModalInfo(false);
+        } else {
+          setShowModalInfo(true);
+          setIsLoadingModal(false);
+          dispatch(page2fa('Login'))
+          dispatch(saveUser({ type2fa: type2faLogin }));
+        }
+      } else {
+        navigation.navigate('Pin2faConfirmation', { page: 'Login' });
+        setShowModalInfo(false);
+        setIsLoadingModal(false);
+      }
+      setShowSecureModal(false);
     }
+    
+    
 
   } else {
     errorSnackNotice(response);
   }
+
 
 
 
@@ -166,7 +182,7 @@ async function handleSignIn(
       AsyncStorage.setItem('brandTheme', jsonValue);
     }
     else {
-      errorSnackNotice();
+      //errorSnackNotice();
       dispatch(saveTheme({ colors: {}, images: {} }));
     }
   }
@@ -178,6 +194,8 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
   const [statusGet, setStatusGet] = useState('');
   const [statusUser, setStatusUser] = useState('');
   const [showDeviceModal, setShowDeviceModal] = useState(false);
+  const [showSecureModal, setShowSecureModal] = useState(false);
+  const [deviceStatus, setDeviceStatus] = useState(0);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
@@ -191,7 +209,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     changeHandlerSelect: 'onSelect'
   });
 
-  const isValid = isFormValid( password);
+  const isValid = isFormValid(password);
   const dispatch = useDispatch();
   const redux = useSelector(state => state);
   const userData = redux.user;
@@ -209,6 +227,8 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
       Password,
       Company,
       setIsLoadingModal,
+      setShowSecureModal,
+      setDeviceStatus,
       setShowModalInfo,
       setStatusUser,
       setShowDeviceModal,
@@ -219,8 +239,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
       dispatch,
       userData);
 
-    };
-
+  };
 
   useEffect(() => {
     handleBiometric();
@@ -237,7 +256,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     const response = await getCompaniesQuery(phone);
     if (response.code < 400) {
       setCompanyOption(response?.data);
-      dispatch(saveUser({ dataCompany: response?.data}));
+      dispatch(saveUser({ dataCompany: response?.data }));
       setIsLoadingModal(false);
     } else {
       setCompanyOption([]);
@@ -268,15 +287,19 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     setShowDeviceModal(false);
   };
 
+  const hideModalSecure = () => {
+    setShowSecureModal(false);
+  };
+
   const closeSnack = () => {
     setSnakVisible(false);
     setButtonNext(false);
     setActionAnimated(true);
   };
-
   function handlePressGoBack() {
     navigation.goBack();
   }
+
 
 
   function errorSnackNotice(response) {
@@ -314,6 +337,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     setShowModalInfo(!showModalInfo);
     navigation.navigate('MyWallet');
   }
+
 
   return (
     <>
@@ -403,6 +427,7 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
               navigation={navigation}
               login
             />
+            <ModalSecureDevicesNew isOpen={showSecureModal} navigation={navigation} page={statusUser} onClose={hideModalSecure} email={phone} deviceStatus={deviceStatus} />
             <ModalDeviceError isOpen={showDeviceModal} navigation={navigation} page={statusUser} onClose={hideModal} />
           </KeyboardAvoidingView>
         </ResizeImageBackground>

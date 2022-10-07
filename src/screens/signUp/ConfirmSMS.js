@@ -10,6 +10,8 @@ import * as Animatable from 'react-native-animatable';
 import i18n from '@utils/i18n';
 import SMS from '@assets/brand/password.png';
 import background from '@assets/brand/backgroundImage.png';
+import Colors from '@styles/Colors';
+
 
 import {
   NavigationBar,

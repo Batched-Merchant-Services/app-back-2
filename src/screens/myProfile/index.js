@@ -268,7 +268,7 @@ const myProfile = ({ navigation }) => {
               <DivSpace height-10 />
               <View height-1 bgBlue06/>
             </TouchableOpacity>
-            <DivSpace height-20 />
+            {/* <DivSpace height-20 />
             <TouchableOpacity onPress={handleWorkinInform}>
               <View  row>
                 <View flex-1>
@@ -305,7 +305,7 @@ const myProfile = ({ navigation }) => {
               </View>
               <DivSpace height-10 />
               <View height-1 bgBlue06/>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <DivSpace height-30 />
             <Text h10 textGray>{i18n.t('myProfile.component.textItIsVeryImportantThat')}</Text>
             <DivSpace height-15 />
@@ -315,12 +315,12 @@ const myProfile = ({ navigation }) => {
                   {i18n.t('myProfile.component.textNoticeOfPrivacy')}
                 </Text>
               </Link>
-              <DivSpace height-5 />
+              {/* <DivSpace height-5 />
               <Link onPress={() => {}}>
                 <Text h13 medium bgBlue06>
                   {i18n.t('myProfile.component.textTermsAndConditions')}
                 </Text>
-              </Link>
+              </Link> */}
             </View>
           </View>
           <DivSpace height-25 />

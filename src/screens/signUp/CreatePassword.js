@@ -6,6 +6,8 @@ import * as Animatable from 'react-native-animatable';
 import i18n from '@utils/i18n';
 import passwordImage from '@assets/brand/password.png';
 import LocalStorage from '@utils/localStorage';
+import Colors from '@styles/Colors';
+
 import {
   ButtonNext,
   DivSpace,
@@ -53,7 +55,7 @@ const CreatePassword = ({ navigation }) => {
   const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
     changeHandlerSelect: 'onSelect'
   });
-  const isValid = isFormValid(password, confirmPassword,company);
+  const isValid = isFormValid(password, confirmPassword);
   const isValidConfig = isFormValid(password, confirmPassword);
 
   useEffect(() => {
@@ -196,7 +198,7 @@ const CreatePassword = ({ navigation }) => {
                   <DivSpace height-20 />
 
                   <Animatable.View animation={'zoomInUp'} >
-                    <Select
+                    {/* <Select
                       {...company}
                       label={i18n.t('signUp.component.selectEntryCode')}
                       options={companyOption}
@@ -204,8 +206,7 @@ const CreatePassword = ({ navigation }) => {
                       dropLabelStyle={{ color: brandTheme?.textBlue01 ?? Colors.textBlue01 }}
                       dropStyle={{ backgroundColor: brandTheme?.textBlue01 ?? Colors.textBlue01, borderColor: brandTheme?.bgOrange02 ?? Colors.bgOrange02 }}
                     />
-                    <DivSpace height-10 />
-
+                    <DivSpace height-10 /> */}
                     <AnimateLabelInput
                       {...password}
                       label={i18n.t('generics.password')}

@@ -47,7 +47,7 @@ const PersonalInformation = ({ navigation }) => {
   const birthday = useValidatedInput('birthday', inputBirthday);
   const curp = useValidatedInput('curp', inputCurp);
   const rfc = useValidatedInput('', inputRfc);
-  const isValid = isFormValid(name, lastName, birthday, curp, rfc);
+  const isValid = isFormValid(name,slastName,birthday);
   const onclickSegment = useValidatedInput('segment', false, {
     changeHandlerName: 'onChangeSeg'
   });
@@ -179,13 +179,13 @@ const PersonalInformation = ({ navigation }) => {
                   placeholder={birthday.value !== '' ? formatDate(birthday.value) : 'MM/DD/YYYY'}
                   label={i18n.t('myProfile.component.labelMyBirthday')}
                 />
-                <DivSpace height-30 />
+                {/* <DivSpace height-30 />
 
                 <AnimateLabelInput
                   {...curp}
                   label={i18n.t('myProfile.component.labelCURP')}
                   autoCapitalize={'characters'}
-                />
+                /> */}
                 <DivSpace height-10 />
                 {/* <AnimateLabelInput
                 {...rfc}

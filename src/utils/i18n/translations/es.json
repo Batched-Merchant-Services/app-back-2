@@ -806,11 +806,19 @@
           "title":"WIRING INSTRUCTIONS",
           "textTheInternational":"Send the wire to the following account information:",
           "textReceivingFinancial":"Receiving Financial Bank Name Evolve Bank & Trust",
-          "textOne":"Address: 7813 Office Park Blvd Baton Rouge LA 70809\nBeneficiary Name: Evolve Bank & Trust\nBeneficiary Address: 6070 Poplar Ave. #200\nMemphis TN 38119 USA Account Number: 084106768\nSWIFT Code: FRNAUS44",
+          "textOne":"Address: 7813 Office Park Blvd Baton Rouge LA 70809\nBeneficiary Name: Evolve Bank & Trust\nBeneficiary Address: 6070 Poplar Ave. #200\nMemphis TN 38119 USA \nRouting Number: 084106768\nSWIFT Code: FRNAUS44",
           "textPleaseInclude":"Special Note or Reference:You must include Batched, LLC Account Number 9900009730",
           "textTwo":"Also provide your full name and Email address associated with your Batched Merchant Services Account on the wire instructions.",
           "textToRegister":"",
           "buttonUnderstood":"Understood!"
+        },
+        "modalSecureDevices":{
+          "title":"Nuevo dispositivo \n Detectado",
+          "textWeDetectedThatLogged":"Detectamos que iniciaste sesión en un nuevo dispositivo, te enviamos un correo para autorizar el acceso a:",
+          "textOneAuthorized":"Una vez autorizado vuelve a la aplicación",
+          "textAccessToTheApplication":"El ingreso a la aplicación desde éste dispositivo ha sido rechazado.",
+          "buttonUnderstood":"Entendido"
+          
         }
       }
     },
