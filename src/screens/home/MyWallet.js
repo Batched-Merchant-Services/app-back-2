@@ -3,6 +3,7 @@ import { verticalScale } from 'react-native-size-matters';
 import { AsyncStorage,Platform,RefreshControl,ScrollView,StatusBar } from 'react-native';
 import { withNavigationFocus,NavigationEvents } from 'react-navigation';
 import { getBalances,verifyToken,getListWalletCrypto,getListBuyCrypto } from '@utils/api/switch';
+import { cleanDataUser, getDataUser } from '@store/actions/userGraph.actions';
 import { useSelector,useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { Bubbles } from 'react-native-loader';
@@ -39,6 +40,7 @@ import { View,
 } from '@components';
 
 
+
 const MyWallet = ({ navigation,screenProps }) => {
   const redux = useSelector(state => state);
   const appData = redux.user;
@@ -63,6 +65,7 @@ const MyWallet = ({ navigation,screenProps }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    getUserInfo();
     getVerifyToken();
     setShowModal(false);
     setShowModalInst(false);
@@ -114,6 +117,11 @@ const MyWallet = ({ navigation,screenProps }) => {
       setBalances([]);
     }
   }
+
+  async function getUserInfo() {
+    dispatch(getDataUser());
+  }
+
 
   async function getVerifyToken() {
     const value = await AsyncStorage.getItem('nameLang');

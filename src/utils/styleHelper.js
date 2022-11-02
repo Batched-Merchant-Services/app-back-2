@@ -28,6 +28,10 @@ const HEADERS = [
   'h17',
   'h10',
   'h7',
+  'h6',
+  'h5',
+  'h4',
+  'h3',
 ];
 const FONT_WEIGHTS = ['regular', 'medium', 'semibold', 'bold'];
 const TEXT_ALIGNMENTS = ['center', 'left', 'right'];

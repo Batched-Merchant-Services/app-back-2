@@ -1,25 +1,24 @@
-import React ,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import i18n from '@utils/i18n';
 import {
   DivSpace,
   NavigationBar,
   View,
   Text,
-  ButtonRounded,
   Link,
   Select,
-  ImageComponent,
+  ImageUploadPiker,
   SnackBar,
   Loader
 } from '@components';
-import { useSelector,useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { convertImage } from '@utils/formatters';
 import * as Animatable from 'react-native-animatable';
 import { useValidatedInput } from '@hooks/validation-hooks';
-import { scale ,verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { getIdentificationsCatalog,updateUserOfficialIdentify } from '@utils/api/switch';
+import { getIdentificationsCatalog, updateUserOfficialIdentify } from '@utils/api/switch';
 import ImagePicker from 'react-native-image-picker';
 import frontID from '@assets/brand/frontID.png';
 import backID from '@assets/brand/backID.png';
@@ -31,22 +30,23 @@ import LocalStorage from '@utils/localStorage';
 import Styles from './styles';
 import IconWarning from '../../utils/iconSVG/IconWarning';
 import Colors from '@styles/Colors';
+import { cleanErrorProfile, createKYC, editKYC, getTypeIdentification } from '../../store/actions/profile.actions';
 
 const options = {
-  title               : 'Capture Photo',
-  cancelButtonTitle   : 'Cancel',
+  title: 'Capture Photo',
+  cancelButtonTitle: 'Cancel',
   takePhotoButtonTitle: 'Capture Photo',
-  storageOptions      : {
+  storageOptions: {
     skipBackup: true,
-    path      : 'images',
+    path: 'images',
   },
 };
 
 
 
 function photoProofOfAddress(setSendProofOfAddress, setProofOfAddress) {
-  ImagePicker.showImagePicker(options, async(response) => {
-    const { error, uri,data } = response;
+  ImagePicker.showImagePicker(options, async (response) => {
+    const { error, uri, data } = response;
     if (response.didCancel) {
       console.log('User cancelled image picker');
     }
@@ -61,14 +61,14 @@ function photoProofOfAddress(setSendProofOfAddress, setProofOfAddress) {
       const resultBase = await convertImage(source);
       setSendProofOfAddress(resultBase);
       setProofOfAddress(uri);
-      
+
     }
   });
 }
 
 
 function photoSelfie(setSendPhotoSelfie, setshowPhotoSelfie) {
-  ImagePicker.launchCamera(options, async(response) => {
+  ImagePicker.launchCamera(options, async (response) => {
     const { error, uri, data } = response;
     if (response.didCancel) {
       console.log('User cancelled image picker');
@@ -90,8 +90,8 @@ function photoSelfie(setSendPhotoSelfie, setshowPhotoSelfie) {
 
 
 function photoBack(setSendPhotoBack, setshowPhotoBack) {
-  ImagePicker.showImagePicker(options, async(response) => {
-    const { error, uri,data } = response;
+  ImagePicker.showImagePicker(options, async (response) => {
+    const { error, uri, data } = response;
     if (response.didCancel) {
       console.log('User cancelled image picker');
     }
@@ -112,7 +112,7 @@ function photoBack(setSendPhotoBack, setshowPhotoBack) {
 
 
 function photoFront(setSendPhotoFront, setshowPhotoFront) {
-  ImagePicker.showImagePicker(options, async(response) => {
+  ImagePicker.showImagePicker(options, async (response) => {
     const { error, uri, data } = response;
     if (response.didCancel) {
       console.log('User cancelled image picker');
@@ -143,8 +143,8 @@ async function updateInfoUser(
   inputIdAddress,
   navigation,
   setIsLoadingModal,
-  setSnakVisible, 
-  setButtonNext, 
+  setSnakVisible,
+  setButtonNext,
   setTitle,
   dispatch
 ) {
@@ -173,7 +173,7 @@ async function updateInfoUser(
 function closeSnackNotice(
   setIsLoadingModal,
   setSnakVisible,
-  setButtonNext, 
+  setButtonNext,
   setTitle,
   response
 ) {
@@ -193,28 +193,32 @@ const OfficialIdentification = ({ navigation }) => {
   const redux = useSelector(state => state);
   const dispatch = useDispatch();
   const userData = redux.user;
+  const userGraph = redux.userGraph;
+  const profileData = redux.profile;
   const brandTheme = userData?.Theme?.colors;
   const brandThemeImages = userData?.Theme?.images;
-  const userInfo = userData?userData.infoUser : '';
-  const KycState = userInfo ? userInfo.kyc:'';
-  const idUser= KycState?KycState.id:'';
-  const addressState =userInfo? userInfo.address:'';
-  const imageFront= KycState?KycState.frontId?KycState.frontId+ '?' + new Date():'':'';
-  const imageBack= KycState ?KycState.backId?KycState.backId+ '?' + new Date():'':'';
-  const imageSelfie= KycState ?KycState.faceId?KycState.faceId+ '?' + new Date():'':'';
-  const documentId= KycState ?KycState.documentId?KycState.documentId+ '?' + new Date():'':'';
-  const typeIdentif= KycState ?KycState.typeIdentification:'';
-  const inputIdAddress= addressState.length  > 0 ?userInfo.address[0].id?userInfo.address[0].id:'':'';
-  const [typeIdentification, setTypeIdentification ] = useState([]);
-  const [dataIdentification, setDataIdentification ] = useState([]);
-  const [showPhotoFront, setshowPhotoFront ] = useState(imageFront);
-  const [showPhotoBack, setshowPhotoBack ] = useState(imageBack);
-  const [showPhotoSelfie, setshowPhotoSelfie ] = useState(imageSelfie);
-  const [showProofOfAddress, setProofOfAddress ] = useState(documentId);
-  const [sendPhotoFront, setSendPhotoFront ] = useState('');
-  const [sendPhotoBack, setSendPhotoBack ] = useState('');
-  const [sendPhotoSelfie, setSendPhotoSelfie ] = useState('');
-  const [sendProofOfAddress, setSendProofOfAddress ] = useState('');
+  const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
+  const userInfo = userProfile ? userProfile?.accounts : '';
+  const KycState = userInfo?.kyc ? userInfo?.kyc[0] : '';
+  const idUser = KycState ? KycState.id : '';
+  const addressState = userInfo ? userInfo.address : '';
+  const imageFrontValue = KycState ? KycState.frontId ? KycState.frontId + '?' + new Date() : '' : '';
+  const imageBackValue = KycState ? KycState.backId ? KycState.backId + '?' + new Date() : '' : '';
+  const imageSelfieValue = KycState ? KycState.faceId ? KycState.faceId + '?' + new Date() : '' : '';
+  const documentId = KycState ? KycState.documentId ? KycState.documentId + '?' + new Date() : '' : '';
+  const typeIdentif = KycState ? KycState.typeIdentification : '';
+
+  const inputIdAddress = addressState.length > 0 ? userInfo.address[0].id ? userInfo.address[0].id : '' : '';
+  const [typeIdentification, setTypeIdentification] = useState([]);
+  const [dataIdentification, setDataIdentification] = useState([]);
+  const [showPhotoFront, setshowPhotoFront] = useState(imageFrontValue);
+  const [showPhotoBack, setshowPhotoBack] = useState(imageBackValue);
+  const [showPhotoSelfie, setshowPhotoSelfie] = useState(imageSelfieValue);
+  const [showProofOfAddress, setProofOfAddress] = useState(documentId);
+  const [sendPhotoFront, setSendPhotoFront] = useState('');
+  const [sendPhotoBack, setSendPhotoBack] = useState('');
+  const [sendPhotoSelfie, setSendPhotoSelfie] = useState('');
+  const [sendProofOfAddress, setSendProofOfAddress] = useState('');
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [title, setTitle] = useState('');
@@ -228,41 +232,119 @@ const OfficialIdentification = ({ navigation }) => {
   const [warningBackCard, setWarningBackCard] = useState(false);
   const [warningSelfieCard, setWarningSelfieCard] = useState(false);
   const [warningProfOfAddress, setWarningProfOfAddress] = useState(false);
+  const imageFront = useValidatedInput('file', imageFrontValue);
+  const imageBack = useValidatedInput('file', imageBackValue);
+  const imageProofAddress = useValidatedInput('file', documentId);
+  const imageSelfie = useValidatedInput('file', imageSelfieValue);
+
+
+  useEffect(() => {
+    setIsLoadingModal(false)
+  }, [profileData?.successEditKYC])
+
+
+  // async function identifyCatalogs() {
+  //   const token = await LocalStorage.get('auth_token');
+  //   const response = await getIdentificationsCatalog(token);
+  //   if (response.code < 400) {
+  //     setTypeIdentification(response.data);
+  //   }
+
+  // }
+
   
+  useEffect(() => {
+    dispatch(cleanErrorProfile());
+    const countryCode = userInfo?.countryCode;
+    console.log('countryCode',countryCode);
+    dispatch(getTypeIdentification({ countryCode }));
+    //getTypeIdentity();
+  }, [])
 
   useEffect(() => {
-    identifyCatalogs();
-  }, []);
+    console.log('profileData?.dropDownIdentification',profileData)
+    if (profileData?.dropDownIdentification) {
+      if (profileData?.dropDownIdentification?.length > 0) {
+        setDataIdentification(profileData?.dropDownIdentification)
+      }
+    }
+  }, [profileData?.dropDownIdentification]);
+
+  // useEffect(() => {
+  //   let typeLanguage = typeIdentification?.map((item) => {
+  //     const billedIdSaved = { name: i18n.t(`${item?.name}`), value: item?.value };
+  //     console.log('billedIdSaved', billedIdSaved)
+  //     return billedIdSaved;
+  //   });
+  //   console.log('typeLanguage', typeLanguage)
+  //   setDataIdentification(typeLanguage);
+  // }, [typeIdentification]);
 
 
-  async function identifyCatalogs(){
-    const token = await LocalStorage.get('auth_token');
-    const response = await getIdentificationsCatalog(token);
-    if (response.code < 400) {
-      setTypeIdentification(response.data);
-    } 
-  }
-
-  useEffect(() => {
-    let typeLanguage = typeIdentification?.map((item) => {
-      const billedIdSaved = {name: i18n.t(`${item?.name}`),value:item?.value};
-      console.log('billedIdSaved',billedIdSaved)
-      return billedIdSaved;
-    });
-    console.log('typeLanguage',typeLanguage)
-    setDataIdentification(typeLanguage);
-  }, [typeIdentification]);
-
-  const isValid =showPhotoFront && showPhotoBack && showPhotoSelfie;
+  const isValid = showPhotoFront && showPhotoBack && showPhotoSelfie;
 
   function handlePressBack() {
     navigation.goBack();
   }
 
- 
-  const OfficialIdent = useValidatedInput('typeIdentif', typeIdentif ==='' || typeIdentif === undefined ?{name: i18n.t('generics.selectOne')}:{name: typeIdentif}, {
+
+  const OfficialIdent = useValidatedInput('typeIdentif', typeIdentif === '' || typeIdentif === undefined ? { name: i18n.t('generics.selectOne') } : { name: typeIdentif }, {
     changeHandlerSelect: 'onSelect'
   });
+ 
+  function getDropDown(value) {
+    //setIsLoadingModal(true);
+    const valueFront = userGraph?.fileFront ? userGraph?.fileFront : KycState?.frontId;
+    const valueBack = userGraph?.fileBack  ? userGraph?.fileBack : KycState?.backId;
+    const valueFaceId =  userGraph?.fileSelfie  ? userGraph?.fileSelfie  : KycState?.faceId;
+    const valueDocumentId = userGraph?.fileAddress  ? userGraph?.fileAddress : KycState?.documentId;
+    const valueTypeIdent = value.name  ? value.name : KycState.typeIdentification;
+    const isComplete = (valueFront?true:false)&&(valueBack?true:false)&&(valueFaceId?true:false)&&(valueDocumentId?true:false)&&(valueTypeIdent?true:false);
+
+    if (userInfo?.kyc?.length > 0 ) {
+      const dataUpdateKYC = {
+        id: KycState?.id ?? "",
+        accountId: userProfile.accountId ?? "",
+        frontId: valueFront,
+        backId: valueBack,
+        faceId: valueFaceId,
+        typeIdentification: valueTypeIdent,
+        documentId: valueDocumentId,
+        kycid: KycState?.kycid ?? "0",
+        isComplete: isComplete,
+        ip:''
+      }
+      dispatch(editKYC({ dataUpdateKYC }))
+    } else {
+
+      const dataCreateKYC = {
+        accountId: userProfile.accountId ?? "",
+        frontId: valueFront,
+        backId: valueBack,
+        faceId: valueFaceId,
+        typeIdentification: valueTypeIdent,
+        documentId: valueDocumentId,
+        status: "0",
+        kycid: KycState?.kycid ?? "0",
+        isComplete: isComplete,
+        ip:''
+      }
+      dispatch(createKYC({ dataCreateKYC }))
+    }
+  }
+
+  //console.log('profileData',profileData?.isLoadingEditKYC)
+
+  useEffect(() => {
+    console.log('profileData?.isLoadingEditKYC',profileData?.isLoadingEditKYC)
+    setIsLoadingModal(profileData?.isLoadingEditKYC);
+  }, [profileData?.isLoadingEditKYC]);
+
+  useEffect(() => {
+    console.log('profileData?.isLoadingCreateKYC',profileData?.isLoadingCreateKYC)
+    setIsLoadingModal(profileData?.isLoadingCreateKYC);
+  }, [profileData?.isLoadingCreateKYC]);
+
 
   const handleChoosePhotoFront = () => {
     photoFront(setSendPhotoFront, setshowPhotoFront);
@@ -274,14 +356,14 @@ const OfficialIdentification = ({ navigation }) => {
 
   const handleChoosePhotoSelfie = () => {
     photoSelfie(setSendPhotoSelfie, setshowPhotoSelfie);
-  
+
   };
 
-  const handleChooseProofOfAddress= () => {
+  const handleChooseProofOfAddress = () => {
     photoProofOfAddress(setSendProofOfAddress, setProofOfAddress);
   };
 
-  async function handlePressNext () {
+  async function handlePressNext() {
 
     await updateInfoUser(
       idUser,
@@ -297,31 +379,32 @@ const OfficialIdentification = ({ navigation }) => {
       setButtonNext,
       setTitle,
       dispatch
-    );   
+    );
   }
+  function getValueLoading(value) {
+    console.log('getValueLoading',value);
+  }
+  
+
 
   const handleCloseNotif = () => {
     setSnakVisible(false);
     setButtonNext(false);
     setActionAnimated(true);
   };
-  
+
   return (
     <SignUpWrapper>
-      <NavigationBar onBack={handlePressBack}  body={i18n.t('myProfile.component.OfficialIdentification.title')}/>
+      <NavigationBar onBack={handlePressBack} body={i18n.t('myProfile.component.OfficialIdentification.title')} />
       <ScrollView>
-        <SafeAreaView forceInset={{top: 'always'}}>
+        <SafeAreaView forceInset={{ top: 'always' }}>
           <DivSpace height-10 />
           <View row centerH>
-            <View width-6 height-6 bgGray style={{borderRadius: 6}}></View>
+            <View width-6 height-6 bgGray style={{ borderRadius: 6 }}></View>
             <DivSpace width-6 />
-            <View width-6 height-6 bgGray style={{borderRadius: 6}}></View>
+            <View width-6 height-6 bgGray style={{ borderRadius: 6 }}></View>
             <DivSpace width-6 />
-            <View width-6 height-6 bgOrange02 style={{borderRadius: 6}}></View>
-            <DivSpace width-6 />
-            <View width-6 height-6 bgGray style={{borderRadius: 6}}></View>
-            <DivSpace width-6 />
-            <View width-6 height-6 bgGray style={{borderRadius: 6}}></View>
+            <View width-6 height-6 bgOrange02 style={{ borderRadius: 6 }}></View>
           </View>
           <DivSpace height-25 />
           <View flex-1>
@@ -338,9 +421,10 @@ const OfficialIdentification = ({ navigation }) => {
                 {...OfficialIdent}
                 label={i18n.t('myProfile.component.OfficialIdentification.textTypeOfOfficial')}
                 options={dataIdentification}
+                onFill={(value)=>getDropDown(value)}
               />
               <DivSpace height-7 />
-              { showPhotoFront === null || showPhotoFront === ''  ?
+              {/* { showPhotoFront === null || showPhotoFront === ''  ?
                 <TouchableOpacity onPress={handleChoosePhotoFront} >
                   <View centerH centerV height-190 textBlue01 style={Styles.containerId}>
                     <Animatable.View animation="fadeIn" delay={100} style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -396,9 +480,41 @@ const OfficialIdentification = ({ navigation }) => {
                     </View>
                   </View>
                 </View>
-              }
-              <DivSpace height-25 />
-              {warningFrontCard  ? 
+              } */}
+              <ImageUploadPiker
+                {...imageFront}
+                label={i18n.t('myProfile.component.OfficialIdentification.textFrontID')}
+                ImageEmpty={brandThemeImages?.frontID ? brandThemeImages?.frontID : frontID}
+                typeImage='front'
+                onfillLoading={(value) => getValueLoading(value)}
+              />
+              <DivSpace height-15 />
+              <ImageUploadPiker
+                {...imageBack}
+                label={i18n.t('myProfile.component.OfficialIdentification.textBackID')}
+                ImageEmpty={brandThemeImages?.backID ? brandThemeImages?.backID : backID}
+                typeImage='back'
+                onfillLoading={(value) => setIsLoadingModal(value)}
+              />
+              <DivSpace height-15 />
+              <ImageUploadPiker
+                {...imageSelfie}
+                label={i18n.t('myProfile.component.OfficialIdentification.textYourPhoto')}
+                ImageEmpty={brandThemeImages?.selfie ? brandThemeImages?.selfie : fotoID}
+                typeImage='selfie'
+                onfillLoading={(value) => setIsLoadingModal(value)}
+              />
+              <DivSpace height-15 />
+              <ImageUploadPiker
+                {...imageProofAddress}
+                label={i18n.t('myProfile.component.OfficialIdentification.textYourProofOfAddress')}
+                ImageEmpty={brandThemeImages?.address ? brandThemeImages?.address : domicilio}
+                typeImage='address'
+                onfillLoading={(value) => setIsLoadingModal(value)}
+
+              />
+
+              {/* {warningFrontCard  ? 
                 <View>
                   <DivSpace height-10/>
                   <View row centerH centerV>
@@ -620,37 +736,37 @@ const OfficialIdentification = ({ navigation }) => {
                 :
                 null
               }
-              <DivSpace height-15/>
+              <DivSpace height-15/> */}
               <Text h12 white>
                 {i18n.t('myProfile.component.OfficialIdentification.textIfThePhotos')}
               </Text>
-              <DivSpace height-15/>
+              <DivSpace height-15 />
               <View height-1 textBlue01 />
-              <DivSpace height-15/>  
+              <DivSpace height-15 />
               <Text h10 textGray>{i18n.t('myProfile.component.labelTheInformationRequested')}</Text>
               <Text h10 textGray>{i18n.t('myProfile.component.labelYourInformation')}<Text bold white>{' '}{i18n.t('myProfile.component.labelItIsProtected')}</Text></Text>
-              <DivSpace height-15/>  
+              <DivSpace height-15 />
               <View left>
-                <Link onPress={() => {}}>
+                <Link onPress={() => { }}>
                   <Text h13 medium bgBlue06>
                     {i18n.t('myProfile.component.linkNoticeOfPrivacy')}
                   </Text>
-                </Link>  
+                </Link>
               </View>
-              <DivSpace height-15/>
+              <DivSpace height-15 />
               <Text h10 textGray>{i18n.t('myProfile.component.OfficialIdentification.textVerifyYourInformation')}</Text>
-              <DivSpace height-20/>  
+              <DivSpace height-20 />
               <View row>
-                <View flex-1  >
-                  <View  centerH centerV bottom>
-                    <ButtonRounded size = 'lg' onPress={handlePressNext} disabled={!isValid}>
-                      <Text h10  semibold>
+                {/* <View flex-1  >
+                  <View centerH centerV bottom>
+                    <ButtonRounded size='lg' onPress={handlePressNext} disabled={!isValid}>
+                      <Text h10 semibold>
                         {i18n.t('myProfile.component.buttonSaveAndFinish')}
                       </Text>
                     </ButtonRounded>
-                    <DivSpace height-15/>   
+                    <DivSpace height-15 />
                   </View>
-                </View>
+                </View> */}
               </View>
             </View>
           </View>
@@ -662,8 +778,8 @@ const OfficialIdentification = ({ navigation }) => {
         onClose={handleCloseNotif}
         animationAction={actionAnimated}
       />
-      {isLoadingModal &&(
-        <Loader 
+      {isLoadingModal && (
+        <Loader
           isOpen={true}
           navigation={navigation} />)}
     </SignUpWrapper>

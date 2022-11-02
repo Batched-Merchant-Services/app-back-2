@@ -23,7 +23,7 @@ var apiGraph = axios.create({
 
 
 const errorHandler = (error) => {
-  console.log('error graph',error)
+  console.log('error graph',error?.response)
   if(error.config) {
     
   }
@@ -41,7 +41,7 @@ const successHandler = (response) => {
 
 apiGraph.interceptors.request.use(
   async config => {
-    console.log('request',config,getTicks());
+    console.log('request', config);
     config.headers = { ...config.headers,  'content-hash': generateRSA('AppSavyy' + '|' + getTicks())};
     return config;
   },function (error) {
@@ -49,7 +49,6 @@ apiGraph.interceptors.request.use(
     return  Promise.reject(error);
   }
 );
-
 
 apiGraph.interceptors.response.use(
   response => successHandler(response),

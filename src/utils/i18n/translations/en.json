@@ -66,7 +66,8 @@
       "dropdownQuestion":"Please select an option",
       "cardNumberLength":"The Card Number must be 16 digits",
       "nipEquality": "The nip doesn't match",
-      "idTransaction":"Please enter a transaction id"
+      "idTransaction":"Please enter a transaction id",
+      "codeLength":"Your code must be at least 6 characters"
     },
     "generics": {
       "country": "Country",
@@ -177,7 +178,7 @@
     },
     "signUp": {
       "component": {
-        "smsSent": "We send you an SMS or Email with the PIN code",
+        "smsSent": "We send you an Email with the PIN code",
         "textwelcomeToUulala":"Welcome to SAVVY!",
         "labelEmail": "Email",
         "labelPhone": "Phone number (10 digits)",
@@ -219,11 +220,11 @@
         "labelRfc": "Tax Identifier",
         "labelOcupation": "Occupation",
         "labelName": "First Name",
-        "labelFirstLastName": "Middle Name (optional)",
+        "labelFirstLastName": "Middle Name (Optional)",
         "labelSecondLastName": "Last Name",
         "labelSelectAsk": "Choose a security question",
         "labelTitleOnboard": "My Profile",
-        "labelGender":"Gender",
+        "labelGender":"Gender (Optional)",
         "labelCURP": "SSN",
         "labelRFC": "Tax Identifier",
         "linkNoticeOfPrivacy":"Notice Of Privacy",
@@ -667,7 +668,7 @@
         "textProvider": "Provider",
         "textBiweeklyPayment": "fortnightly Pays",
         "buttonPay": "Pay",
-        "textTheFundsWillBe": "Funds will be automatically taken from My Wallet in case of debit.",
+        "textTheFundsWillBe": "Funds will be automatically taken from Mi Wallet in case of debit.",
         "textCreditDetail": "Credit Details",
         "textCapital": "Capital",
         "textInterestAmount": "Interest Amount",
@@ -761,7 +762,7 @@
         "labelMyWallet": "My wallet",
         "labelUulalaCard": "SAVVY Card",
         "buttonUseVirtualCard": "Use Virtual Card",
-        "buttonTransfer": "Wire Instructions",
+        "buttonTransfer": "International Wires",
         "buttonRechargueWallet": "Top up Wallet",
         "buttonPayUsers": "Peer to Peer",
         "buttonTransferBank": "Bank Transfers",
@@ -925,6 +926,8 @@
         "textRememberToCreate":"remember to create it with the exact amount you want to pay in an online store.",
         "buttonListOfVirtual":"List of \n virtual cards",
         "buttonVirtualCardInstructions":"Virtual card \n instructions",
+        "textInactiveCard":"Inactive card",
+        "textIfYouWantToMake":"If you want to make payments with it, press the padlock icon at the top of the card.",
         "CardSwift":{
           "textAccessYour":"To Access your",
           "textVirtualCard":"virtual card",
@@ -1441,8 +1444,8 @@
           "textFromYourWallet":"from your wallet to another user SAVVY",
           "textShippingInformation":"Shipping information: Enter the address of your contact or scan their wallet QR code",
           "inputAddressOfTheWallet":"Address 'Address' of the wallet to send",
-          "buttonScanQR":"Scan QR",
           "dropDownAddress":"Address",
+          "buttonScanQR":"Scan QR",
           "buttonAddThe":"Add the",
           "textEnterTheAmountYou":"Enter the amount you want to send in",
           "textOrTheEquivalent":"or the equivalent in your currency",
@@ -1460,7 +1463,7 @@
           "textEquivalentAmount":"Equivalent amount *",
           "textACommissionIsDeducted":"* A commission is deducted from the amount to be transferred.",
           "textCommissionForTransaction":"Commission per transaction",
-          "inputTransferReference":"Description",
+          "inputTransferReference":"Transfer reference",
           "buttonTransfer":"Transfer",
           "textOnlySend":"Only send",
           "textCoin":"coin",
@@ -1481,7 +1484,7 @@
           "textConfirmationTimeCan":"Confirmation time can vary from 24 to 72 hours,",
           "textDependingOnTheSpeed":"depending on the speed that the",
           "textBlockchainTakesAndThe":"blockchain takes and the liquidation of the assets is carried out.",
-          "buttonToReturn":"Back",
+          "buttonToReturn":"To return",
           "textThereIsNoAddress":"There is no address to show"
         },
         "HistoryCrypto":{
@@ -1589,6 +1592,7 @@
         },
         "Swap":{
           "titleSwap":"Swap",
+          "titleConfirmation":"Confirmation",
           "textCryptocurrencyTo":"Cryptocurrency to exchange for:",
           "textAmountSent":"Amount Sent",
           "textAmountReceived":"Amount received",
@@ -1604,10 +1608,9 @@
           "textYouWillReceive":"You’ll Receive:",
           "textNetworkFees":"Network Fees",
           "buttonSwap":"Swap",
-          "textOn":"on",
+          "textOn":"On",
           "snackNotice":"You cannot send amounts less than 20 USD"
         }
-     
       } 
     },
     "ModalKYC":{
@@ -1681,6 +1684,7 @@
       "textAuthenticationVia":"Authentication via",
       "textEmail":"Email",
       "textSMS":"SMS",
+      "textExternal":"External",
       "textSMSAuthenticationActivated":"SMS authentication enabled",
       "textEmailAuthenticationActivated":"Email authentication activated",
       "textRememberToEnterSixDigits":"Remember to re-enter the code",

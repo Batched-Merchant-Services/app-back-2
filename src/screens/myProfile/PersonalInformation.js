@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatDate, formatDateSend } from '@utils/formatters';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import i18n from '@utils/i18n';
@@ -19,15 +19,20 @@ import SignUpWrapper from '@screens/signUp/components/SignUpWrapper';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
 import { updateUser } from '@utils/api/switch';
 import LocalStorage from '@utils/localStorage';
+import { updateUserProfileInfo } from '@store/actions/profile.actions';
+import { cleanErrorProfile } from '../../store/actions/profile.actions';
 
 
 const PersonalInformation = ({ navigation }) => {
   const redux = useSelector(state => state);
-  const userData = redux.user;
-  const userInfo = userData ? userData.infoUser : '';
+  const dispatch = useDispatch();
+  const userGraph = redux.userGraph;
+  const profileData = redux.profile;
+  const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
+  const userInfo = userProfile ? userProfile?.accounts : '';
   const inputName = userInfo ? userInfo.firstName : '';
   const inputMiddleName = userInfo ? userInfo.middleName ? userInfo.middleName : '' : '';
   const inputSlastName = userInfo ? userInfo.lastName : '';
@@ -47,11 +52,10 @@ const PersonalInformation = ({ navigation }) => {
   const birthday = useValidatedInput('birthday', inputBirthday);
   const curp = useValidatedInput('curp', inputCurp);
   const rfc = useValidatedInput('', inputRfc);
-  const isValid = isFormValid(name,slastName,birthday);
+  const isValid = isFormValid(name, slastName, birthday);
   const onclickSegment = useValidatedInput('segment', false, {
     changeHandlerName: 'onChangeSeg'
   });
-
   const onFill = code => {
     setGender(code === 1 ? 'F' : code === 2 ? 'M' : 'O');
   };
@@ -63,54 +67,81 @@ const PersonalInformation = ({ navigation }) => {
   };
 
   useEffect(() => {
-    setGender(inputGender === 1 || inputGender === 'F'  ? 'F' : inputGender === 2 || inputGender === 'M' ? 'M' : 'O');
-  }, []);
+    dispatch(cleanErrorProfile());
+  }, [])
+
+
+  useEffect(() => {
+    setIsLoadingModal(false);
+  }, [profileData?.successUpdateInfo]);
 
 
   function handlePressBack() {
     navigation.goBack();
   }
 
-  async function handlePressNext() {
+
+  function handlePressNext() {
     setIsLoadingModal(true);
-    const token = await LocalStorage.get('auth_token');
-    const response = await updateUser(
-      token,
-      name.value,
-      lastName.value,
-      slastName.value,
-      Gender,
-      nameDay.text,
-      curp.value,
-      rfc.value,
-    );
-    if (response.code < 400) {
-      setTimeout(function () {
-        navigation.navigate('MyProfile');
-        setIsLoadingModal(false);
-      }, 1000);
-    } else {
-      setIsLoadingModal(true);
-      setTimeout(function () {
-        setIsLoadingModal(false);
-        setSnakVisible(true);
-        setButtonNext(true);
-        setTitle(response.message);
-      }, 1000);
+    const dataProfile = {
+      id: userInfo?.id ?? '',
+      firstName: name.value ?? '',
+      middleName: lastName.value ?? '',
+      lastName: slastName.value ?? '',
+      secondLastName: lastName.value ?? '',
+      birthday: nameDay?.text,
+      nationalId: '',
+      otherNationalId: '',
+      gender: Gender,
+      alias: userInfo?.alias ?? "",
+      countryCode: userInfo?.countryCode ?? "",
+      isComplete: true,
+      websiteUrl: '',
+      corporationType: '',
+      businessType: '',
+      webSocialMediaPresense: ''
     }
+    dispatch(updateUserProfileInfo({ dataProfile }))
   }
 
-  function handleContactInform() {
-    navigation.navigate('ContactInformationProfile');
-  }
+
+
+  // async function handlePressNext () {
+  //   setIsLoadingModal(true);
+  //   const token = await LocalStorage.get('auth_token');
+  //   const response = await updateUser(
+  //     token,
+  //     name.value,
+  //     lastName.value,
+  //     slastName.value,
+  //     Gender,
+  //     nameDay.text,
+  //     curp.value,
+  //     rfc.value,
+  //   );
+  //   if (response.code < 400) {
+  //     setTimeout(function(){
+  //       navigation.navigate('MyProfile');
+  //       setIsLoadingModal(false);
+  //     }, 1000);
+  //   } else{
+  //     setIsLoadingModal(true);
+  //     setTimeout(function(){
+  //       setIsLoadingModal(false);
+  //       setSnakVisible(true);
+  //       setButtonNext(true);
+  //       setTitle(response.message);
+  //     }, 1000);
+  //   }
+  // }
+
+
 
   const handleCloseNotif = () => {
     setSnakVisible(false);
     setButtonNext(false);
     setActionAnimated(true);
   };
-
-
   return (
     <SignUpWrapper >
       <KeyboardAvoidingView
@@ -123,10 +154,6 @@ const PersonalInformation = ({ navigation }) => {
             <DivSpace height-10 />
             <View row centerH>
               <View width-6 height-6 bgOrange02 style={{ borderRadius: 6 }}></View>
-              <DivSpace width-6 />
-              <View width-6 height-6 bgGray style={{ borderRadius: 6 }}></View>
-              <DivSpace width-6 />
-              <View width-6 height-6 bgGray style={{ borderRadius: 6 }}></View>
               <DivSpace width-6 />
               <View width-6 height-6 bgGray style={{ borderRadius: 6 }}></View>
               <DivSpace width-6 />
@@ -172,20 +199,20 @@ const PersonalInformation = ({ navigation }) => {
                     />
                   </View>
                 </View>
-
                 <DivSpace height-20 />
                 <DropDownDatePicker
                   onSelected={date => onDateSelected(date, 'birthday')}
                   placeholder={birthday.value !== '' ? formatDate(birthday.value) : 'MM/DD/YYYY'}
                   label={i18n.t('myProfile.component.labelMyBirthday')}
                 />
-                {/* <DivSpace height-30 />
-
-                <AnimateLabelInput
-                  {...curp}
-                  label={i18n.t('myProfile.component.labelCURP')}
-                  autoCapitalize={'characters'}
-                /> */}
+                {/* <DivSpace height-30/>
+              <AnimateLabelInput
+                {...curp}
+                label={i18n.t('myProfile.component.labelCURP')}
+                keyboardType={'default'}
+                returnKeyType={'done'}
+                autoCapitalize={'characters'}
+              /> */}
                 <DivSpace height-10 />
                 {/* <AnimateLabelInput
                 {...rfc}
@@ -218,7 +245,6 @@ const PersonalInformation = ({ navigation }) => {
                 </View>
               </View>
             </View>
-
           </SafeAreaView>
         </ScrollView>
         <SnackBar

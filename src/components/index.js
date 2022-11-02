@@ -58,10 +58,11 @@ import SnackBar from './SnackBar';
 import Loader from './Loader';
 import ContainerCrypto from './ContainerCrypto';
 import MenuTabs from './MenuTabs';
-
+import ImageUploadPiker from '@components/ImageUploadPiker';
 
 
 export {
+  ImageUploadPiker,
   AnimateLabelInput,
   AnimateLabelAmount,
   SwitchControl,

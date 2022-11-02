@@ -1,5 +1,6 @@
-import ImageComponentr from 'react-native-image-resizer';
+import ImageResizer from 'react-native-image-resizer';
 import ImgToBase64 from 'react-native-image-base64';
+import moment from 'moment';
 
 export const formatDateGMT = stringDate => {
   const date = new Date(stringDate);
@@ -101,10 +102,12 @@ export const upperCase = text => {
 };
 
 export const convertImage = async(path) => {
-  const resizedImageUrl = await ImageComponentr.createResizedImage(path, 400, 400, 'JPEG', 100, 0, null);
+  const resizedImageUrl = await ImageResizer.createResizedImage(path, 400, 400, 'JPEG', 100, 0, null);
   const base64 =  await ImgToBase64.getBase64String(resizedImageUrl.uri);
-  return 'data:image/jpeg;base64,'+ base64;
+  return base64;
 };
+
+
 
 export const maskNumbers = cardNumber => {
   if (cardNumber) {
@@ -138,3 +141,13 @@ export const maskEmail = cardNumber => {
   }
   return '';
 };
+
+
+export const twoDigits = value => {
+  if (value) {
+    const first2Num = Number.parseFloat(value).toFixed(3)
+    return first2Num;
+  }
+  return '';
+};
+

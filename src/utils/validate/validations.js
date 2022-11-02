@@ -155,7 +155,12 @@ async function downloadedText() {
     number: {
       presence: {
         message: i18n.t('validations.number')
-      }
+      },
+      length: {
+        minimum: 6,
+        maximum: 6,
+        message: i18n.t('validations.codeLength')
+      },
     },
     city: {
       presence: {

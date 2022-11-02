@@ -66,7 +66,8 @@
       "dropdownQuestion":"Selecciona una opción",
       "cardNumberLength":"El número de tarjeta debe tener 16 dígitos",
       "nipEquality": "El Nip no coincide",
-      "idTransaction":"Ingrese un id de transacción"
+      "idTransaction":"Ingrese un id de transacción",
+      "codeLength":"Su código debe tener al menos 6 caracteres."
     },
     "generics": {
       "country": "Selecciona tu país",
@@ -79,7 +80,7 @@
       "password": "Contraseña",
       "confirmPassword": "Confirmar contraseña",
       "selectOne": "Selecciona una opción",
-      "select": "Selecciona",
+      "select": "Select",
       "next": "Siguiente",
       "welcome": "¡Bienvenido a SAVVY!",
       "welcomeLogin": "Bienvenido",
@@ -115,6 +116,14 @@
       "NotificationCopiedText":"Texto Copiado",
       "textConfirmation":"Confirmación"
     },
+    "dropdown": {
+      "identificacion": {
+        "ine":"INE",
+        "passport":"Pasaporte",
+        "militar":"Cartilla Militar",
+        "visa":"Visa"
+      }
+    },
     "menu": {
       "component": {
         "labelMenuMyProfile": "Mi perfil",
@@ -126,14 +135,6 @@
         "labelMyCredits": "Mis creditos",
         "labelSecurity": "Seguridad",
         "labelMenuTransferMyBank": "Transferencia a mi cuenta bancaria"
-      }
-    },
-    "dropdown": {
-      "identificacion": {
-        "govermentid":"INE",
-        "passport":"Pasaporte",
-        "diverlicence":"Licencia",
-        "visa":"Visa"
       }
     },
     "emptyState": {
@@ -169,7 +170,7 @@
         "weHaveSentYouPIN": "Código vía SMS",
         "buttonNext": "Siguiente",
         "labelConfirmPass": "Confirma tu contraseña",
-        "labelDescriptionForget": "Recibirás un código SMS de 6 dígitos con el que podrás recuperar tu contraseña",
+        "labelDescriptionForget": "Recibirás un código Email de 6 dígitos con el que podrás recuperar tu contraseña",
         "linkAuthenticate": "Autenticar con llamada"
       },
       "message": {
@@ -179,7 +180,7 @@
     },
     "signUp": {
       "component": {
-        "smsSent": "Te enviamos un SMS o Email con el código PIN",
+        "smsSent": "Te enviamos un Email con el código PIN",
         "textwelcomeToUulala":"Bienvenido a SAVVY!",
         "labelEmail": "Correo electrónico",
         "labelPhone": "Teléfono (10 digitos)",
@@ -223,7 +224,7 @@
         "labelFirstLastName": "Segundo nombre (Opcional)",
         "labelSecondLastName": "Apellidos",
         "labelTitleOnboard": "Mi Perfil",
-        "labelGender":"Sexo",
+        "labelGender":"Sexo (Opcional)",
         "labelCURP": "CURP",
         "labelRFC": "RFC",
         "linkNoticeOfPrivacy":"Aviso de Privcidad",
@@ -758,7 +759,7 @@
         "labelMyWallet": "Mi Monedero",
         "labelUulalaCard": "Tarjeta SAVVY",
         "buttonUseVirtualCard": "Usar con Tarjeta Virtual",
-        "buttonTransfer": "Wire Instructions",
+        "buttonTransfer": "Transferencias electrónicas",
         "buttonRechargueWallet": "Recargar Monedero",
         "buttonPayUsers": "Pagos a Usuarios",
         "buttonTransferBank": "Transferencias Bancarias",
@@ -806,7 +807,7 @@
           "title":"WIRING INSTRUCTIONS",
           "textTheInternational":"Send the wire to the following account information:",
           "textReceivingFinancial":"Receiving Financial Bank Name Evolve Bank & Trust",
-          "textOne":"Address: 7813 Office Park Blvd Baton Rouge LA 70809\nBeneficiary Name: Evolve Bank & Trust\nBeneficiary Address: 6070 Poplar Ave. #200\nMemphis TN 38119 USA \nRouting Number: 084106768\nSWIFT Code: FRNAUS44",
+          "textOne":"Address: 7813 Office Park Blvd Baton Rouge LA 70809\nBeneficiary Name: Evolve Bank & Trust\nBeneficiary Address: 6070 Poplar Ave. #200\nMemphis TN 38119 USA\nRouting Number: 084106768\nSWIFT Code: FRNAUS44",
           "textPleaseInclude":"Special Note or Reference:You must include Batched, LLC Account Number 9900009730",
           "textTwo":"Also provide your full name and Email address associated with your Batched Merchant Services Account on the wire instructions.",
           "textToRegister":"",
@@ -922,6 +923,8 @@
         "textRememberToCreate":"recuerda crearla con el monto exacto que deseas pagar en una tienda en línea.",
         "buttonListOfVirtual":"Lista de tarjetas \n virtuales",
         "buttonVirtualCardInstructions":"Instrucciones de \n tarjetas virtuales",
+        "textInactiveCard":"Tarjeta inactiva",
+        "textIfYouWantToMake":"Si deseas realizar pagos con ella presiona el icono del candado en la parte superior de la tarjeta.",
         "CardSwift":{
           "textAccessYour":"Accede a tu",
           "textVirtualCard":"tarjeta virtual",
@@ -1451,7 +1454,7 @@
           "textEquivalentAmount":"Monto equivalente*",
           "textACommissionIsDeducted":"*Al monto a transferir se descuenta una comisión.",
           "textCommissionForTransaction":"Comisión por transacción",
-          "inputTransferReference":"Descripción",
+          "inputTransferReference":"Referencia de transferencia",
           "buttonTransfer":"Transferir",
           "textOnlySend":"Solo enviar",
           "textCoin":"moneda",
@@ -1577,10 +1580,10 @@
           "textCryptoTransfer":"Transferencia Crypto",
           "textEnterTheAmountYou":"Ingresa el monto que deseas enviar en Criptodivisa o el equivalente en Dólares americanos.",
           "buttonSend":"Enviar"
-
         },
         "Swap":{
           "titleSwap":"Swap",
+          "titleConfirmation":"Confirmación",
           "textCryptocurrencyTo":"Criptodivisa por la cual intercambiar:",
           "textAmountSent":"Monto Enviado",
           "textAmountReceived":"Monto Recibido",
@@ -1673,6 +1676,7 @@
       "textAuthenticationVia":"Autenticación vía",
       "textEmail":"Email",
       "textSMS":"SMS",
+      "textExternal":"Externa",
       "textSMSAuthenticationActivated":"Autenticación vía SMS activada",
       "textEmailAuthenticationActivated":"Autenticación vía Email activada",
       "textRememberToEnterSixDigits":"Recuerda reingresar el código que",
