@@ -80,7 +80,7 @@ async function handleSignIn(
     await LocalStorage.set('password', Password);
     await LocalStorage.set('left', response?.getLoggin?.left);
     await LocalStorage.set('uuid', response?.getLoggin?.uuid);
-    getThemeBrand(response?.getLoggin?.token);
+    //getThemeBrand(response?.getLoggin?.token);
     dispatch(saveUser({ type2fa: type2faLogin }));
     dispatch(isTwoFactor(isTwoFactorLogin));
     dispatch(saveUser({ companyValue: Company?.value }));

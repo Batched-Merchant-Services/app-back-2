@@ -1,11 +1,12 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { TouchableOpacity,Animated } from 'react-native';
 import { Text, View, DivSpace } from '@components';
 import styles from './styles';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import i18n from '@utils/i18n';
-import { useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSnackbarClose } from '@store/actions/appGraph.actions';
 import Colors from '@styles/Colors';
 
 const SnackBar = ({
@@ -16,14 +17,73 @@ const SnackBar = ({
   style = {}
 }) => {
   const redux = useSelector(state => state);
+  const dispatch = useDispatch();
   const appData = redux.user;
+  const appGraph = redux.appGraph;
   const brandTheme = appData?.Theme?.colors;
+  const SHOW = useSelector(state => state?.appGraph?.toggleSnackbar);
+  const MESSAGE = useSelector((state) => state?.appGraph?.snackbarMessage);
+  const TYPE = useSelector((state) => state?.appGraph?.typeSnack);
+  const [animated, setAnimated] = useState(new Animated.Value(0))
+  const duration = 2000;
+
+  const fadeOut = () => {
+    Animated.timing(animated, {
+      toValue: 0,
+      duration: duration,
+      useNativeDriver: true
+    }).start();
+    setTimeout(() => {
+      handleClose()
+    }, 800);
+  };
+
+
+  useEffect(() => {
+    Animated.timing(animated, {
+      toValue: 1,
+      duration: duration,
+      useNativeDriver: true
+    }).start();
+    setTimeout(() => {
+      fadeOut();
+    }, 3000);
+  }, [SHOW]);
+
+
+  function handleClose() {
+    dispatch(toggleSnackbarClose());
+  }
+
+
+  const errorColor = brandTheme?.error ?? Colors.error;
+
+  const warningColor = brandTheme?.warning ?? Colors.warning;
+
+  const successColor = brandTheme?.success ?? Colors.success;
+
+
+  let backgroundSnack;
+  switch (TYPE) {
+    case 'error':
+      backgroundSnack = errorColor;
+      break;
+    case 'warning':
+      backgroundSnack = warningColor;
+      break;
+    case 'success':
+      backgroundSnack = successColor;
+      break;
+    default:
+      backgroundSnack = errorColor;
+  }
+
 
   if (isVisible) {
     setTimeout(function(){ onClose(); }, 3000);
   }
 
-  if (isVisible ) {
+  if (isVisible || SHOW) {
     return (
       <View centerH>
         <Animatable.View
@@ -39,7 +99,7 @@ const SnackBar = ({
             <View row>
               <View flex-1 paddingL-15 centerV>
                 <Text h12>
-                  {message}
+                  {message ? message?.toString() : MESSAGE?.toString()}
                 </Text>
               </View>
               <DivSpace width-20 />
@@ -75,7 +135,7 @@ const SnackBar = ({
             <View row>
               <View flex-1 paddingL-15 centerV>
                 <Text h12>
-                  {message}
+                  {message ? message?.toString() : MESSAGE?.toString()}
                 </Text>
               </View>
               <DivSpace width-20 />
