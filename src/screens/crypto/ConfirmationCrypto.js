@@ -30,7 +30,6 @@ const ConfirmationCrypto = ({navigation}) => {
     navigation.navigate('MyWallet');
   }
 
-console.log('iconCrypto',iconCrypto)
   return (
     <SignUpWrapper>
       <SafeAreaView style={Styles.viewInfoCntc} forceInset={{top: 'always'}}>

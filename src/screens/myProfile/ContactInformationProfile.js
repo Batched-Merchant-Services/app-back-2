@@ -26,34 +26,34 @@ import { cleanErrorProfile, createAddress, editAddress, getCountries, getState }
 const ContactInformationProfile = ({ navigation }) => {
   const redux = useSelector(state => state);
   const dispatch = useDispatch();
-  const userData = redux.user;
-  const userGraph = redux.userGraph;
-  const profileData = redux.profile;
+  const userData = redux?.user;
+  const userGraph = redux?.userGraph;
+  const profileData = redux?.profile;
   const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
   const userInfo = userProfile ? userProfile?.accounts : '';
-  const addressState = userInfo ? userInfo.address : '';
-  const addressFirst = addressState ? userInfo.address[0] : '';
-  const addressSecond = addressState ? userInfo.address[1] : '';
-  const inputPhoneNumber = userInfo ? userInfo.phoneNumber : '';
-  const inputEmail = userInfo ? userInfo.email : '';
-  const inputIdUser = userData.idUser ? userData.idUser : '';
-  const inputStreet = addressState.length > 0 ? addressFirst.street ? addressFirst.street : '' : '';
-  const inputNumberOutIn = addressState.length > 0 ? addressFirst.number ? addressFirst.number : '' : '';
-  const inputSuburb = addressState.length > 0 ? addressFirst.suburb !== '' ? addressFirst.suburb : '' : '';
-  const inputCountry = addressState.length > 0 ? addressFirst.country !== '' ? addressFirst.country : '' : '';
-  const inputZipCode = addressState.length > 0 ? addressFirst.zipCode ? addressFirst.zipCode : '' : '';
-  const inputDelegation = addressState.length > 0 ? addressFirst.city !== '' ? addressFirst.city : '' : '';
-  const inputState = addressState.length > 0 ? addressFirst.state !== '' ? addressFirst.state : '' : '';
+  const addressState = userInfo ? userInfo?.address : '';
+  const addressFirst = addressState ? userInfo?.address[0] : '';
+  const addressSecond = addressState ? userInfo?.address[1] : '';
+  const inputPhoneNumber = userInfo ? userInfo?.phoneNumber : '';
+  const inputEmail = userInfo ? userInfo?.email : '';
+  const inputIdUser = userData?.idUser ? userData?.idUser : '';
+  const inputStreet = addressState?.length > 0 ? addressFirst?.street ? addressFirst?.street : '' : '';
+  const inputNumberOutIn = addressState?.length > 0 ? addressFirst?.number ? addressFirst?.number : '' : '';
+  const inputSuburb = addressState?.length > 0 ? addressFirst?.suburb !== '' ? addressFirst?.suburb : '' : '';
+  const inputCountry = addressState?.length > 0 ? addressFirst?.country !== '' ? addressFirst?.country : '' : '';
+  const inputZipCode = addressState?.length > 0 ? addressFirst?.zipCode ? addressFirst?.zipCode : '' : '';
+  const inputDelegation = addressState?.length > 0 ? addressFirst?.city !== '' ? addressFirst?.city : '' : '';
+  const inputState = addressState?.length > 0 ? addressFirst?.state !== '' ? addressFirst?.state : '' : '';
 
-  const inputStreetShipping = addressState.length > 0 ? addressSecond.street ? addressSecond.street : '' : '';
-  const inputNumberOutInShipping = addressState.length > 0 ? addressSecond.number ? addressSecond.number : '' : '';
-  const inputSuburbShipping = addressState.length > 0 ? addressSecond.suburb !== '' ? addressSecond.suburb : '' : '';
-  const inputCountryShipping = addressState.length > 0 ? addressSecond.country !== '' ? addressSecond.country : '' : '';
-  const inputZipCodeShipping = addressState.length > 0 ? addressSecond.zipCode ? addressSecond.zipCode : '' : '';
-  const inputDelegationShipping = addressState.length > 0 ? addressSecond.city !== '' ? addressSecond.city : '' : '';
-  const inputStateShipping = addressState.length > 0 ? addressSecond.state !== '' ? addressSecond.state : '' : '';
+  const inputStreetShipping = addressState?.length > 0 ? addressSecond?.street ? addressSecond?.street : '' : '';
+  const inputNumberOutInShipping = addressState?.length > 0 ? addressSecond?.number ? addressSecond?.number : '' : '';
+  const inputSuburbShipping = addressState?.length > 0 ? addressSecond?.suburb !== '' ? addressSecond?.suburb : '' : '';
+  const inputCountryShipping = addressState?.length > 0 ? addressSecond?.country !== '' ? addressSecond?.country : '' : '';
+  const inputZipCodeShipping = addressState?.length > 0 ? addressSecond?.zipCode ? addressSecond?.zipCode : '' : '';
+  const inputDelegationShipping = addressState?.length > 0 ? addressSecond?.city !== '' ? addressSecond?.city : '' : '';
+  const inputStateShipping = addressState?.length > 0 ? addressSecond?.state !== '' ? addressSecond?.state : '' : '';
 
-  const inputIdAddress = addressState.length > 0 ? addressFirst.id ? addressFirst.id : '' : '';
+  const inputIdAddress = addressState?.length > 0 ? addressFirst?.id ? addressFirst?.id : '' : '';
 
   const [countryCatalog, setCountryCatalog] = useState([]);
   const [countryShippCatalog, setCountryShippCatalog] = useState([]);
@@ -126,9 +126,9 @@ const ContactInformationProfile = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(getCountries());
-    const IDCountry = inputCountry === 'Mexico +52' ? true : false;
-    const IDCountryShip = inputCountryShipping === 'Mexico +52' ? true : false;
-    setShowInfoEU(IDCountry);
+    const IDCountry = inputCountry === 'Mexico +52' || inputState === 'MEX' ? true : false;
+    const IDCountryShip = inputCountryShipping === 'Mexico +52' || inputStateShipping === 'MEX' ? true : false;
+    setShowInfoEU(IDCountry); 
     setShowInfoEUShipping(IDCountryShip);
   }, []);
 
@@ -201,14 +201,14 @@ const ContactInformationProfile = ({ navigation }) => {
     const dataUpdateAddress = {
       id: addressFirst?.id ?? '',
       accountId: userProfile?.accountId ?? "",
-      suburb: suburb?.value,
-      city: delegation.value,
-      country: valueCountry?.name,
-      state: valueState?.name,
-      street: street?.value,
-      number: numberOutIn?.value,
+      suburb: suburb?.value ?? "",
+      city: delegation.value ?? "",
+      country: valueCountry?.name ?? "",
+      state: valueState?.name ?? "",
+      street: street?.value ?? "",
+      number: numberOutIn?.value ?? "",
       typeAddress: 'billing',
-      zipCode: CP?.value,
+      zipCode: CP?.value ?? "",
       shortName: 'billing',
       isComplete: true
     }
@@ -216,7 +216,7 @@ const ContactInformationProfile = ({ navigation }) => {
       id: addressSecond?.id ?? '',
       accountId: userProfile?.accountId ?? "",
       suburb: checkTandC?.value ? suburb?.value : suburbShipping?.value,
-      city: checkTandC?.value ? delegation.value : delegationShipping.value,
+      city: checkTandC?.value ? delegation?.value : delegationShipping?.value,
       country: checkTandC?.value ? valueCountry?.name : valueCountrySipping?.name,
       state: checkTandC?.value ? valueState?.name : valueStateSipping?.name,
       street: checkTandC?.value ? street?.value : streetShipping?.value,
@@ -237,21 +237,21 @@ const ContactInformationProfile = ({ navigation }) => {
     const valueStateSipping = stateShipping?.value ?? '';
     const dataCreateAddress = {
       accountId: userProfile?.accountId ?? "",
-      suburb: suburb?.value,
-      city: delegation.value,
-      country: valueCountry?.value,
-      state: valueState?.value,
-      street: street?.value,
-      number: numberOutIn?.value,
+      suburb: suburb?.value ?? "",
+      city: delegation.value ?? "",
+      country: valueCountry?.value ?? "",
+      state: valueState?.value ?? "",
+      street: street?.value ?? "",
+      number: numberOutIn?.value ?? "",
       typeAddress: 'billing',
-      zipCode: CP?.value,
+      zipCode: CP?.value ?? "",
       shortName: 'billing',
       isComplete: true
     }
     const dataCreateAddressShipping = {
       accountId: userProfile?.accountId ?? "",
       suburb: checkTandC?.value ? suburb?.value : suburbShipping?.value,
-      city: checkTandC?.value ? delegation.value : delegationShipping.value,
+      city: checkTandC?.value ? delegation?.value : delegationShipping?.value,
       country: checkTandC?.value ? valueCountry?.value : valueCountrySipping?.value,
       state: checkTandC?.value ? valueState?.value : valueStateSipping?.value,
       street: checkTandC?.value ? street?.value : streetShipping?.value,

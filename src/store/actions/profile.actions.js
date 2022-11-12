@@ -110,6 +110,9 @@ export const editKYC = ({ dataUpdateKYC }) => async (dispatch) => {
         dispatch({ type: EDIT_KYC_SUCCESS, payload: response?.data['editAccountsKyc'] });
         dispatch(getDataUser());
         dispatch(toggleSnackbarOpen('Información Actualizada con Exito','success'));
+      }else{
+        dispatch({ type: PROFILE_ERROR , payload: response?.Message });
+        dispatch(toggleSnackbarOpen(response?.Message));
       }
     }).catch((error) => {
       console.log('error 1 identity',error);
@@ -136,23 +139,23 @@ export const createKYC = ({dataCreateKYC}) => async (dispatch) => {
         data: dataCreateKYC
       }
     }).then(async (response) => {
+      console.log('response',response);
       if (response.data) {
         dispatch({ type: CREATE_KYC_SUCCESS, payload: response?.data['editAccountsKyc'] });
          dispatch(getDataUser());
          dispatch(toggleSnackbarOpen('Información Actualizada con Exito','success'));
+      }else{
+        dispatch({ type: PROFILE_ERROR , payload: response?.Message });
+        dispatch(toggleSnackbarOpen(response?.Message));
       }
     }).catch((error) => {
-      console.log('error 1 identity',error);
       dispatch({ type: PROFILE_ERROR , payload: error });
       dispatch(toggleSnackbarOpen(error));
     })
   } catch (error) {
-    console.log('error 2 identity',error);
     dispatch({ type: PROFILE_ERROR, payload: error });
   }
 };
-
-
 
 
 export const createAddress = ({arrayAddress}) => async (dispatch) => {

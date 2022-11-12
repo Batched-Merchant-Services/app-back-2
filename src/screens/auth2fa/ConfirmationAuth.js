@@ -29,7 +29,6 @@ const ConfirmationAuth = ({ navigation, route, navigation: { goBack } }) => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const handlePressBack = () => {
-    console.log('config',appData);
     if (appData?.pageNavigation2fa ==='config') {
       navigation.navigate('MyWallet')
     } else {

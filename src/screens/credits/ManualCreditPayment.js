@@ -30,7 +30,6 @@ const ManualCreditPayment = ({ navigation }) => {
   }
 
   function handlePay() {
-    console.log('go transfer')
     var foobar = [3, 2, 1];
     if (!foobar.includes(appData?.type2fa)) {      
       setShowModal2fa(true);

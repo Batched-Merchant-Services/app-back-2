@@ -60,7 +60,6 @@ const ImageUploadPiker = ({ value, error, onChangeText, navigation, label, Image
 
 
   function onchangeSendImage() {
-    console.log('onchangeSendImage',typeImagesSend)
     if (typeImagesSend === 'front') {
       onChangeText(userGraph?.fileFront ?? '');
       setShowFront(userGraph?.successFileFront);
@@ -133,26 +132,24 @@ const ImageUploadPiker = ({ value, error, onChangeText, navigation, label, Image
     }
   };
 
-
+  console.log('userInfo?.kyc',userInfo?.kyc, userGraph)
   function getUpdateAddress() {
-    console.log('get Address')
     const valueFront = userGraph?.fileFront ? userGraph?.fileFront : kyc?.frontId;
     const valueBack = userGraph?.fileBack  ? userGraph?.fileBack : kyc?.backId;
     const valueFaceId =  userGraph?.fileSelfie  ? userGraph?.fileSelfie  : kyc?.faceId;
     const valueDocumentId = userGraph?.fileAddress  ? userGraph?.fileAddress : kyc?.documentId;
-    const valueTypeIdent = kyc.typeIdentification  ? kyc.typeIdentification : '';
+    const valueTypeIdent = kyc?.typeIdentification  ? kyc?.typeIdentification : '';
     const isComplete = (valueFront?true:false)&&(valueBack?true:false)&&(valueFaceId?true:false)&&(valueDocumentId?true:false)&&(valueTypeIdent?true:false);
-    console.log('values true',isComplete,valueTypeIdent);
     
     if (userInfo?.kyc?.length > 0 ) {
       const dataUpdateKYC = {
         id: kyc?.id ?? "",
-        accountId: userProfile.accountId ?? "",
-        frontId: valueFront,
-        backId: valueBack,
-        faceId: valueFaceId,
-        typeIdentification: valueTypeIdent,
-        documentId: valueDocumentId,
+        accountId: userProfile?.accountId ?? "",
+        frontId: valueFront ?? "",
+        backId: valueBack ?? "",
+        faceId: valueFaceId ?? "",
+        typeIdentification: valueTypeIdent ?? "",
+        documentId: valueDocumentId ?? "",
         kycid: kyc?.kycid ?? "0",
         isComplete: isComplete,
         ip:''
@@ -161,12 +158,12 @@ const ImageUploadPiker = ({ value, error, onChangeText, navigation, label, Image
     } else {
 
       const dataCreateKYC = {
-        accountId: userProfile.accountId ?? "",
-        frontId: valueFront,
-        backId: valueBack,
-        faceId: valueFaceId,
-        typeIdentification: valueTypeIdent,
-        documentId: valueDocumentId,
+        accountId: userProfile?.accountId ?? "",
+        frontId: valueFront ?? "",
+        backId: valueBack ?? "",
+        faceId: valueFaceId ?? "",
+        typeIdentification: valueTypeIdent ?? "",
+        documentId: valueDocumentId ?? "",
         status: "0",
         kycid: kyc?.kycid ?? "0",
         isComplete: isComplete,
@@ -213,27 +210,29 @@ const ImageUploadPiker = ({ value, error, onChangeText, navigation, label, Image
     );
     if (grantedcamera === PermissionsAndroid.RESULTS.GRANTED) {
       console.log("Camera & storage permission given");
-      launchCamera(optionsCamera, (response) => {
-        const { error, uri, data } = response;
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        }
-        else if (error) {
-          console.log('error', error)
-          setFileError(response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button:', response.customButton);
-        } else {
-          if (data) {
-            const source = { uri: 'data:image/jpeg;base64,' + data }
-            const nameFile = Math.random() + response?.fileName;
-            uploadImage(source, nameFile, valueImage);
-          } else {
-            setFileError('Image rejected, please retake it.');
-          }
-        }
-      });
     }
+    launchCamera(optionsCamera, (response) => {
+      const { error, uri, data } = response;
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (error) {
+        console.log('error', error)
+        setFileError(response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button:', response.customButton);
+      } else {
+        const nameFiles = response?.uri?.slice(response?.uri?.lastIndexOf('/') + 1);
+
+        if (data) {
+          const source = { uri: 'data:image/jpeg;base64,' + data }
+          const nameFile = Math.random() + nameFiles;
+          uploadImage(source, nameFile, valueImage);
+        } else {
+          setFileError('Image rejected, please retake it.');
+        }
+      }
+    });
   }
 
     

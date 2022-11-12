@@ -50,7 +50,6 @@ const TwoFactorActivation = ({ navigation, route, navigation: { goBack } }) => {
 
   async function getQrAuth() {
     setIsLoadingModal(true);
-    console.log('getQrAuth');
     const response = await getAuth2faQr();
     if (response?.getImageTwoFactor) {
       setClabe(response?.getImageTwoFactor?.secretCode)

@@ -23,7 +23,9 @@ import {
 
 export const initialState = {
   isLoadingProfile: false,
+  isLoadingAvatar: false,
   isLoadingEditKYC: false,
+  isLoadingTypeIdentification: false,
   isLoadingCreateKYC: false,
   successUpdateAvatar: false,
   successUpdateInfo: false,
@@ -51,14 +53,14 @@ export const initialState = {
 };
 
 export default profileReducer = (state = initialState, action) => {
-  console.log('action',action.type)
+
   switch (action.type) {
     case UPDATE_PROFILE_AVATAR:
-      return { ...state, isLoadingProfile: true, errorProfile: false };
+      return { ...state, isLoadingAvatar: true, errorProfile: false };
     case UPDATE_PROFILE_AVATAR_SUCCESS:
       return {
         ...state,
-        isLoadingProfile: false,
+        isLoadingAvatar: false,
         successUpdateAvatar: true,
         errorProfile: false,
         imageProfile: action.payload,
@@ -147,11 +149,11 @@ export default profileReducer = (state = initialState, action) => {
         success: {},
       };
     case TYPE_IDENTIFICATION:
-      return { ...state, isLoadingProfile: true, errorProfile: false };
+      return { ...state, isLoadingTypeIdentification: true, errorProfile: false,  successTypeIdentification: false};
     case TYPE_IDENTIFICATION_SUCCESS:
       return {
         ...state,
-        isLoadingProfile: false,
+        isLoadingTypeIdentification: false,
         successTypeIdentification: true,
         errorProfile: false,
         dropDownIdentification: action.payload,
@@ -161,11 +163,15 @@ export default profileReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingProfile: false,
+        isLoadingAvatar:false,
         finishProfileSuccess: false,
-        successCreateAddress:false,
-        successEditAddress:false,
         successUpdateAvatar: false,
         successUpdateInfo: false,
+        successCreateAddress: false,
+        successEditAddress: false,
+        successCreateKYC: false,
+        successEditKYC: false,
+        successTypeIdentification: false,
         isLoadingEditKYC: false,
         isLoadingCreateKYC: false,
         showError: true,
@@ -176,7 +182,10 @@ export default profileReducer = (state = initialState, action) => {
       return {
         ...state,
         successUpdateAvatar: false,
+        isLoadingAvatar:false,
         isLoadingProfile: false,
+        isLoadingEditKYC: false,
+        isLoadingCreateKYC: false,
         finishProfileSuccess: false,
         showError: false,
         successUpdateInfo: false,
@@ -184,6 +193,7 @@ export default profileReducer = (state = initialState, action) => {
         successEditAddress:false,
         successCreateKYC: false,
         successEditKYC: false, 
+        successTypeIdentification: false,
         error: {},
       };
     default:

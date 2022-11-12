@@ -64,13 +64,14 @@ function selectAvatar(setShowPhoto, setShowImage, setIsLoadingModal,dispatch) {
       console.log('User tapped custom button: ', response.customButton);
     }
     else {
-
+      const nameFiles = response?.uri?.slice(response?.uri?.lastIndexOf('/') + 1);
+      console.log('response',response?.fileName? response?.fileName:nameFiles)
       if (data) {
         const sourceURI = { uri: uri };
         setShowPhoto(sourceURI);
         setShowImage(true);
         const source = 'data:image/jpeg;base64,' + data;
-        const nameFile = Math.random() + response?.fileName ;
+        const nameFile = Math.random() + response?.fileName? response?.fileName:nameFiles ;
         const resultBase = await convertImage(source);
         dispatch(setFile({ nameFile, resultBase }));
       }
@@ -115,8 +116,9 @@ function selectAvatar(setShowPhoto, setShowImage, setIsLoadingModal,dispatch) {
 const myProfile = ({ navigation }) => {
   const redux = useSelector(state => state);
   const dispatch = useDispatch();
-  const userData = redux.user;
-  const userGraph = redux.userGraph;
+  const userData = redux?.user;
+  const userGraph = redux?.userGraph;
+  const profileData = redux?.profile;
   const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
   const userAccount = userProfile?.accounts;
   const brandTheme = userData?.Theme?.colors;
@@ -126,7 +128,7 @@ const myProfile = ({ navigation }) => {
   const [name, setName] = useState(userAccount?.firstName + ' ' + userAccount?.middleName);
   const [alias, setAlias] = useState(userAccount?.alias);
   const [lastName, setLastName] = useState(userAccount?.lastName);
-  const [showImage, setShowImage] = useState(false);
+  const [showImage, setShowImage] = useState(userAccount?.avatarImage?true:false);
   const [showPhoto, setShowPhoto] = useState(null);
   const [profileComplete] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
@@ -146,16 +148,27 @@ const myProfile = ({ navigation }) => {
     extrapolate: 'clamp',
   });
 
+
   useEffect(() => {
     dispatch(cleanErrorProfile());
     dispatch(cleanDataFile());
-    getImageProfile();
-
-
+    if (showImage) {
+      getImageProfile();
+    }
   }, []);
 
+
   useEffect(() => {
-    console.log('userGraph',userGraph?.setFile === null,userGraph?.setFile !== null)
+    setIsLoadingModal(false)
+  }, [profileData?.successUpdateAvatar])
+
+
+  useEffect(() => {
+    setIsLoadingModal(userGraph?.isLoadingFileAvatar);
+  }, [userGraph?.isLoadingFileAvatar]);
+
+
+  useEffect(() => {
     if (userGraph?.setFile !== null) {
       profileUpdateAvatar();
     } 
@@ -163,6 +176,7 @@ const myProfile = ({ navigation }) => {
 
 
   function profileUpdateAvatar() {
+    // setIsLoadingModal(true);
     dispatch(updateUserAvatar({ id: userAccount?.id, image: userGraph?.setFile }))
   }
   
@@ -365,7 +379,7 @@ const myProfile = ({ navigation }) => {
               style={{ height: verticalScale(330) }}
             >
               <Animatable.View animation="zoomIn" delay={300} >
-                <ImageBackground source={{ uri: showImage ? showPhoto.uri : null }} style={{ width: '100%', height: verticalScale(330), opacity: 0.1 }} />
+                <ImageBackground source={{ uri: showImage ? showPhoto?.uri : null }} style={{ width: '100%', height: verticalScale(330), opacity: 0.1 }} />
                 <View style={{ opacity: 1, marginTop: verticalScale(-250) }}>
                   <Animatable.View animation="zoomIn" delay={300} centerH centerV style={{ margin: 10, opacity: 1 }}>
                     {showImage ?
@@ -379,7 +393,7 @@ const myProfile = ({ navigation }) => {
                           <Animatable.View animation="zoomIn" delay={300} style={{ alignItems: 'center', justifyContent: 'center' }}>
                             <TouchableOpacity onPress={handleChoosePhoto}>
                               <View style={Styles.photoProfile}>
-                                <Image source={{ uri: showPhoto.uri }} style={Styles.imageProfileNull} />
+                                <Image source={{ uri: showPhoto?.uri }} style={Styles.imageProfileNull} />
                               </View>
                             </TouchableOpacity>
                             <DivSpace height-15 />

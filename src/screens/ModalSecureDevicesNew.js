@@ -36,7 +36,6 @@ const ModalSecureDevicesNew = ({ isOpen, navigation, onClose = () => null, page,
     setTimeout(() => setScaleValue(new Animated.Value(0)), 500);
   };
 
-  console.log('isOpen', isOpen, showOpen, deviceStatus)
   return (
     <ModalContainer showModal={!showOpen ? showOpen : Open}>
       <View paddingH-25 centerH textBlue01 style={styles.containerModal}>

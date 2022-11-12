@@ -44,7 +44,6 @@ const ActivationSms = ({ navigation, route, navigation: { goBack } }) => {
   useEffect(() => { getSMSCode() }, []);
 
   async function getSMSCode() {
-    console.log('appData', appData)
     const phone = await LocalStorage.get('user');
     setPhoneUser(phone)
     const responseCode = await getCodeSms();

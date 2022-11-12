@@ -77,7 +77,6 @@ const AmountCryptoTwo = ({ value, error, onChangeText, onFillConvert,convertData
 
   const filterPays = code => {
     const codeName = code ? code.name : code;
-    console.log('codeName',codeName)
     setCurrency(codeName);
     if (codeName === 'USD') {
       convertAmountSendUSD(value)
@@ -141,7 +140,6 @@ const AmountCryptoTwo = ({ value, error, onChangeText, onFillConvert,convertData
     }
   }
 
-  console.log('showCurrency', showCurrency)
 
   return (
     <View flex-1>

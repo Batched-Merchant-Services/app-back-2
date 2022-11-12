@@ -71,7 +71,6 @@ const ModalBalances = ({ isOpen, onClose = () => null, navigation }) => {
   const isValid = isFormValid(amount, Origin, Destiny);
 
   const goTransfer = async () => {
-    console.log('go transfer')
     var foobar = [3, 2, 1];
     if (!foobar.includes(appData?.type2fa)) {      
       setShowModal2fa(true);

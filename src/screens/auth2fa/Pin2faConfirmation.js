@@ -433,7 +433,6 @@ async function sendCryptoInfo(
 ) {
   setIsLoadingModal(true);
   const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
-  console.log('data 1',token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity)
   const response = data.page === 'sendCryptoUsers' ? await sendCryptoUsers(token, data.shortNameCrypto, data?.amountCurrency, data?.addressCrypto, data?.transferReference?.value, codeSecurity) : await sendCrypto(token, data.shortNameCrypto, data?.amountCurrency, data?.sendAddress, data?.transferReference?.value, codeSecurity);
   if (response.code < 400) {
     setTimeout(function () {
@@ -478,7 +477,6 @@ async function saleCrypto(
 }
 
 function errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response) {
-  console.log('message', response)
   setIsLoadingModal(true);
   setTimeout(function () {
     setSnakVisible(true);
@@ -509,10 +507,8 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const isValid = isFormValid(codeActivation);
 
-  console.log('codeActivation', codeActivation)
 
   async function getInfo() {
-    console.log('params', params, appData);
     const code = codeActivation?.value;
     const token = await LocalStorage.get('auth_token');
 
@@ -521,7 +517,6 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
     } else if (params === 'ChangePass' || params === 'LoginChange') {
       navigation.push('CreatePassword', { code: code, page: params });
     } else {
-      console.log('yesss ', data)
       if (data.page === 'contacts') {
         await payContact(token,
           data,

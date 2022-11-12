@@ -22,6 +22,7 @@ export const initialState = {
 	showErrorUser: false,
 	successDataUser:false,
 	isLoadingFile: false,
+	isLoadingFileAvatar: false,
 	showErrorFile: false,
 	setFile: null,
 	successFileFront: false,
@@ -53,11 +54,11 @@ export default usergraphReducer = (state = initialState, action) => {
 				error: {},
 			};
 			case SET_FILE_URL:
-				return { ...state, isLoadingFile: true, showErrorUser: false };
+				return { ...state, isLoadingFileAvatar: true, showErrorUser: false };
 			case SET_FILE_URL_SUCCESS:
 				return {
 					...state,
-					isLoadingFile: false,
+					isLoadingFileAvatar: false,
 					showErrorUser: false,
 					setFile: action.payload,
 					error: {},
@@ -118,6 +119,12 @@ export default usergraphReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoadingData: false,
+				isLoadingFileAvatar: false,
+				isLoadingFile: false,
+				successFileFront: false,
+				successFileBack: false,
+				successFileAddress: false,
+				successFileSelfie: false,
 				showErrorUser: true,
 				error: action.payload,
 			};
@@ -137,6 +144,7 @@ export default usergraphReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoadingData: false,
+				isLoadingFileAvatar: false,
 				showErrorUser: false,
 				showErrorFile: false,
 				successFileFront:false,

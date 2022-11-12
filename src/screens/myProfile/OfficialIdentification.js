@@ -192,24 +192,23 @@ const OfficialIdentification = ({ navigation }) => {
 
   const redux = useSelector(state => state);
   const dispatch = useDispatch();
-  const userData = redux.user;
-  const userGraph = redux.userGraph;
-  const profileData = redux.profile;
+  const userData = redux?.user;
+  const userGraph = redux?.userGraph;
+  const profileData = redux?.profile;
   const brandTheme = userData?.Theme?.colors;
   const brandThemeImages = userData?.Theme?.images;
   const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
   const userInfo = userProfile ? userProfile?.accounts : '';
   const KycState = userInfo?.kyc ? userInfo?.kyc[0] : '';
-  const idUser = KycState ? KycState.id : '';
-  const addressState = userInfo ? userInfo.address : '';
-  const imageFrontValue = KycState ? KycState.frontId ? KycState.frontId + '?' + new Date() : '' : '';
-  const imageBackValue = KycState ? KycState.backId ? KycState.backId + '?' + new Date() : '' : '';
-  const imageSelfieValue = KycState ? KycState.faceId ? KycState.faceId + '?' + new Date() : '' : '';
-  const documentId = KycState ? KycState.documentId ? KycState.documentId + '?' + new Date() : '' : '';
-  const typeIdentif = KycState ? KycState.typeIdentification : '';
+  const idUser = KycState ? KycState?.id : '';
+  const addressState = userInfo ? userInfo?.address : '';
+  const imageFrontValue = KycState ? KycState?.frontId ? KycState?.frontId + '?' + new Date() : '' : '';
+  const imageBackValue = KycState ? KycState?.backId ? KycState?.backId + '?' + new Date() : '' : '';
+  const imageSelfieValue = KycState ? KycState?.faceId ? KycState?.faceId + '?' + new Date() : '' : '';
+  const documentId = KycState ? KycState?.documentId ? KycState?.documentId + '?' + new Date() : '' : '';
+  const typeIdentif = KycState ? KycState?.typeIdentification : '';
 
   const inputIdAddress = addressState.length > 0 ? userInfo.address[0].id ? userInfo.address[0].id : '' : '';
-  const [typeIdentification, setTypeIdentification] = useState([]);
   const [dataIdentification, setDataIdentification] = useState([]);
   const [showPhotoFront, setshowPhotoFront] = useState(imageFrontValue);
   const [showPhotoBack, setshowPhotoBack] = useState(imageBackValue);
@@ -224,14 +223,6 @@ const OfficialIdentification = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [buttonNext, setButtonNext] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const [aceptCardFront, setAceptFrontCard] = useState(false);
-  const [aceptCardBack, setAceptBackCard] = useState(false);
-  const [aceptSelfieBack, setAceptSelfieCard] = useState(false);
-  const [aceptProfOfAddress, setAceptProfOfAddress] = useState(false);
-  const [warningFrontCard, setWarningFrontCard] = useState(false);
-  const [warningBackCard, setWarningBackCard] = useState(false);
-  const [warningSelfieCard, setWarningSelfieCard] = useState(false);
-  const [warningProfOfAddress, setWarningProfOfAddress] = useState(false);
   const imageFront = useValidatedInput('file', imageFrontValue);
   const imageBack = useValidatedInput('file', imageBackValue);
   const imageProofAddress = useValidatedInput('file', documentId);
@@ -241,6 +232,10 @@ const OfficialIdentification = ({ navigation }) => {
   useEffect(() => {
     setIsLoadingModal(false)
   }, [profileData?.successEditKYC])
+
+  useEffect(() => {
+    setIsLoadingModal(false)
+  }, [profileData?.successCreateKYC])
 
 
   // async function identifyCatalogs() {
@@ -256,19 +251,17 @@ const OfficialIdentification = ({ navigation }) => {
   useEffect(() => {
     dispatch(cleanErrorProfile());
     const countryCode = userInfo?.countryCode;
-    console.log('countryCode',countryCode);
     dispatch(getTypeIdentification({ countryCode }));
     //getTypeIdentity();
   }, [])
 
   useEffect(() => {
-    console.log('profileData?.dropDownIdentification',profileData)
     if (profileData?.dropDownIdentification) {
       if (profileData?.dropDownIdentification?.length > 0) {
         setDataIdentification(profileData?.dropDownIdentification)
       }
     }
-  }, [profileData?.dropDownIdentification]);
+  }, [profileData?.isLoadingTypeIdentification]);
 
   // useEffect(() => {
   //   let typeLanguage = typeIdentification?.map((item) => {
@@ -298,18 +291,18 @@ const OfficialIdentification = ({ navigation }) => {
     const valueBack = userGraph?.fileBack  ? userGraph?.fileBack : KycState?.backId;
     const valueFaceId =  userGraph?.fileSelfie  ? userGraph?.fileSelfie  : KycState?.faceId;
     const valueDocumentId = userGraph?.fileAddress  ? userGraph?.fileAddress : KycState?.documentId;
-    const valueTypeIdent = value.name  ? value.name : KycState.typeIdentification;
+    const valueTypeIdent = value?.name  ? value?.name : KycState?.typeIdentification;
     const isComplete = (valueFront?true:false)&&(valueBack?true:false)&&(valueFaceId?true:false)&&(valueDocumentId?true:false)&&(valueTypeIdent?true:false);
 
     if (userInfo?.kyc?.length > 0 ) {
       const dataUpdateKYC = {
         id: KycState?.id ?? "",
         accountId: userProfile.accountId ?? "",
-        frontId: valueFront,
-        backId: valueBack,
-        faceId: valueFaceId,
-        typeIdentification: valueTypeIdent,
-        documentId: valueDocumentId,
+        frontId: valueFront ?? "",
+        backId: valueBack ?? "",
+        faceId: valueFaceId ?? "",
+        typeIdentification: valueTypeIdent ?? "",
+        documentId: valueDocumentId ?? "",
         kycid: KycState?.kycid ?? "0",
         isComplete: isComplete,
         ip:''
@@ -319,11 +312,11 @@ const OfficialIdentification = ({ navigation }) => {
 
       const dataCreateKYC = {
         accountId: userProfile.accountId ?? "",
-        frontId: valueFront,
-        backId: valueBack,
-        faceId: valueFaceId,
-        typeIdentification: valueTypeIdent,
-        documentId: valueDocumentId,
+        frontId: valueFront ?? "",
+        backId: valueBack ?? "",
+        faceId: valueFaceId ?? "",
+        typeIdentification: valueTypeIdent ?? "",
+        documentId: valueDocumentId ?? "",
         status: "0",
         kycid: KycState?.kycid ?? "0",
         isComplete: isComplete,
@@ -336,12 +329,10 @@ const OfficialIdentification = ({ navigation }) => {
   //console.log('profileData',profileData?.isLoadingEditKYC)
 
   useEffect(() => {
-    console.log('profileData?.isLoadingEditKYC',profileData?.isLoadingEditKYC)
     setIsLoadingModal(profileData?.isLoadingEditKYC);
   }, [profileData?.isLoadingEditKYC]);
 
   useEffect(() => {
-    console.log('profileData?.isLoadingCreateKYC',profileData?.isLoadingCreateKYC)
     setIsLoadingModal(profileData?.isLoadingCreateKYC);
   }, [profileData?.isLoadingCreateKYC]);
 

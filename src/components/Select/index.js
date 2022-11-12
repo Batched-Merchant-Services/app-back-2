@@ -53,7 +53,6 @@ const Select = ({ error, label, value, options, size,onSelect, languages,onFill,
 
   const handleAdjustFrame = (style, showInBottom) => {
     style.width = width;
-    console.log('width',style.width)
     if (showInBottom) {
       style.height = verticalScale(1 * options.length + 130, 0.40);
       style.left = style.width > 150 ? style.left - verticalScale(1, 0.3): null;

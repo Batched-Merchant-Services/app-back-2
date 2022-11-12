@@ -29,17 +29,17 @@ import { cleanErrorProfile } from '../../store/actions/profile.actions';
 const PersonalInformation = ({ navigation }) => {
   const redux = useSelector(state => state);
   const dispatch = useDispatch();
-  const userGraph = redux.userGraph;
-  const profileData = redux.profile;
+  const userGraph = redux?.userGraph;
+  const profileData = redux?.profile;
   const userProfile = userGraph?.dataUser?.usersProfile ? userGraph?.dataUser?.usersProfile[0] : '';
   const userInfo = userProfile ? userProfile?.accounts : '';
-  const inputName = userInfo ? userInfo.firstName : '';
-  const inputMiddleName = userInfo ? userInfo.middleName ? userInfo.middleName : '' : '';
-  const inputSlastName = userInfo ? userInfo.lastName : '';
-  const inputBirthday = userInfo ? userInfo.birthday : '';
-  const inputCurp = userInfo ? userInfo.otherNationalId : '';
-  const inputRfc = userInfo ? userInfo.nationalId ? userInfo.nationalId : '' : '';
-  const inputGender = userInfo ? userInfo.gender : '';
+  const inputName = userInfo ? userInfo?.firstName : '';
+  const inputMiddleName = userInfo ? userInfo?.middleName ? userInfo?.middleName : '' : '';
+  const inputSlastName = userInfo ? userInfo?.lastName : '';
+  const inputBirthday = userInfo ? userInfo?.birthday : '';
+  const inputCurp = userInfo ? userInfo?.otherNationalId : '';
+  const inputRfc = userInfo ? userInfo?.nationalId ? userInfo?.nationalId : '' : '';
+  const inputGender = userInfo ? userInfo?.gender : '';
   const [snakVisible, setSnakVisible] = useState(false);
   const [actionAnimated, setActionAnimated] = useState(false);
   const [title, setTitle] = useState('');
@@ -59,7 +59,7 @@ const PersonalInformation = ({ navigation }) => {
   const onFill = code => {
     setGender(code === 1 ? 'F' : code === 2 ? 'M' : 'O');
   };
-  const [nameDay, setIsBirthday] = useState({ text: formatDateSend(birthday.value), message: '' });
+  const [nameDay, setIsBirthday] = useState({ text: formatDateSend(birthday?.value), message: '' });
 
   const onDateSelected = (date, name) => {
     const format = formatDateSend(date);
@@ -89,10 +89,10 @@ const PersonalInformation = ({ navigation }) => {
       middleName: lastName.value ?? '',
       lastName: slastName.value ?? '',
       secondLastName: lastName.value ?? '',
-      birthday: nameDay?.text,
+      birthday: nameDay?.text ?? "",
       nationalId: '',
       otherNationalId: '',
-      gender: Gender,
+      gender: Gender ?? "" ,
       alias: userInfo?.alias ?? "",
       countryCode: userInfo?.countryCode ?? "",
       isComplete: true,
