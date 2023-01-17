@@ -1,136 +1,73 @@
 export const GET_USER_BATCHED = `
 query($token:String!,$field:String!,$id:String!){
-  getUsersByField(token:$token,field:$field,id:$id)
-  {
-      id
-      email
-      phoneNumber
-      lada
-      clients {
+    getUsersByField(token:$token,field:$field,id:$id){
         id
-        externalId
-        status
-        activationDate
-        officeId
-        firstName
-        middleName
-        lastName
-        fullName
-        displayName
-        mobileNo
-        dateOfBirth
-        emailAddress
-        statusPayroll 
-        account {
-          id
-          accountNo
-          externalId
-          clientId
-          groupId
-          currencyCode
-          balance {
-            year
-            account
-            deposit
-            withdrawal
-            total
-            currency
-          }
-          transactions{
-            id
-            accountId 
-            transactionDate
-            type
-            amount
-            finalBalance
-            currencyCode
-            exchageRate
-            createdDate
-            note{
-              id
-              clientId
-              groupId
-              accountId
-              transactionId
-              noteDescription
-            }
-          } 
-        }
-        companies {
-          id 
-          pathLogo 
-          name 
-          feePhysicalCard
-        }
-      }
-      usersProfile
-      {
-          userID
-          id
-          status
-          name
-          accountId
-          roleId
-          accounts
-          {
-              id
-              term
-              status
-              firstName
-              avatarImage
-              lastName
-              secondLastName
-              phoneNumber
-              middleName
-              email
-              clientId
-              currency
-              gender
-              alias
-              birthday
-              nationalId
-              otherNationalId
-              countryCode
-              externalId
-              pin
-              customerId
-              isComplete
-              address
-              {
-                  id
-                  city
-                  suburb
-                  country
-                  state
-                  street
-                  number
-                  typeAddress
-                  zipCode
-                  shortName
-                  isComplete
-              }
+        email
+        lada
+        phoneNumber
+        usersProfile{
+            taxo
+            status
+            name
+            accounts{
+                id
+                clientId
+                externalId
+                firstName
+                lastName
+                middleName
+                secondLastName
+                status
+                alias
+                pin
+                term
+                feeCardVirtual
+                feeCardPhysical
+                currency
+                gender
+                birthday
+                nationalId
+                otherNationalId
+                avatarImage
+                countryCode
+                customerId
+                address{
+                    status
+                    id
+                    city
+                    suburb
+                    country
+                    state
+                    street
+                    number
+                    typeAddress
+                    zipCode
+                    shortName
+                }
+                bankInformation{
+                    id
+                    bankName
+                    routingNumber
+                    accountNumber
+                }
                 kyc{
-                  id
-                  typeIdentification
-                  frontId
-                  backId
-                  kycid
-                  faceId
-                  documentId
-                  status
-                  isComplete
+                    id
+                    typeIdentification
+                    frontId
+                    backId
+                    kycid
+                    faceId
+                    documentId
+                    status
                 }
-                bankInformation
-                {
-                  id
-                  bankName
-                  routingNumber
-                  accountNumber
+                securityQuestion{
+                    id
+                    answer
+                    question
                 }
-          }
-
-      }
-  }
+            }
+        }
+    }
 }`;
 
 export const SET_FILE = `
@@ -139,7 +76,7 @@ mutation($token:String!,$fileName:String!,$file64:String!){
 }`;
 
 
-export const VALIDATE_SESSION_QUERY =`
+export const VALIDATE_SESSION_QUERY = `
 query($token:String!){
   getValidateSession(token:$token){
     token

@@ -14,9 +14,9 @@ import { AsyncStorage } from 'react-native';
  * @param  {...Function} middlewares Redux middleares
  */
 function applyMiddlewares(...middlewares) {
-  const appliedMiddlewares = applyMiddleware(...middlewares);
-  // If is develop mode apply devtools middleware
-  return composeWithDevTools(appliedMiddlewares);
+    const appliedMiddlewares = applyMiddleware(...middlewares);
+    // If is develop mode apply devtools middleware
+    return composeWithDevTools(appliedMiddlewares);
 }
 
 /**
@@ -24,29 +24,29 @@ function applyMiddlewares(...middlewares) {
  * @param {Function} rootReducer Redux root reducer
  */
 export default async function configureStore(rootReducer) {
-  const REDUX_STORE_KEY = 'redux-state';
+    const REDUX_STORE_KEY = 'redux-state';
 
-  const [error, state] = await to(localStorage.get(REDUX_STORE_KEY));
-  const initialState = state ? JSON.parse(state) : {};
-  const themeBrand = await AsyncStorage.getItem('brandTheme');
-  // Override values
-  initialState.app = {drawerState: 'closing',modalState: 'closing',navigationIn: false};
-  //initialState.user = {Theme: themeBrand?JSON.parse(themeBrand??{}):{colors: Colors}  };
+    const [error, state] = await to(localStorage.get(REDUX_STORE_KEY));
+    const initialState = state ? JSON.parse(state) : {};
+    const themeBrand = await AsyncStorage.getItem('brandTheme');
+    // Override values
+    initialState.app = { drawerState: 'closing', modalState: 'closing', navigationIn: false };
+    //initialState.user = {Theme: themeBrand?JSON.parse(themeBrand??{}):{colors: Colors}  };
 
-  error && console.log('Error loading redux state', error);
+    error && console.log('Error loading redux state', error);
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    applyMiddlewares(thunkMiddleware, promiseMiddleware)
-  );
+    const store = createStore(
+        rootReducer,
+        initialState,
+        applyMiddlewares(thunkMiddleware, promiseMiddleware)
+    );
 
-  store.subscribe(
-    async () =>
-      await to(
-        localStorage.set(REDUX_STORE_KEY, JSON.stringify(store.getState()))
-      )
-  );
+    store.subscribe(
+        async () =>
+            await to(
+                localStorage.set(REDUX_STORE_KEY, JSON.stringify(store.getState()))
+            )
+    );
 
-  return store;
+    return store;
 }

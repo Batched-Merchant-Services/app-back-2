@@ -1,6 +1,6 @@
 package com.imagepicker.utils;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.facebook.react.bridge.ReadableMap;

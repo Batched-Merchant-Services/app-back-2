@@ -1,7 +1,7 @@
-export const GRAPHQL_API ='https://core.batchedservices.com/AccessPoint/graphql';
+export const GRAPHQL_API = 'https://core.batchedservices.com/AccessPoint/graphql';
 
 
-export const LOGIN_QUERY =`
+export const LOGIN_QUERY = `
 query ($user:String!,$password:String!,$languaje:Int!,$id:String!,$groupid:Int!,$reference:String!){
   getLoggin(user: $user, password:$password,languaje:$languaje, id:$id,groupid:$groupid,reference:$reference){
       token
@@ -16,7 +16,30 @@ query ($user:String!,$password:String!,$languaje:Int!,$id:String!,$groupid:Int!,
       deviceStatus        
   }
 }`;
-export const LOGIN_TWO_FACTOR_QUERY =`
+
+export const GET_ORDER_CARDS = ` 
+query ($token:String!)
+{  
+    getOrderCards(token:$token)
+    {
+        id
+        cardAccountId        
+        cardNumber
+        cardExpiryDate
+        cardStatus
+        cardIsVirtual
+        cardExternalId
+        cardIsActive
+        cardProvider
+        cardBalance
+        cardIsBlocked
+        frontCard
+        orderType
+    }
+}`;
+
+
+export const LOGIN_TWO_FACTOR_QUERY = `
 query ($token:String!,$code:String!){
   getLogginTwoFactor(token: $token, code:$code){
       token
@@ -28,42 +51,42 @@ query ($token:String!,$code:String!){
 }`;
 
 
-export const CHANGE_TYPE_AUTHENTICATION =`
+export const CHANGE_TYPE_AUTHENTICATION = `
 mutation ($token:String!,$type:Int!){
   setPrimary2fa(token: $token, type:$type)     
 }`
- 
-export const ACTIVATION_THIRD_PARTY =`
+
+export const ACTIVATION_THIRD_PARTY = `
 mutation ($token:String!,$code:String!,$isPrimary:Boolean!){
   setEnabled2faThirdParty(token: $token, code:$code,isPrimary:$isPrimary)     
 }`
 
-export const ACTIVATION_SMS =`
+export const ACTIVATION_SMS = `
 mutation ($token:String!,$code:String!,$isPrimary:Boolean!){
   setEnabled2faSms(token: $token, code:$code,isPrimary:$isPrimary)     
 }`
 
-export const ACTIVATION_EMAIL =`
+export const ACTIVATION_EMAIL = `
 mutation ($token:String!,$code:String!,$isPrimary:Boolean!){
   setEnabled2faEmail(token: $token, code:$code,isPrimary:$isPrimary)     
 }`
 
-export const AUTHENTICATION_TWO_FACTORS =`
+export const AUTHENTICATION_TWO_FACTORS = `
 query($token:String!) {
   getSecurityCode(token:$token)
 }`
 //SMS
-export const AUTHENTICATION_TWO_FACTORS_SMS =`
+export const AUTHENTICATION_TWO_FACTORS_SMS = `
 query($token:String!) {
   getSecurityCodeDirect(token:$token)
 }`
 //EMAIL
-export const AUTHENTICATION_TWO_FACTORS_EMAIL =`
+export const AUTHENTICATION_TWO_FACTORS_EMAIL = `
 query($token:String!) {
   getSecurityCodeDirectSES(token:$token)
 }`
 
-export const AUTHENTICATION_TWO_FACTORS_QR =`
+export const AUTHENTICATION_TWO_FACTORS_QR = `
 query ($token:String!){
   getImageTwoFactor(token: $token)
   {

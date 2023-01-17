@@ -3,13 +3,15 @@
   "version": "2.2.4",
   "summary": "React Native Pure JWT implementation",
   "license": "MIT",
-  "authors": "Luis Felipe Zaguini",
-  "homepage": "https://github.com/zaguiini/react-native-pure-jwt.git",
+  "authors": {
+    "name": "Luis Felipe Zaguini"
+  },
+  "homepage": "git+https://github.com/zaguiini/react-native-pure-jwt.git",
   "platforms": {
     "ios": "9.0"
   },
   "source": {
-    "git": "https://github.com/zaguiini/react-native-pure-jwt.git",
+    "git": "git+https://github.com/zaguiini/react-native-pure-jwt.git",
     "tag": "2.2.4"
   },
   "source_files": "ios/**/*.{h,m}",

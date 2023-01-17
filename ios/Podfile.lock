@@ -661,12 +661,12 @@ SPEC CHECKSUMS:
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   lottie-react-native: 3d8181d43619b1fe804c828bd5a09d20fe8bdea7
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  Permission-AppTrackingTransparency: 507f031f783885aad86f5754bd23edba587b2125
-  Permission-Calendars: 1a97703f804b86ece328f53fac3683f23ec0df1b
-  Permission-Camera: bae27a8503530770c35aadfecbb97ec71823382a
-  Permission-Contacts: 795936e988352bbf628334378eec5c3728db7140
-  Permission-MediaLibrary: cbc1ee191cf0fe73282d2b3f197714941783d99d
-  Permission-PhotoLibrary: ddb5a158725b29cb12e9e477e8a5f5151c66cc3c
+  Permission-AppTrackingTransparency: c6683b771e8892a434d340500fead09e8d73a444
+  Permission-Calendars: 19b4d8b70726060091543479c1a285aa46d366c6
+  Permission-Camera: 273b78e214eae8d734d1c497b67aa0030838c006
+  Permission-Contacts: 50b2ddfb14541bca788bfe4dfa49901cc88e0876
+  Permission-MediaLibrary: 6ee99836888c5634bd94b436a84edbd7036d3aaa
+  Permission-PhotoLibrary: 4b514739911744def3b903a5a48a20037cd01795
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: 1af97c470c81e8cbb92c5ae42c4838ea95761743
   RCTTypeSafety: 809546c781453daf95eb1c40aa8b6970a4487028
@@ -679,14 +679,14 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 3001f865cfd2c66c1298f427be47b8797ae5843b
   React-jsinspector: c9d1ddf4b1efbcf90323e3581ccff200cf4de346
   React-logger: 5d42caeaf0c31a9b29efb33e10e7f7031f958bfd
-  react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
-  react-native-contacts: f7e0e6f8f3c3e53a97c8a2974f2a65beba8f268f
-  react-native-image-base64: 2ff9ac788639c87a91361ab6652cc95e871b1e54
+  react-native-camera: 210a872c84d3aa0982a9223047ef9e743ed694fa
+  react-native-contacts: 668b8df7b1bfd304930b280c2069d4d7f17c92cb
+  react-native-image-base64: acfe962aa79535d826a2668e66474e85a9ee468d
   react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
-  react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
+  react-native-image-resizer: 506412a2bdd70dde64a61e13505ce10f61a04369
   react-native-maps: 7525a32bcd025af8cf3b6c469af9b8758245db72
-  react-native-pure-jwt: c05a5e5e9aa67f7a41bded3896c14e0f4ac63a03
-  react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
+  react-native-pure-jwt: fecc403c70e0f1fcdb05345581bd1a2704f21fa2
+  react-native-restart: 3b23471050bde7f392395703c4a3f959e2b0ff8e
   React-perflogger: 9454d63e7027e0830fa3e527628558160684f5dd
   React-RCTActionSheet: 240d798e2f5bd1ba2e85503a00fd390f560e6827
   React-RCTAnimation: 0ebf0df36838057097b8c6a30d1036531f8c7b1e
@@ -699,14 +699,14 @@ SPEC CHECKSUMS:
   React-RCTVibration: 7d7eb0db1f7f914945a606e0e91bb535099a07db
   React-runtimeexecutor: 4512c9287cc72ba30bb1d5e01e6bde7a69f2d22b
   ReactCommon: af6dd2c8c0de935841fa809caf41b2093bb9075c
-  ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
-  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
-  RNCharts: d364ca2085e24edb9ee0390d3fb7209257daa44c
-  RNDateTimePicker: 6f1f0b4cf7c71b6e2aea7a3aa62969111084bbd1
-  RNDeviceInfo: c5f8f3a456adcbba405ace475254b08febc4c095
+  ReactNativeART: f003b07dfa7098aa419ed95b69560923440b1eee
+  RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
+  RNCharts: e9461314e1930516d6c986d1be00440aeb26d5f2
+  RNDateTimePicker: 042a33cd9fa98ae7bc1d4ef078f260e1ab4cabf8
+  RNDeviceInfo: e841619c3dac5495a095c5455473579ff04908d4
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNLanguages: 962e562af0d34ab1958d89bcfdb64fafc37c513e
-  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
+  RNPermissions: 7ad8d93b004e6bc85c89e27a102afcde90e07efa
   RNSecureKeyStore: f1ad870e53806453039f650720d2845c678d89c8
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -714,6 +714,6 @@ SPEC CHECKSUMS:
   Yoga: 3f5bfc54ce164fcd5b5d7f9f4232182d6298dd56
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d0329d4f337d8aca6fb93adf3b503db4ed4d0ad0
+PODFILE CHECKSUM: 5f809cf0c11d9f16bd25785eb519a92e6cc7e970
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

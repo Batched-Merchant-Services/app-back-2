@@ -1,24 +1,27 @@
 //Set Errors
 export const SET_ERROR = 'SET_ERROR';
-/* ********************************************* */ 
+/* ********************************************* */
 
 //CLEAN ERROR
 export const CLEAN_ERROR = 'CLEAN_ERROR';
 export const CLEAN_DATA_FILE = 'CLEAN_DATA_FILE';
-/* ********************************************* */ 
+/* ********************************************* */
 
 //SNACK NOTICE
-export const TOGGLE_SNACKBAR_OPEN = 'TOGGLE_SNACKBAR_OPEN'; 
-export const TOGGLE_SNACKBAR_CLOSE = 'TOGGLE_SNACKBAR_CLOSE'; 
+export const TOGGLE_SNACKBAR_OPEN = 'TOGGLE_SNACKBAR_OPEN';
+export const TOGGLE_SNACKBAR_CLOSE = 'TOGGLE_SNACKBAR_CLOSE';
 
-/* ********************************************* */ 
+/* ********************************************* */
 //GET USER INFO
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
 export const USER_ERROR = 'USER_ERROR';
 export const CLEAN_DATA_USER = 'CLEAN_DATA_USER';
 
-/* ********************************************* */ 
+
+
+
+/* ********************************************* */
 //PROFILE
 export const UPDATE_PROFILE_INFO = 'UPDATE_PROFILE_INFO';
 export const UPDATE_PROFILE_INFO_SUCCESS = 'UPDATE_PROFILE_INFO_SUCCESS';
@@ -41,7 +44,7 @@ export const CREATE_KYC_SUCCESS = 'CREATE_KYC_SUCCESS';
 export const TYPE_IDENTIFICATION = 'TYPE_IDENTIFICATION';
 export const TYPE_IDENTIFICATION_SUCCESS = 'TYPE_IDENTIFICATION_SUCCESS';
 
-/* ********************************************* */ 
+/* ********************************************* */
 
 //SET FILE
 export const SET_FILE_URL = 'SET_FILE_URL';
@@ -56,4 +59,4 @@ export const SET_FILE_BACK_SUCCESS = 'SET_FILE_BACK_SUCCESS';
 export const SET_FILE_ADDRESS_SUCCESS = 'SET_FILE_ADDRESS_SUCCESS';
 export const SET_FILE_SELFIE_SUCCESS = 'SET_FILE_SELFIE_SUCCESS';
 
-/* ********************************************* */ 
+/* ********************************************* */

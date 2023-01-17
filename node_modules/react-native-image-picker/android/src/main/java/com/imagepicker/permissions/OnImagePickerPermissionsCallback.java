@@ -1,6 +1,6 @@
 package com.imagepicker.permissions;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 import com.facebook.react.modules.core.PermissionListener;
 
 /**

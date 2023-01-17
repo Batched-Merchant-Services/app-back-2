@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '11.0'
+platform :ios, '14.0'
 
 target 'SavvyWallet' do
   config = use_native_modules!
@@ -11,7 +11,6 @@ target 'SavvyWallet' do
   pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars/Permission-Calendars.podspec"
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts/Permission-Contacts.podspec"
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera/Permission-Camera.podspec"
-  pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
   pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
   pod 'RNCharts', :path => '../node_modules/react-native-charts-wrapper'

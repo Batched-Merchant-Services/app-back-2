@@ -13,21 +13,17 @@ const ResizeImageBackground = ({
   ...rest
 }) => {
   return (
-    <View flex-1 style={{ height, width }}>
-      <ImageBackground
-        source={source}
-        style={[styles.imageContainer, style]}
-        {...rest}
-      >
+    <View flex-1 style={{ height: height || '100%', width: width || '100%' }}>
+      <ImageBackground source={source} style={[styles.imageContainer, style]} {...rest}>
         {children}
       </ImageBackground>
     </View>
   );
 };
 
-ResizeImageBackground.propTypes = {
-  height: PropTypes.number.isRequired,
-  width : PropTypes.number.isRequired
-};
+// ResizeImageBackground.propTypes = {
+//   height: PropTypes.number.isRequired,
+//   width : PropTypes.number.isRequired
+// };
 
 export default ResizeImageBackground;

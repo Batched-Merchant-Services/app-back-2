@@ -14,117 +14,117 @@ YellowBox.ignoreWarnings(['Remote debugger', 'Module RNSecureKeyStore']); // We 
 
 
 class App extends React.Component {
-  state = {
-    ready: false,
-    store: null,
-    active: true,
-    isRechargeUserModalOpened: false,
-    appState: AppState.currentState,
-    timePassed: false,
-    timeValid: false,
-    validateToken: false,
-  };
+    state = {
+        ready: false,
+        store: null,
+        active: true,
+        isRechargeUserModalOpened: false,
+        appState: AppState.currentState,
+        timePassed: false,
+        timeValid: false,
+        validateToken: false,
+    };
 
 
-  async componentDidMount() {
-    this.setState({ ready: true, store: await store, isRechargeUserModalOpened: false});
-    AppState.addEventListener('change', this._handleAppStateChange);
-    timer.clearTimeout(this, 'timePassed');
-    timer.setTimeout(
-      this, 'timeValid', () => this.setState({
-        validateToken: true,
-      }), 250000
-    );
-  }
-
-  async componentDidUpdate() {
-    const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
-    const sinIn = global.store.getState().app.navigationIn;
-    if (this.state.validateToken && sinIn) {
-      const token = await LocalStorage.get('auth_token');
-      const response = await getValidateSession(token);
-      if (response.code < 400) {
-        this.setState({ validateToken: false });
-        timer.clearTimeout(this, 'timeValid');
-      }
-      timer.setTimeout(
-        this, 'timeValid', () => this.setState({
-          validateToken: true,
-        }), 250000
-      );
+    async componentDidMount() {
+        this.setState({ ready: true, store: await store, isRechargeUserModalOpened: false });
+        AppState.addEventListener('change', this._handleAppStateChange);
+        timer.clearTimeout(this, 'timePassed');
+        timer.setTimeout(
+            this, 'timeValid', () => this.setState({
+                validateToken: true,
+            }), 250000
+        );
     }
-  }
 
-
-  _handleAppStateChange = async (nextAppState) => {
-    const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
-    const sinIn = global.store.getState().app.navigationIn;
-    if (nextAppState.match(/inactive|background/)) {
-
-      timer.setTimeout(
-        this, 'timePassed', () => this.setState({
-          isRechargeUserModalOpened: ModalOpen,
-        }), 270000
-      );
-    } else if (nextAppState === 'active' || this.state.appState === 'active') {
-      timer.clearTimeout(this, 'timePassed');
+    async componentDidUpdate() {
+        const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
+        const sinIn = global.store.getState().app.navigationIn;
+        if (this.state.validateToken && sinIn) {
+            const token = await LocalStorage.get('auth_token');
+            const response = await getValidateSession(token);
+            if (response.code < 400) {
+                this.setState({ validateToken: false });
+                timer.clearTimeout(this, 'timeValid');
+            }
+            timer.setTimeout(
+                this, 'timeValid', () => this.setState({
+                    validateToken: true,
+                }), 250000
+            );
+        }
     }
-    this.setState({ appState: nextAppState });
-
-  };
-
-  onAction = async (active) => {
-    const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
-    const sinIn = global.store.getState().app.navigationIn;
-    setTimeout(() => {
-      if (!active) {
-        this.setState({
-          isRechargeUserModalOpened: ModalOpen,
-        });
-      }
-    }, 1000);
-  }
 
 
-  render() {
-    const { isRechargeUserModalOpened } = this.state;
-    if (this.state.ready) {
-      global.store = this.state.store;
-      const theme = this.state.store.getState().user?.Theme;
-      return (
-        <ReduxProvider store={this.state.store}>
-          <UserInactivity
-            timeForInactivity={270000}
-            onAction={this.onAction}
-          >
-            <StatusBar
-              translucent={true} backgroundColor={'transparent'}
-            />
-            <AppContainer screenProps={theme} ref={navigatorRef => { NavigationService.setTopLevelNavigator(navigatorRef); }} />
-            <ModalInactive
-              isOpen={isRechargeUserModalOpened}
-              onEnter={() => {
-                this.setState({ isRechargeUserModalOpened: false });
-              }}
-              onClose={() => {
-                this.setState({ isRechargeUserModalOpened: false });
-                NavigationService.navigate('Login', { page: 'modalUser' });
-                global.store.dispatch({
-                  type   : 'SET_IS_NAVIGATION_IN',
-                  payload: false
+    _handleAppStateChange = async (nextAppState) => {
+        const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
+        const sinIn = global.store.getState().app.navigationIn;
+        if (nextAppState.match(/inactive|background/)) {
+
+            timer.setTimeout(
+                this, 'timePassed', () => this.setState({
+                    isRechargeUserModalOpened: ModalOpen,
+                }), 270000
+            );
+        } else if (nextAppState === 'active' || this.state.appState === 'active') {
+            timer.clearTimeout(this, 'timePassed');
+        }
+        this.setState({ appState: nextAppState });
+
+    };
+
+    onAction = async (active) => {
+        const ModalOpen = global.store.getState().app.modalState === 'closing' ? false : true;
+        const sinIn = global.store.getState().app.navigationIn;
+        setTimeout(() => {
+            if (!active) {
+                this.setState({
+                    isRechargeUserModalOpened: ModalOpen,
                 });
-                global.store.dispatch({
-                  type   : 'SET_IS_MODAL_OPEN',
-                  payload: 'closing',
-                }); 
-              }}
-            />
-          </UserInactivity>
-        </ReduxProvider>
-      );
+            }
+        }, 1000);
     }
-    return null;
-  }
+
+
+    render() {
+        const { isRechargeUserModalOpened } = this.state;
+        if (this.state.ready) {
+            global.store = this.state.store;
+            const theme = { colors: {}, images: {} };
+            return (
+                <ReduxProvider store={this.state.store}>
+                    <UserInactivity
+                        timeForInactivity={270000}
+                        onAction={this.onAction}
+                    >
+                        <StatusBar
+                            translucent={true} backgroundColor={'transparent'}
+                        />
+                        <AppContainer screenProps={theme} ref={navigatorRef => { NavigationService.setTopLevelNavigator(navigatorRef); }} />
+                        <ModalInactive
+                            isOpen={isRechargeUserModalOpened}
+                            onEnter={() => {
+                                this.setState({ isRechargeUserModalOpened: false });
+                            }}
+                            onClose={() => {
+                                this.setState({ isRechargeUserModalOpened: false });
+                                NavigationService.navigate('Login', { page: 'modalUser' });
+                                global.store.dispatch({
+                                    type: 'SET_IS_NAVIGATION_IN',
+                                    payload: false
+                                });
+                                global.store.dispatch({
+                                    type: 'SET_IS_MODAL_OPEN',
+                                    payload: 'closing',
+                                });
+                            }}
+                        />
+                    </UserInactivity>
+                </ReduxProvider>
+            );
+        }
+        return null;
+    }
 }
 
 export default App;

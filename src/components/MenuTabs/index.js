@@ -10,38 +10,38 @@ import CustomTabBarIcon from './CustomTabBarIcon';
 
 const MenuTabs = ({ ...props }) => {
 
-  const redux = useSelector(state => state);
-  const appData = redux.user;
-  const brandTheme = appData?.Theme?.colors;
+    const redux = useSelector(state => state);
+    const appData = redux.user;
+    const brandTheme = {};
 
-  const {navigation} = props; 
-  const routes = navigation.state.routes;
-  
-  const navigationHandler = (routeName) => {
-    navigation.navigate(routeName);
-  };
+    const { navigation } = props;
+    const routes = navigation.state.routes;
 
-  return (
-    <View row style={{ backgroundColor: brandTheme.bgOrange02 ?? Colors.bgOrange02}} >
-      {routes.length > 0 &&(
-        routes.map((route, index) => (
-          <View flex-1 centerH>
-            <CustomTabBarIcon
-              key={route.key}
-              routeName={route.routeName}
-              onPress={() => navigationHandler(route.routeName)}
-              focused={navigation.state.index === index}
-              index={index}
-            />
-          </View>
-        ))
-      )}
-    </View>
-  );
+    const navigationHandler = (routeName) => {
+        navigation.navigate(routeName);
+    };
+
+    return (
+        <View row style={{ backgroundColor: brandTheme.bgOrange02 ?? Colors.bgOrange02 }} >
+            {routes.length > 0 && (
+                routes.map((route, index) => (
+                    <View flex-1 centerH>
+                        <CustomTabBarIcon
+                            key={route.key}
+                            routeName={route.routeName}
+                            onPress={() => navigationHandler(route.routeName)}
+                            focused={navigation.state.index === index}
+                            index={index}
+                        />
+                    </View>
+                ))
+            )}
+        </View>
+    );
 };
 
 MenuTabs.propTypes = {
-  onPress: PropTypes.func,
+    onPress: PropTypes.func,
 };
 
 export default MenuTabs;
