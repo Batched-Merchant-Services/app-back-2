@@ -13,7 +13,7 @@ const BASEURLGRAPH = GRAPH_PRODUCTION_API_URL;
 const device = DeviceInfo.getUniqueId();
 
 
-var apiGraph = axios.create({
+export var apiGraph = axios.create({
     baseURL: BASEURLGRAPH,
     headers: {
         'Content-Type': 'application/json',
@@ -147,15 +147,7 @@ export const getCodeEmail = async () => {
     return await apiGraph.post(GRAPHQL_API, { query: AUTHENTICATION_TWO_FACTORS_EMAIL, variables });
 };
 
-export const getOrderCards = async () => {
 
-    const token = await LocalStorage.get('auth_token');
-
-    const variables = {
-        token: token,
-    }
-    return await apiGraph.post(GRAPHQL_API, { query: GET_ORDER_CARDS, variables });
-};
 
 
 export const setActivationSms = async (code) => {

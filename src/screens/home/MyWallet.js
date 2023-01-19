@@ -39,7 +39,8 @@ import {
     Loader,
     SnackBar
 } from '@components';
-import { getOrderCards, validateSesion } from '../../utils/api/graph';
+import { validateSesion } from '../../utils/api/graph';
+import { getOrderCards } from '../../utils/api/graph_api/cards.service';
 
 
 
@@ -155,14 +156,13 @@ const MyWallet = ({ navigation, screenProps }) => {
 
     function errorSnackNotice(message) {
         setIsLoadingModal(true);
-        setTimeout(function () {
-            setSnakVisible(true);
-            setButtonNext(true);
-            setIsLoadingModal(false);
-            setTitle(message);
-        }, 1000);
-    }
 
+        setSnakVisible(true);
+        setButtonNext(true);
+        setIsLoadingModal(false);
+        setTitle(message);
+
+    }
 
     async function getVerifyToken() {
         const value = await AsyncStorage.getItem('nameLang');
