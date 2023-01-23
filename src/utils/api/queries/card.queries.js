@@ -33,3 +33,9 @@ mutation ($token:String!,$id:Int!)
 }
 `;
 
+export const SET_ORDER_PIN_DIRECT_RENDER_BY_ID = `
+mutation ($token:String!, $code:String!,$id:Int!,$pin:String!)
+{
+    setOrderPinDirectRenderById(token:$token,code:$code,id:$id,pin:$pin)
+}
+`

@@ -39,7 +39,7 @@ import {
     Loader,
     SnackBar
 } from '@components';
-import { validateSesion } from '../../utils/api/graph';
+import { getDataUserGraph, validateSesion } from '../../utils/api/graph';
 import { getOrderCards } from '../../utils/api/graph_api/cards.service';
 
 
@@ -50,6 +50,7 @@ const MyWallet = ({ navigation, screenProps }) => {
     const appData = redux.user;
     const brandTheme = appData?.Theme?.colors;
     const brandThemeImages = appData?.Theme?.images;
+    const [userGraph, setUserGraph] = React.useState(null);
     const [refreshing, setRefreshing] = React.useState(false);
     const [showModal, setShowModal] = useState(false);
     const [showModalInst, setShowModalInst] = useState(false);
@@ -68,12 +69,19 @@ const MyWallet = ({ navigation, screenProps }) => {
     const [isLoadingModal, setIsLoadingModal] = useState(false);
     const dispatch = useDispatch();
 
+    var userGraphInfo = null;
+
     useEffect(() => {
+
+
+
         getUserInfo();
-        getVerifyToken();
+
         setShowModal(false);
         setShowModalInst(false);
     }, []);
+
+
 
     const onRefresh = React.useCallback(async () => {
         setRefreshing(true);
@@ -107,10 +115,11 @@ const MyWallet = ({ navigation, screenProps }) => {
         let balances = [];
 
         // const redux = useSelector((state) => state);
-        const userGraph = redux?.userGraph?.dataUser;
+        const userGraph = userGraphInfo;
+
         // console.log('Seguinimento getBalance', userGraph);
 
-        const BalanceWallet = userGraph?.clients[0]?.account?.balance?.total;
+        const BalanceWallet = userGraph?.clients?.account?.balance?.total;
         dispatch(saveInfoPayment({ balanceWallet: BalanceWallet }));
 
         balances.push({ balance: BalanceWallet, type: 1, name: 'WALLET', currency: 'USD' });
@@ -151,7 +160,16 @@ const MyWallet = ({ navigation, screenProps }) => {
     }
 
     async function getUserInfo() {
-        dispatch(getDataUser());
+
+        let userGraphAux = await getDataUserGraph().then(user => {
+            // console.log('user graph', user);
+
+            userGraphInfo = user;
+            getVerifyToken();
+        });
+
+
+
     }
 
     function errorSnackNotice(message) {
@@ -169,17 +187,17 @@ const MyWallet = ({ navigation, screenProps }) => {
         const token = await LocalStorage.get('auth_token');
         // const verifyResponse = await verifyToken(token);
 
-        const userGraph = redux?.userGraph?.dataUser;
+        const userGraph = userGraphInfo;
 
         const verifyResponse = await validateSesion();
 
         console.log('Validate sesion response: ', userGraph, verifyResponse);
 
-        const Id = userGraph?.usersProfile[0].accounts?.clientId;
+        const Id = userGraph?.usersProfile?.accounts?.clientId;
         // const Id = verifyResponse.data.user.account.clientId;
         setClientId(Id);
-        const external = userGraph?.usersProfile[0].accounts?.externalId;
-        const kycStatus = userGraph?.usersProfile[0].accounts?.kyc[0].status; // verifyResponse.data ? verifyResponse.data.user.account.kyc ? verifyResponse.data.user.account.kyc.status : '' : '';
+        const external = userGraph?.usersProfile?.accounts?.externalId;
+        const kycStatus = userGraph?.usersProfile?.accounts?.kyc?.status; // verifyResponse.data ? verifyResponse.data.user.account.kyc ? verifyResponse.data.user.account.kyc.status : '' : '';
         const currencyUser = 'USD';
         const statusCrypto = true;
         const idUser = userGraph?.id;
@@ -410,7 +428,7 @@ const MyWallet = ({ navigation, screenProps }) => {
             </View>
             <NavigationEvents
                 onWillFocus={payload => {
-                    getVerifyToken(payload);
+                    // getVerifyToken(payload);
                 }}
             />
         </LinearGradient>

@@ -118,7 +118,7 @@ const MyCards = ({ navigation }) => {
                 console.log('getOrderCards', cardsData);
 
                 cardsData.forEach(card => {
-                    cards.push({ id: card?.id, proxyKey: "000000000", statusCancelCard: card?.cardStatus !== 'active', statusRequestCard: card?.orderType !== 2, statusActivation: card?.cardIsActive, balance: card?.cardBalance, name: card?.cardNumber, cardNumber: card?.cardNumber, disabled: card?.cardIsBlocked, dueDate: "00/00", cvv: "000", type: card?.cardIsVirtual ? 'VIRTUAL' : 'PHYSICAL' });
+                    cards.push({ id: card?.id, proxyKey: "000000000", img_card: card?.frontCard, statusCancelCard: card?.cardStatus !== 'active', statusRequestCard: card?.orderType !== 2, statusActivation: card?.cardIsActive, balance: card?.cardBalance, name: card?.cardNumber, cardNumber: card?.cardNumber, disabled: card?.cardIsBlocked, dueDate: "00/00", cvv: "000", type: card?.cardIsVirtual ? 'VIRTUAL' : 'PHYSICAL' });
                 });
 
                 console.log('card', cards);

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import Colors from '@styles/Colors';
 
 const Cards = ({ input, available, height, width, ...item }) => {
-    console.log('item card', item);
+    // console.log('item card', item);
     const redux = useSelector(state => state);
     const userData = redux.user;
     const brandTheme = userData?.Theme?.colors;
@@ -37,7 +37,7 @@ const Cards = ({ input, available, height, width, ...item }) => {
                     <Text style={Styles.textWhite} h10 bold>
                         {' '}
                         {typeCard !== 'PHYSICAL'
-                            ? ''
+                            ? i18n.t('myCards.component.textDebitVirtual')
                             : i18n.t('myCards.component.textDebitPhysical')}
                     </Text>
                 </View>

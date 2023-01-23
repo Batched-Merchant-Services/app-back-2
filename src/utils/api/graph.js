@@ -35,7 +35,9 @@ const errorHandler = (error) => {
 };
 
 const successHandler = (response) => {
+    // if (response?.data?.data?.getUsersByField) {
     console.log('response', response);
+    // }
     return response?.data?.data;
 };
 
@@ -102,18 +104,57 @@ export const loginTwoFactor = async (codeSecurity) => {
     return await apiGraph.post(GRAPHQL_API, { query: LOGIN_TWO_FACTOR_QUERY, variables });
 };
 
-export const getDataUser = async () => {
+export const getDataUserGraph = async () => {
 
     const token = await LocalStorage.get('auth_token');
     const uuid = await LocalStorage.get('uuid');
+
+
 
     const variables = {
         token: token,
         field: 'id',
         id: uuid
     }
-    console.log('variables', variables)
-    return await apiGraph.post(GRAPHQL_API, { query: GET_DATA_USER, variables });
+
+
+
+
+    // console.log('variables', variables)
+    const response = await apiGraph.post(GRAPHQL_API, { query: GET_DATA_USER, variables });
+
+
+
+    let responseObject = {
+        ...response?.getUsersByField[0],
+        clients: {
+            ...response?.getUsersByField[0].clients[0]
+        },
+        usersProfile: {
+            ...response?.getUsersByField[0].usersProfile[0],
+
+            accounts: {
+                ...response?.getUsersByField[0].usersProfile[0].accounts,
+                // address: {
+                //     ...response?.getUsersByField[0].usersProfile[0].accounts.address[0]
+                // },
+                kyc: {
+                    ...response?.getUsersByField[0].usersProfile[0].accounts.kyc[0]
+                }
+            }
+        }
+    }
+
+    // console.log('efect response object', responseObject);
+
+
+    // console.log('Response user object', JSON.stringify(responseObject));
+
+    await LocalStorage.set('user_info_graph', JSON.stringify(responseObject));
+
+
+
+    return response?.getUsersByField?.length > 0 ? responseObject : null
 };
 
 

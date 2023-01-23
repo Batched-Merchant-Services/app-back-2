@@ -41,6 +41,7 @@ import {
     sendCryptoUsers
 } from '@utils/api/switch';
 import { createCardVirtual, createTRXSwap, updateCardVirtual } from '../../utils/api/switch';
+import { setOrderPinDirectRenderById } from '../../utils/api/graph_api/cards.service';
 
 async function transactionWallet(
     token,
@@ -199,7 +200,9 @@ async function transferWallet(
     appData
 ) {
     setIsLoadingModal(true);
-    const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
+
+    let type2fa = await LocalStorage.get('type2fa')
+    const codeSecurity = type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
     const response = await walletToAccount(token, data.amount, codeSecurity);
     if (response.code < 400) {
         setTimeout(function () {
@@ -227,18 +230,35 @@ async function changePINCard(
     appData
 ) {
     setIsLoadingModal(true);
-    const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
-    const response = await validatePin(token, codeSecurity);
-    if (response.code < 400) {
-        setTimeout(function () {
-            navigation.navigate(next, { Proxy: data ? data.ProxyKey : '' });
-            setIsLoadingModal(false);
-        }, 1000);
-        setTextWarning(false);
+    let type2fa = await LocalStorage.get('type2fa')
+    const codeSecurity = +type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
+
+    const response = await setOrderPinDirectRenderById(codeSecurity, data?.cardId, data?.nip);
+    console.log('changePINCard', response);
+
+    if (response?.setOrderPinDirectRenderById) {
+        setIsLoadingModal(false);
+        navigation.navigate(next);
     }
     else {
         errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
     }
+
+
+
+
+
+
+    // if (response.code < 400) {
+    //     setTimeout(function () {
+    //         navigation.navigate(next, { Proxy: data ? data.ProxyKey : '' });
+    //         setIsLoadingModal(false);
+    //     }, 1000);
+    //     setTextWarning(false);
+    // }
+    // else {
+    //     errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
+    // }
 }
 
 
@@ -798,34 +818,7 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
         AsyncStorage.setItem('brandTheme', jsonValue);
     }
 
-    async function getUserInfo() {
 
-        const response = await getDataUser();
-        if (response?.getUsersByField) {
-            const data = response?.getUsersByField.length > 0 ? {
-                ...response?.getUsersByField[0],
-                clients: {
-                    ...response?.getUsersByField[0].clients[0]
-                },
-                usersProfile: {
-                    ...response?.getUsersByField[0].usersProfile[0],
-
-                    accounts: {
-                        ...response?.getUsersByField[0].usersProfile[0].accounts,
-                        // address: {
-                        //     ...response?.getUsersByField[0].usersProfile[0].accounts.address[0]
-                        // },
-                        kyc: {
-                            ...response?.getUsersByField[0].usersProfile[0].accounts.kyc[0]
-                        }
-                    }
-                }
-            } : []
-            dispatch(saveInfoUserGraph(data));
-        } else {
-            errorSnackNotice();
-        }
-    }
 
 
     function errorSnackNotice(response) {
