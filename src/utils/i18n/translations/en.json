@@ -481,9 +481,9 @@
         "detail": "Transaction Details",
         "origin": "Source",
         "authorization": "Authorization",
-        "transaction": "Transaction",
+        "transaction": "Transaction type",
         "textdeposit": "Deposit",
-        "textcharge": "Charge"
+        "textcharge": "Withdrawal"
       }
     },
     "receivedQRPayments": {

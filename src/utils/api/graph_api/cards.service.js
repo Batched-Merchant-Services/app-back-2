@@ -2,6 +2,7 @@ import { apiGraph } from "../graph";
 import { GET_ORDER_CARDS, SET_ORDER_ACTIVE_STATUS_CARD, SET_ORDER_PIN_DIRECT_RENDER_BY_ID, SET_ORDER_SUSPEND_STATUS_CARD } from "../queries/card.queries";
 import LocalStorage from '@utils/localStorage';
 import { GRAPHQL_API } from "../constants";
+import { GET_ORDER_ACCOUNT_TRANSACTIONS } from "../queries/cards.queries";
 
 export const getOrderCards = async () => {
 
@@ -44,4 +45,17 @@ export const setOrderPinDirectRenderById = async (code, id, pin) => {
     }
 
     return await apiGraph.post(GRAPHQL_API, { query: SET_ORDER_PIN_DIRECT_RENDER_BY_ID, variables });
+};
+
+export const getOrderAccountTransactions = async (id, page, limit, startdate, enddate) => {
+
+
+
+    console.log('getOrderAccountTransactions', page, limit, startdate, enddate)
+
+    const token = await LocalStorage.get('auth_token');
+
+    const variables = { token, id, page, limit, startdate, enddate };
+
+    return await apiGraph.post(GRAPHQL_API, { query: GET_ORDER_ACCOUNT_TRANSACTIONS, variables });
 };

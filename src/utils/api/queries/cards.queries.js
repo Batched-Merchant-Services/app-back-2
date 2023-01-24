@@ -18,3 +18,15 @@ query ($token:String!)
         orderType
     }
 }`;
+
+export const GET_ORDER_ACCOUNT_TRANSACTIONS = `
+    query($token:String!,$id:Int!,$page:Int!,$limit:Int!,$startdate:DateTime!,$enddate:DateTime!) {
+        getOrderAccountTransactions(token:$token,id:$id,page:$page,limit:$limit,startdate:$startdate,enddate:$enddate)
+       {
+           description
+           amount
+           type
+           date
+       }
+    }
+    `

@@ -243,22 +243,6 @@ async function changePINCard(
     else {
         errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
     }
-
-
-
-
-
-
-    // if (response.code < 400) {
-    //     setTimeout(function () {
-    //         navigation.navigate(next, { Proxy: data ? data.ProxyKey : '' });
-    //         setIsLoadingModal(false);
-    //     }, 1000);
-    //     setTextWarning(false);
-    // }
-    // else {
-    //     errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
-    // }
 }
 
 

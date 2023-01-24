@@ -110,9 +110,10 @@ const MyCards = ({ navigation }) => {
 
                 cardsData = [...response?.getOrderCards]
 
+
                 if (cardsData.length === 0) {
                     cards.push({ proxyKey: "000000000", statusCancelCard: false, statusRequestCard: false, statusActivation: false, balance: 0, name: "0000 0000 0000 0000", cardNumber: "0000 0000 0000 0000", disabled: false, dueDate: "00/00", cvv: "000", type: 'EMPTY' });
-                    cards.push({ redemption_link: "000000000000000000000000000000000000000000000", status: "Valid", expdate: "00/00/0000", transaction_id: "000000000", type: "VIRTUAL" });
+
                 }
 
                 console.log('getOrderCards', cardsData);
@@ -121,6 +122,7 @@ const MyCards = ({ navigation }) => {
                     cards.push({ id: card?.id, proxyKey: "000000000", img_card: card?.frontCard, statusCancelCard: card?.cardStatus !== 'active', statusRequestCard: card?.orderType !== 2, statusActivation: card?.cardIsActive, balance: card?.cardBalance, name: card?.cardNumber, cardNumber: card?.cardNumber, disabled: card?.cardIsBlocked, dueDate: "00/00", cvv: "000", type: card?.cardIsVirtual ? 'VIRTUAL' : 'PHYSICAL' });
                 });
 
+                cards.push({ redemption_link: "000000000000000000000000000000000000000000000", status: "Valid", expdate: "00/00/0000", transaction_id: "000000000", type: "VIRTUAL" });
                 console.log('card', cards);
 
                 setCAROUSEL_ITEMS(cards);

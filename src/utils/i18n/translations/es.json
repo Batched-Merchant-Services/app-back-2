@@ -478,9 +478,9 @@
         "detail": "Detalle de la transaccion",
         "origin": "Fuente",
         "authorization": "Folio de autorización",
-        "transaction": "Transacción",
+        "transaction": "Tipo de Transacción",
         "textdeposit": "Deposito",
-        "textcharge": "Cargo"
+        "textcharge": "Retiro"
       }
     },
     "receivedQRPayments": {

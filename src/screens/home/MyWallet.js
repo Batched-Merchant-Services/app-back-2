@@ -218,7 +218,7 @@ const MyWallet = ({ navigation, screenProps }) => {
     };
 
     const historic = async () => {
-        navigation.navigate('Historics', { clientId: clientId });
+        navigation.navigate('Historics', { page: 'wallet', clientId: clientId });
     };
 
     const requesCash = async () => {
@@ -386,10 +386,6 @@ const MyWallet = ({ navigation, screenProps }) => {
                                         <DivSpace width-8 />
                                         <View>
                                             <ButtonWallet navigation={navigation} delay={200} IconButton={IconPeople} onPress={userPayment} titleText={i18n.t('homeWallet.component.buttonPayUsers')} />
-                                        </View>
-                                        <DivSpace width-8 />
-                                        <View>
-                                            <ButtonWallet navigation={navigation} delay={500} IconButton={IconTransfer} onPress={transferButton} titleText={i18n.t('homeWallet.component.buttonTransferWallCard')} />
                                         </View>
                                         <DivSpace width-8 />
                                         <View>

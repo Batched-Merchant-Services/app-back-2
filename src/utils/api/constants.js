@@ -1,4 +1,4 @@
-export const GRAPHQL_API = 'https://core.batchedservices.com/AccessPoint/graphql';
+export const GRAPHQL_API = 'https://graph.batchedservices.com/AccessPointAccountsApi/graphql';
 
 
 export const LOGIN_QUERY = `
@@ -81,135 +81,124 @@ export const GET_DATA_USER = `
 query($token:String!,$field:String!,$id:String!){
   getUsersByField(token:$token,field:$field,id:$id)
   {
-      id
-      email
-      phoneNumber
-      lada
-      clients {
         id
-        externalId
-        status
-        activationDate
-        officeId
-        firstName
-        middleName
-        lastName
-        fullName
-        displayName
-        mobileNo
-        dateOfBirth
-        emailAddress
-        statusPayroll 
-        account {
-          id
-          accountNo
-          externalId
-          clientId
-          groupId
-          currencyCode
-          balance {
-            year
-            account
-            deposit
-            withdrawal
-            total
-            currency
-          }
-          transactions{
+        email
+        phoneNumber
+        lada
+        clients {
             id
-            accountId 
-            transactionDate
-            type
-            amount
-            finalBalance
-            currencyCode
-            exchageRate
-            createdDate
-            note{
-              id
-              clientId
-              groupId
-              accountId
-              transactionId
-              noteDescription
+            externalId
+            status
+            activationDate
+            officeId
+            firstName
+            middleName
+            lastName
+            fullName
+            displayName
+            mobileNo
+            dateOfBirth
+            emailAddress
+            statusPayroll 
+            account {
+                id
+                accountNo
+                externalId
+                clientId
+                groupId
+                currencyCode
+                balance {
+                    year
+                    account
+                    deposit
+                    withdrawal
+                    total
+                    currency
+                }
+                transactions{
+                    id
+                    accountId 
+                    transactionDate
+                    type
+                    amount
+                    finalBalance
+                    currencyCode
+                    exchageRate
+                    createdDate
+                    note{
+                        id
+                        clientId
+                        groupId
+                        accountId
+                        transactionId
+                        noteDescription
+                    }
+                } 
             }
-          } 
+            
         }
-        companies {
-          id 
-          pathLogo 
-          name 
-          feePhysicalCard
-        }
-      }
-      usersProfile
-      {
-          userID
-          id
-          status
-          name
-          accountId
-          roleId
-          accounts
-          {
-              id
-              term
-              status
-              firstName
-              avatarImage
-              lastName
-              secondLastName
-              phoneNumber
-              middleName
-              email
-              clientId
-              currency
-              gender
-              alias
-              birthday
-              nationalId
-              otherNationalId
-              countryCode
-              externalId
-              pin
-              customerId
-              isComplete
-              address
-              {
-                  id
-                  city
-                  suburb
-                  country
-                  state
-                  street
-                  number
-                  typeAddress
-                  zipCode
-                  shortName
-                  isComplete
-              }
-                kyc{
-                  id
-                  typeIdentification
-                  frontId
-                  backId
-                  kycid
-                  faceId
-                  documentId
-                  status
-                  isComplete
-                }
-                bankInformation
+        usersProfile
+        {
+            userID
+            id
+            status
+            name
+            accountId
+            roleId
+            accounts
+            {
+                id
+                term
+                status
+                firstName
+                avatarImage
+                lastName
+                secondLastName
+                phoneNumber
+                middleName
+                email
+                clientId
+                currency
+                gender
+                alias
+                birthday
+                nationalId
+                otherNationalId
+                countryCode
+                externalId
+                pin
+                customerId
+                isComplete
+                address
                 {
-                  id
-                  bankName
-                  routingNumber
-                  accountNumber
+                    id
+                    city
+                    suburb
+                    country
+                    state
+                    street
+                    number
+                    typeAddress
+                    zipCode
+                    shortName
+                    isComplete
                 }
-          }
+                    kyc{
+                        id
+                        typeIdentification
+                        frontId
+                        backId
+                        kycid
+                        faceId
+                        documentId
+                        status
+                        isComplete
+                    }
+                   
+            }
 
-      }
-  }
+        }
+    }
 }`;
 
 export const SET_FORGOT_PASSWORD = `
