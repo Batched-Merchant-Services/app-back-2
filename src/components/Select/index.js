@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableHighlight, AsyncStorage, Platform } from 'react-native';
 import ModalDropdown from 'vhuerta-react-native-modal-dropdown';
 import PropTypes from 'prop-types';
@@ -27,6 +27,10 @@ const Select = ({ error, label, value, options, size, onSelect, languages, onFil
     const [option] = useState({ name: '', value: '' });
     const [styleBackground] = useState(brandTheme.textBlueDark ?? Colors.textBlueDark);
     const [styleBorder] = useState(brandTheme.bgBlue06 ?? Colors.bgBlue06);
+
+    useEffect(() => {
+        console.log('error', options)
+    }, []);
 
     const handleSelect = index => {
         onSelect(options[index]);

@@ -89,7 +89,7 @@ async function handleSignIn(
         // dispatch(saveUser({ type2fa: type2faLogin }));
         await LocalStorage.set('type2fa', `${type2faLogin}`);
         dispatch(isTwoFactor(isTwoFactorLogin));
-        await LocalStorage.set('companyValue', `${Company?.valueS}`);
+        await LocalStorage.set('companyValue', `${Company?.value}`);
         // dispatch(saveUser({ companyValue: Company?.value }));
         setDeviceStatus(deviceStatus);
 
@@ -213,11 +213,15 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
     const [valueChek, setChekValue] = useState(loginWithFingerPrint);
     const [isLoadingModal, setIsLoadingModal] = useState(false);
     const [showModalInfo, setShowModalInfo] = useState(false);
-    const password = useValidatedInput('loginPassword', '');
+    const password = useValidatedInput('loginPassword', 'Marijo19956!');
     const phone = navigation.getParam('phone');
-    const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
+    const company = useValidatedInput('dropdownSelect', { value: 342, name: "Savvy Wallet" }, {
         changeHandlerSelect: 'onSelect'
     });
+
+    // const company = useValidatedInput('dropdownSelect', { name: i18n.t('generics.selectOne') }, {
+    //     changeHandlerSelect: 'onSelect'
+    // });
 
     const isValid = isFormValid(password);
     const dispatch = useDispatch();
@@ -277,8 +281,8 @@ const SelectCompany = ({ navigation, loginWithFingerPrint, toggleLoginWithFinger
             }));
             setIsLoadingModal(false);
             setCompanyOption(values);
-            dispatch(saveUser({ dataCompany: values }));
-            console.log('response get companies', companyOption)
+            // dispatch(saveUser({ dataCompany: values }));
+            console.log('response get companies', companies)
         }
         else {
             errorSnackNotice('Error to get comaniesS');

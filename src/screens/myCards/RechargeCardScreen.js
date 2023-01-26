@@ -17,6 +17,7 @@ import { moneyFormatter } from '@utils/formatters';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
 import Styles from './styles';
 import Modal2faConfirmation from '@screens/auth2fa/Modal2faConfirmation';
+import LocalStorage from '@utils/localStorage';
 
 const RechargeCardScreen = ({ navigation }) => {
     const data = navigation.getParam('dataBackup');
@@ -27,27 +28,43 @@ const RechargeCardScreen = ({ navigation }) => {
     const [balanceWallet] = useState(userData ? userData.balanceWallet : '');
     const amount = useValidatedInput('amount', '');
     const isValid = isFormValid(amount);
-    const type2fa = null;
+    var type2fa = null;
 
     useEffect(() => {
 
-        getUserPin();
+
+        console.log('type2fa useEffect')
+        // getUserPin();
 
     }, []);
 
 
     async function getUserPin() {
+        console.log('type2fa getUserPin');
         type2fa = await LocalStorage.get('type2fa');
+        console.log('type2fa getUserPin after')
+
         type2fa = +type2fa;
+
+        execTransaction();
     }
 
     function handleRechargePress() {
+
+
+        getUserPin();
+
+
+    }
+
+    function execTransaction() {
+        console.log('handleRechargePress', amount?.value, type2fa);
         var foobar = [3, 2, 1];
         if (!foobar.includes(type2fa)) {
-            setShowModal2fa(true);
+            // setShowModal2fa(true);
         } else {
             navigation.navigate('Pin2faConfirmation', {
-                data: { page: 'topUp', data: data, amount: amount.value },
+                data: { page: 'topUp', card: data, amount: amount.value },
                 next: 'RechargeCardConfirmation'
             });
             //navigation.navigate('Pin2faConfirmation',{page: 'topUp',data: data, amount: amount.value});   

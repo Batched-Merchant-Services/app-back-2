@@ -169,7 +169,7 @@ const Login = ({ navigation, loginWithFingerPrint, toggleLoginWithFingerprint, s
     const [valueChek, setChekValue] = useState(loginWithFingerPrint);
     const [isLoadingModal, setIsLoadingModal] = useState(false);
     const password = useValidatedInput('loginPassword', '');
-    const phone = useValidatedInput('phone', '');
+    const phone = useValidatedInput('phone', 'maria@batchedmerchantservices.com');
     const isValid = isFormValid(phone);
     const dispatch = useDispatch();
     const redux = useSelector(state => state);

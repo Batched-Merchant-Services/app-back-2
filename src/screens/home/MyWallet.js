@@ -67,6 +67,7 @@ const MyWallet = ({ navigation, screenProps }) => {
     const [snakVisible, setSnakVisible] = useState(false);
     const [actionAnimated, setActionAnimated] = useState(false);
     const [isLoadingModal, setIsLoadingModal] = useState(false);
+
     const dispatch = useDispatch();
 
     var userGraphInfo = null;
@@ -191,7 +192,7 @@ const MyWallet = ({ navigation, screenProps }) => {
 
         const verifyResponse = await validateSesion();
 
-        console.log('Validate sesion response: ', userGraph, verifyResponse);
+        console.log('Validate sesion response: ', value);
 
         const Id = userGraph?.usersProfile?.accounts?.clientId;
         // const Id = verifyResponse.data.user.account.clientId;
@@ -206,11 +207,13 @@ const MyWallet = ({ navigation, screenProps }) => {
     }
 
     const rechargueWallet = async () => {
-        navigation.navigate('RechargeOptions');
+        setShowModal(true);
+        // navigation.navigate('RechargeOptions');
     };
 
     const userPayment = async () => {
-        navigation.navigate('PaymentUsers');
+        setShowModal(true);
+        // navigation.navigate('PaymentUsers');
     };
 
     const bankTransfer = async () => {
@@ -311,7 +314,8 @@ const MyWallet = ({ navigation, screenProps }) => {
             end={{ x: 0, y: 1 }}
             colors={[brandTheme?.bgBlue01 ?? Colors.bgBlue01, brandTheme?.bgBlue01 ?? Colors.bgBlue01]}
         >
-            <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} />
+            <DivSpace height-40 />
+            {/* <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} /> */}
             <View flex-1 centerH>
                 <Text h14 title>{i18n.t('homeWallet.component.titleMyWallet')}</Text>
                 <DivSpace height-5 />
@@ -428,6 +432,7 @@ const MyWallet = ({ navigation, screenProps }) => {
                 }}
             />
         </LinearGradient>
+
 
     );
 };

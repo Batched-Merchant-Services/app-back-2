@@ -146,7 +146,7 @@ const CardPhysicalActions = ({ navigation, dataPhysical, inactive }) => {
                                 </View>
                             </Ripple>
                         </Animatable.View>
-                        <Animatable.View style={Styles.containerButton} animation="flipInX" delay={300}>
+                        {/* <Animatable.View style={Styles.containerButton} animation="flipInX" delay={300}>
                             <Ripple style={{ flex: 1 }} onPress={handleCancelPress}>
                                 <View flex-1 centerH>
                                     <BoxGradient blue size={scale(41)}>
@@ -158,7 +158,7 @@ const CardPhysicalActions = ({ navigation, dataPhysical, inactive }) => {
                                     </Text>
                                 </View>
                             </Ripple>
-                        </Animatable.View>
+                        </Animatable.View> */}
                     </Fragment>
                 )}
                 {inactive && (

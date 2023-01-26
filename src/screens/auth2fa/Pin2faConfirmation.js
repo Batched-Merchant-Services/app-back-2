@@ -9,7 +9,8 @@ import {
     SnackBar,
     ButtonRounded,
     NavigationBar,
-    ImageComponent
+    ImageComponent,
+    AnimateLabelInput
 } from '@components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidatedInput, isFormValid } from '@hooks/validation-hooks';
@@ -41,7 +42,7 @@ import {
     sendCryptoUsers
 } from '@utils/api/switch';
 import { createCardVirtual, createTRXSwap, updateCardVirtual } from '../../utils/api/switch';
-import { setOrderPinDirectRenderById } from '../../utils/api/graph_api/cards.service';
+import { setOrderPinDirectRenderById, transferWalletToCard } from '../../utils/api/graph_api/cards.service';
 
 async function transactionWallet(
     token,
@@ -84,21 +85,46 @@ async function payContacts(
     setTitle,
     appData
 ) {
-    setIsLoadingModal(true);
-    const codeSecurity = appData?.type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
+    // setIsLoadingModal(true);
+    let type2fa = await LocalStorage.get('type2fa');
+    let userGraphInfo = JSON.parse(await LocalStorage.get('user_info_graph'));
+    const codeSecurity = +type2fa !== 1 ? getCodeLeft + '-' + code : '2fa' + '-' + code;
 
-    const response = await reloadCard(token, data?.data?.id, codeSecurity, data?.amount, '', data?.data?.type);
+    console.log('recharge card', data?.card);
 
-    if (response.code < 400) {
-        setTimeout(function () {
-            navigation.navigate(next);
-            setIsLoadingModal(false);
-        }, 1000);
-        setTextWarning(false);
-    } else {
-        console.log('error')
-        errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
+    const response = await transferWalletToCard(codeSecurity, data?.card.id, data?.amount, 5, data?.card?.cardNumber.substring(12, 16));
+
+    console.log('Response card load', response);
+
+    if (response?.createTransactionToAccount) {
+        navigation.navigate(next);
+        setIsLoadingModal(false);
     }
+    else {
+        console.log('recharge card error')
+        navigation.navigate('RechargeCardError', navigation);
+        // navigation.navigate(next);
+        // setIsLoadingModal(false);
+        // navigation.goBack();
+
+        // fireErrorMessage('Service not available', setSnakVisible, setTitle);
+        // errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
+    }
+
+
+
+    // const response = await reloadCard(token, data?.data?.id, codeSecurity, data?.amount, '', data?.data?.type);
+
+    // if (response.code < 400) {
+    //     setTimeout(function () {
+    //         navigation.navigate(next);
+    //         setIsLoadingModal(false);
+    //     }, 1000);
+    //     setTextWarning(false);
+    // } else {
+    //     console.log('error')
+    //     errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response);
+    // }
 }
 
 async function cardCancelFunction(
@@ -481,15 +507,21 @@ async function saleCrypto(
 }
 
 function errorFunction(setIsLoadingModal, setSnakVisible, setTitle, response) {
-    setIsLoadingModal(true);
+
     setTimeout(function () {
         setSnakVisible(true);
         setIsLoadingModal(false);
-        setTitle(response.message);
+        setTitle(response.Message);
     }, 1000);
 
 }
+
+function fireErrorMessage(message, setSnakVisible, setTitle) {
+    setSnakVisible(true);
+    setTitle(message);
+}
 const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
+
     const dispatch = useDispatch();
     const redux = useSelector(state => state);
     const appData = redux.user;
@@ -877,6 +909,7 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
     //73448-594864
 
     useEffect(() => {
+        getUserInfoGraph()
         if (appData?.isTwoFactor) {
             setShowModalDates(false);
         } else {
@@ -898,6 +931,11 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
         setButtonNext(false);
         setActionAnimated(true);
     };
+
+    async function getUserInfoGraph() {
+
+
+    }
 
 
 
@@ -946,7 +984,19 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
                     <DivSpace height-30 />
                     <View centerH>
                         <Text h12 textGray>{i18n.t('Auth2fa.textConfirmationCode')}</Text>
-                        <PinInput {...codeActivation} />
+                    </View>
+                    <DivSpace height-20 />
+                    <View marginH-20>
+
+                        <AnimateLabelInput height-20
+                            {...codeActivation}
+                            label={''}
+                            keyboardType={'numeric'}
+                            returnKeyType={'done'}
+                            autoCapitalize={'none'}
+                            maxLength={6}
+                            textAlign={'center'}
+                        />
                     </View>
                     <DivSpace height-50 />
                 </KeyboardAvoidingView>

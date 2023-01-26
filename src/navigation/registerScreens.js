@@ -65,6 +65,7 @@ import MyCards from '@screens/myCards';
 import ActivateCard from '@screens/myCards/ActivateCardScreen';
 import ActivateCardPin from '@screens/myCards/ActivateCardPinScreen';
 import ActivateCardConfirmation from '@screens/myCards/ActivateCardConfirmationScreen';
+import ActivateCardError from '@screens/myCards/RechargeCardErrorScreen';
 import RechargeCard from '@screens/myCards/RechargeCardScreen';
 import RechargeCardConfirmation from '@screens/myCards/RechargeCardConfirmationScreen';
 import ViewCard from '@screens/myCards/ViewCard';
@@ -152,975 +153,981 @@ import ConfirmationSwap from '@screens/crypto/swap/ConfirmationSwap';
 
 
 export const signInScreens = {
-  TabsMenu: {
-    MyWallet: {
-      screen: MyWallet,
-    },
-    MyCards: {
-      screen: MyCards,
-    },
-    // Level: {
-    //   screen: Level,
-    // },
-    // CreditsContracted: {
-    //   screen: CreditsContracted,
-    // },
-    // Store: {
-    //   screen: createStackNavigator(
-    //     {
-    //       Store                : Store,
-    //       StoreCategory        : StoreCategory,
-    //       ShoppingList         : ShoppingList,
-    //       StoreProviderPayments: StoreProviderPayments
-    //     },
-    //     {
-    //       headerMode      : 'none',
-    //       initialRouteName: 'Store'
-    //     }
-    //   ),
-    // }
-  },
-  signMenu: {
-    Welcome: {
-      screen           : Welcome,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PaymentUsers: {
-      screen           : PaymentUsers,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PaymentToContacts: {
-      screen           : PaymentToContacts,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ContactInformation: {
-      screen           : ContactInformation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PayConfirmation: {
-      screen           : PayConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ReceivedInternationalPayments: {
-      screen           : ReceivedInternationalPayments,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RequestedInternationalPayments: {
-      screen           : RequestedInternationalPayments,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RequestInternationalPayment: {
-      screen           : RequestInternationalPayment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationRequestSend: {
-      screen           : ConfirmationRequestSend,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ReceivedPaymentAccepted: {
-      screen           : ReceivedPaymentAccepted,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ReceivedInternationalPayment: {
-      screen           : ReceivedInternationalPayment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ReceivedQRPayment: {
-      screen           : ReceivedQRPayment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ScanQR: {
-      screen           : ScanQR,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    SearchByUserCode: {
-      screen           : SearchByUserCode,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Transfers: {
-      screen           : Transfers,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    TransferWalletBank: {
-      screen           : TransferWalletBank,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    TransferWalletBankSuccess: {
-      screen           : TransferWalletBankSuccess,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Historics: {
-      screen           : Historics,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    EstablecimientosATM: {
-      screen           : EstablecimientosATM,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Recharges: {
-      screen           : Recharges,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeSuccessful: {
-      screen           : RechargeSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargesConfig: {
-      screen           : RechargesConfig,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeCrypto: {
-      screen           : RechargeCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    BankTransfer: {
-      screen           : BankTransfer,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    MyCreditOptions: {
-      screen           : MyCreditOptions,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CreditAcceptance: {
-      screen           : CreditAcceptance,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CreditSuccessful: {
-      screen           : CreditSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    AppPin: {
-      screen           : AppPin,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationPinUser: {
-      screen           : ConfirmationPinUser,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    BiometricChangeConfirmation: {
-      screen           : BiometricChangeConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    AppNewPin: {
-      screen           : AppNewPin,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    AppConfirmationPin: {
-      screen           : AppConfirmationPin,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    BuyPoints: {
-      screen           : BuyPoints,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    DetailBuyPoints: {
-      screen           : DetailBuyPoints,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmBuyPoints: {
-      screen           : ConfirmBuyPoints,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CompleteProfilCredits: {
-      screen           : CompleteProfilCredits,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CreditsContracted: {
-      screen           : CreditsContracted,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    LevelsInfo: {
-      screen           : LevelsInfo,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ManualCreditPayment: {
-      screen           : ManualCreditPayment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ManualCreditPaymentSuccessful: {
-      screen           : ManualCreditPaymentSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ManualCreditPaymentTotalSuccessful: {
-      screen           : ManualCreditPaymentTotalSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ViewCard: {
-      screen           : ViewCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    NewVirtualCards: {
-      screen           : NewVirtualCards,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    UpdateVirtualCard: {
-      screen           : UpdateVirtualCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationUpdateCard: {
-      screen           : ConfirmationUpdateCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CloseOffers: {
-      screen           : CloseOffers,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    StoreScanQR: {
-      screen           : StoreScanQR,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    StoreShowQR: {
-      screen           : StoreShowQR,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    StoreCaptureQR: {
-      screen           : StoreCaptureQR,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    StoreConfirmation: {
-      screen           : StoreConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    StoreCashPurchase: {
-      screen           : StoreCashPurchase,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationBuyStore: {
-      screen           : ConfirmationBuyStore,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ActivateCard: {
-      screen           : ActivateCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ActivateCardPin: {
-      screen           : ActivateCardPin,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ActivateCardConfirmation: {
-      screen           : ActivateCardConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeCard: {
-      screen           : RechargeCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeCardConfirmation: {
-      screen           : RechargeCardConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    GenerateCardVirtual: {
-      screen           : GenerateCardVirtual,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmCardVirtual: {
-      screen           : ConfirmCardVirtual,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    MyVirtualCards: {
-      screen           : MyVirtualCards,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CancelCard: {
-      screen           : CancelCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CancelCardCancel: {
-      screen           : CancelCardCancel,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CancelCardConfirmation: {
-      screen           : CancelCardConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    InfoReceivedCard: {
-      screen           : InfoReceivedCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PinUpdateScreen: {
-      screen           : PinUpdateScreen,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PinUpdateConfirmation: {
-      screen           : PinUpdateConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ProviderPayment: {
-      screen           : ProviderPayment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ProviderPaymentAmount: {
-      screen           : ProviderPaymentAmount,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ProviderPaymentSuccessful: {
-      screen           : ProviderPaymentSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ProviderPaymentSaved: {
-      screen           : ProviderPaymentSaved,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    GiftCardsList: {
-      screen           : GiftCardsList,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    GiftCardDetails: {
-      screen           : GiftCardDetails,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    GiftCardConfirmation: {
-      screen           : GiftCardConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PurchasesSaved: {
-      screen           : PurchasesSaved,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    GiftcardSavedDetail: {
-      screen           : GiftcardSavedDetail,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PurchaseSavedDetail: {
-      screen           : PurchaseSavedDetail,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    MyProfile: {
-      screen           : MyProfile,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    PersonalInformation: {
-      screen           : PersonalInformation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ContactInformationProfile: {
-      screen           : ContactInformationProfile,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    WorkingInformation: {
-      screen           : WorkingInformation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    BankInformation: {
-      screen           : BankInformation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    OfficialIdentification: {
-      screen           : OfficialIdentification,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Configuration: {
-      screen           : Configuration,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Contact: {
-      screen           : Contact,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ContactSuccessful: {
-      screen           : ContactSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    AboutSavvy: {
-      screen           : AboutSavvy,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    paymentToEstablishment: {
-      screen           : paymentToEstablishment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    confirmationEstablishment: {
-      screen           : confirmationEstablishment,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Notifications: {
-      screen           : Notifications,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ScanQrReceived: {
-      screen           : ScanQrReceived,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeReceivedSuccessful: {
-      screen           : RechargeReceivedSuccessful,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RequestCard: {
-      screen           : RequestCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationRequestCard: {
-      screen           : ConfirmationRequestCard,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ListCryptoCurrency: {
-      screen           : ListCryptoCurrency,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    buyCrypto: {
-      screen           : buyCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    buyForeignExchange: {
-      screen           : buyForeignExchange,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    MyCryptoBalance: {
-      screen           : MyCryptoBalance,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeOptions: {
-      screen           : RechargeOptions,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationCrypto: {
-      screen           : ConfirmationCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CryptoSale: {
-      screen           : CryptoSale,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    SendCrypto: {
-      screen           : SendCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ScanQRAddress: {
-      screen           : ScanQRAddress,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ReceiveCrypto: {
-      screen           : ReceiveCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    HistoricCrypto: {
-      screen           : HistoricCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    WalletRecharge: {
-      screen           : WalletRecharge,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    RechargeConfirmation: {
-      screen           : RechargeConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    SendOrTransferOptions: {
-      screen           : SendOrTransferOptions,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    AddNewAddressCrypto: {
-      screen           : AddNewAddressCrypto,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CryptoSendBetweenUser: {
-      screen           : CryptoSendBetweenUser,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    CryptoTransferUsers: {
-      screen           : CryptoTransferUsers,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Auth2fa: {
-      screen           : Auth2fa,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    DeleteAccount: {
-      screen           : DeleteAccount,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ListInformationSwap: {
-      screen           : ListInformationSwap,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
- 
-    ConfirmationSwap: {
-      screen           : ConfirmationSwap,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
+    TabsMenu: {
+        MyWallet: {
+            screen: MyWallet,
+        },
+        MyCards: {
+            screen: MyCards,
+        },
+        // Level: {
+        //   screen: Level,
+        // },
+        // CreditsContracted: {
+        //   screen: CreditsContracted,
+        // },
+        // Store: {
+        //   screen: createStackNavigator(
+        //     {
+        //       Store                : Store,
+        //       StoreCategory        : StoreCategory,
+        //       ShoppingList         : ShoppingList,
+        //       StoreProviderPayments: StoreProviderPayments
+        //     },
+        //     {
+        //       headerMode      : 'none',
+        //       initialRouteName: 'Store'
+        //     }
+        //   ),
+        // }
+    },
+    signMenu: {
+        Welcome: {
+            screen: Welcome,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PaymentUsers: {
+            screen: PaymentUsers,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PaymentToContacts: {
+            screen: PaymentToContacts,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ContactInformation: {
+            screen: ContactInformation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PayConfirmation: {
+            screen: PayConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ReceivedInternationalPayments: {
+            screen: ReceivedInternationalPayments,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RequestedInternationalPayments: {
+            screen: RequestedInternationalPayments,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RequestInternationalPayment: {
+            screen: RequestInternationalPayment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationRequestSend: {
+            screen: ConfirmationRequestSend,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ReceivedPaymentAccepted: {
+            screen: ReceivedPaymentAccepted,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ReceivedInternationalPayment: {
+            screen: ReceivedInternationalPayment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ReceivedQRPayment: {
+            screen: ReceivedQRPayment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ScanQR: {
+            screen: ScanQR,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        SearchByUserCode: {
+            screen: SearchByUserCode,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Transfers: {
+            screen: Transfers,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        TransferWalletBank: {
+            screen: TransferWalletBank,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        TransferWalletBankSuccess: {
+            screen: TransferWalletBankSuccess,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Historics: {
+            screen: Historics,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        EstablecimientosATM: {
+            screen: EstablecimientosATM,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Recharges: {
+            screen: Recharges,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeSuccessful: {
+            screen: RechargeSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargesConfig: {
+            screen: RechargesConfig,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeCrypto: {
+            screen: RechargeCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        BankTransfer: {
+            screen: BankTransfer,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        MyCreditOptions: {
+            screen: MyCreditOptions,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CreditAcceptance: {
+            screen: CreditAcceptance,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CreditSuccessful: {
+            screen: CreditSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        AppPin: {
+            screen: AppPin,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationPinUser: {
+            screen: ConfirmationPinUser,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        BiometricChangeConfirmation: {
+            screen: BiometricChangeConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        AppNewPin: {
+            screen: AppNewPin,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        AppConfirmationPin: {
+            screen: AppConfirmationPin,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        BuyPoints: {
+            screen: BuyPoints,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        DetailBuyPoints: {
+            screen: DetailBuyPoints,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmBuyPoints: {
+            screen: ConfirmBuyPoints,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CompleteProfilCredits: {
+            screen: CompleteProfilCredits,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CreditsContracted: {
+            screen: CreditsContracted,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        LevelsInfo: {
+            screen: LevelsInfo,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ManualCreditPayment: {
+            screen: ManualCreditPayment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ManualCreditPaymentSuccessful: {
+            screen: ManualCreditPaymentSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ManualCreditPaymentTotalSuccessful: {
+            screen: ManualCreditPaymentTotalSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ViewCard: {
+            screen: ViewCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        NewVirtualCards: {
+            screen: NewVirtualCards,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        UpdateVirtualCard: {
+            screen: UpdateVirtualCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationUpdateCard: {
+            screen: ConfirmationUpdateCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CloseOffers: {
+            screen: CloseOffers,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        StoreScanQR: {
+            screen: StoreScanQR,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        StoreShowQR: {
+            screen: StoreShowQR,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        StoreCaptureQR: {
+            screen: StoreCaptureQR,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        StoreConfirmation: {
+            screen: StoreConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        StoreCashPurchase: {
+            screen: StoreCashPurchase,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationBuyStore: {
+            screen: ConfirmationBuyStore,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivateCard: {
+            screen: ActivateCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivateCardPin: {
+            screen: ActivateCardPin,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivateCardConfirmation: {
+            screen: ActivateCardConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivateCardError: {
+            screen: ActivateCardError,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeCard: {
+            screen: RechargeCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeCardConfirmation: {
+            screen: RechargeCardConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        GenerateCardVirtual: {
+            screen: GenerateCardVirtual,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmCardVirtual: {
+            screen: ConfirmCardVirtual,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        MyVirtualCards: {
+            screen: MyVirtualCards,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CancelCard: {
+            screen: CancelCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CancelCardCancel: {
+            screen: CancelCardCancel,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CancelCardConfirmation: {
+            screen: CancelCardConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        InfoReceivedCard: {
+            screen: InfoReceivedCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PinUpdateScreen: {
+            screen: PinUpdateScreen,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PinUpdateConfirmation: {
+            screen: PinUpdateConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ProviderPayment: {
+            screen: ProviderPayment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ProviderPaymentAmount: {
+            screen: ProviderPaymentAmount,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ProviderPaymentSuccessful: {
+            screen: ProviderPaymentSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ProviderPaymentSaved: {
+            screen: ProviderPaymentSaved,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        GiftCardsList: {
+            screen: GiftCardsList,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        GiftCardDetails: {
+            screen: GiftCardDetails,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        GiftCardConfirmation: {
+            screen: GiftCardConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PurchasesSaved: {
+            screen: PurchasesSaved,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        GiftcardSavedDetail: {
+            screen: GiftcardSavedDetail,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PurchaseSavedDetail: {
+            screen: PurchaseSavedDetail,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        MyProfile: {
+            screen: MyProfile,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        PersonalInformation: {
+            screen: PersonalInformation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ContactInformationProfile: {
+            screen: ContactInformationProfile,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        WorkingInformation: {
+            screen: WorkingInformation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        BankInformation: {
+            screen: BankInformation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        OfficialIdentification: {
+            screen: OfficialIdentification,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Configuration: {
+            screen: Configuration,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Contact: {
+            screen: Contact,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ContactSuccessful: {
+            screen: ContactSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        AboutSavvy: {
+            screen: AboutSavvy,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        paymentToEstablishment: {
+            screen: paymentToEstablishment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        confirmationEstablishment: {
+            screen: confirmationEstablishment,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Notifications: {
+            screen: Notifications,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ScanQrReceived: {
+            screen: ScanQrReceived,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeReceivedSuccessful: {
+            screen: RechargeReceivedSuccessful,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RequestCard: {
+            screen: RequestCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationRequestCard: {
+            screen: ConfirmationRequestCard,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ListCryptoCurrency: {
+            screen: ListCryptoCurrency,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        buyCrypto: {
+            screen: buyCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        buyForeignExchange: {
+            screen: buyForeignExchange,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        MyCryptoBalance: {
+            screen: MyCryptoBalance,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeOptions: {
+            screen: RechargeOptions,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationCrypto: {
+            screen: ConfirmationCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CryptoSale: {
+            screen: CryptoSale,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        SendCrypto: {
+            screen: SendCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ScanQRAddress: {
+            screen: ScanQRAddress,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ReceiveCrypto: {
+            screen: ReceiveCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        HistoricCrypto: {
+            screen: HistoricCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        WalletRecharge: {
+            screen: WalletRecharge,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        RechargeConfirmation: {
+            screen: RechargeConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        SendOrTransferOptions: {
+            screen: SendOrTransferOptions,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        AddNewAddressCrypto: {
+            screen: AddNewAddressCrypto,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CryptoSendBetweenUser: {
+            screen: CryptoSendBetweenUser,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        CryptoTransferUsers: {
+            screen: CryptoTransferUsers,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Auth2fa: {
+            screen: Auth2fa,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        DeleteAccount: {
+            screen: DeleteAccount,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ListInformationSwap: {
+            screen: ListInformationSwap,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
 
-    TwoFactorActivation:{
-      screen           : TwoFactorActivation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
+        ConfirmationSwap: {
+            screen: ConfirmationSwap,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+
+        TwoFactorActivation: {
+            screen: TwoFactorActivation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Swap: {
+            screen: Swap,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Auth2fa: {
+            screen: Auth2fa,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        TwoFactorCodeActivation: {
+            screen: TwoFactorCodeActivation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        TwoFactorConfirmationActivation: {
+            screen: TwoFactorConfirmationActivation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Auth2faSms: {
+            screen: Auth2faSms,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivationSms: {
+            screen: ActivationSms,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ConfirmationAuth: {
+            screen: ConfirmationAuth,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Auth2faEmail: {
+            screen: Auth2faEmail,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        ActivationEmail: {
+            screen: ActivationEmail,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Auth2faApp: {
+            screen: Auth2faApp,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
+        Pin2faConfirmation: {
+            screen: Pin2faConfirmation,
+            navigationOptions: {
+                gesturesEnabled: false
+            }
+        },
     },
-    Swap: {
-      screen           : Swap,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Auth2fa: {
-      screen           : Auth2fa,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    TwoFactorCodeActivation:{
-      screen           : TwoFactorCodeActivation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    TwoFactorConfirmationActivation:{
-      screen           : TwoFactorConfirmationActivation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Auth2faSms:{
-      screen           : Auth2faSms,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ActivationSms:{
-      screen           : ActivationSms,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ConfirmationAuth:{
-      screen           : ConfirmationAuth,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Auth2faEmail:{
-      screen           : Auth2faEmail,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    ActivationEmail:{
-      screen           : ActivationEmail,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Auth2faApp:{
-      screen           : Auth2faApp,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-    Pin2faConfirmation : {
-      screen           : Pin2faConfirmation,
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    },
-  },
 };
 
 export const signOutScreens = {
-  Welcome: {
-    screen           : Welcome,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  SignUp: {
-    screen           : SignUp,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Register: {
-    screen           : Register,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  CompanyCode: {
-    screen           : CompanyCode,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  RequestCompanyCode: {
-    screen           : RequestCompanyCode,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  ConfirmSMS: {
-    screen           : ConfirmSMS,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  CreatePassword: {
-    screen           : CreatePassword,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Login: {
-    screen           : Login,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  WelcomeNew: {
-    screen           : WelcomeNew,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  SelectCompany: {
-    screen           : SelectCompany,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  initRegisterProfile: {
-    screen           : initRegisterProfile,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  onboarStepOne: {
-    screen           : onboarStepOne,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  onboarStepTwo: {
-    screen           : onboarStepTwo,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  onboarStepThree: {
-    screen           : onboarStepThree,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  forgotSecretAnswer: {
-    screen           : forgotSecretAnswer,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  PasswordConfirmation: {
-    screen           : PasswordConfirmation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  InformationPersonal: {
-    screen           : InformationPersonal,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  TransBalanceConfirm: {
-    screen           : TransBalanceConfirm,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Auth2fa: {
-    screen           : Auth2fa,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  TwoFactorInstructions: {
-    screen           : TwoFactorInstructions,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  TwoFactorActivation:{
-    screen           : TwoFactorActivation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  TwoFactorCodeActivation:{
-    screen           : TwoFactorCodeActivation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  TwoFactorConfirmationActivation:{
-    screen           : TwoFactorConfirmationActivation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Auth2faSms:{
-    screen           : Auth2faSms,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  ActivationSms:{
-    screen           : ActivationSms,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  ConfirmationAuth:{
-    screen           : ConfirmationAuth,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Auth2faEmail:{
-    screen           : Auth2faEmail,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  ActivationEmail:{
-    screen           : ActivationEmail,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Auth2faApp:{
-    screen           : Auth2faApp,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Pin2faConfirmation : {
-    screen           : Pin2faConfirmation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
+    Welcome: {
+        screen: Welcome,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    SignUp: {
+        screen: SignUp,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Register: {
+        screen: Register,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    CompanyCode: {
+        screen: CompanyCode,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    RequestCompanyCode: {
+        screen: RequestCompanyCode,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    ConfirmSMS: {
+        screen: ConfirmSMS,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    CreatePassword: {
+        screen: CreatePassword,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    WelcomeNew: {
+        screen: WelcomeNew,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    SelectCompany: {
+        screen: SelectCompany,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    initRegisterProfile: {
+        screen: initRegisterProfile,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    onboarStepOne: {
+        screen: onboarStepOne,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    onboarStepTwo: {
+        screen: onboarStepTwo,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    onboarStepThree: {
+        screen: onboarStepThree,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    forgotSecretAnswer: {
+        screen: forgotSecretAnswer,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    PasswordConfirmation: {
+        screen: PasswordConfirmation,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    InformationPersonal: {
+        screen: InformationPersonal,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    TransBalanceConfirm: {
+        screen: TransBalanceConfirm,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Auth2fa: {
+        screen: Auth2fa,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    TwoFactorInstructions: {
+        screen: TwoFactorInstructions,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    TwoFactorActivation: {
+        screen: TwoFactorActivation,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    TwoFactorCodeActivation: {
+        screen: TwoFactorCodeActivation,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    TwoFactorConfirmationActivation: {
+        screen: TwoFactorConfirmationActivation,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Auth2faSms: {
+        screen: Auth2faSms,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    ActivationSms: {
+        screen: ActivationSms,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    ConfirmationAuth: {
+        screen: ConfirmationAuth,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Auth2faEmail: {
+        screen: Auth2faEmail,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    ActivationEmail: {
+        screen: ActivationEmail,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Auth2faApp: {
+        screen: Auth2faApp,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
+    Pin2faConfirmation: {
+        screen: Pin2faConfirmation,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    },
 };

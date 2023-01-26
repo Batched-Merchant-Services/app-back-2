@@ -1383,7 +1383,7 @@
         "textNewFeatures": "new features \n and improvements",
         "textForYourUulala": "for your SAVVY \n application that",
         "textWillBeAvailable": "will be available soon.",
-        "textIfYouWantMore": "If you want more information about \n the latest updates and news from \n SAVVY follow us on our social networks:",
+        "textIfYouWantMore": "If you want to use this function, please visit our website",
         "buttonReturn": "Back"
       }
     },
@@ -1704,6 +1704,7 @@
       "textSelectTheManualOption": "3. Select the manual option and enter the previously stored security key.",
       "textSecurityKey": "Security key",
       "textConfirmationCode": "Confirmation Code:",
+      "textCEmpty": "",
       "textAddMoreSecurity": "Add more security to your account.",
       "textInCaseOfMakingAMovement": "In case of making a movement, your authentication will be required.",
       "textActivate": "Activate",
