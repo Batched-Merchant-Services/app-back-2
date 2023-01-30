@@ -996,6 +996,7 @@ const Pin2faConfirmation = ({ navigation, route, navigation: { goBack } }) => {
                             autoCapitalize={'none'}
                             maxLength={6}
                             textAlign={'center'}
+                            autoFocus={true}
                         />
                     </View>
                     <DivSpace height-50 />

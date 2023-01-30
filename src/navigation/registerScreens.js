@@ -38,11 +38,11 @@ import TransferWalletBankSuccess from '@screens/transfers/TransferWalletBankSucc
 import BankTransfer from '@screens/recharges/BankTransfer';
 import Historics from '@screens/historics/Historics';
 import EstablecimientosATM from '@screens/maps/EstablecimientosATM';
-import Recharges from '@screens/recharges/Recharges';
+
 import RechargeSuccessful from '@screens/recharges/RechargeSuccessful';
 import ScanQrReceived from '@screens/recharges/ScanQrReceived';
 import RechargeReceivedSuccessful from '@screens/recharges/RechargeReceivedSuccess';
-import RechargesConfig from '@screens/recharges/RechargesConfig';
+
 import MyCreditOptions from '@screens/credits/MyCreditOptions';
 import CreditAcceptance from '@screens/credits/CreditAcceptance';
 import CreditSuccessful from '@screens/credits/CreditSuccessful';
@@ -296,20 +296,8 @@ export const signInScreens = {
                 gesturesEnabled: false
             }
         },
-        Recharges: {
-            screen: Recharges,
-            navigationOptions: {
-                gesturesEnabled: false
-            }
-        },
         RechargeSuccessful: {
             screen: RechargeSuccessful,
-            navigationOptions: {
-                gesturesEnabled: false
-            }
-        },
-        RechargesConfig: {
-            screen: RechargesConfig,
             navigationOptions: {
                 gesturesEnabled: false
             }

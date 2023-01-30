@@ -1227,14 +1227,7 @@ export const validateEmail = async (token) => {
     return await apiSavvyWallet.get(`/wallet/generate/pin/direct_ses`, { headers });
 };
 
-export const getValidateSession = async (token) => {
 
-    const headers = {
-        'Authorization': token
-    };
-
-    return await apiSavvyWallet.get(`/sessions/validate?validate_token=true`, { headers });
-};
 
 export const getSites = async (token) => {
 

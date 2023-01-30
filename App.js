@@ -7,7 +7,8 @@ import NavigationService from './NavigationService';
 import store from '@store';
 import { ModalInactive } from '@components';
 import LocalStorage from '@utils/localStorage';
-import { getValidateSession } from './src/utils/api/switch';
+import { getValidateSession } from './src/utils/api/graph_api/sesion.service';
+
 const timer = require('react-native-timer');
 
 YellowBox.ignoreWarnings(['Remote debugger', 'Module RNSecureKeyStore']); // We know, use remote debugger might slow down app performance...
@@ -43,7 +44,7 @@ class App extends React.Component {
         if (this.state.validateToken && sinIn) {
             const token = await LocalStorage.get('auth_token');
             const response = await getValidateSession(token);
-            if (response.code < 400) {
+            if (!response.getValidateSession) {
                 this.setState({ validateToken: false });
                 timer.clearTimeout(this, 'timeValid');
             }
@@ -53,6 +54,22 @@ class App extends React.Component {
                 }), 250000
             );
         }
+    }
+
+    async handleExitPress() {
+
+        global.store.dispatch({
+            type: 'SET_IS_MODAL_OPEN',
+            payload: 'closing'
+        });
+        global.store.dispatch({
+            type: 'SET_IS_NAVIGATION_IN',
+            payload: false
+        });
+
+        NavigationService.navigate.navigate('Login');
+
+        NavigationService.dispatch(NavigationService.closeDrawer());
     }
 
 

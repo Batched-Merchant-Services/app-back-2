@@ -208,8 +208,8 @@ const MyCards = ({ navigation }) => {
     return (
         <SignUpWrapper forceInset={{ top: 0 }}>
             <SafeAreaView style={{ flex: 1, top: verticalScale(-6) }} forceInset={{ top: 'always' }}>
-                {/* <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} /> */}
-                <DivSpace height-40 />
+                <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} />
+                {/* <DivSpace height-40 /> */}
                 <View flex-1 centerH>
                     {!showInfo ? <View flex-1 centerV><Bubbles size={12} color={brandTheme?.bgOrange02 ?? Colors?.bgOrange02} /></View> :
                         <View flex-1 centerH>

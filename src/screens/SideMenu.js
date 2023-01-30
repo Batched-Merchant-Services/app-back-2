@@ -81,7 +81,7 @@ const SideMenu = ({ navigation }) => {
             </View>
             <DivSpace height-32 />
             <View>
-                <Ripple style={Styles.menuEl} onPress={handleMyProfile}>
+                {/* <Ripple style={Styles.menuEl} onPress={handleMyProfile}>
                     <View
                         style={Styles.menuText}
                         row
@@ -95,9 +95,9 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
+                </Ripple> */}
 
-                <Ripple style={Styles.menuEl} onPress={handlePressWelcome}>
+                {/* <Ripple style={Styles.menuEl} onPress={handlePressWelcome}>
                     <View
                         style={Styles.menuText}
                         row
@@ -111,8 +111,8 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
-                <Ripple style={Styles.menuEl} onPress={handleContactPress}>
+                </Ripple> */}
+                {/* <Ripple style={Styles.menuEl} onPress={handleContactPress}>
                     <View
                         style={Styles.menuText}
                         row
@@ -126,8 +126,8 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
-                <Ripple style={Styles.menuEl} onPress={handleScanQRPress}>
+                </Ripple> */}
+                {/* <Ripple style={Styles.menuEl} onPress={handleScanQRPress}>
                     <View
                         style={Styles.menuText}
                         row
@@ -141,8 +141,8 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
-                <Ripple style={Styles.menuEl} onPress={handleConfiguration}>
+                </Ripple> */}
+                {/* <Ripple style={Styles.menuEl} onPress={handleConfiguration}>
                     <View
                         style={Styles.menuText}
                         row
@@ -156,8 +156,8 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
-                <Ripple style={Styles.menuEl} onPress={() => navigation.navigate('Auth2fa', { page: 'config' })}>
+                </Ripple> */}
+                {/* <Ripple style={Styles.menuEl} onPress={() => navigation.navigate('Auth2fa', { page: 'config' })}>
                     <View
                         style={Styles.menuText}
                         row
@@ -171,7 +171,7 @@ const SideMenu = ({ navigation }) => {
                         </Text>
                         <ImageComponent source={Angle} white width={scale(9)} height={scale(18)} />
                     </View>
-                </Ripple>
+                </Ripple> */}
             </View>
             <View flex-1 bottom marginB-40>
                 <Ripple style={Styles.menuEl} onPress={handleExitPress}>

@@ -314,8 +314,8 @@ const MyWallet = ({ navigation, screenProps }) => {
             end={{ x: 0, y: 1 }}
             colors={[brandTheme?.bgBlue01 ?? Colors.bgBlue01, brandTheme?.bgBlue01 ?? Colors.bgBlue01]}
         >
-            <DivSpace height-40 />
-            {/* <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} /> */}
+            {/* <DivSpace height-40 /> */}
+            <NavigatorHeader brandTheme={brandThemeImages} avatarProfile={() => console.log('')} navigation={navigation} />
             <View flex-1 centerH>
                 <Text h14 title>{i18n.t('homeWallet.component.titleMyWallet')}</Text>
                 <DivSpace height-5 />

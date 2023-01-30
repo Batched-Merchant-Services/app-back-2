@@ -1,0 +1,20 @@
+info Running jetifier to migrate libraries to AndroidX. You can disable it using "--no-jetifier" flag.
+Jetifier found 1727 file(s) to forward-jetify. Using 8 workers...
+info Starting JS server...
+info Launching emulator...
+info Installing the app...
+debug Running command "cd android && ./gradlew app:installDebug -PreactNativeDevServerPort=8081"
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+
+Error: Command failed: ./gradlew app:installDebug -PreactNativeDevServerPort=8081
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+
+    at makeError (/Users/urbanob/sources/app-back-2/node_modules/execa/index.js:174:9)
+    at /Users/urbanob/sources/app-back-2/node_modules/execa/index.js:278:16
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async runOnAllDevices (/Users/urbanob/sources/app-back-2/node_modules/@react-native-community/cli-platform-android/build/commands/runAndroid/runOnAllDevices.js:109:5)
+    at async Command.handleAction (/Users/urbanob/sources/app-back-2/node_modules/react-native/node_modules/@react-native-community/cli/build/index.js:192:9)

@@ -1,4 +1,17 @@
 {
   "name": "SavvyWallet",
-  "displayName": "SavvyWallet"
+  "displayName": "SavvyWallet",
+  "android": {
+    "package": "com.anonymous.savvywallet"
+  },
+  "ios": {
+    "bundleIdentifier": "com.anonymous.savvywallet"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "7d64c761-3df2-4b7f-bf60-3b324fe97a5a"
+    }
+  },
+  "owner": "urbanobms",
+  "slug": "savvy-app"
 }

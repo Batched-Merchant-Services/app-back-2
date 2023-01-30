@@ -31,9 +31,7 @@ import ModalBalances from '@components/ModalBalances';
 import ModalInternationalWire from '@components/ModalInternationalWire';
 import ModalInactive from '@components/ModalInactive';
 import NoticeToast from '@components/NoticeToast';
-import MarkersComponent from '@components/MarkersComponent';
-import MarkersStoreComponent from '@components/MarkersStoreComponent';
-import UserMarker from '@components/UserMarker';
+
 import Line from '@components/Line';
 import MenuContainer from '@components/MenuContainer';
 import ButtonWallet from '@components/ButtonWallet';
@@ -42,7 +40,7 @@ import ResizeImageBackground from '@components/ResizeImageBackground';
 import ResizeImageAvatar from '@components/ResizeImageAvatar';
 import BoxGradient from '@components/BoxGradient';
 import ButtonSquareGradient from '@components/ButtonSquareGradient';
-import Map from '@components/Map';
+
 import BoxCardLevel from '@components/BoxCardLevel';
 import BoxLevelBadge from '@components/BoxLevelBadge';
 import BoxVirtualCard from '@components/BoxVirtualCard';
@@ -62,66 +60,63 @@ import ImageUploadPiker from '@components/ImageUploadPiker';
 
 
 export {
-  ImageUploadPiker,
-  AnimateLabelInput,
-  AnimateLabelAmount,
-  SwitchControl,
-  Text,
-  View,
-  DivSpace,
-  ImageComponent,
-  ResizeImageAvatar,
-  ButtonNext,
-  NavigationBar,
-  Checkbox,
-  Select,
-  Link,
-  PinInput,
-  DropDownDatePicker,
-  TimeBar,
-  ButtonRounded,
-  ResizeImageBackground,
-  BoxGradient,
-  ButtonSquareGradient,
-  ButtonFloating,
-  BoxBlue,
-  ButtonBackHome,
-  QrCode,
-  InfoBox,
-  ModalContainer,
-  ModalShowLevel,
-  ModalDisabled,
-  ModalVerifyStatus,
-  ModalBalances,
-  ModalInternationalWire,
-  ModalInactive,
-  Map,
-  NoticeToast,
-  MarkersComponent,
-  MarkersStoreComponent,
-  UserMarker,
-  Line,
-  NavigatorHeader,
-  BoxCardLevel,
-  BoxLevelBadge,
-  MenuContainer,
-  ButtonWallet,
-  BoxVirtualCard,
-  QrCodeReader,
-  ContainerCardsInput,
-  TextInputDate,
-  BoxCVV,
-  BoxCardNipInput,
-  BoxImageCredit,
-  ControlInput,
-  RawSwitchControl,
-  TextInputError,
-  SearchBar,
-  MenuTabIcon,
-  MenuTabLabel,
-  SnackBar,
-  Loader,
-  ContainerCrypto,
-  MenuTabs
+    ImageUploadPiker,
+    AnimateLabelInput,
+    AnimateLabelAmount,
+    SwitchControl,
+    Text,
+    View,
+    DivSpace,
+    ImageComponent,
+    ResizeImageAvatar,
+    ButtonNext,
+    NavigationBar,
+    Checkbox,
+    Select,
+    Link,
+    PinInput,
+    DropDownDatePicker,
+    TimeBar,
+    ButtonRounded,
+    ResizeImageBackground,
+    BoxGradient,
+    ButtonSquareGradient,
+    ButtonFloating,
+    BoxBlue,
+    ButtonBackHome,
+    QrCode,
+    InfoBox,
+    ModalContainer,
+    ModalShowLevel,
+    ModalDisabled,
+    ModalVerifyStatus,
+    ModalBalances,
+    ModalInternationalWire,
+    ModalInactive,
+
+    NoticeToast,
+    Line,
+    NavigatorHeader,
+    BoxCardLevel,
+    BoxLevelBadge,
+    MenuContainer,
+    ButtonWallet,
+    BoxVirtualCard,
+    QrCodeReader,
+    ContainerCardsInput,
+    TextInputDate,
+    BoxCVV,
+    BoxCardNipInput,
+    BoxImageCredit,
+    ControlInput,
+    RawSwitchControl,
+    TextInputError,
+    SearchBar,
+    MenuTabIcon,
+    MenuTabLabel,
+    SnackBar,
+    Loader,
+    ContainerCrypto,
+    MenuTabs
 
 };
